@@ -10,8 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.14.2",
+    "axios": "^1.6.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.0",
+    "recoil": "^0.7.7",
+    "styled-components": "^6.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
