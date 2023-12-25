@@ -1,3 +1,7 @@
 export const Drawer = () => {
-  return <></>;
+  return (
+    <>
+      <h1>Drawer</h1>
+    </>
+  );
 };
