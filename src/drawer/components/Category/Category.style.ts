@@ -4,6 +4,6 @@ export const StyledCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 1rem;
   font-style: ${({ theme }) => theme.typo.subtitle2};
 `;
