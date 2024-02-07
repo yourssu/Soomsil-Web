@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
   display: flex;
+  align-items: center;
   width: 100%;
   height: 64px;
   position: sticky;
@@ -19,14 +20,15 @@ export const StyledHeaderTabs = styled.nav`
 `;
 
 export const StyledHeaderTab = styled(NavLink)`
+  ${({ theme }) => theme.typo.caption0}
   display: flex;
   position: relative;
   padding: 24px;
-  font-style: ${({ theme }) => theme.typo.caption0}
   color: ${({ theme }) => theme.color.textTertiary};
   text-decoration: none;
   cursor: pointer;
-  
+  white-space: nowrap;
+
   &.active::after {
     content: '';
     display: block;
@@ -39,4 +41,25 @@ export const StyledHeaderTab = styled(NavLink)`
     border-radius: 8px 8px 0 0;
     background-color: ${({ theme }) => theme.color.textPointed};
   }
+`;
+
+export const StyledHeaderSearchContainer = styled.div`
+  display: flex;
+  border: 1px solid ${({ theme }) => theme.color.borderThick};
+  border-radius: 100px;
+  padding: 12px 16px;
+  gap: 4px;
+`;
+
+export const StyledHeaderSearchInput = styled.input`
+  width: 492px;
+  height: 20px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+`;
+
+export const StyledHeaderSearchIcon = styled.img`
+  width: 18px;
+  height: 18px;
 `;
