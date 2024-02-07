@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
   display: flex;
+  padding: 0 40px;
   align-items: center;
   width: 100%;
   height: 64px;
@@ -10,7 +11,6 @@ export const StyledHeader = styled.header`
 `;
 
 export const StyledHeaderLogo = styled(Link)`
-  margin-left: 40px;
   display: flex;
 `;
 
@@ -45,6 +45,8 @@ export const StyledHeaderTab = styled(NavLink)`
 
 export const StyledHeaderSearchContainer = styled.div`
   display: flex;
+  width: 552px;
+  height: 44px;
   border: 1px solid ${({ theme }) => theme.color.borderThick};
   border-radius: 100px;
   padding: 12px 16px;
@@ -52,7 +54,7 @@ export const StyledHeaderSearchContainer = styled.div`
 `;
 
 export const StyledHeaderSearchInput = styled.input`
-  width: 492px;
+  width: 100%;
   height: 20px;
   border: none;
   outline: none;
@@ -62,4 +64,21 @@ export const StyledHeaderSearchInput = styled.input`
 export const StyledHeaderSearchIcon = styled.img`
   width: 18px;
   height: 18px;
+`;
+
+export const StyledHeaderIconButton = styled.button`
+  margin-left: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+`;
+
+export const StyledHeaderUserIcon = styled.img`
+  width: 32px;
+  height: 32px;
+`;
+
+export const StyledSpacer = styled.div`
+  flex-grow: 1;
 `;

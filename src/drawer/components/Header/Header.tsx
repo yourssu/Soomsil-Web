@@ -1,4 +1,5 @@
-import searchIcon from '@/assets/search_icon.svg';
+import personCircleIcon from '@/assets/ic_personcircle.svg';
+import searchIcon from '@/assets/ic_search.svg';
 import soomsil from '@/assets/soomsil.svg';
 
 import {
@@ -9,6 +10,9 @@ import {
   StyledHeaderSearchContainer,
   StyledHeaderSearchInput,
   StyledHeaderSearchIcon,
+  StyledHeaderUserIcon,
+  StyledHeaderIconButton,
+  StyledSpacer,
 } from './Header.style';
 
 const Header = () => {
@@ -22,10 +26,14 @@ const Header = () => {
         <StyledHeaderTab to="register">서비스 등록</StyledHeaderTab>
         <StyledHeaderTab to="myDrawers">내 서랍장</StyledHeaderTab>
       </StyledHeaderTabs>
+      <StyledSpacer />
       <StyledHeaderSearchContainer>
         <StyledHeaderSearchInput type="text" />
         <StyledHeaderSearchIcon src={searchIcon} alt="searchIcon" />
       </StyledHeaderSearchContainer>
+      <StyledHeaderIconButton>
+        <StyledHeaderUserIcon src={personCircleIcon} alt="personCircleIcon" />
+      </StyledHeaderIconButton>
     </StyledHeader>
   );
 };
