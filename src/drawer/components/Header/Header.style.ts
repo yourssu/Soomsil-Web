@@ -6,11 +6,12 @@ export const StyledHeader = styled.header`
   align-items: center;
   width: 100%;
   height: 4rem;
-  padding: 0 40px;
+  padding-right: 20rem;
   position: sticky;
 `;
 
 export const StyledHeaderLogo = styled(Link)`
+  margin-left: 2.5rem;
   display: flex;
 `;
 
