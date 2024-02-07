@@ -22,8 +22,8 @@ export const Category = () => {
   return (
     <StyledCategoryContainer>
       <div>카테고리 유형</div>
-      {CategoryList.map((index) => (
-        <CheckBox key={index.id}>{index.title}</CheckBox>
+      {CategoryList.map(({ id, title }) => (
+        <CheckBox key={id}>{title}</CheckBox>
       ))}
     </StyledCategoryContainer>
   );
