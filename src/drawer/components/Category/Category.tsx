@@ -1,6 +1,6 @@
 import { CheckBox } from '@yourssu/design-system-react';
 
-import { CategoryContainer } from './Category.style';
+import { StyledCategoryContainer } from './Category.style';
 
 interface CategoryProps {
   id: number;
@@ -20,11 +20,11 @@ const CategoryList: CategoryProps[] = [
 
 export const Category = () => {
   return (
-    <CategoryContainer>
+    <StyledCategoryContainer>
       <div>카테고리 유형</div>
       {CategoryList.map((index) => (
         <CheckBox key={index.id}>{index.title}</CheckBox>
       ))}
-    </CategoryContainer>
+    </StyledCategoryContainer>
   );
 };

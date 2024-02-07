@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CategoryContainer = styled.div`
+export const StyledCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
