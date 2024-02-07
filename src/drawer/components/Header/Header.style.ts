@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledHeader = styled.header`
@@ -8,8 +8,9 @@ export const StyledHeader = styled.header`
   position: sticky;
 `;
 
-export const StyledHeaderLogo = styled.img`
+export const StyledHeaderLogo = styled(Link)`
   margin-left: 40px;
+  display: flex;
 `;
 
 export const StyledHeaderTabs = styled.nav`
