@@ -1,7 +1,11 @@
-import { IconContext, IcStarFilled, IcStarLine } from '@yourssu/design-system-react';
+import {
+  IconContext,
+  IcStarFilled,
+  IcStarLine,
+  IcDotsVerticalLine,
+} from '@yourssu/design-system-react';
 
 import BigThumbnail from '@/assets/bigThumbnail.png';
-import Setting from '@/assets/settingIcon.svg';
 import SmallThumbnail from '@/assets/smallThumbnail.png';
 import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 
@@ -70,8 +74,9 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
 const CardSetting = ({ onClick }: CardSettingProps) => {
   return (
     <StyledSettingButton onClick={onClick}>
-      {/* 아이콘으로 교체 예정 */}
-      <img src={Setting} />
+      <IconContext.Provider value={{ color: '#505458', size: '36px' }}>
+        <IcDotsVerticalLine />
+      </IconContext.Provider>
     </StyledSettingButton>
   );
 };
