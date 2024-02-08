@@ -12,16 +12,13 @@ export const StyledContainer = styled(Link)<StyledContainerProps>`
   text-decoration: none;
 `;
 
-export const StyledBigThumbnail = styled.img`
-  border-radius: 0.5rem;
-  box-shadow:
-    0px 1px 3px 1px rgba(60, 64, 67, 0.15),
-    0px 1px 2px 0px rgba(60, 64, 67, 0.3);
-`;
-
-export const StyledSmallThumbnail = styled.img`
-  width: 4rem;
-  border-radius: 0.75rem;
+interface StyledThumbnailProps {
+  $width?: number;
+  $borderRadius: number;
+}
+export const StyledThumbnail = styled.img<StyledThumbnailProps>`
+  width: ${(props) => `${props.$width}rem;`}
+  border-radius: ${(props) => `${props.$borderRadius}rem;`}
   box-shadow:
     0px 1px 3px 1px rgba(60, 64, 67, 0.15),
     0px 1px 2px 0px rgba(60, 64, 67, 0.3);

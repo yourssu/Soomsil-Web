@@ -7,10 +7,9 @@ import StarLine from '@/assets/starLineIcon.svg';
 import {
   StyledContainer,
   StyledText,
-  StyledBigThumbnail,
-  StyledSmallThumbnail,
   StyledTitle,
   StyledSettingButton,
+  StyledThumbnail,
 } from './Card.style';
 import { CardContainerProps, CardContentProps, CardThumbnailProps } from './Card.type';
 
@@ -23,11 +22,23 @@ const CardContainer = ({ children, link, width = 25.5 }: CardContainerProps) => 
 };
 
 const CardBigThumbnail = ({ imgSrc }: CardThumbnailProps) => {
-  return <StyledBigThumbnail src={imgSrc || BigThumbnail}></StyledBigThumbnail>;
+  return (
+    <StyledThumbnail
+      src={imgSrc || BigThumbnail}
+      $borderRadius={0.5}
+      $width={25.5}
+    ></StyledThumbnail>
+  );
 };
 
 const CardSmallThumbnail = ({ imgSrc }: CardThumbnailProps) => {
-  return <StyledSmallThumbnail src={imgSrc || SmallThumbnail}></StyledSmallThumbnail>;
+  return (
+    <StyledThumbnail
+      src={imgSrc || SmallThumbnail}
+      $borderRadius={0.75}
+      $width={4}
+    ></StyledThumbnail>
+  );
 };
 
 const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentProps) => {
