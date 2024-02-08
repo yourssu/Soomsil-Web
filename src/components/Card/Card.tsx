@@ -3,6 +3,7 @@ import Setting from '@/assets/settingIcon.svg';
 import SmallThumbnail from '@/assets/smallThumbnail.png';
 import StarFilled from '@/assets/starFilledIcon.svg';
 import StarLine from '@/assets/starLineIcon.svg';
+import { FlexContainer, FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 
 import {
   StyledContainer,
@@ -48,15 +49,15 @@ const CardSmallThumbnail = ({ imgSrc }: CardThumbnailProps) => {
 
 const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentProps) => {
   return (
-    <div style={{ flexGrow: 1 }}>
+    <FlexGrowItem>
       <StyledTitle>{title}</StyledTitle>
       <StyledText>{body}</StyledText>
-      <div style={{ display: 'flex' }}>
+      <FlexContainer>
         <StyledText>{bookmarkCount}+</StyledText>
         {/* 아이콘으로 교체 예정 */}
         {isBookmarked ? <img src={StarFilled} width={15} /> : <img src={StarLine} width={15} />}
-      </div>
-    </div>
+      </FlexContainer>
+    </FlexGrowItem>
   );
 };
 
