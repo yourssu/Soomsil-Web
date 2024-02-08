@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyeldFooter = styled.footer`
+export const StyledFooter = styled.footer`
   display: flex;
   position: absolute;
   bottom: 0;

@@ -1,10 +1,10 @@
-import { StyeldFooter, StyledFooterLogo, StyledFooterText } from './Footer.style';
+import { StyledFooter, StyledFooterLogo, StyledFooterText } from './Footer.style';
 
 export const Footer = () => {
   return (
-    <StyeldFooter>
+    <StyledFooter>
       <StyledFooterLogo>SOOMSIL DRAWERS</StyledFooterLogo>
       <StyledFooterText>Version n.n.n</StyledFooterText>
-    </StyeldFooter>
+    </StyledFooter>
   );
 };
