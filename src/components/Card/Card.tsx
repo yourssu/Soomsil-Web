@@ -11,7 +11,12 @@ import {
   StyledSettingButton,
   StyledThumbnail,
 } from './Card.style';
-import { CardContainerProps, CardContentProps, CardThumbnailProps } from './Card.type';
+import {
+  CardContainerProps,
+  CardContentProps,
+  CardSettingProps,
+  CardThumbnailProps,
+} from './Card.type';
 
 const CardContainer = ({ children, link, width = 25.5 }: CardContainerProps) => {
   return (
@@ -55,12 +60,7 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
   );
 };
 
-const CardSetting = () => {
-  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    window.alert('menu-list 구현 이후 추가 예정');
-    event.preventDefault();
-  };
-
+const CardSetting = ({ onClick }: CardSettingProps) => {
   return (
     <StyledSettingButton onClick={onClick}>
       {/* 아이콘으로 교체 예정 */}

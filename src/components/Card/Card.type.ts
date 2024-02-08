@@ -14,3 +14,7 @@ export interface CardContentProps {
 export interface CardThumbnailProps {
   imgSrc?: string;
 }
+
+export interface CardSettingProps {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}

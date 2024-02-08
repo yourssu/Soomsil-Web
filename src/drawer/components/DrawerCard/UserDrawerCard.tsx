@@ -11,6 +11,11 @@ export const UserDrawerCard = ({
   bookmarkCount,
   isBookmarked,
 }: DrawerCardProps) => {
+  const onClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    window.alert('menu-list 구현 이후 추가 예정');
+    event.preventDefault();
+  };
+
   return (
     <Card link={link}>
       <Card.BigThumbnail imgSrc={bigImgSrc} />
@@ -21,7 +26,7 @@ export const UserDrawerCard = ({
         bookmarkCount={bookmarkCount}
         isBookmarked={isBookmarked}
       />
-      <Card.Setting />
+      <Card.Setting onClick={onClick} />
     </Card>
   );
 };
