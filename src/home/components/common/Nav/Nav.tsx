@@ -6,15 +6,15 @@ import { Dropdown } from '@/components/Dropdown/Dropdown';
 import { Spacing } from '../Spacing/Spacing';
 
 import {
-  Container,
-  ProfileContainer,
-  ColDivider,
-  NonLoginContainer,
-  NonLoginText,
-  DropDownEmail,
-  DropDownLogout,
-  DropDownMyPage,
-  DropDownName,
+  StyledContainer,
+  StyledProfileContainer,
+  StyledColDivider,
+  StyledNonLoginContainer,
+  StyledNonLoginText,
+  StyledDropDownEmail,
+  StyledDropDownLogout,
+  StyledDropDownMyPage,
+  StyledDropDownName,
 } from './Nav.style';
 interface NavProps {
   isLoggedIn: boolean;
@@ -25,30 +25,30 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
     setOnProfileClick((prev) => !prev);
   };
   return (
-    <Container>
+    <StyledContainer>
       {isLoggedIn ? (
         <div>
-          <ProfileContainer src={Profile} alt="profile" onClick={handelProfileClick} />
+          <StyledProfileContainer src={Profile} alt="profile" onClick={handelProfileClick} />
           {onProfileClick && (
             <Dropdown>
-              <DropDownName>뿌슝이</DropDownName>
-              <DropDownEmail>cuteppussung@naver.com</DropDownEmail>
+              <StyledDropDownName>뿌슝이</StyledDropDownName>
+              <StyledDropDownEmail>cuteppussung@naver.com</StyledDropDownEmail>
               <Spacing size={'1rem'} />
-              <DropDownMyPage to="/mypage">마이페이지</DropDownMyPage>
+              <StyledDropDownMyPage to="/mypage">마이페이지</StyledDropDownMyPage>
               <Spacing size={'0.25rem'} />
-              <DropDownLogout>로그아웃</DropDownLogout>
+              <StyledDropDownLogout>로그아웃</StyledDropDownLogout>
             </Dropdown>
           )}
         </div>
       ) : (
         <div>
-          <NonLoginContainer>
-            <NonLoginText to="/login">로그인</NonLoginText>
-            <ColDivider>|</ColDivider>
-            <NonLoginText to="/signup">회원가입</NonLoginText>
-          </NonLoginContainer>
+          <StyledNonLoginContainer>
+            <StyledNonLoginText to="/login">로그인</StyledNonLoginText>
+            <StyledColDivider>|</StyledColDivider>
+            <StyledNonLoginText to="/signup">회원가입</StyledNonLoginText>
+          </StyledNonLoginContainer>
         </div>
       )}
-    </Container>
+    </StyledContainer>
   );
 };

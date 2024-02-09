@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { Container } from './Dropdown.style';
+import { StyledContainer } from './Dropdown.style';
 
 export const Dropdown = ({ children }: { children: ReactNode }) => {
-  return <Container>{children}</Container>;
+  return <StyledContainer>{children}</StyledContainer>;
 };
