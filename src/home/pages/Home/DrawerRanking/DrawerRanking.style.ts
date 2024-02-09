@@ -29,7 +29,6 @@ export const StyledTitle = styled.div`
 
 export const StyledAllViewButton = styled(Link)`
   padding-right: 0.1875rem;
-  cursor: pointer;
   color: ${({ theme }) => theme.color.textTertiary};
 
   // YDS 지정이 되어 있지 않아 임시로 작업했습니다.
