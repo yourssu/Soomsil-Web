@@ -34,6 +34,11 @@ export const StyledText = styled.p`
   color: ${({ theme }) => theme.color.textTertiary};
 `;
 
+export const StyledBookmarkContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const StyledSettingButton = styled.button`
   background-color: transparent;
   border: none;

@@ -15,6 +15,7 @@ import {
   StyledTitle,
   StyledSettingButton,
   StyledThumbnail,
+  StyledBookmarkContainer,
 } from './Card.style';
 import {
   CardContainerProps,
@@ -56,7 +57,7 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
     <FlexGrowItem>
       <StyledTitle>{title}</StyledTitle>
       <StyledText>{body}</StyledText>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <StyledBookmarkContainer>
         <StyledText>{bookmarkCount}+</StyledText>
         <IconContext.Provider
           value={{
@@ -66,7 +67,7 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
         >
           {isBookmarked ? <IcStarFilled /> : <IcStarLine />}
         </IconContext.Provider>
-      </div>
+      </StyledBookmarkContainer>
     </FlexGrowItem>
   );
 };
