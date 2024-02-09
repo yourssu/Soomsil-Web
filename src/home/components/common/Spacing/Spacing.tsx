@@ -1,7 +1,7 @@
-import { Container } from './Spacing.style';
+import { StyledContainer } from './Spacing.style';
 export interface SpacingProps {
   size: string;
 }
 export const Spacing = ({ size }: SpacingProps) => {
-  return <Container size={size} />;
+  return <StyledContainer size={size} />;
 };
