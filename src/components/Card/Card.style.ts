@@ -5,7 +5,7 @@ interface StyledContainerProps {
   $width: number;
 }
 export const StyledContainer = styled(Link)<StyledContainerProps>`
-  width: ${(props) => `${props.$width}rem;`}
+  width: ${(props) => `${props.$width}rem`};
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -17,8 +17,8 @@ interface StyledThumbnailProps {
   $borderRadius: number;
 }
 export const StyledThumbnail = styled.img<StyledThumbnailProps>`
-  width: ${(props) => `${props.$width}rem;`}
-  border-radius: ${(props) => `${props.$borderRadius}rem;`}
+  width: ${(props) => `${props.$width}rem`};
+  border-radius: ${(props) => `${props.$borderRadius}rem`};
   box-shadow:
     0px 1px 3px 1px rgba(60, 64, 67, 0.15),
     0px 1px 2px 0px rgba(60, 64, 67, 0.3);
