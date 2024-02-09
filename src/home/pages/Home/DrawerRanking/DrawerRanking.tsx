@@ -22,6 +22,7 @@ const DrawerRanking = ({ drawerList }: DrawerRankingProps) => {
       <StyledRankCardContainer>
         {drawerList.map((drawerItem) => (
           <RankCard
+            key={drawerItem.title}
             link={drawerItem.link}
             title={drawerItem.title}
             body={drawerItem.body}
