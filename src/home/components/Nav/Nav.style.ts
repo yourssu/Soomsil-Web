@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled.nav`
   width: 100%;
   display: flex;
   justify-content: flex-end;
