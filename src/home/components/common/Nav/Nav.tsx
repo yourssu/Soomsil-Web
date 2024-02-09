@@ -45,7 +45,7 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
           <NonLoginContainer>
             <NonLoginText to="/login">로그인</NonLoginText>
             <ColDivider>|</ColDivider>
-            <NonLoginText to="/login">회원가입</NonLoginText>
+            <NonLoginText to="/signup">회원가입</NonLoginText>
           </NonLoginContainer>
         </div>
       )}
