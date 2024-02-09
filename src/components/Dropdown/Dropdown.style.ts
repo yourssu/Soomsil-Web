@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 export const StyledContainer = styled.div`
   padding: 1rem;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   z-index: 10;
   bottom: -9rem;

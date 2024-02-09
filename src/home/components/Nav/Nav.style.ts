@@ -53,7 +53,9 @@ export const StyledDropDownEmail = styled.div`
 export const StyledDropDownMyPage = styled(NavLink)`
   ${({ theme }) => theme.typo.button0};
   color: ${({ theme }) => theme.color.textPrimary};
+  padding-top: 1.25rem;
 `;
 export const StyledDropDownLogout = styled.div`
   ${({ theme }) => theme.typo.button0};
+  padding-top: 0.75rem;
 `;

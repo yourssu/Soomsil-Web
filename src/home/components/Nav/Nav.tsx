@@ -3,8 +3,6 @@ import { useState } from 'react';
 import Profile from '@/assets/home/profile.svg';
 import { Dropdown } from '@/components/Dropdown/Dropdown';
 
-import { Spacing } from '../Spacing/Spacing';
-
 import {
   StyledContainer,
   StyledProfileContainer,
@@ -33,9 +31,7 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
             <Dropdown>
               <StyledDropDownName>뿌슝이</StyledDropDownName>
               <StyledDropDownEmail>cuteppussung@naver.com</StyledDropDownEmail>
-              <Spacing size={'1rem'} />
               <StyledDropDownMyPage to="/mypage">마이페이지</StyledDropDownMyPage>
-              <Spacing size={'0.25rem'} />
               <StyledDropDownLogout>로그아웃</StyledDropDownLogout>
             </Dropdown>
           )}

@@ -4,8 +4,8 @@ import { Layout as DrawerLayout } from './drawer/components/Layout/Layout';
 import MyDrawer from './drawer/pages/MyDrawer';
 import Ranking from './drawer/pages/Ranking';
 import Register from './drawer/pages/Register';
-import { HomeLayout } from './home/components/common/HomeLayout/HomeLayout';
-import { Login } from './home/components/login/Login';
+import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
+import { Login } from './home/components/Login/Login';
 import { Home } from './home/pages/Home';
 import { Search } from './search/Search';
 
