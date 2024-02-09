@@ -20,16 +20,16 @@ interface NavProps {
   isLoggedIn: boolean;
 }
 export const Nav = ({ isLoggedIn }: NavProps) => {
-  const [onProfileClick, setOnProfileClick] = useState(false);
-  const handelProfileClick = () => {
-    setOnProfileClick((prev) => !prev);
+  const [isProfileClicked, setIsProfileClicked] = useState(false);
+  const handleProfileClick = () => {
+    setIsProfileClicked((prev) => !prev);
   };
   return (
     <StyledContainer>
       {isLoggedIn ? (
         <div>
-          <StyledProfileContainer src={Profile} alt="profile" onClick={handelProfileClick} />
-          {onProfileClick && (
+          <StyledProfileContainer src={Profile} alt="profile" onClick={handleProfileClick} />
+          {isProfileClicked && (
             <Dropdown>
               <StyledDropDownName>뿌슝이</StyledDropDownName>
               <StyledDropDownEmail>cuteppussung@naver.com</StyledDropDownEmail>
