@@ -2,7 +2,7 @@ import { Card } from '@/components/Card/Card';
 
 import { RankDrawerProps } from './RankDrawerCard.type';
 
-export const RankCard = ({
+const RankDrawerCard = ({
   link,
   smallImgSrc,
   title,
@@ -22,3 +22,5 @@ export const RankCard = ({
     </Card>
   );
 };
+
+export default RankDrawerCard;

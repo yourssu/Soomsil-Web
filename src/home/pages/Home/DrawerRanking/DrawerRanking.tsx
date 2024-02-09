@@ -1,4 +1,4 @@
-import { RankCard } from '../RankDrawerCard/RankDrawerCard';
+import RankDrawerCard from '../RankDrawerCard/RankDrawerCard';
 import { RankDrawerProps } from '../RankDrawerCard/RankDrawerCard.type';
 
 import {
@@ -21,7 +21,7 @@ const DrawerRanking = ({ drawerList }: DrawerRankingProps) => {
       </StyledTitleContainer>
       <StyledRankCardContainer>
         {drawerList.map((drawerItem) => (
-          <RankCard
+          <RankDrawerCard
             key={drawerItem.title}
             link={drawerItem.link}
             title={drawerItem.title}
