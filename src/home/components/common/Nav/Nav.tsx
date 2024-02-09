@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import Profile from '@/assets/home/profile.svg';
+import { Dropdown } from '@/components/Dropdown/Dropdown';
 
-import { Dropdown } from '../Dropdown/Dropdown';
 import { Spacing } from '../Spacing/Spacing';
 
 import {

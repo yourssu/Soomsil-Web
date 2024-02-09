@@ -8,7 +8,7 @@ import { StyledLayout } from './Layout.style';
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <StyledLayout>
-      <Nav isLoggedIn={false} />
+      <Nav isLoggedIn={true} />
       {children || <Outlet />}
     </StyledLayout>
   );
