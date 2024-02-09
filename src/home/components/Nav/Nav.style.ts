@@ -11,6 +11,7 @@ export const StyledContainer = styled.div`
 export const StyledProfileContainer = styled.img`
   width: 2.5rem;
   height: 2.5rem;
+  cursor: pointer;
 `;
 export const StyledNonLoginContainer = styled.div`
   display: flex;
