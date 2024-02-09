@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   width: min-content;
-  padding: 1.5rem;
+  padding: 1.4375rem;
 
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
@@ -28,6 +28,7 @@ export const StyledTitle = styled.div`
 `;
 
 export const StyledAllViewButton = styled(Link)`
+  padding-right: 0.1875rem;
   cursor: pointer;
   color: ${({ theme }) => theme.color.textTertiary};
 
@@ -44,4 +45,5 @@ export const StyledRankCardContainer = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   width: max-content;
+  margin-bottom: 0.8125rem;
 `;
