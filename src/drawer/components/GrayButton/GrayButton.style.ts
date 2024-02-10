@@ -7,7 +7,7 @@ export const StyledGrayButton = styled.button`
   border: none;
   background-color: ${({ theme }) => theme.color.buttonBG};
   color: ${({ theme }) => theme.color.textSecondary};
-  font-style: ${({ theme }) => theme.typo.caption0};
+  ${({ theme }) => theme.typo.caption0};
   cursor: pointer;
   &:hover {
     background-color: ${({ theme }) => theme.color.buttonNormalPressed};

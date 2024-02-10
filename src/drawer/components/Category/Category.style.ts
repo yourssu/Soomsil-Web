@@ -9,5 +9,5 @@ export const StyledCategoryContainer = styled.div`
   align-items: flex-start;
   align-self: flex-start;
   gap: 1rem;
-  font-style: ${({ theme }) => theme.typo.subtitle2};
+  ${({ theme }) => theme.typo.subtitle2};
 `;

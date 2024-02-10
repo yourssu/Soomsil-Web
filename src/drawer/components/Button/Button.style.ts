@@ -14,7 +14,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     $isFilled ? ({ theme }) => theme.color.bgNormal : ({ theme }) => theme.color.buttonPoint};
   border: ${({ $isFilled }) =>
     $isFilled ? 'none' : ({ theme }) => `1px solid ${theme.color.buttonPoint}`};
-  font-style: ${({ theme }) => theme.typo.caption0};
+  ${({ theme }) => theme.typo.caption0};
   cursor: pointer;
   &:hover {
     background-color: ${({ theme }) => theme.color.buttonPointPressed};
