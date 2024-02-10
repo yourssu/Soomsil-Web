@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const StyledCategoryContainer = styled.div`
-  margin-top: 1.3125rem;
-  margin-left: 2.125rem;
-  padding-left: 2.0625rem;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  left: 0;
+  margin-left: 3.56rem;
   align-items: flex-start;
   align-self: flex-start;
   gap: 1rem;
