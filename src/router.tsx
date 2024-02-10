@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Layout as DrawerLayout } from './drawer/components/Layout/Layout';
-import MyDrawer from './drawer/pages/MyDrawer';
-import Register from './drawer/pages/Register';
 import { Ranking } from './drawer/pages/Ranking/Ranking';
+import { Register } from './drawer/pages/Register';
+import { MyDrawer } from './drawer/pages/MyDrawer';
 import { Home } from './home/pages/Home';
 import { Search } from './search/Search';
 
