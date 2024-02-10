@@ -8,6 +8,8 @@ export const StyledHeader = styled.header`
   height: 4rem;
   padding-right: 20rem;
   position: sticky;
+  top: 0;
+  background-color: ${({ theme }) => theme.color.bgNormal};
 `;
 
 export const StyledHeaderLogo = styled(Link)`
