@@ -5,8 +5,9 @@ interface StyledButtonProps {
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  padding: 8px 32px;
-  border-radius: 9999px;
+  height: 2.125rem;
+  padding: 0.5rem 2rem;
+  border-radius: 624.9375rem;
   background-color: ${({ $isFilled }) =>
     $isFilled ? ({ theme }) => theme.color.buttonPoint : 'transparent'};
   color: ${({ $isFilled }) =>
