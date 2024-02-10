@@ -11,8 +11,8 @@ export const StyledFooter = styled.footer`
   background-color: ${({ theme }) => theme.color.bgPressed};
 `;
 
-export const StyledFooterLogo = styled.text``;
+export const StyledFooterLogo = styled.span``;
 
-export const StyledFooterText = styled.text`
+export const StyledFooterText = styled.span`
   margin-left: 1.25rem;
 `;
