@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8.56rem;
+`;
+
 export const StyledRankingContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -10,7 +16,7 @@ export const StyledRankingContainer = styled.section`
 
 export const StyledCardContainer = styled.section`
   display: grid;
-  grid-template-columns: 25.5rem 25.5rem 25.5rem;
+  grid-template-columns: repeat(3, 25.5rem);
   gap: 1.75rem;
   margin-top: 2rem;
 `;

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 export const StyledCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
-  position: fixed;
-  left: 0;
-  margin-left: 3.56rem;
+  position: sticky;
+  top: 0;
+  margin-top: 3.38rem;
+  margin-left: -15rem;
   align-items: flex-start;
-  align-self: flex-start;
   gap: 1rem;
   ${({ theme }) => theme.typo.subtitle2};
 `;
