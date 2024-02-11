@@ -7,12 +7,12 @@ export const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 80px;
+  height: 5rem;
   background-color: ${({ theme }) => theme.color.bgPressed};
 `;
 
-export const StyledFooterLogo = styled.text``;
+export const StyledFooterLogo = styled.span``;
 
-export const StyledFooterText = styled.text`
-  margin-left: 30px;
+export const StyledFooterText = styled.span`
+  margin-left: 1.25rem;
 `;
