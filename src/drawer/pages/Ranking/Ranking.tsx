@@ -1,7 +1,9 @@
-import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
-import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
 import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
 import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
+import { Category } from '@/drawer/components/Category/Category';
+import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
+import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
+
 import {
   StyledBetweenContainer,
   StyledCardContainer,
@@ -12,7 +14,6 @@ import {
   StyledTextContainer,
   StyledTitle,
 } from './Ranking.style';
-import { Category } from '@/drawer/components/Category/Category';
 
 export const Ranking = () => {
   return (

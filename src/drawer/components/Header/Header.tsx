@@ -1,5 +1,5 @@
-import personCircleIcon from '@/assets/ic_personcircle.svg';
-import searchIcon from '@/assets/ic_search.svg';
+import { IcPersoncircleLine, IcSearchLine, IconContext } from '@yourssu/design-system-react';
+
 import soomsil from '@/assets/soomsil.svg';
 
 import {
@@ -9,8 +9,6 @@ import {
   StyledHeaderTabs,
   StyledHeaderSearchContainer,
   StyledHeaderSearchInput,
-  StyledHeaderSearchIcon,
-  StyledHeaderUserIcon,
   StyledHeaderIconButton,
   StyledSpacer,
 } from './Header.style';
@@ -29,10 +27,24 @@ const Header = () => {
       <StyledSpacer />
       <StyledHeaderSearchContainer>
         <StyledHeaderSearchInput type="text" />
-        <StyledHeaderSearchIcon src={searchIcon} alt="searchIcon" />
+        <IconContext.Provider
+          value={{
+            color: '#8E9398',
+            size: '1.125rem',
+          }}
+        >
+          <IcSearchLine />
+        </IconContext.Provider>
       </StyledHeaderSearchContainer>
       <StyledHeaderIconButton>
-        <StyledHeaderUserIcon src={personCircleIcon} alt="personCircleIcon" />
+        <IconContext.Provider
+          value={{
+            color: '#816DEC',
+            size: '2rem',
+          }}
+        >
+          <IcPersoncircleLine />
+        </IconContext.Provider>
       </StyledHeaderIconButton>
     </StyledHeader>
   );
