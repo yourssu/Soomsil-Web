@@ -64,22 +64,12 @@ export const StyledHeaderSearchInput = styled.input`
   background-color: transparent;
 `;
 
-export const StyledHeaderSearchIcon = styled.img`
-  width: 1.125rem;
-  height: 1.125rem;
-`;
-
 export const StyledHeaderIconButton = styled.button`
   margin-left: 1rem;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-`;
-
-export const StyledHeaderUserIcon = styled.img`
-  width: 2rem;
-  height: 2rem;
 `;
 
 export const StyledSpacer = styled.div`
