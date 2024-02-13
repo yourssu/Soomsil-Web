@@ -3,7 +3,6 @@ import { YDSWrapper } from '@yourssu/design-system-react';
 import ReactDOM from 'react-dom/client';
 
 import { App } from './App';
-
 import './index.css';
 
 const queryClient = new QueryClient();
