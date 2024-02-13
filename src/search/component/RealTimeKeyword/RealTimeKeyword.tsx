@@ -42,7 +42,7 @@ export const RealTimeKeyword = () => {
     const setDay = day.length === 1 ? '0' + day : day;
     const setMin = min.length === 1 ? '0' + min : min;
 
-    const setHour = AMPM === 'PM' && Number(hour) !== 12 ? String(Number(hour) + 12) : hour;
+    const setHour = AMPM === 'PM' && Number(hour) !== 12 ? String(Number(hour) + 12) : '0' + hour;
 
     setRealTime({
       year: year,
