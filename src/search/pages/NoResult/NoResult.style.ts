@@ -14,9 +14,9 @@ export const StyledNoResultSection = styled.div`
 `;
 
 export const StyledNoResultKeyword = styled.span`
-  // subtitle24
-  color: var(--text-textPointed, #816dec);
+  color: ${({ theme }) => theme.color.textPointed};
 
+  // subtitle24
   font-family: 'Spoqa Han Sans Neo';
   font-size: 24px;
   font-style: normal;
@@ -25,9 +25,9 @@ export const StyledNoResultKeyword = styled.span`
 `;
 
 export const StyledNoResultDescription = styled.p`
-  // subtitle24
-  color: var(--text-textPrimary, #101112);
+  color: ${({ theme }) => theme.color.textPrimary};
 
+  // subtitle24
   font-family: 'Spoqa Han Sans Neo';
   font-size: 24px;
   font-style: normal;
@@ -42,9 +42,9 @@ export const StyledModifySection = styled.div`
 `;
 
 export const StyledModifyDescription = styled.p`
-  // body 18
-  color: var(--text-textTertiary, #8e9398);
+  color: ${({ theme }) => theme.color.textTertiary};
 
+  // body 18
   font-family: 'Spoqa Han Sans Neo';
   font-size: 18px;
   font-style: normal;
@@ -63,7 +63,7 @@ export const StyledCard = styled.div`
 
   border-radius: 12px;
   border: 1px solid var(--border-borderNormal, rgba(16, 17, 18, 0.1));
-  background: var(--bg-bgNormal, #fff);
+  background: ${({ theme }) => theme.baseColor.white000};
 `;
 
 export const StyledCardDescriptionSection = styled.div`
@@ -84,21 +84,21 @@ export const StyledCardIconFrame = styled.div`
 export const StyledCardTextFrame = styled.div``;
 
 export const StyledCardLink = styled.a`
-  color: var(--text-textPrimary, #101112);
+  color: ${({ theme }) => theme.color.textPrimary};
 
   ${({ theme }) => theme.typo.subtitle1}
 
   &:hover {
-    color: var(--text-textPrimary, #101112);
+    color: ${({ theme }) => theme.color.textPrimary};
     text-decoration: underline;
     cursor: pointer;
   }
 `;
 
 export const StyledCardLinkTextDescription = styled.p`
-  // body16
-  color: var(--text-textTertiary, #8e9398);
+  color: ${({ theme }) => theme.color.textTertiary};
 
+  // body16
   font-family: 'Spoqa Han Sans Neo';
   font-size: 16px;
   font-style: normal;

@@ -25,13 +25,13 @@ export const StyledHeaderTextSection = styled.div`
 `;
 
 export const StyledHeaderText1 = styled.span`
-  color: var(--text-textPrimary, #101112);
+  color: ${({ theme }) => theme.color.textPrimary};
 
-  ${({ theme }) => theme.typo.subtitle1}
+  ${({ theme }) => theme.typo.subtitle1};
 `;
 
 export const StyledHeaderText2 = styled.span`
-  color: var(--text-textTertiary, #8e9398);
+  color: ${({ theme }) => theme.color.textTertiary};
 
   ${({ theme }) => theme.typo.body2}
 `;
@@ -45,7 +45,7 @@ export const StyledHeaderImageSection = styled.img`
 `;
 
 export const StyledListItemText = styled.p`
-  color: black;
+  color: ${({ theme }) => theme.color.textPrimary};
 
   // body18
   font-family: Spoqa Han Sans Neo;
@@ -57,7 +57,6 @@ export const StyledListItemText = styled.p`
 `;
 
 export const StyledListItemRanking = styled.span`
-  // body18
   font-family: 'Spoqa Han Sans Neo';
   font-size: 18px;
   font-style: normal;
