@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { ListItem, IcSearchLine } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
-import RealTimeKeywordImage from '@/asset/RealTimeKeyword.png';
+import RealTimeKeywordImage from '@/assets/search/RealTimeKeyword.png';
 
 import {
   StyledContainer,

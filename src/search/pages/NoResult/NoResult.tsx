@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { IcArrowRightLine, IcPenLine } from '@yourssu/design-system-react';
 
-import IcSoomsilde from '@/asset/NoResultIcon.svg';
+import IcSoomsilde from '@/assets/search/NoResultIcon.svg';
 
 import {
   StyledModifySection,
