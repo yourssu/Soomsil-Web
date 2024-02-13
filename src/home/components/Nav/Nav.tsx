@@ -28,7 +28,7 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
         <div>
           <StyledProfileContainer src={Profile} alt="profile" onClick={handleProfileClick} />
           {isProfileClicked && (
-            <Dropdown>
+            <Dropdown padding="1rem" bottom="-10rem" right="0.8rem">
               <StyledDropDownName>뿌슝이</StyledDropDownName>
               <StyledDropDownEmail>cuteppussung@naver.com</StyledDropDownEmail>
               <StyledDropDownMyPage to="/mypage">마이페이지</StyledDropDownMyPage>
