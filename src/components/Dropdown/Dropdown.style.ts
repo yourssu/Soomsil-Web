@@ -4,6 +4,7 @@ import { DropdownProps } from './Dropdown';
 
 export const StyledContainer = styled.div<DropdownProps>`
   padding: ${(props) => props.padding};
+  left: ${(props) => props.left};
   display: flex;
   flex-direction: column;
   position: absolute;
