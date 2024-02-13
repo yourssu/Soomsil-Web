@@ -89,15 +89,6 @@ target {
   scroll-margin-block: 5ex;
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
 ul {
   padding: 0;
   margin: 0;
