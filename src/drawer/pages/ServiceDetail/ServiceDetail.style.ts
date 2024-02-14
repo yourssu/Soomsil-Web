@@ -19,6 +19,9 @@ export const StyledBackgroundImageContainer = styled.div<StyledBackgroundImageCo
   justify-content: flex-end;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${(props) => props.$backgroundImage});
+  /* TODO: 추후 반응형 적용 필요 */
+  padding-left: 17vw;
+  padding-bottom: 4vh;
 `;
 
 export const StyledServiceTitleText = styled.h1`
@@ -66,4 +69,20 @@ export const StyledServiceActionContainer = styled.div`
   display: flex;
   gap: 1.5rem;
   margin-top: 1.5rem;
+`;
+
+export const StyledIconButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+interface StyledIconLabelTextProps {
+  $color: string;
+}
+
+export const StyledIconLabelText = styled.span<StyledIconLabelTextProps>`
+  /* TODO: 추후 폰트 변경 필요 */
+  ${({ theme }) => theme.typo.button4}
+  color: ${(props) => props.$color};
 `;
