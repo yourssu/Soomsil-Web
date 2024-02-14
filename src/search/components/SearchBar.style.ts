@@ -5,12 +5,12 @@ import { searchSize } from '../types/searchBox.type';
 
 export const StyledSearchBar = styled.div`
   width: 100vw;
-  height: 108px;
+  height: 6.75rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: start;
-  padding: 40px;
+  padding: 2.5rem;
 `;
 
 interface StyledInputContainerProps {
@@ -18,8 +18,8 @@ interface StyledInputContainerProps {
 }
 
 export const StyledInputContainer = styled.div<StyledInputContainerProps>`
-  width: ${(props) => (props.containerSize == 'large' ? '800px' : '669px')};
-  height: 60px;
+  width: ${(props) => (props.containerSize == 'large' ? '50rem' : '41.813rem')};
+  height: 3.75rem;
   display: flex;
   align-items: center;
 `;
@@ -30,8 +30,8 @@ interface StyledInputProps {
 
 export const StyledInput = styled.input<StyledInputProps>`
   ${(props) => props.theme.typo.title2};
-  width: ${(props) => (props.inputSize == 'large' ? '659px' : '529px')};
-  height: 31px;
+  width: ${(props) => (props.inputSize == 'large' ? '41.188rem' : '33.063rem')};
+  height: 1.938rem;
   border: none;
   &:focus {
     outline: none;
@@ -40,8 +40,8 @@ export const StyledInput = styled.input<StyledInputProps>`
 typos;
 
 export const StyledXButton = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
