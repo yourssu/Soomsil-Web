@@ -32,11 +32,11 @@ export const ServiceDetail = () => {
           </StyledCategoryContainer>
         </StyledServiceInfoContainer>
         <StyledServiceActionContainer>
-          // TODO: 버튼 사이즈 반응형
+          {/* TODO: 버튼 사이즈 반응형 */}
           <BoxButton size="medium" rounding={8} variant="filled" width="200px">
             DOWNLOAD
           </BoxButton>
-          // TODO: 버튼 사이즈 반응형
+          {/* TODO: 버튼 사이즈 반응형 */}
           <BoxButton size="medium" rounding={8} variant="tinted" width="200px">
             Github
           </BoxButton>
