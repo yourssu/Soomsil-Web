@@ -8,7 +8,7 @@ export const FlexGrowItem = ({
   children,
   proportion = 1,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   proportion?: number;
 }) => {
   return <StyledFlexGrowItem $proportion={proportion}>{children}</StyledFlexGrowItem>;
