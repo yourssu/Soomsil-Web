@@ -74,6 +74,7 @@ const ResultListItem = ({ title, link, content, date, thumbnail }: ResultListIte
                 src={thumbnail[4]}
                 alt="썸네일"
               ></StyledThumbnailImage>
+              <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
             </StyledThumbnail>
           </>
         )}
