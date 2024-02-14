@@ -4,6 +4,7 @@ import { Layout as DrawerLayout } from './drawer/components/Layout/Layout';
 import { MyDrawer } from './drawer/pages/MyDrawer';
 import { Ranking } from './drawer/pages/Ranking/Ranking';
 import { Register } from './drawer/pages/Register';
+import { ServiceDetail } from './drawer/pages/ServiceDetail/ServiceDetail';
 import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
 import { Login } from './home/components/login/Login';
 import { Home } from './home/pages/Home';
@@ -18,6 +19,7 @@ export const Router = () => {
       </Route>
       <Route path="/drawer" element={<DrawerLayout />}>
         <Route index element={<Navigate to="rankings" replace />}></Route>
+        <Route path="services/:serviceId" element={<ServiceDetail />} />
         <Route path="rankings" element={<Ranking />} />
         <Route path="register" element={<Register />} />
         <Route path="myDrawers" element={<MyDrawer />} />
