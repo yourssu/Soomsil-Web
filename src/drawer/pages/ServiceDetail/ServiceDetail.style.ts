@@ -36,7 +36,7 @@ export const StyledServiceDeveloperText = styled.h2`
 export const StyledServiceInfoContainer = styled.div`
   display: flex;
   gap: 1rem;
-  margin-top: 3rem;
+  margin-top: 2.5rem;
 `;
 
 export const StyledThumbnailImage = styled.img`
@@ -60,4 +60,10 @@ export const StyledCategoryText = styled.span`
 export const StyledCategoryHintText = styled.span`
   ${({ theme }) => theme.typo.button4}
   color: ${({ theme }) => theme.color.textTertiary};
+`;
+
+export const StyledServiceActionContainer = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 `;
