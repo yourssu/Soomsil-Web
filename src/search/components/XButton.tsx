@@ -1,4 +1,4 @@
-import { StyledXButton } from './SearchBar.style';
+import { StyledXButton } from './SearchBar/SearchBar.style';
 
 const XButton = ({ initiateValue }: { initiateValue: () => void }) => {
   return (

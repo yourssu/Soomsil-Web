@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import SearchIconSVG from '../assets/SearchIconSVG';
-import useForm from '../hooks/useForm';
-import { searchSize } from '../types/searchBox.type';
+import SearchIconSVG from '../../assets/SearchIconSVG';
+import useForm from '../../hooks/useForm';
+import { searchSize } from '../../types/searchBox.type';
+import Spacing from '../Spacing';
+import XButton from '../XButton';
 
 import { StyledInput, StyledInputContainer } from './SearchBar.style';
-import Spacing from './Spacing';
-import XButton from './XButton';
 
 interface SearchBoxProps {
   size: searchSize;

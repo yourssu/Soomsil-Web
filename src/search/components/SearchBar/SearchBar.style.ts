@@ -1,7 +1,7 @@
 import { typos } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
-import { searchSize } from '../types/searchBox.type';
+import { searchSize } from '../../types/searchBox.type';
 
 export const StyledSearchBar = styled.div`
   width: 100vw;

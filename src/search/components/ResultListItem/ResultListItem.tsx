@@ -1,4 +1,5 @@
-import { ResultListItemResponse } from '../types/ResultListItem.type';
+import { ResultListItemResponse } from '../../types/ResultListItem.type';
+import Spacing from '../Spacing';
 
 import {
   StyledContent,
@@ -11,7 +12,6 @@ import {
   StyledThumbnailImage,
   StyledTitle,
 } from './ResultListItem.style';
-import Spacing from './Spacing';
 
 const ResultListItem = ({ title, link, content, date, thumbnail }: ResultListItemResponse) => {
   return (

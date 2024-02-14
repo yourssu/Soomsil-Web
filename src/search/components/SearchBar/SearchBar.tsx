@@ -1,8 +1,8 @@
-import logo from '../assets/Logo.svg';
+import logo from '../../assets/Logo.svg';
+import Spacing from '../Spacing';
 
 import { StyledSearchBar } from './SearchBar.style';
 import SearchBox from './SearchBox';
-import Spacing from './Spacing';
 
 const SearchBar = () => {
   return (
