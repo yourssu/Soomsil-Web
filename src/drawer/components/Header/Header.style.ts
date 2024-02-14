@@ -7,10 +7,11 @@ export const StyledHeader = styled.header`
   width: 100%;
   height: 4rem;
   /* TODO: 추후 반응형 적용 필요 */
-  padding-right: 17vw;
+  padding-right: 10%;
   position: sticky;
   top: 0;
   background-color: ${({ theme }) => theme.color.bgNormal};
+  border-bottom: 1px solid ${({ theme }) => theme.color.borderNormal};
 `;
 
 export const StyledHeaderLogo = styled(Link)`
@@ -20,7 +21,8 @@ export const StyledHeaderLogo = styled(Link)`
 
 export const StyledHeaderTabs = styled.nav`
   display: flex;
-  margin-left: 7.5rem;
+  /* TODO: 추후 반응형 적용 필요 */
+  margin-left: 10%;
 `;
 
 export const StyledHeaderTab = styled(NavLink)`
@@ -50,7 +52,7 @@ export const StyledHeaderTab = styled(NavLink)`
 export const StyledHeaderSearchContainer = styled.div`
   display: flex;
   /* TODO: 추후 반응형 적용 필요 */
-  width: 28vw;
+  width: 30%;
   height: 2.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderThick};
   border-radius: 6.25rem;

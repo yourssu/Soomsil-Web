@@ -20,8 +20,8 @@ export const StyledBackgroundImageContainer = styled.div<StyledBackgroundImageCo
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${(props) => props.$backgroundImage});
   /* TODO: 추후 반응형 적용 필요 */
-  padding-left: 17vw;
-  padding-bottom: 4vh;
+  padding-left: 15%;
+  padding-bottom: 3%;
 `;
 
 export const StyledServiceTitleText = styled.h1`
@@ -39,7 +39,7 @@ export const StyledServiceDeveloperText = styled.h2`
 export const StyledServiceInfoContainer = styled.div`
   display: flex;
   gap: 1rem;
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 `;
 
 export const StyledThumbnailImage = styled.img`
