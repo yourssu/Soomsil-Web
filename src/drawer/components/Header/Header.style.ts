@@ -6,7 +6,8 @@ export const StyledHeader = styled.header`
   align-items: center;
   width: 100%;
   height: 4rem;
-  padding-right: 20rem;
+  /* TODO: 추후 반응형 적용 필요 */
+  padding-right: 17vw;
   position: sticky;
   top: 0;
   background-color: ${({ theme }) => theme.color.bgNormal};
@@ -48,7 +49,8 @@ export const StyledHeaderTab = styled(NavLink)`
 
 export const StyledHeaderSearchContainer = styled.div`
   display: flex;
-  width: 34.5rem;
+  /* TODO: 추후 반응형 적용 필요 */
+  width: 28vw;
   height: 2.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderThick};
   border-radius: 6.25rem;
@@ -62,16 +64,4 @@ export const StyledHeaderSearchInput = styled.input`
   border: none;
   outline: none;
   background-color: transparent;
-`;
-
-export const StyledHeaderIconButton = styled.button`
-  margin-left: 1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-`;
-
-export const StyledSpacer = styled.div`
-  flex-grow: 1;
 `;

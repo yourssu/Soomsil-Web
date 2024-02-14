@@ -1,6 +1,8 @@
 import { IcPersoncircleLine, IcSearchLine, IconContext } from '@yourssu/design-system-react';
+import { useTheme } from 'styled-components';
 
 import soomsil from '@/assets/soomsil.svg';
+import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 
 import {
   StyledHeader,
@@ -9,11 +11,11 @@ import {
   StyledHeaderTabs,
   StyledHeaderSearchContainer,
   StyledHeaderSearchInput,
-  StyledHeaderIconButton,
-  StyledSpacer,
 } from './Header.style';
 
 const Header = () => {
+  const theme = useTheme();
+
   return (
     <StyledHeader>
       <StyledHeaderLogo to="/drawer">
@@ -24,28 +26,28 @@ const Header = () => {
         <StyledHeaderTab to="register">서비스 등록</StyledHeaderTab>
         <StyledHeaderTab to="myDrawers">내 서랍장</StyledHeaderTab>
       </StyledHeaderTabs>
-      <StyledSpacer />
+      <FlexGrowItem proportion={1} />
       <StyledHeaderSearchContainer>
         <StyledHeaderSearchInput type="text" />
         <IconContext.Provider
           value={{
-            color: '#8E9398',
+            color: theme.color.buttonNormalPressed,
             size: '1.125rem',
           }}
         >
           <IcSearchLine />
         </IconContext.Provider>
       </StyledHeaderSearchContainer>
-      <StyledHeaderIconButton>
+      <button style={{ marginLeft: '1rem' }}>
         <IconContext.Provider
           value={{
-            color: '#816DEC',
+            color: theme.color.textPointed,
             size: '2rem',
           }}
         >
           <IcPersoncircleLine />
         </IconContext.Provider>
-      </StyledHeaderIconButton>
+      </button>
     </StyledHeader>
   );
 };
