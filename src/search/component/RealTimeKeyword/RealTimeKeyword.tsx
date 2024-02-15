@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import { ListItem, IcSearchLine } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
-import RealTimeKeywordImage from '@/assets/search/RealTimeKeyword.png';
+import RealTimeKeywordImage from '@/assets/RealTimeKeyword.png';
 
 import {
   StyledContainer,
   StyledHeader,
   StyledHeaderImageSection,
-  StyledHeaderText1,
-  StyledHeaderText2,
+  StyledHeaderTitle,
+  StyledHeaderTime,
   StyledHeaderTextSection,
   StyledList,
   StyledListItemRanking,
@@ -25,24 +25,28 @@ interface RealTimeData {
   min: string;
 }
 
-// Keyword 가져오는 쿼리 작성
 export const RealTimeKeyword = () => {
   const navigate = useNavigate();
 
   const [realTime, setRealTime] = useState<RealTimeData>();
 
-  useEffect(() => {
+  const createTime = () => {
     const koreaTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' });
     const [date, time] = koreaTime.split(', ');
     const [month, day, year] = date.split('/');
     const [hour, min, _] = time.split(':');
     const [, AMPM] = _.split(' ');
 
-    const setMonth = month.length === 1 ? '0' + month : month;
-    const setDay = day.length === 1 ? '0' + day : day;
-    const setMin = min.length === 1 ? '0' + min : min;
+    const setMonth = month.padStart(2, '0');
+    const setDay = day.padStart(2, '0');
+    const setMin = min.padStart(2, '0');
 
-    const setHour = AMPM === 'PM' && Number(hour) !== 12 ? String(Number(hour) + 12) : '0' + hour;
+    const setHour =
+      AMPM === 'PM' && Number(hour) !== 12
+        ? String(Number(hour) + 12)
+        : hour.length === 2
+          ? hour
+          : '0' + hour;
 
     setRealTime({
       year: year,
@@ -51,6 +55,10 @@ export const RealTimeKeyword = () => {
       hour: setHour,
       min: setMin,
     });
+  };
+
+  useEffect(() => {
+    createTime();
   }, []);
 
   // api 연동해서 가져와야 합니다. 현재는 임의의 데이터만 넣었습니다.
@@ -76,24 +84,15 @@ export const RealTimeKeyword = () => {
     <StyledContainer>
       <StyledHeader>
         <StyledHeaderTextSection>
-          <StyledHeaderText1>
+          <StyledHeaderTitle>
             숨쉬듯이
             <br />
             검색한 키워드
-          </StyledHeaderText1>
+          </StyledHeaderTitle>
           {realTime ? (
-            <StyledHeaderText2>
-              {realTime.year +
-                '.' +
-                realTime.month +
-                '.' +
-                realTime.day +
-                ' ' +
-                realTime.hour +
-                ':' +
-                realTime.min}{' '}
-              기준
-            </StyledHeaderText2>
+            <StyledHeaderTime>
+              {`${realTime.year}.${realTime.month}.${realTime.day} ${realTime.hour}:${realTime.min} 기준`}
+            </StyledHeaderTime>
           ) : null}
         </StyledHeaderTextSection>
         <StyledHeaderImageSection src={RealTimeKeywordImage} alt="뿌슝이" />
@@ -103,18 +102,12 @@ export const RealTimeKeyword = () => {
           return (
             <ListItem
               leftIcon={
-                <StyledListItemRanking
-                  style={{
-                    color: `${index + 1 < 4 ? '#8a2ac5' : '#8E9398'}`,
-                  }}
-                >
-                  {index + 1}
-                </StyledListItemRanking>
+                <StyledListItemRanking rankingNumber={index + 1}>{index + 1}</StyledListItemRanking>
               }
               rightIcon={<IcSearchLine color={'#8A2AC5'} />}
-              key={index}
+              key={value}
               style={{
-                padding: '12px',
+                padding: '0.75rem',
               }}
               children={<StyledListItemText>{value}</StyledListItemText>}
               onClick={listOnclick}
