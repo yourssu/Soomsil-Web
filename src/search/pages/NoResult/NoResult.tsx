@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { IcArrowRightLine, IcPenLine } from '@yourssu/design-system-react';
+import { IcArrowRightLine, IcPenLine, IconContext } from '@yourssu/design-system-react';
+import { useTheme } from 'styled-components';
 
 import IcSoomsilde from '@/assets/search/NoResultIcon.svg';
 import { FlexContainer } from '@/components/FlexContainer/FlexContainer';
@@ -39,6 +40,8 @@ const ADD_SECTION_DATA: AddSectionData[] = [
 ];
 
 export const NoResult = () => {
+  const theme = useTheme();
+
   const [noResultKeyword, setNoResultKeyword] = useState<string>();
   const [addSectionData, setAddSectionData] = useState<AddSectionData[]>();
 
@@ -80,7 +83,14 @@ export const NoResult = () => {
                   {index === 0 ? (
                     <img src={IcSoomsilde} alt="soomsil" />
                   ) : (
-                    <IcPenLine color={'#816DEC'} size={'1.8rem'} />
+                    <IconContext.Provider
+                      value={{
+                        size: '1.8rem',
+                        color: theme.color.buttonPoint,
+                      }}
+                    >
+                      <IcPenLine />
+                    </IconContext.Provider>
                   )}
                 </StyledCardIconFrame>
                 <StyledCardTextFrame>
@@ -96,15 +106,19 @@ export const NoResult = () => {
                   </StyledCardLinkTextDescription>
                 </StyledCardTextFrame>
               </StyledCardDescriptionSection>
-              <IcArrowRightLine
-                style={{
+              <IconContext.Provider
+                value={{
+                  size: '1.2rem',
+                  color: theme.color.buttonNormal,
                   cursor: 'pointer',
                 }}
-                color={'#505458'}
-                onClick={() => {
-                  window.open(value.href);
-                }}
-              />
+              >
+                <IcArrowRightLine
+                  onClick={() => {
+                    window.open(value.href);
+                  }}
+                />
+              </IconContext.Provider>
             </StyledCard>
           );
         })}

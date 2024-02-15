@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ListItem, IcSearchLine } from '@yourssu/design-system-react';
+import { ListItem, IcSearchLine, IconContext } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
 import RealTimeKeywordImage from '@/assets/RealTimeKeyword.png';
@@ -104,7 +104,18 @@ export const RealTimeKeyword = () => {
               leftIcon={
                 <StyledListItemRanking rankingNumber={index + 1}>{index + 1}</StyledListItemRanking>
               }
-              rightIcon={<IcSearchLine color={'#8A2AC5'} />}
+              /**
+               * @수정사항 color 색상이 YDS에 없어서 HEX로 넣었습니다.
+               */
+              rightIcon={
+                <IconContext.Provider
+                  value={{
+                    color: '#8A2AC5',
+                  }}
+                >
+                  <IcSearchLine />
+                </IconContext.Provider>
+              }
               key={value}
               style={{
                 padding: '0.75rem',
