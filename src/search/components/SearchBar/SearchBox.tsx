@@ -1,6 +1,6 @@
 import { IcSearchLine } from '@yourssu/design-system-react';
 
-import XButton from '../../assets/XButton.svg';
+import XButton from '../../assets/x_button.svg';
 import useForm from '../../hooks/useForm';
 import { searchSize } from '../../types/searchBox.type';
 import Spacing from '../Spacing/Spacing';
