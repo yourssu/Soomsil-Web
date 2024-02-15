@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/Logo.svg';
-import Spacing from '../Spacing';
+import Spacing from '../Spacing/Spacing';
 
 import { StyledSearchBar } from './SearchBar.style';
 import SearchBox from './SearchBox';

@@ -1,5 +1,5 @@
 import { ResultListItemResponse } from '../../types/ResultListItem.type';
-import Spacing from '../Spacing';
+import Spacing from '../Spacing/Spacing';
 
 import {
   StyledContent,
