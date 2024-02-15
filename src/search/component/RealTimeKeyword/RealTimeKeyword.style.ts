@@ -7,7 +7,7 @@ export const StyledContainer = styled.div`
   width: 25rem;
   gap: 0.625rem;
   border-radius: 0.75rem;
-  border: var(--0, 1px) solid var(--border-borderNormal, rgba(16, 17, 18, 0.1));
+  border: 1px solid ${({ theme }) => theme.color.borderNormal};
   background: ${({ theme }) => theme.color.bgNormal};
 `;
 
