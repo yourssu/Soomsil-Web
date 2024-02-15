@@ -5,48 +5,39 @@ export const StyledContainer = styled.div`
   w-auto;
   flex-direction: column;
   align-items: flex-start;
-  gap: 32px;
+  gap: 2rem;
   flex-shrink: 0;
-`;
-
-export const StyledNoResultSection = styled.div`
-  display: flex;
 `;
 
 export const StyledNoResultKeyword = styled.span`
   color: ${({ theme }) => theme.color.textPointed};
 
-  // subtitle24
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 130%;
+  ${({ theme }) => theme.typo.title2}
 `;
 
 export const StyledNoResultDescription = styled.p`
   color: ${({ theme }) => theme.color.textPrimary};
 
-  // subtitle24
+  /* PC & Android/subtitle24 */
   font-family: 'Spoqa Han Sans Neo';
-  font-size: 24px;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 130%;
+  line-height: 130%; /* 1.95rem */
 `;
 
 export const StyledModifySection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0.75rem;
 `;
 
 export const StyledModifyDescription = styled.p`
   color: ${({ theme }) => theme.color.textTertiary};
 
-  // body 18
+  /* PC & Android/body18 */
   font-family: 'Spoqa Han Sans Neo';
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
@@ -54,36 +45,46 @@ export const StyledModifyDescription = styled.p`
 
 export const StyledCard = styled.div`
   display: flex;
-  width: 799px;
+  width: 49.9375rem;
   height: auto;
-  padding: 20px;
+
+  padding: 1.25rem;
   justify-content: space-between;
   align-items: center;
-  align-self: stretch;
 
-  border-radius: 12px;
-  border: 1px solid var(--border-borderNormal, rgba(16, 17, 18, 0.1));
-  background: ${({ theme }) => theme.baseColor.white000};
+  border-radius: 0.75rem;
+  border: 1px solid ${({ theme }) => theme.color.borderNormal};
+  background: ${({ theme }) => theme.color.bgNormal};
 `;
 
 export const StyledCardDescriptionSection = styled.div`
   display: flex;
-  gap: 16px;
+  gap: 1.25rem;
 `;
 
-export const StyledCardIconFrame = styled.div`
+interface StyledCardIconFrameProp {
+  index: number;
+}
+
+export const StyledCardIconFrame = styled.div<StyledCardIconFrameProp>`
   display: flex;
-  width: 50px;
-  height: 50px;
-  padding: 10px;
+  width: 3.375rem;
+  height: 3.375rem;
+  padding: 0.625rem;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0.5rem;
+  background: ${(prop) => (prop.index === 0 ? 'rgba(255, 44, 190, 0.1)' : '#ebe6fb')};
 `;
 
-export const StyledCardTextFrame = styled.div``;
+export const StyledCardTextFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+`;
 
-export const StyledCardLink = styled.a`
+export const StyledCardLinkText = styled.a`
   color: ${({ theme }) => theme.color.textPrimary};
 
   ${({ theme }) => theme.typo.subtitle1}
@@ -98,10 +99,10 @@ export const StyledCardLink = styled.a`
 export const StyledCardLinkTextDescription = styled.p`
   color: ${({ theme }) => theme.color.textTertiary};
 
-  // body16
+  /* PC & Android/body16 */
   font-family: 'Spoqa Han Sans Neo';
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 130%;
+  line-height: 130%; /* 1.3rem */
 `;
