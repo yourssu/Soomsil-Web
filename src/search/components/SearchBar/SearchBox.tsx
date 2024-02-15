@@ -5,7 +5,7 @@ import useForm from '../../hooks/useForm';
 import { searchSize } from '../../types/searchBox.type';
 import Spacing from '../Spacing/Spacing';
 
-import { StyledInput, StyledInputContainer } from './SearchBar.style';
+import { StyledInput, StyledInputContainer } from './SearchBox.style';
 
 interface SearchBoxProps {
   size: searchSize;
