@@ -12,7 +12,6 @@ const SearchBar = () => {
       <Link to="/">
         <img src={logo} alt="logo" />
       </Link>
-
       <Spacing direction="horizontal" size={20} />
       <SearchBox size="large" />
     </StyledSearchBar>
