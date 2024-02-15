@@ -3,6 +3,7 @@ import { BoxButton } from '@yourssu/design-system-react';
 import NotIllust from '@/drawer/assets/drawerNot.png';
 
 import { BigDrawerCard } from '../DrawerCard/BigDrawerCard';
+import { UserDrawerCard } from '../DrawerCard/UserDrawerCard';
 
 import {
   StyledCardLayoutContainer,
@@ -38,16 +39,27 @@ export const CardLayout = ({ isDataExist, type }: CardLayoutProps) => {
   return isDataExist ? (
     <StyledCardLayoutContainer>
       {/* 추후 card id로 map key index 수정 필요 */}
-      {Array.from({ length: 9 }).map((_, index) => (
-        <BigDrawerCard
-          key={index}
-          link={''}
-          title={'service'}
-          body={'service introduction'}
-          bookmarkCount={999}
-          isBookmarked={true}
-        />
-      ))}
+      {Array.from({ length: 9 }).map((_, index) =>
+        type === 'mydrawer' ? (
+          <UserDrawerCard
+            key={index}
+            link={''}
+            title={'service'}
+            body={'service introduction'}
+            bookmarkCount={999}
+            isBookmarked={true}
+          />
+        ) : (
+          <BigDrawerCard
+            key={index}
+            link={''}
+            title={'service'}
+            body={'service introduction'}
+            bookmarkCount={999}
+            isBookmarked={true}
+          />
+        )
+      )}
     </StyledCardLayoutContainer>
   ) : (
     <StyledNotContainer>
