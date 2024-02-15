@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { IcArrowRightLine, IcPenLine, IconContext } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
 
-import IcSoomsilde from '@/assets/search/NoResultIcon.svg';
+import IcSoomsilde from '@/assets/ic_wiki.svg';
 import { FlexContainer } from '@/components/FlexContainer/FlexContainer';
 
 import {
