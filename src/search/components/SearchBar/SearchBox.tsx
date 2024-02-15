@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import SearchIconSVG from '../../assets/SearchIconSVG';
 import XButton from '../../assets/XButton.svg';
 import useForm from '../../hooks/useForm';
@@ -13,11 +11,11 @@ interface SearchBoxProps {
 }
 
 const SearchBox = ({ size }: SearchBoxProps) => {
-  const { value, handleChangeValue, setValue } = useForm('');
-
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
+  const {
+    value: searchInputText,
+    handleChangeValue: handleChangeSearchInputText,
+    setValue: setSearchInputText,
+  } = useForm('');
 
   return (
     <label htmlFor="searchBox">
@@ -42,14 +40,18 @@ const SearchBox = ({ size }: SearchBoxProps) => {
         <foreignObject x="0" y="0" width={size == 'large' ? '800' : '669'} height="60">
           <StyledInputContainer containerSize={size}>
             <Spacing direction="horizontal" size={24} />
-            <StyledInput inputSize={size} value={value} onChange={handleChangeValue} />
+            <StyledInput
+              inputSize={size}
+              value={searchInputText}
+              onChange={handleChangeSearchInputText}
+            />
             <Spacing direction="horizontal" size={24} />
             <img
               style={{ cursor: 'pointer' }}
               src={XButton}
               alt="X Button"
               onClick={() => {
-                setValue('');
+                setSearchInputText('');
               }}
             />
 
