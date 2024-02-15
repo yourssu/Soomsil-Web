@@ -1,4 +1,5 @@
-import SearchIconSVG from '../../assets/SearchIconSVG';
+import { IcSearchLine } from '@yourssu/design-system-react';
+
 import XButton from '../../assets/XButton.svg';
 import useForm from '../../hooks/useForm';
 import { searchSize } from '../../types/searchBox.type';
@@ -56,7 +57,7 @@ const SearchBox = ({ size }: SearchBoxProps) => {
             />
 
             <Spacing direction="horizontal" size={8} />
-            <SearchIconSVG />
+            <IcSearchLine size={36} color="#8A2AC5" />
           </StyledInputContainer>
         </foreignObject>
         <defs>
