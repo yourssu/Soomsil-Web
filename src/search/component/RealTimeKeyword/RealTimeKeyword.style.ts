@@ -63,7 +63,7 @@ interface StyledListItemRankingProp {
 export const StyledListItemRanking = styled.span<StyledListItemRankingProp>`
   color: ${(prop) => (prop.rankingNumber < 4 ? '#8a2ac5' : '#8E9398')};
   font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.125rem;
+  font-size: 1.155rem;
   font-style: normal;
   font-weight: 500;
   line-height: 130%;
