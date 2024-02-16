@@ -6,10 +6,12 @@ export const StyledHeader = styled.header`
   align-items: center;
   width: 100%;
   height: 4rem;
-  padding-right: 20rem;
+  /* TODO: 추후 반응형 적용 필요 */
+  padding-right: 10%;
   position: sticky;
   top: 0;
   background-color: ${({ theme }) => theme.color.bgNormal};
+  border-bottom: 1px solid ${({ theme }) => theme.color.borderNormal};
 `;
 
 export const StyledHeaderLogo = styled(Link)`
@@ -19,7 +21,8 @@ export const StyledHeaderLogo = styled(Link)`
 
 export const StyledHeaderTabs = styled.nav`
   display: flex;
-  margin-left: 7.5rem;
+  /* TODO: 추후 반응형 적용 필요 */
+  margin-left: 10%;
 `;
 
 export const StyledHeaderTab = styled(NavLink)`
@@ -48,7 +51,8 @@ export const StyledHeaderTab = styled(NavLink)`
 
 export const StyledHeaderSearchContainer = styled.div`
   display: flex;
-  width: 34.5rem;
+  /* TODO: 추후 반응형 적용 필요 */
+  width: 30%;
   height: 2.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderThick};
   border-radius: 6.25rem;
@@ -62,26 +66,4 @@ export const StyledHeaderSearchInput = styled.input`
   border: none;
   outline: none;
   background-color: transparent;
-`;
-
-export const StyledHeaderSearchIcon = styled.img`
-  width: 1.125rem;
-  height: 1.125rem;
-`;
-
-export const StyledHeaderIconButton = styled.button`
-  margin-left: 1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-`;
-
-export const StyledHeaderUserIcon = styled.img`
-  width: 2rem;
-  height: 2rem;
-`;
-
-export const StyledSpacer = styled.div`
-  flex-grow: 1;
 `;

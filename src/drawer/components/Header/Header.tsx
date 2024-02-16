@@ -1,6 +1,8 @@
-import personCircleIcon from '@/assets/ic_personcircle.svg';
-import searchIcon from '@/assets/ic_search.svg';
+import { IcPersoncircleLine, IcSearchLine, IconContext } from '@yourssu/design-system-react';
+import { useTheme } from 'styled-components';
+
 import soomsil from '@/assets/soomsil.svg';
+import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 
 import {
   StyledHeader,
@@ -9,13 +11,11 @@ import {
   StyledHeaderTabs,
   StyledHeaderSearchContainer,
   StyledHeaderSearchInput,
-  StyledHeaderSearchIcon,
-  StyledHeaderUserIcon,
-  StyledHeaderIconButton,
-  StyledSpacer,
 } from './Header.style';
 
 const Header = () => {
+  const theme = useTheme();
+
   return (
     <StyledHeader>
       <StyledHeaderLogo to="/drawer">
@@ -26,14 +26,28 @@ const Header = () => {
         <StyledHeaderTab to="register">서비스 등록</StyledHeaderTab>
         <StyledHeaderTab to="myDrawers">내 서랍장</StyledHeaderTab>
       </StyledHeaderTabs>
-      <StyledSpacer />
+      <FlexGrowItem proportion={1} />
       <StyledHeaderSearchContainer>
         <StyledHeaderSearchInput type="text" />
-        <StyledHeaderSearchIcon src={searchIcon} alt="searchIcon" />
+        <IconContext.Provider
+          value={{
+            color: theme.color.buttonNormalPressed,
+            size: '1.125rem',
+          }}
+        >
+          <IcSearchLine />
+        </IconContext.Provider>
       </StyledHeaderSearchContainer>
-      <StyledHeaderIconButton>
-        <StyledHeaderUserIcon src={personCircleIcon} alt="personCircleIcon" />
-      </StyledHeaderIconButton>
+      <button style={{ marginLeft: '1rem' }}>
+        <IconContext.Provider
+          value={{
+            color: theme.color.textPointed,
+            size: '2rem',
+          }}
+        >
+          <IcPersoncircleLine />
+        </IconContext.Provider>
+      </button>
     </StyledHeader>
   );
 };
