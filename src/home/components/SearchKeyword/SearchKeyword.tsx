@@ -1,4 +1,5 @@
-import { ListItem, IcSearchLine, IconContext } from '@yourssu/design-system-react';
+import { IcSearchLine, IconContext } from '@yourssu/design-system-react';
+import { Link } from 'react-router-dom';
 
 import RealTimeKeywordImage from '@/assets/realTimeKeyword.png';
 
@@ -6,6 +7,7 @@ import {
   StyledContainer,
   StyledImage,
   StyledListContainer,
+  StyledListItem,
   StyledListItemKeyword,
   StyledRank,
   StyledTitle,
@@ -32,22 +34,24 @@ const SearchKeyword = ({ keywords, date }: SearchKeywordProps) => {
       <StyledImage src={RealTimeKeywordImage} alt="뿌슝이" />
       <StyledListContainer>
         {keywords.map((keyword, index) => (
-          <ListItem
-            key={keyword}
-            leftIcon={<StyledRank $rank={index + 1}>{index + 1}</StyledRank>}
-            rightIcon={
-              <IconContext.Provider
-                value={{
-                  color: '#8A2AC5',
-                }}
-              >
-                <IcSearchLine />
-              </IconContext.Provider>
-            }
-            width="15rem"
-          >
-            <StyledListItemKeyword>{keyword}</StyledListItemKeyword>
-          </ListItem>
+          <Link key={keyword} to={`/search?keyword=${keyword}`}>
+            <StyledListItem
+              leftIcon={<StyledRank $rank={index + 1}>{index + 1}</StyledRank>}
+              rightIcon={
+                <IconContext.Provider
+                  value={{
+                    color: '#8A2AC5',
+                    width: '1.25rem',
+                  }}
+                >
+                  <IcSearchLine />
+                </IconContext.Provider>
+              }
+              width="15rem"
+            >
+              <StyledListItemKeyword>{keyword}</StyledListItemKeyword>
+            </StyledListItem>
+          </Link>
         ))}
       </StyledListContainer>
     </StyledContainer>
