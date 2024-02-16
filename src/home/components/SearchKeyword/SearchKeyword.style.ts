@@ -1,6 +1,10 @@
 import { ListItem } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
+interface StyledRankProps {
+  $rank: number;
+}
+
 export const StyledContainer = styled.div`
   position: relative;
   padding: 0.9375rem;
@@ -54,7 +58,7 @@ export const StyledListItem = styled(ListItem)`
   padding: 0.625rem 0.75rem;
 `;
 
-export const StyledRank = styled.span<{ $rank: number }>`
+export const StyledRank = styled.span<StyledRankProps>`
   color: ${(props) => (props.$rank < 4 ? '#8A2AC5' : props.theme.color.textTertiary)};
 
   // YDS 지정이 되어 있지 않아 임시로 작업했습니다.
