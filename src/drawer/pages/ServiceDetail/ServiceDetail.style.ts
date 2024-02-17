@@ -17,12 +17,12 @@ export const StyledBackgroundImageContainer = styled.div<StyledBackgroundImageCo
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 40vh;
+  height: 55vh;
   justify-content: flex-end;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${(props) => props.$backgroundImage});
   /* TODO: 추후 반응형 적용 필요 */
-  padding-left: 15%;
+  padding-left: 17%;
   padding-bottom: 3%;
 
   margin-bottom: 5rem;
