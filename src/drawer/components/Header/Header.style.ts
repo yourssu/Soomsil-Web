@@ -67,18 +67,3 @@ export const StyledHeaderSearchInput = styled.input`
   outline: none;
   background-color: transparent;
 `;
-<<<<<<< HEAD
-
-export const StyledHeaderIconButton = styled.button`
-  margin-left: 1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-`;
-
-export const StyledSpacer = styled.div`
-  flex-grow: 1;
-`;
-=======
->>>>>>> 8d5579a6ff00d34db67ded4699734359b36db29d
