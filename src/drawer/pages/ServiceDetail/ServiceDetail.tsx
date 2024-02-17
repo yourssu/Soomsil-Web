@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import {
   BoxButton,
   IcShareLine,
@@ -37,6 +39,24 @@ import {
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
   const theme = useTheme();
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const currentScrollRef = scrollRef.current;
+
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      const x = currentScrollRef!.scrollLeft;
+      currentScrollRef!.scrollTo(x + event.deltaY / 2, 0);
+    };
+
+    if (currentScrollRef) currentScrollRef.addEventListener('wheel', handleWheel);
+
+    return () => {
+      if (currentScrollRef) currentScrollRef.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
 
   return (
     <StyledServiceDetailContainer>
@@ -93,7 +113,7 @@ export const ServiceDetail = () => {
       </StyledBackgroundImageContainer>
       <FlexContainer>
         <StyledDescriptionSection>
-          <StyledCarousel>
+          <StyledCarousel ref={scrollRef}>
             {Array.from({ length: 3 }).map(() => (
               <StyledProductImage src={backgroundImage} />
             ))}
