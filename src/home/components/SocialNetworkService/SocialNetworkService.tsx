@@ -22,10 +22,10 @@ const SocialNetworkService = () => {
     <>
       <StyledIconContainer>
         {ICON_LIST.map((icon, index) => (
-          <>
+          <React.Fragment key={icon.icon}>
             <StyledIcon to="https://www.naver.com" $image={icon.icon} />
             {ICON_LIST.length !== index + 1 && <StyledLine />}
-          </>
+          </React.Fragment>
         ))}
       </StyledIconContainer>
     </>
