@@ -1,10 +1,10 @@
-import { IcSearchLine } from '@yourssu/design-system-react';
+import { IcSearchLine, IcXcircleFilled } from '@yourssu/design-system-react';
 
 import Spacing from '@/components/Spacing/Spacing';
 import useForm from '@/search/hooks/useForm';
 import { searchSize } from '@/search/types/searchBox.type';
 
-import { StyledICXcircleFilled, StyledInput, StyledInputContainer } from './SearchBox.style';
+import { StyledInput, StyledInputContainer } from './SearchBox.style';
 
 interface SearchBoxProps {
   size: searchSize;
@@ -46,7 +46,8 @@ export const SearchBox = ({ size }: SearchBoxProps) => {
               onChange={handleChangeSearchInputText}
             />
             <Spacing direction="horizontal" size={24} />
-            <StyledICXcircleFilled
+            <IcXcircleFilled
+              cursor="pointer"
               color="rgba(181, 185, 189, 1)"
               size={'1.5rem'}
               onClick={() => {

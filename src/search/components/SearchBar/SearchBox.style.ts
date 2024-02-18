@@ -1,4 +1,3 @@
-import { IcXcircleFilled } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
 import { searchSize } from '@/search/types/searchBox.type';
@@ -26,8 +25,4 @@ export const StyledInput = styled.input<StyledInputProps>`
   &:focus {
     outline: none;
   }
-`;
-
-export const StyledICXcircleFilled = styled(IcXcircleFilled)`
-  cursor: pointer;
 `;
