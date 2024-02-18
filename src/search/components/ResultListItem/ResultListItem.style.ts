@@ -10,7 +10,7 @@ export const StyledResultListItem = styled.section`
   border: 0.063rem ${(props) => props.theme.color.borderNormal} solid;
 `;
 
-export const StyledLinkImage = styled.span`
+export const StyledLinkImageWrap = styled.span`
   width: 1.5rem;
   height: 1.5rem;
   display: flex;
@@ -19,6 +19,11 @@ export const StyledLinkImage = styled.span`
   padding: 0.188rem;
   border-radius: 62.438rem;
   background-color: ${(props) => props.theme.color.bgRecomment};
+`;
+
+export const StyledLinkImage = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 export const StyledLinkTitle = styled.span`
