@@ -7,7 +7,7 @@ export const StyledResultListItem = styled.section`
   width: 50rem;
   border-radius: 0.75rem;
   padding: 1.5rem;
-  border: 0.063rem rgba(16, 17, 18, 0.1) solid;
+  border: 0.063rem ${(props) => props.theme.color.borderNormal} solid;
 `;
 
 export const StyledLinkImage = styled.span`
@@ -18,7 +18,7 @@ export const StyledLinkImage = styled.span`
   align-items: center;
   padding: 0.188rem;
   border-radius: 62.438rem;
-  background-color: #f8f9fa;
+  background-color: ${(props) => props.theme.color.bgRecomment};
 `;
 
 export const StyledLinkTitle = styled.span`
@@ -39,7 +39,7 @@ export const StyledTitle = styled.a<StyledTitleProps>`
   ${(props) => props.theme.typo.title3}
   width: 100%;
   height: 1.938rem;
-  color: #1a0db3;
+  color: rgba(26, 13, 179, 1);
   word-wrap: break-word;
   display: -webkit-box;
   overflow: hidden;
@@ -49,7 +49,7 @@ export const StyledTitle = styled.a<StyledTitleProps>`
 
   &:hover {
     text-decoration: underline;
-    color: #1a0db3;
+    color: rgba(26, 13, 179, 1);
   }
 `;
 
@@ -76,10 +76,10 @@ interface StyledThumbnailProps {
 
 export const StyledThumbnail = styled.div<StyledThumbnailProps>`
   width: ${(props) => (props.length < 5 ? '8.125rem' : '100%')};
-  height: 130px;
+  height: 8.125rem;
   align-self: flex-end;
   position: relative;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   overflow: hidden;
   display: flex;
 `;
@@ -103,11 +103,11 @@ export const StyledThumbnailCountBox = styled.div`
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 62.438rem;
-  background-color: rgba(37, 39, 41, 0.7);
+  background-color: ${(props) => props.theme.color.dimThick};
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: ${(props) => props.theme.color.bgNormal};
   font-size: 0.75rem;
   position: absolute;
   bottom: 0.25rem;
