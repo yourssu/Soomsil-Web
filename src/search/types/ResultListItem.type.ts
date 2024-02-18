@@ -6,6 +6,7 @@ export interface ResultListItemResponse {
   content: string;
   date: string;
   thumbnail: thumbnailUrl[];
+  favicon: string;
 }
 
 export type ResultListResponse = ResultListItemResponse[];
