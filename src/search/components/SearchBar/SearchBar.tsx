@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import logo from '@/assets/soomsil.svg';
-
-import Spacing from '../Spacing/Spacing';
+import Spacing from '@/components/Spacing/Spacing';
 
 import { StyledLogo, StyledSearchBar } from './SearchBar.style';
 import { SearchBox } from './SearchBox';

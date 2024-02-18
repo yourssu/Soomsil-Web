@@ -1,7 +1,7 @@
 import { IcXcircleFilled } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
-import { searchSize } from '../../types/searchBox.type';
+import { searchSize } from '@/search/types/searchBox.type';
 
 interface StyledInputContainerProps {
   containerSize: searchSize;

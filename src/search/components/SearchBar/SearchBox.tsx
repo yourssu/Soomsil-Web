@@ -1,8 +1,8 @@
 import { IcSearchLine } from '@yourssu/design-system-react';
 
-import useForm from '../../hooks/useForm';
-import { searchSize } from '../../types/searchBox.type';
-import Spacing from '../Spacing/Spacing';
+import Spacing from '@/components/Spacing/Spacing';
+import useForm from '@/search/hooks/useForm';
+import { searchSize } from '@/search/types/searchBox.type';
 
 import { StyledICXcircleFilled, StyledInput, StyledInputContainer } from './SearchBox.style';
 
