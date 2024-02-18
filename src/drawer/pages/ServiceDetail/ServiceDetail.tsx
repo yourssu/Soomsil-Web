@@ -11,7 +11,6 @@ import { useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import backgroundImage from '@/assets/service_detail_background.png';
-import { FlexContainer } from '@/components/FlexContainer/FlexContainer';
 import carouselLeftButton from '@/drawer/assets/carousel_left_button.svg';
 import carouselRightButton from '@/drawer/assets/carousel_right_button.svg';
 import { SmallDrawerCard } from '@/drawer/components/DrawerCard/SmallDrawerCard';
@@ -37,6 +36,7 @@ import {
   StyledCarousel,
   StyledSubtitle,
   StyledCarouselButton,
+  StyledLowerSection,
 } from './ServiceDetail.style';
 
 export const ServiceDetail = () => {
@@ -110,7 +110,7 @@ export const ServiceDetail = () => {
           </StyledIconButtonContainer>
         </StyledServiceActionContainer>
       </StyledBackgroundImageContainer>
-      <FlexContainer>
+      <StyledLowerSection>
         <StyledDescriptionSection>
           <StyledCarousel ref={scrollRef}>
             <StyledCarouselButton
@@ -163,7 +163,7 @@ export const ServiceDetail = () => {
             />
           ))}
         </StyledMoreProductSection>
-      </FlexContainer>
+      </StyledLowerSection>
     </StyledServiceDetailContainer>
   );
 };

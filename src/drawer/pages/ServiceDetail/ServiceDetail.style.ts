@@ -91,6 +91,14 @@ export const StyledIconLabelText = styled.span<StyledIconLabelTextProps>`
   color: ${(props) => props.$color};
 `;
 
+export const StyledLowerSection = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  padding: 0 1rem;
+`;
+
 export const StyledDescriptionSection = styled.div`
   display: grid;
   gap: 2rem;
@@ -162,7 +170,7 @@ export const StyledDescription = styled.p`
 `;
 
 export const StyledMoreProductSection = styled.div`
-  width: 24.8rem;
+  width: 18rem;
   height: fit-content;
   display: grid;
   gap: 2rem;
