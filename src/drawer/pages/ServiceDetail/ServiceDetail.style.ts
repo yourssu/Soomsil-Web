@@ -96,11 +96,12 @@ export const StyledDescriptionSection = styled.div`
   gap: 2rem;
   width: 52.5rem;
   height: fit-content;
+  position: relative;
 `;
 
 export const StyledCarousel = styled.div`
   display: flex;
-  gap: 0.625rem;
+  gap: 10px;
   overflow-x: scroll;
 
   -ms-overflow-style: none;
@@ -110,12 +111,34 @@ export const StyledCarousel = styled.div`
   }
 `;
 
+interface StyledCarouselButtonProps {
+  $backgroundImage: string;
+  $left?: string;
+  $right?: string;
+}
+
+export const StyledCarouselButton = styled.input<StyledCarouselButtonProps>`
+  background-image: url(${(props) => props.$backgroundImage});
+  background-color: transparent;
+
+  width: 3rem;
+  height: 3rem;
+
+  position: absolute;
+  top: 120px;
+  left: ${(props) => props.$left && props.$left};
+  right: ${(props) => props.$right && props.$right};
+
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+`;
+
 export const StyledProductImage = styled.img`
-  width: 27.5rem;
-  height: 18.5rem;
+  width: 440px;
+  height: 296px;
   border-radius: 0.5rem;
   margin: 0 auto;
-  flex-shrink: 0;
   object-fit: cover;
 `;
 

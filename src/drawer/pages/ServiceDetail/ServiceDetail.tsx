@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import {
   BoxButton,
@@ -12,6 +12,8 @@ import { useTheme } from 'styled-components';
 
 import backgroundImage from '@/assets/service_detail_background.png';
 import { FlexContainer } from '@/components/FlexContainer/FlexContainer';
+import carouselLeftButton from '@/drawer/assets/carousel_left_button.svg';
+import carouselRightButton from '@/drawer/assets/carousel_right_button.svg';
 import { SmallDrawerCard } from '@/drawer/components/DrawerCard/SmallDrawerCard';
 
 import {
@@ -34,6 +36,7 @@ import {
   StyledProductImage,
   StyledCarousel,
   StyledSubtitle,
+  StyledCarouselButton,
 } from './ServiceDetail.style';
 
 export const ServiceDetail = () => {
@@ -42,21 +45,17 @@ export const ServiceDetail = () => {
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const currentScrollRef = scrollRef.current;
+  const handleCarouselClick = (event: React.MouseEvent) => {
+    const target = event.target as HTMLInputElement;
+    const scrollAmount = 450;
 
-    const handleWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      const x = currentScrollRef!.scrollLeft;
-      currentScrollRef!.scrollTo(x + event.deltaY / 2, 0);
-    };
+    if (scrollRef.current) {
+      const x = scrollRef.current!.scrollLeft;
+      const scrollDirection = target.name === 'left' ? -scrollAmount : scrollAmount;
 
-    if (currentScrollRef) currentScrollRef.addEventListener('wheel', handleWheel);
-
-    return () => {
-      if (currentScrollRef) currentScrollRef.removeEventListener('wheel', handleWheel);
-    };
-  }, []);
+      scrollRef.current.scrollTo(x + scrollDirection, 0);
+    }
+  };
 
   return (
     <StyledServiceDetailContainer>
@@ -114,6 +113,20 @@ export const ServiceDetail = () => {
       <FlexContainer>
         <StyledDescriptionSection>
           <StyledCarousel ref={scrollRef}>
+            <StyledCarouselButton
+              $backgroundImage={carouselLeftButton}
+              $left={'-24px'}
+              type="button"
+              name="left"
+              onClick={handleCarouselClick}
+            />
+            <StyledCarouselButton
+              $backgroundImage={carouselRightButton}
+              $right={'-24px'}
+              type="button"
+              name="right"
+              onClick={handleCarouselClick}
+            />
             {Array.from({ length: 3 }).map(() => (
               <StyledProductImage src={backgroundImage} />
             ))}
