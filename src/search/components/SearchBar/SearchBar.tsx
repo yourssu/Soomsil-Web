@@ -5,9 +5,9 @@ import logo from '@/assets/soomsil.svg';
 import Spacing from '../Spacing/Spacing';
 
 import { StyledLogo, StyledSearchBar } from './SearchBar.style';
-import SearchBox from './SearchBox';
+import { SearchBox } from './SearchBox';
 
-const SearchBar = () => {
+export const SearchBar = () => {
   return (
     <StyledSearchBar>
       <Link to="/">
@@ -18,5 +18,3 @@ const SearchBar = () => {
     </StyledSearchBar>
   );
 };
-
-export default SearchBar;

@@ -11,7 +11,7 @@ interface SearchBoxProps {
   size: searchSize;
 }
 
-const SearchBox = ({ size }: SearchBoxProps) => {
+export const SearchBox = ({ size }: SearchBoxProps) => {
   const {
     value: searchInputText,
     handleChangeValue: handleChangeSearchInputText,
@@ -82,4 +82,3 @@ const SearchBox = ({ size }: SearchBoxProps) => {
     </label>
   );
 };
-export default SearchBox;

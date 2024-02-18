@@ -13,7 +13,13 @@ import {
   StyledTitle,
 } from './ResultListItem.style';
 
-const ResultListItem = ({ title, link, content, date, thumbnail }: ResultListItemResponse) => {
+export const ResultListItem = ({
+  title,
+  link,
+  content,
+  date,
+  thumbnail,
+}: ResultListItemResponse) => {
   return (
     <StyledResultListItem>
       <div style={{ width: thumbnail.length < 5 ? '601px' : '100%' }}>
@@ -92,5 +98,3 @@ const ResultListItem = ({ title, link, content, date, thumbnail }: ResultListIte
     </StyledResultListItem>
   );
 };
-
-export default ResultListItem;
