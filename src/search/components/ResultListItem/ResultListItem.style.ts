@@ -87,6 +87,7 @@ export const StyledThumbnail = styled.div<StyledThumbnailProps>`
   border-radius: 0.75rem;
   overflow: hidden;
   display: flex;
+  gap: 0.125rem;
 `;
 
 export const StyledThumbnailImage = styled.img<StyledThumbnailProps>`

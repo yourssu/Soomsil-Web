@@ -47,35 +47,13 @@ export const ResultListItem = ({
           <>
             <Spacing direction="vertical" size={12} />
             <StyledThumbnail length={thumbnail.length}>
-              <StyledThumbnailImage
-                length={thumbnail.length}
-                src={thumbnail[0]}
-                alt="썸네일"
-              ></StyledThumbnailImage>
-              <Spacing direction="horizontal" size={2} />
-              <StyledThumbnailImage
-                length={thumbnail.length}
-                src={thumbnail[1]}
-                alt="썸네일"
-              ></StyledThumbnailImage>
-              <Spacing direction="horizontal" size={2} />
-              <StyledThumbnailImage
-                length={thumbnail.length}
-                src={thumbnail[2]}
-                alt="썸네일"
-              ></StyledThumbnailImage>
-              <Spacing direction="horizontal" size={2} />
-              <StyledThumbnailImage
-                length={thumbnail.length}
-                src={thumbnail[3]}
-                alt="썸네일"
-              ></StyledThumbnailImage>
-              <Spacing direction="horizontal" size={2} />
-              <StyledThumbnailImage
-                length={thumbnail.length}
-                src={thumbnail[4]}
-                alt="썸네일"
-              ></StyledThumbnailImage>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <StyledThumbnailImage
+                  length={thumbnail.length}
+                  src={thumbnail[index]}
+                  alt="썸네일"
+                ></StyledThumbnailImage>
+              ))}
               <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
             </StyledThumbnail>
           </>
