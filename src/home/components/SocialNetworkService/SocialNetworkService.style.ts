@@ -6,6 +6,8 @@ export const StyledIconContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+
+  height: fit-content;
   padding: 0.75rem 0.5rem;
 
   border-radius: 0.75rem;
@@ -13,9 +15,12 @@ export const StyledIconContainer = styled.div`
 `;
 
 export const StyledIcon = styled(Link)<{ $image: string }>`
-  background: url(${(props) => props.$image});
+  display: block;
   width: 2.5rem;
   height: 2.5rem;
+
+  background: url(${(props) => props.$image});
+  border-radius: 0.875rem;
 `;
 
 export const StyledLine = styled.hr`
