@@ -1,11 +1,10 @@
 import { IcSearchLine } from '@yourssu/design-system-react';
 
-import XButton from '../../assets/x_button.svg';
 import useForm from '../../hooks/useForm';
 import { searchSize } from '../../types/searchBox.type';
 import Spacing from '../Spacing/Spacing';
 
-import { StyledInput, StyledInputContainer } from './SearchBox.style';
+import { StyledICXcircleFilled, StyledInput, StyledInputContainer } from './SearchBox.style';
 
 interface SearchBoxProps {
   size: searchSize;
@@ -47,17 +46,15 @@ export const SearchBox = ({ size }: SearchBoxProps) => {
               onChange={handleChangeSearchInputText}
             />
             <Spacing direction="horizontal" size={24} />
-            <img
-              style={{ cursor: 'pointer' }}
-              src={XButton}
-              alt="X Button"
+            <StyledICXcircleFilled
+              color="rgba(181, 185, 189, 1)"
+              size={'1.5rem'}
               onClick={() => {
                 setSearchInputText('');
               }}
             />
-
             <Spacing direction="horizontal" size={8} />
-            <IcSearchLine size={36} color="#8A2AC5" />
+            <IcSearchLine size={36} color="rgba(138, 42, 197, 1)" />
           </StyledInputContainer>
         </foreignObject>
         <defs>
@@ -73,9 +70,9 @@ export const SearchBox = ({ size }: SearchBoxProps) => {
                 : 'translate(316.58 30) rotate(-180) scale(316.58 168.318)'
             }
           >
-            <stop stopColor="#D143C3" />
-            <stop offset="0.489" stopColor="#3A95E9" />
-            <stop offset="1" stopColor="#8A2AC5" />
+            <stop stopColor="rgba(209, 67, 195, 1)" />
+            <stop offset="0.489" stopColor="rgba(58, 149, 233, 1)" />
+            <stop offset="1" stopColor="rgba(138, 42, 197, 1)" />
           </radialGradient>
         </defs>
       </svg>
