@@ -35,14 +35,9 @@ export const StyledTitle = styled.div`
 
 export const StyledUpdateDate = styled.div`
   height: 0.875rem;
-  color: ${({ theme }) => theme.color.textTertiary};
 
-  // YDS 지정이 되어 있지 않아 임시로 작업했습니다.
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 0.6875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
+  color: ${({ theme }) => theme.color.textTertiary};
+  ${({ theme }) => theme.typo.caption2}
 `;
 
 export const StyledListContainer = styled.div`
