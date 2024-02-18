@@ -1,6 +1,6 @@
 import { BoxButton } from '@yourssu/design-system-react';
 
-import NotIllust from '@/drawer/assets/drawerNot.png';
+import NotIllust from '@/drawer/assets/noResultDrawer.png';
 
 import { BigDrawerCard } from '../DrawerCard/BigDrawerCard';
 import { UserDrawerCard } from '../DrawerCard/UserDrawerCard/UserDrawerCard';
