@@ -111,6 +111,7 @@ export const StyledCarousel = styled.div`
   display: flex;
   gap: 10px;
   overflow-x: scroll;
+  scroll-behavior: smooth;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
