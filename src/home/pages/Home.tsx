@@ -1,5 +1,5 @@
-import DrawerRanking from '../components/DrawerRanking/DrawerRanking';
-import SearchKeyword from '../components/SearchKeyword/SearchKeyword';
+import { DrawerRanking } from '../components/DrawerRanking/DrawerRanking';
+import { SearchKeyword } from '../components/SearchKeyword/SearchKeyword';
 import SocialNetworkService from '../components/SocialNetworkService/SocialNetworkService';
 
 import { StyledContainer } from './Home.style';
