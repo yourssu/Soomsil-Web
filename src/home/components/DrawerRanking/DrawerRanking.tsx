@@ -1,4 +1,4 @@
-import RankDrawerCard from '../RankDrawerCard/RankDrawerCard';
+import { RankDrawerCard } from '../RankDrawerCard/RankDrawerCard';
 
 import {
   StyledAllViewButton,
@@ -14,7 +14,7 @@ const Dummy = [
   { link: '', title: 'title2', body: 'description', bookmarkCount: 999, isBookmarked: false },
 ];
 
-const DrawerRanking = () => {
+export const DrawerRanking = () => {
   return (
     <StyledContainer>
       <StyledTitleContainer>
@@ -36,5 +36,3 @@ const DrawerRanking = () => {
     </StyledContainer>
   );
 };
-
-export default DrawerRanking;

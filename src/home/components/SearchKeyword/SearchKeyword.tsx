@@ -31,7 +31,7 @@ const Dummy = {
   date: '2024.01.01.12:00',
 };
 
-const SearchKeyword = () => {
+export const SearchKeyword = () => {
   return (
     <StyledContainer>
       <StyledTitleContainer>
@@ -68,5 +68,3 @@ const SearchKeyword = () => {
     </StyledContainer>
   );
 };
-
-export default SearchKeyword;
