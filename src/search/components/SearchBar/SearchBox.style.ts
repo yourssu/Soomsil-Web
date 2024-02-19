@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { searchSize } from '@/search/types/searchBox.type';
+import { searchSize } from '@/search/types/SearchBox.type';
 
 interface StyledInputContainerProps {
   containerSize: searchSize;
