@@ -5,6 +5,8 @@ export const StyledServiceDetailContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+
+  padding-bottom: 10rem;
 `;
 
 interface StyledBackgroundImageContainerProps {
@@ -15,13 +17,15 @@ export const StyledBackgroundImageContainer = styled.div<StyledBackgroundImageCo
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 40vh;
+  height: 55vh;
   justify-content: flex-end;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${(props) => props.$backgroundImage});
   /* TODO: 추후 반응형 적용 필요 */
-  padding-left: 15%;
+  padding-left: 17%;
   padding-bottom: 3%;
+
+  margin-bottom: 5rem;
 `;
 
 export const StyledServiceTitleText = styled.h1`
@@ -85,4 +89,100 @@ export const StyledIconLabelText = styled.span<StyledIconLabelTextProps>`
   /* TODO: 추후 폰트 변경 필요 */
   ${({ theme }) => theme.typo.button4}
   color: ${(props) => props.$color};
+`;
+
+export const StyledLowerSection = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  padding: 0 1rem;
+`;
+
+export const StyledDescriptionSection = styled.div`
+  display: grid;
+  gap: 2rem;
+  width: 52.5rem;
+  height: fit-content;
+  position: relative;
+`;
+
+export const StyledCarousel = styled.div`
+  display: flex;
+  gap: 10px;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+interface StyledCarouselButtonProps {
+  $backgroundImage: string;
+  $left?: string;
+  $right?: string;
+}
+
+export const StyledCarouselButton = styled.input<StyledCarouselButtonProps>`
+  background-image: url(${(props) => props.$backgroundImage});
+  background-color: transparent;
+
+  width: 3rem;
+  height: 3rem;
+
+  position: absolute;
+  top: 120px;
+  left: ${(props) => props.$left && props.$left};
+  right: ${(props) => props.$right && props.$right};
+
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+`;
+
+export const StyledProductImage = styled.img`
+  width: 440px;
+  height: 296px;
+  border-radius: 0.5rem;
+  margin: 0 auto;
+  object-fit: cover;
+`;
+
+export const StyledDescriptionPart = styled.div`
+  display: grid;
+  gap: 0.875rem;
+`;
+
+export const StyledSubtitle = styled.p`
+  ${({ theme }) => theme.typo.subtitle1};
+  color: ${({ theme }) => theme.color.textPrimary};
+`;
+
+export const StyledDescription = styled.p`
+  ${({ theme }) => theme.typo.body2};
+  color: ${({ theme }) => theme.color.textSecondary};
+
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+`;
+
+export const StyledMoreProductSection = styled.div`
+  width: 18rem;
+  height: fit-content;
+  display: grid;
+  gap: 2rem;
+  padding: 0 0.5rem;
+  margin-left: 5.25rem;
+
+  /* Soomsil/Drawer/Web/title22 */
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 1.375rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%; /* 1.7875rem */
+  color: ${({ theme }) => theme.color.textPrimary};
 `;

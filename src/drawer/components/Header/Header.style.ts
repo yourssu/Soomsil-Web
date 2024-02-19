@@ -12,6 +12,8 @@ export const StyledHeader = styled.header`
   top: 0;
   background-color: ${({ theme }) => theme.color.bgNormal};
   border-bottom: 1px solid ${({ theme }) => theme.color.borderNormal};
+
+  z-index: 9;
 `;
 
 export const StyledHeaderLogo = styled(Link)`
