@@ -15,12 +15,23 @@ import {
   StyledUpdateDate,
 } from './SearchKeyword.style';
 
-interface SearchKeywordProps {
-  keywords: string[];
-  date: string;
-}
+const Dummy = {
+  keyword: [
+    '숭실대학교',
+    '유어슈',
+    '복학신청',
+    '글로벌미디어학부',
+    '뿌슝이',
+    '로지',
+    '에린',
+    '혀니',
+    '엘리아',
+    '복학하기싫어요',
+  ],
+  date: '2024.01.01.12:00',
+};
 
-const SearchKeyword = ({ keywords, date }: SearchKeywordProps) => {
+const SearchKeyword = () => {
   return (
     <StyledContainer>
       <StyledTitleContainer>
@@ -29,11 +40,11 @@ const SearchKeyword = ({ keywords, date }: SearchKeywordProps) => {
           <br />
           검색된 키워드
         </StyledTitle>
-        <StyledUpdateDate>{date} 기준</StyledUpdateDate>
+        <StyledUpdateDate>{Dummy.date} 기준</StyledUpdateDate>
       </StyledTitleContainer>
       <StyledImage src={RealTimeKeywordImage} alt="뿌슝이" />
       <StyledListContainer>
-        {keywords.map((keyword, index) => (
+        {Dummy.keyword.map((keyword, index) => (
           <Link key={keyword} to={`/search?keyword=${keyword}`}>
             <StyledListItem
               leftIcon={<StyledRank $rank={index + 1}>{index + 1}</StyledRank>}

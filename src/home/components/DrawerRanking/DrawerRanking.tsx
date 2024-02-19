@@ -1,5 +1,4 @@
 import RankDrawerCard from '../RankDrawerCard/RankDrawerCard';
-import { RankDrawerProps } from '../RankDrawerCard/RankDrawerCard.type';
 
 import {
   StyledAllViewButton,
@@ -8,11 +7,14 @@ import {
   StyledTitle,
   StyledTitleContainer,
 } from './DrawerRanking.style';
-interface DrawerRankingProps {
-  drawerList: RankDrawerProps[];
-}
 
-const DrawerRanking = ({ drawerList }: DrawerRankingProps) => {
+const Dummy = [
+  { link: '', title: 'title', body: 'description', bookmarkCount: 999, isBookmarked: false },
+  { link: '', title: 'title1', body: 'description', bookmarkCount: 999, isBookmarked: true },
+  { link: '', title: 'title2', body: 'description', bookmarkCount: 999, isBookmarked: false },
+];
+
+const DrawerRanking = () => {
   return (
     <StyledContainer>
       <StyledTitleContainer>
@@ -20,7 +22,7 @@ const DrawerRanking = ({ drawerList }: DrawerRankingProps) => {
         <StyledAllViewButton to="/drawer">전체보기</StyledAllViewButton>
       </StyledTitleContainer>
       <StyledRankCardContainer>
-        {drawerList.map((drawerItem) => (
+        {Dummy.map((drawerItem) => (
           <RankDrawerCard
             key={drawerItem.title}
             link={drawerItem.link}
