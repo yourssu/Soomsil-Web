@@ -21,3 +21,7 @@ export const StyledServiceText = styled.div`
   color: ${({ theme }) => theme.color.textSecondary};
   white-space: nowrap;
 `;
+
+export const StyledDropdownContainer = styled.div`
+  position: relative;
+`;

@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
-import styled from 'styled-components';
-
 import { Card } from '@/components/Card/Card';
 import { Dropdown } from '@/components/Dropdown/Dropdown';
 
 import { DrawerCardProps } from '../DrawerCard.type';
 
 import {
+  StyledDropdownContainer,
   StyledServiceModify,
   StyledServiceText,
   StyledServiceTextContainer,
@@ -53,7 +52,7 @@ export const UserDrawerCard = ({
         bookmarkCount={bookmarkCount}
         isBookmarked={isBookmarked}
       />
-      <DropdownContainer ref={containerRef}>
+      <StyledDropdownContainer ref={containerRef}>
         <Card.Setting onClick={onClickSetting} />
         {isCardSettingClicked && (
           <Dropdown padding="1rem" bottom="-4.5rem" right="0">
@@ -63,11 +62,7 @@ export const UserDrawerCard = ({
             </StyledServiceTextContainer>
           </Dropdown>
         )}
-      </DropdownContainer>
+      </StyledDropdownContainer>
     </Card>
   );
 };
-
-const DropdownContainer = styled.div`
-  position: relative;
-`;
