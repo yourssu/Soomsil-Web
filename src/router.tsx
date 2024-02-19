@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout as DrawerLayout } from './drawer/components/Layout/Layout';
 import { MyDrawer } from './drawer/pages/MyDrawer';
 import { Ranking } from './drawer/pages/Ranking/Ranking';
-import { Register } from './drawer/pages/Register';
+import { Register } from './drawer/pages/Register/Register';
 import { ServiceDetail } from './drawer/pages/ServiceDetail/ServiceDetail';
 import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
 import { Login } from './home/components/login/Login';
