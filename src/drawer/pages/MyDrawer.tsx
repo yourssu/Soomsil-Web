@@ -1,7 +1,9 @@
+import { CardLayout } from '../components/CardLayout/CardLayout';
+
 export const MyDrawer = () => {
   return (
     <>
-      <h1>MyDrawer</h1>
+      <CardLayout isDataExist={false} type="MYDRAWER" />
     </>
   );
 };
