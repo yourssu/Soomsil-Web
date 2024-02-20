@@ -10,7 +10,7 @@ export const StyledInnerContainer = styled.div`
   align-items: center;
   gap: 1rem;
 
-  width: 66rem;
+  max-width: 66rem;
   padding: 1.4375rem 0.5rem;
   margin: 0 auto;
 `;
