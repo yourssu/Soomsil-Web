@@ -14,7 +14,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   description: string;
   width: number;
-  length: number;
   inputWidth: number;
   isWarned?: boolean;
 }
@@ -23,7 +22,6 @@ export const Input = ({
   title,
   description,
   width,
-  length,
   inputWidth,
   isWarned,
   ...props
@@ -44,7 +42,6 @@ export const Input = ({
         <StyledInput
           value={inputValue}
           onChange={handleInputChange}
-          maxLength={length - 1}
           id={title}
           $isWarned={isWarned}
           {...props}
