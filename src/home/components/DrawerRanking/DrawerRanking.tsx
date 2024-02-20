@@ -23,6 +23,7 @@ export const DrawerRanking = () => {
       </StyledTitleContainer>
       <StyledRankCardContainer>
         {Dummy.map((drawerItem) => (
+          /* API 연동할 때 키 값 변경하기 => 프로덕트 고유 값으로 */
           <RankDrawerCard
             key={drawerItem.title}
             link={drawerItem.link}
