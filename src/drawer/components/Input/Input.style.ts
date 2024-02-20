@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
-interface StyledContainerProps {
-  $width: number;
-}
-
 export const StyledContainer = styled.div`
-  width: ${({ $width }: StyledContainerProps) => $width}rem;
+  width: 79.625rem;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 24.375rem) {
+    width: 21.875rem;
+  }
 `;
 
 export const StyledLabelContainer = styled.div`
@@ -15,14 +14,13 @@ export const StyledLabelContainer = styled.div`
   flex-direction: column;
 `;
 
-interface StyledInputContainerProps {
-  $inputWidth: number;
-}
-
 export const StyledInputContainer = styled.div`
-  width: ${({ $inputWidth }: StyledInputContainerProps) => $inputWidth}rem;
+  width: 61.875rem;
   display: flex;
   flex-direction: column;
+  @media (max-width: 24.375rem) {
+    width: 16rem;
+  }
 `;
 
 interface StyledInputProps {
@@ -65,8 +63,12 @@ export const StyledInputLength = styled.span<StyledInputProps>`
 `;
 
 export const StyledLabelTitle = styled.label`
+  @media (max-width: 24.375rem) {
+    ${({ theme }) => theme.typo.caption0};
+  }
   ${({ theme }) => theme.typo.subtitle3};
   color: ${({ theme }) => theme.color.textPrimary};
+  word-break: keep-all;
   &:hover {
     cursor: pointer;
   }
