@@ -17,7 +17,7 @@ export const StyledInnerContainer = styled.div`
 
 export const StyledNotificationContainer = styled.div`
   width: 100%;
-  height: 26px;
+  height: 1.625rem;
 
   text-align: left;
   overflow: hidden;

@@ -26,7 +26,8 @@ export const Notification = () => {
     const intervalId = setInterval(() => {
       if (prev) prev.style.cssText = 'opacity: 0; transition: opacity 0.25s ease 0s;';
       if (next)
-        next.style.cssText = 'transform: translateY(-26px); transition: transform 0.7s ease 0s;';
+        next.style.cssText =
+          'transform: translateY(-1.625rem); transition: transform 0.7s ease 0s;';
 
       setTimeout(() => {
         goToNextTerm();
