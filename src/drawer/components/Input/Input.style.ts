@@ -35,7 +35,8 @@ export const StyledInput = styled.input<StyledInputProps>`
     ${({ $isWarned, theme }) => ($isWarned ? theme.color.buttonWarned : theme.color.buttonNormal)};
   ${({ theme }) => theme.typo.subtitle1};
   background-color: transparent;
-  color: ${({ theme }) => theme.color.textSecondary};
+  color: ${({ $isWarned, theme }) =>
+    $isWarned ? theme.color.buttonWarned : theme.color.textSecondary};
   border-top: none;
   border-left: none;
   border-right: none;
