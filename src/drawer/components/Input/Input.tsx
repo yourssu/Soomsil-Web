@@ -15,6 +15,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   description: string;
   width: number;
   inputWidth: number;
+  isNecessary?: boolean;
   isWarned?: boolean;
 }
 
@@ -23,6 +24,7 @@ export const Input = ({
   description,
   width,
   inputWidth,
+  isNecessary,
   isWarned,
   ...props
 }: InputProps) => {
@@ -35,7 +37,7 @@ export const Input = ({
   return (
     <StyledContainer $width={width}>
       <StyledLabelContainer>
-        <StyledLabelTitle htmlFor={title}>{title}</StyledLabelTitle>
+        <StyledLabelTitle htmlFor={title}>{isNecessary ? `${title} *` : title}</StyledLabelTitle>
         <StyledLabelDescription>{description}</StyledLabelDescription>
       </StyledLabelContainer>
       <StyledInputContainer $inputWidth={inputWidth}>
@@ -47,7 +49,7 @@ export const Input = ({
           {...props}
         />
         {isWarned ? (
-          <StyledInputLength $isWarned={true}>*은 필수값입니다.</StyledInputLength>
+          <StyledInputLength $isWarned={true}>*{title}은 필수값입니다.</StyledInputLength>
         ) : (
           <StyledInputLength>
             {inputValue.length}/{length}

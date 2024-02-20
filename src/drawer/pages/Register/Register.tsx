@@ -10,18 +10,20 @@ export const Register = () => {
           <Input
             width={79.625}
             maxLength={20}
-            title={'서비스 이름 *'}
+            title={'서비스 이름'}
             description={'(최대 20자)'}
             inputWidth={61.875}
+            isNecessary={true}
             isWarned={true}
           />
 
           <Input
             width={79.625}
             maxLength={20}
-            title={'간단한 설명 *'}
+            title={'간단한 설명'}
             description={'(최대 20자)'}
             inputWidth={61.875}
+            isNecessary={true}
             disabled={true}
           />
         </StyledInputContainer>
