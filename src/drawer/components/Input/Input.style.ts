@@ -28,6 +28,9 @@ interface StyledInputProps {
 }
 
 export const StyledInput = styled.input<StyledInputProps>`
+  @media (max-width: 24.375rem) {
+    ${({ theme }) => theme.typo.caption2};
+  }
   padding: 0.38rem;
   border: 1px solid
     ${({ $isWarned, theme }) => ($isWarned ? theme.color.buttonWarned : theme.color.buttonNormal)};
