@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { IcNoticeLine } from '@yourssu/design-system-react';
+
+import { useInterval } from '@/home/hooks/useInterval';
 
 import {
   StyledContainer,
   StyledInnerContainer,
   StyledNotification,
+  StyledNotificationArray,
   StyledNotificationContainer,
 } from './Notification.style';
 
@@ -17,41 +20,50 @@ const Dummy = [
 ];
 
 export const Notification = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [activeTransition, setActiveTransition] = useState(true);
+  const slideRef = useRef<HTMLDivElement>(null);
+  const notificationArray = [Dummy[Dummy.length - 1], ...Dummy, Dummy[0]];
 
-  useEffect(() => {
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
+  useInterval(() => setCurrentIndex((prev) => prev + 1), 5000);
 
-    const intervalId = setInterval(() => {
-      if (prev) prev.style.cssText = 'opacity: 0; transition: opacity 0.25s ease 0s;';
-      if (next)
-        next.style.cssText =
-          'transform: translateY(-1.625rem); transition: transform 0.7s ease 0s;';
-
+  const InfiniteSlideHandler = (nextIndex: number) => {
+    setTimeout(() => {
+      if (slideRef.current) {
+        setActiveTransition(false);
+      }
+      setCurrentIndex(nextIndex);
       setTimeout(() => {
-        goToNextTerm();
-        if (prev) prev.style.cssText = 'opacity: 1';
-        if (next) next.style.cssText = '';
-      }, 1000);
-    }, 2500);
-
-    return () => clearInterval(intervalId);
-  }, [currentIndex]);
-
-  const goToNextTerm = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % Dummy.length);
+        if (slideRef.current) {
+          setActiveTransition(true);
+        }
+      }, 100);
+    }, 500);
   };
+
+  if (currentIndex === notificationArray.length - 1) {
+    InfiniteSlideHandler(1);
+  }
+
+  if (currentIndex === 0) {
+    InfiniteSlideHandler(Dummy.length);
+  }
 
   return (
     <StyledContainer>
       <StyledInnerContainer>
         <IcNoticeLine size="2.25rem" />
         <StyledNotificationContainer>
-          <StyledNotification id="prev">{Dummy[currentIndex]}</StyledNotification>
-          <StyledNotification id="next">
-            {Dummy[(currentIndex + 1) % Dummy.length]}
-          </StyledNotification>
+          <StyledNotificationArray
+            ref={slideRef}
+            $length={notificationArray.length}
+            $currentIndex={currentIndex}
+            $active={activeTransition}
+          >
+            {notificationArray.map((notification, index) => (
+              <StyledNotification key={index}>{notification}</StyledNotification>
+            ))}
+          </StyledNotificationArray>
         </StyledNotificationContainer>
       </StyledInnerContainer>
     </StyledContainer>
