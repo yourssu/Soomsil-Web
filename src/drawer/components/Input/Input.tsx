@@ -13,11 +13,10 @@ import {
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   description: string;
-  isNecessary?: boolean;
   isWarned?: boolean;
 }
 
-export const Input = ({ title, description, isNecessary, isWarned, ...props }: InputProps) => {
+export const Input = ({ title, description, isWarned, ...props }: InputProps) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +26,7 @@ export const Input = ({ title, description, isNecessary, isWarned, ...props }: I
   return (
     <StyledContainer>
       <StyledLabelContainer>
-        <StyledLabelTitle htmlFor={title}>{isNecessary ? `${title} *` : title}</StyledLabelTitle>
+        <StyledLabelTitle htmlFor={title}>{props.required ? `${title} *` : title}</StyledLabelTitle>
         <StyledLabelDescription>{description}</StyledLabelDescription>
       </StyledLabelContainer>
       <StyledInputContainer>

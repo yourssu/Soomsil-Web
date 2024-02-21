@@ -11,7 +11,7 @@ export const Register = () => {
             maxLength={20}
             title={'서비스 이름'}
             description={'(최대 20자)'}
-            isNecessary={true}
+            required={true}
             isWarned={true}
           />
 
@@ -20,7 +20,7 @@ export const Register = () => {
             maxLength={20}
             title={'간단한 설명'}
             description={'(최대 20자)'}
-            isNecessary={true}
+            required={true}
             disabled={true}
           />
         </StyledInputContainer>
