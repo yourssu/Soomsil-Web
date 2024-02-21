@@ -38,11 +38,3 @@ export const StyledBookmarkContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-
-export const StyledSettingButton = styled.button`
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  width: 2.25rem;
-`;

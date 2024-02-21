@@ -4,6 +4,7 @@ import {
   IcStarLine,
   IcDotsVerticalLine,
 } from '@yourssu/design-system-react';
+import { useTheme } from 'styled-components';
 
 import BigThumbnail from '@/assets/bigThumbnail.png';
 import SmallThumbnail from '@/assets/smallThumbnail.png';
@@ -13,7 +14,6 @@ import {
   StyledContainer,
   StyledText,
   StyledTitle,
-  StyledSettingButton,
   StyledThumbnail,
   StyledBookmarkContainer,
 } from './Card.style';
@@ -53,6 +53,7 @@ const CardSmallThumbnail = ({ imgSrc }: CardThumbnailProps) => {
 };
 
 const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentProps) => {
+  const theme = useTheme();
   return (
     <FlexGrowItem>
       <StyledTitle>{title}</StyledTitle>
@@ -61,7 +62,7 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
         <StyledText>{bookmarkCount}+</StyledText>
         <IconContext.Provider
           value={{
-            color: '#505458',
+            color: theme.color.buttonNormal,
             size: '15px',
           }}
         >
@@ -73,12 +74,13 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
 };
 
 const CardSetting = ({ onClick }: CardSettingProps) => {
+  const theme = useTheme();
   return (
-    <StyledSettingButton onClick={onClick}>
-      <IconContext.Provider value={{ color: '#505458', size: '36px' }}>
-        <IcDotsVerticalLine />
-      </IconContext.Provider>
-    </StyledSettingButton>
+    <IconContext.Provider
+      value={{ color: theme.color.buttonNormal, size: '36px', height: '100%', onClick: onClick }}
+    >
+      <IcDotsVerticalLine />
+    </IconContext.Provider>
   );
 };
 
