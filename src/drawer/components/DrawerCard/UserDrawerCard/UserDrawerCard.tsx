@@ -53,10 +53,19 @@ export const UserDrawerCard = ({
         isBookmarked={isBookmarked}
       />
       <StyledDropdownContainer ref={containerRef}>
-        <Card.Setting onClick={onClickSetting} />
+        <Card.Setting
+          onClick={(event) => {
+            event.stopPropagation();
+            onClickSetting();
+          }}
+        />
         {isCardSettingClicked && (
           <Dropdown padding="1rem" bottom="-4.5rem" right="0">
-            <StyledServiceTextContainer>
+            <StyledServiceTextContainer
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
+            >
               <StyledServiceModify to="/drawer/register">서비스 수정</StyledServiceModify>
               <StyledServiceText>서비스 삭제</StyledServiceText>
             </StyledServiceTextContainer>

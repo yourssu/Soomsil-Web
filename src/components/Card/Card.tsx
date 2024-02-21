@@ -4,6 +4,7 @@ import {
   IcStarLine,
   IcDotsVerticalLine,
 } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import BigThumbnail from '@/assets/bigThumbnail.png';
@@ -25,8 +26,14 @@ import {
 } from './Card.type';
 
 const CardContainer = ({ children, link, width = 25.5 }: CardContainerProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(link);
+  };
+
   return (
-    <StyledContainer to={link} $width={width}>
+    <StyledContainer onClick={handleClick} $width={width}>
       {children}
     </StyledContainer>
   );

@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface StyledContainerProps {
   $width: number;
 }
-export const StyledContainer = styled(Link)<StyledContainerProps>`
+export const StyledContainer = styled.div<StyledContainerProps>`
   width: ${(props) => `${props.$width}rem`};
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   text-decoration: none;
+  cursor: pointer;
 `;
 
 interface StyledThumbnailProps {
