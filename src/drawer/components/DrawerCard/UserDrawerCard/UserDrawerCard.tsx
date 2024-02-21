@@ -60,12 +60,15 @@ export const UserDrawerCard = ({
           }}
         />
         {isCardSettingClicked && (
-          <Dropdown padding="1rem" bottom="-4.5rem" right="0">
-            <StyledServiceTextContainer
-              onClick={(event) => {
-                event.stopPropagation();
-              }}
-            >
+          <Dropdown
+            padding="1rem"
+            bottom="-4.5rem"
+            right="0"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            <StyledServiceTextContainer>
               <StyledServiceModify to="/drawer/register">서비스 수정</StyledServiceModify>
               <StyledServiceText>서비스 삭제</StyledServiceText>
             </StyledServiceTextContainer>
