@@ -1,1 +1,1 @@
-export type searchSize = 'small' | 'large';
+export type SearchSize = 'small' | 'large';

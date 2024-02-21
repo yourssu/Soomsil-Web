@@ -1,7 +1,11 @@
+import { SearchBar } from './components/SearchBar/SearchBar';
+import { SearchBox } from './components/SearchBar/SearchBox';
+
 export const Search = () => {
   return (
     <>
-      <h1>Search</h1>
+      <SearchBar />
+      <SearchBox size={'small'} />
     </>
   );
 };

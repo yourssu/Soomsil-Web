@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { searchSize } from '@/search/types/SearchBox.type';
+import { SearchSize } from '@/search/types/SearchBox.type';
 
 interface StyledInputContainerProps {
-  $containerSize: searchSize;
+  $containerSize: SearchSize;
 }
 
 export const StyledInputContainer = styled.div<StyledInputContainerProps>`
@@ -14,7 +14,7 @@ export const StyledInputContainer = styled.div<StyledInputContainerProps>`
 `;
 
 interface StyledInputProps {
-  $inputSize: searchSize;
+  $inputSize: SearchSize;
 }
 
 export const StyledInput = styled.input<StyledInputProps>`
