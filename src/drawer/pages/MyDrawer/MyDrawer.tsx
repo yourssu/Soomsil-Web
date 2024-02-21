@@ -1,30 +1,56 @@
 import { useState } from 'react';
 
-import { FlexContainer } from '@/components/FlexContainer/FlexContainer';
 import Spacing from '@/components/Spacing/Spacing';
+import { Button } from '@/drawer/components/Button/Button';
+import { CardLayout } from '@/drawer/components/CardLayout/CardLayout';
+import { EmptyScreen } from '@/drawer/components/EmptyScreen/EmptyScreen';
+import { NOT_FOUND_TEXT } from '@/drawer/constants/empty.constant';
+import { TAB_DESCRIPTION } from '@/drawer/constants/mydrawer.constant';
 
-import { Button } from '../../components/Button/Button';
+import { StyledContainer, StyledTabWrapper, StyledDescription } from './MyDrawer.style';
 
-import { StyledContainer, StyledTitle } from './MyDrawer.style';
+const Dummy = Array.from({ length: 12 }).map((_, index) => index);
+
+export type TabType = 'STAR' | 'MYDRAWER';
 
 export const MyDrawer = () => {
-  const [currentTab, setCurrentTab] = useState<boolean>(true);
+  const [currentTab, setCurrentTab] = useState<TabType>('STAR');
 
-  const handleClickTab = () => {
-    setCurrentTab((prev) => !prev);
+  const handleClickTab = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const target = event.target as HTMLButtonElement;
+    setCurrentTab(target.name as TabType);
   };
 
   return (
     <StyledContainer>
-      <FlexContainer>
-        <Button text={'Stars'} isFilled={currentTab} onClick={handleClickTab} />
+      <StyledTabWrapper>
+        <Button
+          text={'Stars'}
+          name={'STAR'}
+          isFilled={currentTab === 'STAR'}
+          onClick={(event) => {
+            handleClickTab(event);
+          }}
+        />
         <Spacing direction={'horizontal'} size={16} />
-        <Button text={'My Products'} isFilled={!currentTab} onClick={handleClickTab} />
-      </FlexContainer>
-      <Spacing direction={'vertical'} size={24} />
-      <StyledTitle>
-        {currentTab ? '내 취향의 서비스를 확인해보세요.' : '내가 등록한 서비스를 관리해보세요.'}
-      </StyledTitle>
+        <Button
+          text={'My Products'}
+          name={'MYDRAWER'}
+          isFilled={currentTab === 'MYDRAWER'}
+          onClick={(event) => {
+            handleClickTab(event);
+          }}
+        />
+      </StyledTabWrapper>
+      <Spacing direction={'vertical'} size={14} />
+      {Dummy ? (
+        <>
+          <StyledDescription>{TAB_DESCRIPTION[currentTab]}</StyledDescription>
+          <CardLayout data={Dummy} type={currentTab} />
+        </>
+      ) : (
+        <EmptyScreen {...NOT_FOUND_TEXT[currentTab]} type={currentTab} />
+      )}
     </StyledContainer>
   );
 };
