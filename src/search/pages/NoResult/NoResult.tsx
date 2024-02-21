@@ -79,7 +79,7 @@ export const NoResult = () => {
           return (
             <StyledCard key={value.linkText}>
               <StyledCardDescriptionSection>
-                <StyledCardIconFrame index={index}>
+                <StyledCardIconFrame $index={index}>
                   {index === 0 ? (
                     <img src={IcSoomsilde} alt="soomsil" />
                   ) : (

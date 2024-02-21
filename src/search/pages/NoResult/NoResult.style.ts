@@ -63,7 +63,7 @@ export const StyledCardDescriptionSection = styled.div`
 `;
 
 interface StyledCardIconFrameProp {
-  index: number;
+  $index: number;
 }
 
 export const StyledCardIconFrame = styled.div<StyledCardIconFrameProp>`
@@ -74,7 +74,7 @@ export const StyledCardIconFrame = styled.div<StyledCardIconFrameProp>`
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
-  background: ${(prop) => (prop.index === 0 ? 'rgba(255, 44, 190, 0.1)' : '#ebe6fb')};
+  background: ${(prop) => (prop.$index === 0 ? 'rgba(255, 44, 190, 0.1)' : '#ebe6fb')};
 `;
 
 export const StyledCardTextFrame = styled.div`
