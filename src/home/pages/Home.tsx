@@ -7,8 +7,6 @@ import { StyledContainer } from './Home.style';
 export const Home = () => {
   return (
     <>
-      <a>Home</a>
-      <button>홈 버튼</button>
       <StyledContainer>
         <DrawerRanking />
         <SearchKeyword />

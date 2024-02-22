@@ -1,14 +1,16 @@
 import { PropsWithChildren } from 'react';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { Nav } from '../Nav/Nav';
 
 import { StyledLayout } from './HomeLayout.style';
 export const HomeLayout = ({ children }: PropsWithChildren) => {
+  const router = useLocation();
+
   return (
     <StyledLayout>
-      <Nav isLoggedIn={true} />
+      {router.pathname === '/' ? <Nav isLoggedIn={false} /> : null}
       {children || <Outlet />}
     </StyledLayout>
   );
