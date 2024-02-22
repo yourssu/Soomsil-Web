@@ -97,16 +97,14 @@ export const ServiceDetail = () => {
               {/* TODO: 추후 색상 변경 필요 */}
               <IconContext.Provider
                 value={{
-                  color: theme.color.limeItemPrimary,
+                  color: '#FDD655',
                   size: '1.5rem',
                 }}
               >
                 <IcStarLine />
               </IconContext.Provider>
             </button>
-            <StyledIconLabelText $color={theme.color.limeItemPrimary}>
-              Recommend
-            </StyledIconLabelText>
+            <StyledIconLabelText $color={'#FDD655'}>Recommend</StyledIconLabelText>
           </StyledIconButtonContainer>
         </StyledServiceActionContainer>
       </StyledBackgroundImageContainer>

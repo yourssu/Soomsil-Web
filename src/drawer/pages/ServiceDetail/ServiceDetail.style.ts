@@ -21,29 +21,38 @@ export const StyledBackgroundImageContainer = styled.div<StyledBackgroundImageCo
   justify-content: flex-end;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${(props) => props.$backgroundImage});
-  /* TODO: 추후 반응형 적용 필요 */
-  padding-left: 17%;
-  padding-bottom: 3%;
+  padding-left: 17vw;
+  padding-bottom: 5vh;
 
   margin-bottom: 5rem;
 `;
 
 export const StyledServiceTitleText = styled.h1`
   /* TODO: 추후 폰트 변경 필요 */
-  ${({ theme }) => theme.typo.title1}
+  /* Soomsil/Drawer/Web/title64 */
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
   color: ${({ theme }) => theme.color.textBright};
 `;
 
 export const StyledServiceDeveloperText = styled.h2`
   /* TODO: 추후 폰트 변경 필요 */
-  ${({ theme }) => theme.typo.subtitle3}
-  color: ${({ theme }) => theme.color.textBright};
+  /* Soomsil/Drawer/Web/subtitle32 */
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 44.8px */
+  color: ${({ theme }) => theme.color.textPointed};
 `;
 
 export const StyledServiceInfoContainer = styled.div`
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
 `;
 
 export const StyledThumbnailImage = styled.img`

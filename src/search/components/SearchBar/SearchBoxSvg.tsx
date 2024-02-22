@@ -22,7 +22,7 @@ const SearchBoxForeignObject = forwardRef<HTMLInputElement, SearchBoxForeignObje
       <foreignObject x="0" y="0" width={SEARCH_BOX_WIDTH[size]} height="60">
         <StyledInputContainer containerSize={size}>
           <Spacing direction="horizontal" size={24} />
-          <StyledInput inputSize={size} ref={ref} />
+          <StyledInput $inputSize={size} ref={ref} />
           <Spacing direction="horizontal" size={24} />
           <IcXcircleFilled
             cursor="pointer"

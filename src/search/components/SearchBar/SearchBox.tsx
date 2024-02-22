@@ -6,12 +6,13 @@ import {
   SEARCH_BOX_VIEW_BOX,
   SEARCH_BOX_WIDTH,
 } from '@/search/constant';
-import { searchSize } from '@/search/types/SearchBox.type';
+import { SearchSize } from '@/search/types/SearchBox.type';
+import useForm from '@/search/hooks/useForm';
 
 import { SearchBoxSvg } from './SearchBoxSvg';
 
 interface SearchBoxProps {
-  size: searchSize;
+  size: SearchSize;
 }
 
 export interface IFormInput {
