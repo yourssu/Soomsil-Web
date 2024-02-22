@@ -57,11 +57,11 @@ export const StyledListItemText = styled.p`
 `;
 
 interface StyledListItemRankingProp {
-  rankingNumber: number;
+  $rankingNumber: number;
 }
 
 export const StyledListItemRanking = styled.span<StyledListItemRankingProp>`
-  color: ${(prop) => (prop.rankingNumber < 4 ? '#8a2ac5' : '#8E9398')};
+  color: ${(prop) => (prop.$rankingNumber < 4 ? '#8a2ac5' : '#8E9398')};
   font-family: 'Spoqa Han Sans Neo';
   font-size: 1.155rem;
   font-style: normal;

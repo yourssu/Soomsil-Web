@@ -37,7 +37,7 @@ export const StyledDate = styled.span`
 `;
 
 interface StyledTitleProps {
-  length: number;
+  $length: number;
 }
 
 export const StyledTitle = styled.a<StyledTitleProps>`
@@ -48,7 +48,7 @@ export const StyledTitle = styled.a<StyledTitleProps>`
   word-wrap: break-word;
   display: -webkit-box;
   overflow: hidden;
-  -webkit-line-clamp: ${(props) => (props.length < 5 ? 1 : 2)};
+  -webkit-line-clamp: ${(props) => (props.$length < 5 ? 1 : 2)};
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 
@@ -59,28 +59,28 @@ export const StyledTitle = styled.a<StyledTitleProps>`
 `;
 
 interface StyledContentProps {
-  length: number;
+  $length: number;
 }
 
 export const StyledContent = styled.div<StyledContentProps>`
   ${(props) => props.theme.typo.body1}
   color: ${(props) => props.theme.color.textTertiary};
   width: 100%;
-  height: ${(props) => (props.length < 5 ? 4.688 : 3.25)}rem;
+  height: ${(props) => (props.$length < 5 ? 4.688 : 3.25)}rem;
   word-wrap: break-word;
   display: -webkit-box;
   overflow: hidden;
-  -webkit-line-clamp: ${(props) => (props.length < 5 ? 3 : 2)};
+  -webkit-line-clamp: ${(props) => (props.$length < 5 ? 3 : 2)};
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 `;
 
 interface StyledThumbnailProps {
-  length: number;
+  $length: number;
 }
 
 export const StyledThumbnail = styled.div<StyledThumbnailProps>`
-  width: ${(props) => (props.length < 5 ? '8.125rem' : '100%')};
+  width: ${(props) => (props.$length < 5 ? '8.125rem' : '100%')};
   height: 8.125rem;
   align-self: flex-end;
   position: relative;
@@ -91,7 +91,7 @@ export const StyledThumbnail = styled.div<StyledThumbnailProps>`
 `;
 
 export const StyledThumbnailImage = styled.img<StyledThumbnailProps>`
-  width: ${(props) => (props.length < 5 ? '100%' : '20%')};
+  width: ${(props) => (props.$length < 5 ? '100%' : '20%')};
   height: 100%;
   align-self: flex-end;
   background: linear-gradient(
@@ -99,7 +99,7 @@ export const StyledThumbnailImage = styled.img<StyledThumbnailProps>`
     rgba(212.91, 212.91, 212.91, 0.2) 0%,
     rgba(212.91, 212.91, 212.91, 0.2) 100%
   );
-  aspect-ratio: ${(props) => (props.length < 5 ? 'auto 130/130' : 'auto 148.8/130')};
+  aspect-ratio: ${(props) => (props.$length < 5 ? 'auto 130/130' : 'auto 148.8/130')};
   overflow: clip;
   overflow-clip-margin: content-box;
   object-fit: cover;
