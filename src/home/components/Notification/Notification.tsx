@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import { IcNoticeLine } from '@yourssu/design-system-react';
 
-import { useInterval } from '@/home/hooks/useInterval';
+import { useInterval } from '@/hooks/useInterval';
 
 import {
   StyledContainer,
@@ -23,7 +23,12 @@ export const Notification = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [activeTransition, setActiveTransition] = useState(true);
   const slideRef = useRef<HTMLDivElement>(null);
-  const notificationArray = [Dummy[Dummy.length - 1], ...Dummy, Dummy[0]];
+  const notificationArray = [Dummy[Dummy.length - 1], ...Dummy, Dummy[0]].map(
+    (notification, index) => ({
+      id: index + 1,
+      notification,
+    })
+  );
 
   useInterval(() => setCurrentIndex((prev) => prev + 1), 5000);
 
@@ -60,8 +65,8 @@ export const Notification = () => {
             $currentIndex={currentIndex}
             $active={activeTransition}
           >
-            {notificationArray.map((notification, index) => (
-              <StyledNotification key={index}>{notification}</StyledNotification>
+            {notificationArray.map((item) => (
+              <StyledNotification key={item.id}>{item.notification}</StyledNotification>
             ))}
           </StyledNotificationArray>
         </StyledNotificationContainer>
