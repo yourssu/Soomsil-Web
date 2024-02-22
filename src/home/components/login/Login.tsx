@@ -69,7 +69,6 @@ export const Login = () => {
                     field.onChange(e.target.value);
                   }}
                 />
-                <StyledInputSuffix>@soongsil.ac.kr</StyledInputSuffix>
               </StyledInputRowContainer>
             )}
           />
