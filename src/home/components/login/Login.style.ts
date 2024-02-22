@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const StyledContainer = styled.section`
+export const StyledContainer = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,7 +9,7 @@ export const StyledContainer = styled.section`
   gap: 2.25rem;
 `;
 
-export const StyledLoginContainer = styled.article`
+export const StyledLoginContainer = styled.section`
   border-radius: 1rem;
 
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
@@ -83,7 +83,7 @@ export const StyledInputSuffix = styled.div`
   padding-left: 1rem;
 `;
 
-export const StyledBottomContainer = styled.article`
+export const StyledBottomContainer = styled.section`
   display: flex;
   flex-direction: row;
   padding-right: 2.25rem;
