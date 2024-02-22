@@ -1,3 +1,7 @@
+import { UseFormSetValue } from 'react-hook-form';
+
+import { IFormInput } from '../components/SearchBar/SearchBox';
+
 import { searchSize } from './SearchBox.type';
 
 export interface SearchBoxSvgContainerProps {
@@ -6,9 +10,7 @@ export interface SearchBoxSvgContainerProps {
 
 export interface SearchBoxForeignObjectProps {
   size: searchSize;
-  searchInputText: string;
-  setSearchInputText: React.Dispatch<React.SetStateAction<string>>;
-  handleChangeSearchInputText: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setSearchInputText: UseFormSetValue<IFormInput>;
 }
 
 export interface SearchBoxDefsProps {

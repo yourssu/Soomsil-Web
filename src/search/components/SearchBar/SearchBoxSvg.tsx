@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { IcSearchLine, IcXcircleFilled } from '@yourssu/design-system-react';
 
 import Spacing from '@/components/Spacing/Spacing';
@@ -14,36 +16,29 @@ const SearchBoxSvgContainer = ({ children }: SearchBoxSvgContainerProps) => {
   return <>{children}</>;
 };
 
-const SearchBoxForeignObject = ({
-  size,
-  searchInputText,
-  setSearchInputText,
-  handleChangeSearchInputText,
-}: SearchBoxForeignObjectProps) => {
-  return (
-    <foreignObject x="0" y="0" width={SEARCH_BOX_WIDTH[size]} height="60">
-      <StyledInputContainer containerSize={size}>
-        <Spacing direction="horizontal" size={24} />
-        <StyledInput
-          inputSize={size}
-          value={searchInputText}
-          onChange={handleChangeSearchInputText}
-        />
-        <Spacing direction="horizontal" size={24} />
-        <IcXcircleFilled
-          cursor="pointer"
-          color="rgba(181, 185, 189, 1)"
-          size="1.5rem"
-          onClick={() => {
-            setSearchInputText('');
-          }}
-        />
-        <Spacing direction="horizontal" size={8} />
-        <IcSearchLine size={36} color="rgba(138, 42, 197, 1)" />
-      </StyledInputContainer>
-    </foreignObject>
-  );
-};
+const SearchBoxForeignObject = forwardRef<HTMLInputElement, SearchBoxForeignObjectProps>(
+  ({ size, setSearchInputText }, ref) => {
+    return (
+      <foreignObject x="0" y="0" width={SEARCH_BOX_WIDTH[size]} height="60">
+        <StyledInputContainer containerSize={size}>
+          <Spacing direction="horizontal" size={24} />
+          <StyledInput inputSize={size} ref={ref} />
+          <Spacing direction="horizontal" size={24} />
+          <IcXcircleFilled
+            cursor="pointer"
+            color="rgba(181, 185, 189, 1)"
+            size="1.5rem"
+            onClick={() => {
+              setSearchInputText('SearchInputText', '');
+            }}
+          />
+          <Spacing direction="horizontal" size={8} />
+          <IcSearchLine size={36} color="rgba(138, 42, 197, 1)" />
+        </StyledInputContainer>
+      </foreignObject>
+    );
+  }
+);
 
 const SearchBoxDefs = ({ size }: SearchBoxDefsProps) => {
   return (
