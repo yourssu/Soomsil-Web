@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-interface IUseInterval {
+interface UseIntervalProps {
   (callback: () => void, interval: number): void;
 }
 
-export const useInterval: IUseInterval = (callback, interval) => {
+export const useInterval: UseIntervalProps = (callback, interval) => {
   const savedCallback = useRef<(() => void) | null>(null);
 
   useEffect(() => {
