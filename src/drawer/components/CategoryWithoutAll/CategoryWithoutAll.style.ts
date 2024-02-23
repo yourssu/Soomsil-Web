@@ -4,7 +4,7 @@ export const StyledCategoryWithoutAllContainer = styled.div`
   width: 81.25rem;
   display: flex;
   flex-direction: row;
-  gap: 12rem;
+  gap: 14.13rem;
   @media (max-width: 24.375rem) {
     width: 21.875rem;
     gap: 0.5rem;

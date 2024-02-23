@@ -15,7 +15,7 @@ export const StyledCategoryContainer = styled.div`
 export const StyledCategoryWithoutAllContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.62rem;
+  gap: 0.69rem;
   align-items: flex-start;
   margin-top: 0.62rem;
   margin-bottom: 0.62rem;

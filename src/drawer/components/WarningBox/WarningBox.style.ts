@@ -13,7 +13,7 @@ export const StyledWarningBoxContainer = styled.div`
   height: 4.8125rem;
   border-radius: 0.75rem;
   background: ${({ theme }) => theme.color.buttonDisabledBG};
-  margin-left: 17.5rem;
+  margin-left: 18.69rem;
   padding-left: 1.35rem;
   display: flex;
   flex-direction: row;
