@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { CheckBox } from '@yourssu/design-system-react';
 
 import { StyledCategoryContainer, StyledCategoryWithoutAllContainer } from './Category.style';
@@ -24,6 +26,12 @@ const CategoryList: CategoryProps[] = [
 ];
 
 export const Category = ({ isAll }: IsAllProps) => {
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+
+  const handleCategorySelect = (categoryId: number) => {
+    setSelectedCategory((prev) => (prev === categoryId ? null : categoryId));
+  };
+
   return (
     <>
       {isAll ? (
@@ -38,9 +46,12 @@ export const Category = ({ isAll }: IsAllProps) => {
         /* isAll이 false일 때 - 등록 페이지에 위치한 카테고리*/
         <StyledCategoryWithoutAllContainer>
           {CategoryList.slice(1).map(({ id, title, subcategories }) => (
-            <CheckBox size="medium" key={id}>{`${title}${
-              subcategories ? ` ${subcategories}` : ''
-            }`}</CheckBox>
+            <CheckBox
+              size="medium"
+              key={id}
+              isSelected={selectedCategory === id}
+              onChange={() => handleCategorySelect(id)}
+            >{`${title}${subcategories ? ` ${subcategories}` : ''}`}</CheckBox>
           ))}
         </StyledCategoryWithoutAllContainer>
       )}
