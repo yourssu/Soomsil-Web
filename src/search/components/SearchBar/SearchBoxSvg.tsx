@@ -22,10 +22,10 @@ const SearchBoxForeignObject = ({
 }: SearchBoxForeignObjectProps) => {
   return (
     <foreignObject x="0" y="0" width={SEARCH_BOX_WIDTH[size]} height="60">
-      <StyledInputContainer containerSize={size}>
+      <StyledInputContainer $containerSize={size}>
         <Spacing direction="horizontal" size={24} />
         <StyledInput
-          inputSize={size}
+          $inputSize={size}
           value={searchInputText}
           onChange={handleChangeSearchInputText}
         />

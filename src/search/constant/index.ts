@@ -1,16 +1,16 @@
-import { searchSize } from '../types/SearchBox.type';
+import { SearchSize } from '../types/SearchBox.type';
 
-export const SEARCH_BOX_WIDTH: Record<searchSize, string> = {
+export const SEARCH_BOX_WIDTH: Record<SearchSize, string> = {
   large: '800',
   small: '669',
 };
 
-export const SEARCH_BOX_VIEW_BOX: Record<searchSize, string> = {
+export const SEARCH_BOX_VIEW_BOX: Record<SearchSize, string> = {
   large: '0 0 800 60',
   small: '0 0 669 60',
 };
 
-export const SEARCH_BOX_PATH: Record<string, Record<searchSize, string>> = {
+export const SEARCH_BOX_PATH: Record<string, Record<SearchSize, string>> = {
   d: {
     large:
       'M1.5 18.7449C1.5 8.94465 9.44465 1 19.2449 1H769.5C785.516 1 798.5 13.9837 798.5 30C798.5 46.0163 785.516 59 769.5 59H2.09636C1.76701 59 1.5 58.733 1.5 58.4036V18.7449Z',
@@ -23,7 +23,7 @@ export const SEARCH_BOX_PATH: Record<string, Record<searchSize, string>> = {
   },
 };
 
-export const SEARCH_BOX_RADIAL_GRADIENT: Record<string, Record<searchSize, string>> = {
+export const SEARCH_BOX_RADIAL_GRADIENT: Record<string, Record<SearchSize, string>> = {
   id: {
     large: 'paint0_radial_748_4753',
     small: 'paint0_radial_1093_21396',

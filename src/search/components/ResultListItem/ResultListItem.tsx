@@ -37,19 +37,19 @@ export const ResultListItem = ({
           <StyledDate>{date}</StyledDate>
         </div>
         <Spacing direction="vertical" size={12} />
-        <StyledTitle href={link} length={thumbnail.length}>
+        <StyledTitle href={link} $length={thumbnail.length}>
           {title}
         </StyledTitle>
         <Spacing direction="vertical" size={8} />
-        <StyledContent length={thumbnail.length}>{content}</StyledContent>
+        <StyledContent $length={thumbnail.length}>{content}</StyledContent>
         {/* 썸네일 5개 이상인 경우 */}
         {thumbnail.length >= 5 && (
           <>
             <Spacing direction="vertical" size={12} />
-            <StyledThumbnail length={thumbnail.length}>
+            <StyledThumbnail $length={thumbnail.length}>
               {Array.from({ length: 5 }).map((_, index) => (
                 <StyledThumbnailImage
-                  length={thumbnail.length}
+                  $length={thumbnail.length}
                   src={thumbnail[index]}
                   alt="썸네일"
                 ></StyledThumbnailImage>
@@ -61,9 +61,9 @@ export const ResultListItem = ({
       </div>
       {/* 썸네일 1~4개인 경우 */}
       {thumbnail.length < 5 && (
-        <StyledThumbnail length={thumbnail.length}>
+        <StyledThumbnail $length={thumbnail.length}>
           <StyledThumbnailImage
-            length={thumbnail.length}
+            $length={thumbnail.length}
             src={thumbnail[0]}
             alt="썸네일"
           ></StyledThumbnailImage>

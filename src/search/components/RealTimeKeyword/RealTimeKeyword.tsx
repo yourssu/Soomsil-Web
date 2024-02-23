@@ -102,7 +102,9 @@ export const RealTimeKeyword = () => {
           return (
             <ListItem
               leftIcon={
-                <StyledListItemRanking rankingNumber={index + 1}>{index + 1}</StyledListItemRanking>
+                <StyledListItemRanking $rankingNumber={index + 1}>
+                  {index + 1}
+                </StyledListItemRanking>
               }
               /**
                * @수정사항 color 색상이 YDS에 없어서 HEX로 넣었습니다.
