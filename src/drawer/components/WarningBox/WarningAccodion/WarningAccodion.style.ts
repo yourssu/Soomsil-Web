@@ -24,13 +24,13 @@ export const StyledAccordionHeaderContainer = styled.div`
 `;
 
 export const StyledAccordionHeader = styled.div`
-  ${({ theme }) => theme.color.textPrimary};
+  color: ${({ theme }) => theme.color.textPrimary};
   ${({ theme }) => theme.typo.button3};
 `;
 
 export const StyledAccordionContent = styled.div<{ $isOpen: boolean }>`
   width: 17.5rem;
-  ${({ theme }) => theme.color.textPrimary};
+  color: ${({ theme }) => theme.color.textPrimary};
   font-family: 'Apple SD Gothic Neo';
   font-size: 0.65rem;
   font-style: normal;

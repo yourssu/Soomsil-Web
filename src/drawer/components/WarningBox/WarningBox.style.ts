@@ -22,6 +22,6 @@ export const StyledWarningBoxContainer = styled.div`
 `;
 
 export const StyledWarningBoxText = styled.div`
-  ${({ theme }) => theme.color.textPrimary};
+  color: ${({ theme }) => theme.color.textPrimary};
   ${({ theme }) => theme.typo.button3};
 `;
