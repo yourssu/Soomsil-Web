@@ -31,9 +31,9 @@ export const Input = ({ title, description, isWarned, ...props }: InputProps) =>
       </StyledLabelContainer>
       <StyledInputContainer>
         <StyledInput
+          id={title}
           value={inputValue}
           onChange={handleInputChange}
-          id={title}
           $isWarned={isWarned}
           {...props}
         />
