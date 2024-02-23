@@ -18,7 +18,7 @@ import {
 export const Ranking = () => {
   return (
     <StyledContainer>
-      <Category />
+      <Category isAll={true} />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>

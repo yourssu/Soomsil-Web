@@ -11,3 +11,12 @@ export const StyledCategoryContainer = styled.div`
   gap: 1rem;
   ${({ theme }) => theme.typo.subtitle2};
 `;
+
+export const StyledCategoryWithoutAllContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.62rem;
+  align-items: flex-start;
+  margin-top: 0.62rem;
+  margin-bottom: 0.62rem;
+`;
