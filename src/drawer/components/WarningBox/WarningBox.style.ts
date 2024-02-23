@@ -23,9 +23,5 @@ export const StyledWarningBoxContainer = styled.div`
 
 export const StyledWarningBoxText = styled.div`
   ${({ theme }) => theme.color.textPrimary};
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 1.1375rem */
+  ${({ theme }) => theme.typo.button3}
 `;

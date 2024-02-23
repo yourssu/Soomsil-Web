@@ -25,13 +25,7 @@ export const StyledAccordionHeaderContainer = styled.div`
 
 export const StyledAccordionHeader = styled.div`
   ${({ theme }) => theme.color.textPrimary};
-  color: #000;
-  text-align: center;
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.3;
+  ${({ theme }) => theme.typo.button3};
 `;
 
 export const StyledAccordionContent = styled.div<{ $isOpen: boolean }>`
