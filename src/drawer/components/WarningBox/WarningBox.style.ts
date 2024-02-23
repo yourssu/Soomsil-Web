@@ -6,6 +6,7 @@ export const StyledContainer = styled.div`
   align-items: end;
   gap: 1.06rem;
   margin-bottom: 2rem;
+  margin-right: 1.2rem;
 `;
 
 export const StyledWarningBoxContainer = styled.div`
@@ -13,7 +14,6 @@ export const StyledWarningBoxContainer = styled.div`
   height: 4.8125rem;
   border-radius: 0.75rem;
   background: ${({ theme }) => theme.color.buttonDisabledBG};
-  margin-left: 18.69rem;
   padding-left: 1.35rem;
   display: flex;
   flex-direction: row;
@@ -23,5 +23,5 @@ export const StyledWarningBoxContainer = styled.div`
 
 export const StyledWarningBoxText = styled.div`
   ${({ theme }) => theme.color.textPrimary};
-  ${({ theme }) => theme.typo.button3}
+  ${({ theme }) => theme.typo.button3};
 `;
