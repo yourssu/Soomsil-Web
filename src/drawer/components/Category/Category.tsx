@@ -38,7 +38,7 @@ export const Category = ({ isAll }: IsAllProps) => {
         /* isAll이 true일 때 - 사이드에 위치한 카테고리*/
         <StyledCategoryContainer>
           <div>카테고리 유형</div>
-          {CategoryList.slice(1).map(({ id, title }) => (
+          {CategoryList.map(({ id, title }) => (
             <CheckBox key={id}>{title}</CheckBox>
           ))}
         </StyledCategoryContainer>
