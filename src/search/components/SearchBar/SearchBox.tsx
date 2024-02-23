@@ -5,12 +5,12 @@ import {
   SEARCH_BOX_WIDTH,
 } from '@/search/constant';
 import useForm from '@/search/hooks/useForm';
-import { searchSize } from '@/search/types/SearchBox.type';
+import { SearchSize } from '@/search/types/SearchBox.type';
 
 import { SearchBoxSvg } from './SearchBoxSvg';
 
 interface SearchBoxProps {
-  size: searchSize;
+  size: SearchSize;
 }
 
 export const SearchBox = ({ size }: SearchBoxProps) => {

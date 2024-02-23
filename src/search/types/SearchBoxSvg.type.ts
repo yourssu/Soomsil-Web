@@ -1,16 +1,16 @@
-import { searchSize } from './SearchBox.type';
+import { SearchSize } from './SearchBox.type';
 
 export interface SearchBoxSvgContainerProps {
   children: React.ReactNode;
 }
 
 export interface SearchBoxForeignObjectProps {
-  size: searchSize;
+  size: SearchSize;
   searchInputText: string;
   setSearchInputText: React.Dispatch<React.SetStateAction<string>>;
   handleChangeSearchInputText: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface SearchBoxDefsProps {
-  size: searchSize;
+  size: SearchSize;
 }

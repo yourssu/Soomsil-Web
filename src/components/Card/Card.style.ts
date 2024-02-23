@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface StyledContainerProps {
   $width: number;
 }
-export const StyledContainer = styled(Link)<StyledContainerProps>`
+export const StyledContainer = styled.div<StyledContainerProps>`
   width: ${(props) => `${props.$width}rem`};
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   text-decoration: none;
+  cursor: pointer;
 `;
 
 interface StyledThumbnailProps {
@@ -37,12 +37,4 @@ export const StyledText = styled.p`
 export const StyledBookmarkContainer = styled.div`
   display: flex;
   align-items: center;
-`;
-
-export const StyledSettingButton = styled.button`
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  width: 2.25rem;
 `;
