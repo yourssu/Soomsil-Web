@@ -38,7 +38,7 @@ export const Category = ({ isAll }: IsAllProps) => {
         /* isAll이 false일 때 - 등록 페이지에 위치한 카테고리*/
         <StyledCategoryWithoutAllContainer>
           {CategoryList.slice(1).map(({ id, title, subcategories }) => (
-            <CheckBox size="small" key={id}>{`${title}${
+            <CheckBox size="medium" key={id}>{`${title}${
               subcategories ? ` ${subcategories}` : ''
             }`}</CheckBox>
           ))}
