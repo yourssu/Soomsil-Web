@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { IcArrowDownLine, IcNoticeFilled, IconContext } from '@yourssu/design-system-react';
+import { useTheme } from 'styled-components';
 
 import {
   StyledAccordionContainer,
@@ -10,6 +11,7 @@ import {
 } from './WarningAccodion.style';
 export const WarningAccodion = () => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const theme = useTheme();
 
   const handleOpenAccodion = () => {
     setIsAccordionOpen(!isAccordionOpen);
@@ -19,7 +21,7 @@ export const WarningAccodion = () => {
       <StyledAccordionHeaderContainer onClick={handleOpenAccodion}>
         <IconContext.Provider
           value={{
-            color: '#FF5252',
+            color: theme.color.buttonWarned,
             size: '1.21213rem',
             mirrored: false,
           }}
@@ -29,7 +31,7 @@ export const WarningAccodion = () => {
         <StyledAccordionHeader>저작권 관련 조항</StyledAccordionHeader>
         <IconContext.Provider
           value={{
-            color: '#5A5B63',
+            color: theme.color.textPrimary,
             size: '1rem',
             mirrored: false,
           }}

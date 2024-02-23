@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { CheckBox, IcNoticeFilled, IconContext } from '@yourssu/design-system-react';
+import { useTheme } from 'styled-components';
 
 import { WarningAccodion } from './WarningAccodion/WarningAccodion';
 import {
@@ -11,6 +12,7 @@ import {
 
 export const WarningBox = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 24.375 * 16);
+  const theme = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,7 +35,7 @@ export const WarningBox = () => {
         <StyledWarningBoxContainer>
           <IconContext.Provider
             value={{
-              color: '#FF5252',
+              color: theme.color.buttonWarned,
               size: '2.2rem',
               mirrored: false,
             }}
