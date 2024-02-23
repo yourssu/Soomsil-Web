@@ -19,4 +19,5 @@ export const StyledCategoryWithoutAllContainer = styled.div`
   align-items: flex-start;
   margin-top: 0.62rem;
   margin-bottom: 0.62rem;
+  margin-left: 1rem;
 `;

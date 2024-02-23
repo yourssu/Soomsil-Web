@@ -4,11 +4,12 @@ export const StyledCategoryWithoutAllContainer = styled.div`
   width: 81.25rem;
   display: flex;
   flex-direction: row;
-  gap: 14.13rem;
+  gap: 12.75rem;
   @media (max-width: 24.375rem) {
     width: 21.875rem;
     gap: 0.5rem;
   }
+  white-space: nowrap;
 `;
 
 export const StyledCategoryContainer = styled.div`
@@ -32,5 +33,5 @@ export const StyledCategoryDescription = styled.div`
   font-weight: 400;
   line-height: 1.3;
   color: ${({ theme }) => theme.color.textSecondary};
-  margin-top: 0.25rem;
+  margin-top: 0.62rem;
 `;
