@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.article`
@@ -39,7 +39,7 @@ export const StyledInputContainer = styled.article`
   flex-direction: column;
   gap: 0.5rem;
 `;
-export const StyledButtonLabel = styled(NavLink)`
+export const StyledButtonLabel = styled(Link)`
   color: ${({ theme }) => theme.color.textTertiary};
   ${({ theme }) => theme.typo.button3};
 `;
