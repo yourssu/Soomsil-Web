@@ -52,6 +52,7 @@ export const StyledTextAreaContainer = styled.div`
 
 interface StyledTextAreaProps {
   $isWarned?: boolean;
+  $hasText?: boolean;
 }
 
 export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
@@ -68,13 +69,15 @@ export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
 
   border: none;
   border-bottom: 1px solid
-    ${({ $isWarned, theme }) => ($isWarned ? theme.color.buttonWarned : theme.color.buttonDisabled)};
-
-  &:focus {
-    border-bottom: 1px solid
-      ${({ $isWarned, theme }) =>
-        $isWarned ? theme.color.buttonWarned : theme.color.buttonNormalPressed};
-  }
+    ${({ $isWarned, $hasText, theme }) => {
+      if ($isWarned) {
+        return theme.color.buttonWarned;
+      } else if ($hasText) {
+        return theme.color.buttonNormalPressed;
+      } else {
+        return theme.color.buttonDisabled;
+      }
+    }};
 `;
 
 export const StyledTextAreaLength = styled.span<StyledTextAreaProps>`

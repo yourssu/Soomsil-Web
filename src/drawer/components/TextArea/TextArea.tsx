@@ -36,6 +36,7 @@ export const TextArea = ({ title, description, isWarned, ...props }: TextAreaPro
           onChange={handleTextAreaChange}
           rows={8}
           $isWarned={isWarned}
+          $hasText={textAreaValue.length > 0}
           {...props}
         />
         {isWarned ? (
