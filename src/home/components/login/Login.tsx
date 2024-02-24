@@ -18,7 +18,6 @@ import {
 } from './Login.style';
 export const Login = () => {
   const { register, control } = useForm();
-
   return (
     <StyledContainer>
       <img src={soomsil} alt={'soomsil-logo'} width={180} height={38} />
