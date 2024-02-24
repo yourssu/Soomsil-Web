@@ -43,7 +43,7 @@ interface StyledTitleProps {
 export const StyledTitle = styled.a<StyledTitleProps>`
   ${(props) => props.theme.typo.title3}
   width: 100%;
-  height: 1.938rem;
+  height: fit-content;
   color: rgba(26, 13, 179, 1);
   word-wrap: break-word;
   display: -webkit-box;
