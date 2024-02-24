@@ -1,17 +1,19 @@
 import { DrawerRanking } from '../components/DrawerRanking/DrawerRanking';
+import { Notification } from '../components/Notification/Notification';
 import { SearchKeyword } from '../components/SearchKeyword/SearchKeyword';
 import SocialNetworkService from '../components/SocialNetworkService/SocialNetworkService';
 
-import { StyledContainer } from './Home.style';
+import { StyledComponentContainer } from './Home.style';
 
 export const Home = () => {
   return (
     <>
-      <StyledContainer>
+      <Notification />
+      <StyledComponentContainer>
         <DrawerRanking />
         <SearchKeyword />
         <SocialNetworkService />
-      </StyledContainer>
+      </StyledComponentContainer>
     </>
   );
 };

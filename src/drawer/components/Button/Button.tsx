@@ -1,14 +1,13 @@
 import { StyledButton } from './Button.style';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  onClick: () => void;
   isFilled?: boolean;
 }
 
-export const Button = ({ text, onClick, isFilled }: ButtonProps) => {
+export const Button = ({ text, onClick, isFilled, ...props }: ButtonProps) => {
   return (
-    <StyledButton onClick={onClick} $isFilled={isFilled}>
+    <StyledButton onClick={onClick} $isFilled={isFilled} {...props}>
       {text}
     </StyledButton>
   );
