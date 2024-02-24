@@ -27,6 +27,7 @@ export const StyledInputContainer = styled.div`
 
 interface StyledInputProps {
   $isWarned?: boolean;
+  $hasText?: boolean;
 }
 
 export const StyledInput = styled.input<StyledInputProps>`
@@ -43,12 +44,15 @@ export const StyledInput = styled.input<StyledInputProps>`
 
   border: none;
   border-bottom: 1px solid
-    ${({ $isWarned, theme }) =>
-      $isWarned ? theme.color.buttonWarned : theme.color.buttonNormalPressed};
-
-  &:disabled {
-    border-bottom: 1px solid ${({ theme }) => theme.color.buttonDisabled};
-  }
+    ${({ $isWarned, $hasText, theme }) => {
+      if ($isWarned) {
+        return theme.color.buttonWarned;
+      } else if ($hasText) {
+        return theme.color.buttonNormalPressed;
+      } else {
+        return theme.color.buttonDisabled;
+      }
+    }};
 `;
 
 export const StyledInputLength = styled.span<StyledInputProps>`

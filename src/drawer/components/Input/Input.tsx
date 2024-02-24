@@ -35,6 +35,7 @@ export const Input = ({ title, description, isWarned, ...props }: InputProps) =>
           value={inputValue}
           onChange={handleInputChange}
           $isWarned={isWarned}
+          $hasText={inputValue.length > 0}
           {...props}
         />
         {isWarned ? (
