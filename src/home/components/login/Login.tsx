@@ -1,5 +1,5 @@
 import { BoxButton } from '@yourssu/design-system-react';
-import { Controller, useForm, useWatch } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import soomsil from '@/assets/soomsil.svg';
 
@@ -18,14 +18,6 @@ import {
 } from './Login.style';
 export const Login = () => {
   const { register, control } = useForm();
-  const watchEmailQuery = useWatch({
-    name: 'email',
-    control,
-  });
-  const watchPasswordQuery = useWatch({
-    name: 'password',
-    control,
-  });
 
   return (
     <StyledContainer>
@@ -43,7 +35,6 @@ export const Login = () => {
                   placeholder="ppushoong"
                   {...register('email')}
                   type="text"
-                  value={watchEmailQuery}
                   onChange={(e) => {
                     field.onChange(e.target.value);
                   }}
@@ -64,7 +55,6 @@ export const Login = () => {
                   placeholder="영문숫자포함10글자"
                   {...register('password')}
                   type="password"
-                  value={watchPasswordQuery}
                   onChange={(e) => {
                     field.onChange(e.target.value);
                   }}
