@@ -15,13 +15,18 @@ export const StyledLabelContainer = styled.div`
   flex-direction: column;
 `;
 
-export const StyledLabelTitle = styled.label`
+interface StyledLabelTitleProps {
+  $isWarned?: boolean;
+}
+
+export const StyledLabelTitle = styled.label<StyledLabelTitleProps>`
   @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
   }
 
   ${({ theme }) => theme.typo.subtitle3};
-  color: ${({ theme }) => theme.color.textPrimary};
+  color: ${({ $isWarned, theme }) =>
+    $isWarned ? theme.color.buttonWarned : theme.color.textPrimary};
 
   &:hover {
     cursor: pointer;
@@ -41,7 +46,7 @@ export const StyledLabelDescription = styled.span`
 `;
 
 export const StyledTextAreaContainer = styled.div`
-  @media (max-width: MOBILE_VIEW_WIDTH) {
+  @media (max-width: 30rem) {
     width: 16rem;
   }
 
