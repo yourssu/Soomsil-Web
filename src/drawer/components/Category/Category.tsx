@@ -51,7 +51,7 @@ export const Category = ({ isAll }: IsAllProps) => {
               key={id}
               isSelected={selectedCategory === id}
               onChange={() => handleCategorySelect(id)}
-            >{`${title}${subcategories ? ` ${subcategories}` : ''}`}</CheckBox>
+>{`${title} ${subcategories ?? ''}`}</CheckBox>
           ))}
         </StyledCategoryWithoutAllContainer>
       )}
