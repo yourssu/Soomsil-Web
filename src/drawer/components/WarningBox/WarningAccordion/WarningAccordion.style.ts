@@ -31,12 +31,13 @@ export const StyledAccordionHeader = styled.div`
 export const StyledAccordionContent = styled.div<{ $isOpen: boolean }>`
   width: 17.5rem;
   color: ${({ theme }) => theme.color.textPrimary};
-  font-family: 'Apple SD Gothic Neo';
+  font-family: 'Spoqa Han Sans Neo';
   font-size: 0.65rem;
   font-style: normal;
   font-weight: 400;
   line-height: 1.3;
   margin-left: 0.5rem;
+  word-break: keep-all;
 
   display: ${({ $isOpen }) => ($isOpen ? 'block' : 'none')};
 `;
