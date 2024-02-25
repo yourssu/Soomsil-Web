@@ -13,21 +13,15 @@ export const Search = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
 
-  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGetSearch({
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetSearch({
     query: query as string,
   });
-
-  useEffect(() => {
-    console.log(data);
-    console.log(error);
-  }, [data, error]);
 
   const observer = useRef<IntersectionObserver>();
 
   const lastElementRef = useCallback(
     (node: HTMLDivElement) => {
       if (isLoading) return;
-      console.log(node);
 
       if (observer.current) observer.current.disconnect(); // 🔵
       observer.current = new IntersectionObserver((entries) => {
