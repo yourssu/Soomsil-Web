@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     width: 21.875rem;
   }
 
@@ -16,7 +16,7 @@ export const StyledLabelContainer = styled.div`
 `;
 
 export const StyledLabelTitle = styled.label`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
   }
 
@@ -41,7 +41,7 @@ export const StyledLabelDescription = styled.span`
 `;
 
 export const StyledTextAreaContainer = styled.div`
-  @media (max-width: 24.375rem) {
+  @media (max-width: MOBILE_VIEW_WIDTH) {
     width: 16rem;
   }
 
@@ -56,7 +56,7 @@ interface StyledTextAreaProps {
 }
 
 export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption2};
   }
 
