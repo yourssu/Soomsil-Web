@@ -8,17 +8,18 @@ import {
   StyledAccordionContent,
   StyledAccordionHeader,
   StyledAccordionHeaderContainer,
-} from './WarningAccodion.style';
-export const WarningAccodion = () => {
+} from './WarningAccordion.style';
+
+export const WarningAccordion = () => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const theme = useTheme();
 
-  const handleOpenAccodion = () => {
+  const handleOpenAccordion = () => {
     setIsAccordionOpen(!isAccordionOpen);
   };
   return (
     <StyledAccordionContainer>
-      <StyledAccordionHeaderContainer onClick={handleOpenAccodion}>
+      <StyledAccordionHeaderContainer onClick={handleOpenAccordion}>
         <IconContext.Provider
           value={{
             color: theme.color.buttonWarned,

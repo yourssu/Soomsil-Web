@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { CheckBox, IcNoticeFilled, IconContext } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
 
-import { WarningAccodion } from './WarningAccodion/WarningAccodion';
+import { WarningAccordion } from './WarningAccordion/WarningAccordion';
 import {
   StyledContainer,
   StyledWarningBoxContainer,
@@ -30,7 +30,7 @@ export const WarningBox = () => {
   return (
     <StyledContainer>
       {isMobileView ? (
-        <WarningAccodion />
+        <WarningAccordion />
       ) : (
         <StyledWarningBoxContainer>
           <IconContext.Provider
