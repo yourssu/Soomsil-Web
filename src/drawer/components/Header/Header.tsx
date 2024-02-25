@@ -13,12 +13,12 @@ import {
   StyledHeaderSearchInput,
 } from './Header.style';
 
-const Header = () => {
+export const Header = () => {
   const theme = useTheme();
 
   return (
     <StyledHeader>
-      <StyledHeaderLogo to="/drawer">
+      <StyledHeaderLogo to="/">
         <img src={soomsil} alt="soomsil" />
       </StyledHeaderLogo>
       <StyledHeaderTabs>
@@ -51,5 +51,3 @@ const Header = () => {
     </StyledHeader>
   );
 };
-
-export default Header;
