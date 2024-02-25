@@ -5,7 +5,7 @@ export const StyledCategoryWithoutAllContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 12.75rem;
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     width: 21.875rem;
     gap: 0.5rem;
   }
@@ -18,7 +18,7 @@ export const StyledCategoryContainer = styled.div`
 `;
 
 export const StyledCategoryTitle = styled.div`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
   }
   ${({ theme }) => theme.typo.subtitle3};
