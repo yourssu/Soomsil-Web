@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-import { IcArrowDownLine, IcNoticeFilled, IconContext } from '@yourssu/design-system-react';
+import {
+  IcArrowDownLine,
+  IcArrowUpLine,
+  IcNoticeFilled,
+  IconContext,
+} from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
 
 import {
@@ -37,7 +42,7 @@ export const WarningAccordion = () => {
             mirrored: false,
           }}
         >
-          <IcArrowDownLine />
+          {isAccordionOpen ? <IcArrowUpLine /> : <IcArrowDownLine />}
         </IconContext.Provider>
       </StyledAccordionHeaderContainer>
       <StyledAccordionContent $isOpen={isAccordionOpen}>
