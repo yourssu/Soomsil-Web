@@ -1,5 +1,3 @@
-import { useForm } from 'react-hook-form';
-
 import {
   SEARCH_BOX_PATH,
   SEARCH_BOX_RADIAL_GRADIENT,
@@ -7,7 +5,6 @@ import {
   SEARCH_BOX_WIDTH,
 } from '@/search/constant';
 import { SearchSize } from '@/search/types/SearchBox.type';
-import useForm from '@/search/hooks/useForm';
 
 import { SearchBoxSvg } from './SearchBoxSvg';
 
@@ -15,13 +12,7 @@ interface SearchBoxProps {
   size: SearchSize;
 }
 
-export interface IFormInput {
-  SearchInputText: string;
-}
-
 export const SearchBox = ({ size }: SearchBoxProps) => {
-  const { register, setValue: setSearchInputText } = useForm<IFormInput>();
-
   return (
     <label htmlFor="searchBox">
       <svg
@@ -36,11 +27,7 @@ export const SearchBox = ({ size }: SearchBoxProps) => {
           stroke={SEARCH_BOX_PATH['stroke'][size]}
           strokeWidth="2"
         />
-        <SearchBoxSvg.ForeignObject
-          size={size}
-          setSearchInputText={setSearchInputText}
-          {...register('SearchInputText')}
-        />
+        <SearchBoxSvg.ForeignObject size={size} />
         <defs>
           <radialGradient
             id={SEARCH_BOX_RADIAL_GRADIENT['id'][size]}
