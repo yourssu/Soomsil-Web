@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { CheckBox, IcNoticeFilled, IconContext } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
 
+import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
+
 import { WarningAccordion } from './WarningAccordion/WarningAccordion';
 import {
   StyledContainer,
@@ -11,12 +13,12 @@ import {
 } from './WarningBox.style';
 
 export const WarningBox = () => {
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 24.375 * 16);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= MOBILE_VIEW_WIDTH);
   const theme = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
-      const newIsMobileView = window.innerWidth <= 24.375 * 16;
+      const newIsMobileView = window.innerWidth <= MOBILE_VIEW_WIDTH;
       setIsMobileView(newIsMobileView);
     };
 
