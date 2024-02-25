@@ -10,6 +10,20 @@ export const StyledResultListItem = styled.section`
   border: 0.063rem ${(props) => props.theme.color.borderNormal} solid;
 `;
 
+interface StyledContentProps {
+  $length: number;
+}
+
+export const StyledContentWrap = styled.div<StyledContentProps>`
+  width: ${(props) => (props.$length < 5 ? '37.563rem' : '100%')};
+`;
+
+export const StyledInformationWrap = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+`;
+
 export const StyledLinkImageWrap = styled.span`
   width: 1.5rem;
   height: 1.5rem;
