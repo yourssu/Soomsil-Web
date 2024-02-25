@@ -1,6 +1,7 @@
 type thumbnailUrl = string;
 
 export interface ResultListItemResponse {
+  id: string;
   title: string;
   link: string;
   content: string;
@@ -8,5 +9,3 @@ export interface ResultListItemResponse {
   thumbnail: thumbnailUrl[];
   favicon: string;
 }
-
-export type ResultListResponse = ResultListItemResponse[];
