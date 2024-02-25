@@ -1,5 +1,7 @@
+import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
 import { Input } from '@/drawer/components/Input/Input';
 import { TextArea } from '@/drawer/components/TextArea/TextArea';
+import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 
 import { StyledContainer, StyledInputContainer } from './Register.style';
 
@@ -27,6 +29,8 @@ export const Register = () => {
 
       <TextArea title="내용" description="(최대 5000자)" required={true} maxLength={5000} />
 
+      <CategoryWithoutAll />
+
       <StyledInputContainer>
         <Input maxLength={100} title={'웹 페이지 링크'} description={'(최대 100자)'} />
 
@@ -36,6 +40,8 @@ export const Register = () => {
 
         <Input maxLength={100} title={'GitHub 링크'} description={'(최대 100자)'} />
       </StyledInputContainer>
+
+      <WarningBox />
     </StyledContainer>
   );
 };
