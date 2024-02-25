@@ -8,21 +8,21 @@ interface IsAllProps {
   isAll: boolean;
 }
 
-interface CategoryProps extends IsAllProps {
+interface CategoryProps {
   id: number;
   title: string;
   subcategories?: string;
 }
 
 const CategoryList: CategoryProps[] = [
-  { id: 1, title: '전체', isAll: true },
-  { id: 2, title: '교내생활', isAll: false },
-  { id: 3, title: '취미', subcategories: '(음악, 스포츠, 게임, 여행)', isAll: false },
-  { id: 4, title: '건강', subcategories: '(건강 및 피트니스, 의료)', isAll: false },
-  { id: 5, title: 'IT', subcategories: '(AI, 개발자, 디자인)', isAll: false },
-  { id: 6, title: '지식', subcategories: '(비즈니스, 교육, 뉴스, 금융)', isAll: false },
-  { id: 7, title: '라이프스타일', subcategories: '(소셜 네트워킹, 미디어, 일상)', isAll: false },
-  { id: 8, title: '기타', isAll: false },
+  { id: 1, title: '전체' },
+  { id: 2, title: '교내생활' },
+  { id: 3, title: '취미', subcategories: '(음악, 스포츠, 게임, 여행)' },
+  { id: 4, title: '건강', subcategories: '(건강 및 피트니스, 의료)' },
+  { id: 5, title: 'IT', subcategories: '(AI, 개발자, 디자인)' },
+  { id: 6, title: '지식', subcategories: '(비즈니스, 교육, 뉴스, 금융)' },
+  { id: 7, title: '라이프스타일', subcategories: '(소셜 네트워킹, 미디어, 일상)' },
+  { id: 8, title: '기타' },
 ];
 
 export const Category = ({ isAll }: IsAllProps) => {
@@ -51,7 +51,7 @@ export const Category = ({ isAll }: IsAllProps) => {
               key={id}
               isSelected={selectedCategory === id}
               onChange={() => handleCategorySelect(id)}
->{`${title} ${subcategories ?? ''}`}</CheckBox>
+            >{`${title} ${subcategories ?? ''}`}</CheckBox>
           ))}
         </StyledCategoryWithoutAllContainer>
       )}
