@@ -4,6 +4,7 @@ import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/Categ
 import { Input } from '@/drawer/components/Input/Input';
 import { TextArea } from '@/drawer/components/TextArea/TextArea';
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
+import { LINK, RESISTER_URL } from '@/drawer/constants/link.constant';
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
 
 import {
@@ -14,6 +15,10 @@ import {
 } from './Register.style';
 
 export const Register = () => {
+  const validateLink = (name: string, value: string) => {
+    return !value.startsWith(RESISTER_URL[name as keyof typeof RESISTER_URL]);
+  };
+
   return (
     <StyledContainer>
       <StyledInputContainer>
@@ -39,33 +44,15 @@ export const Register = () => {
           </StyledImportText>
         </StyledRightContainer>
 
-        <Input
-          maxLength={100}
-          title={'웹 페이지 링크'}
-          description={'(최대 100자)'}
-          validate={(value) => !value.startsWith('https://')}
-        />
-
-        <Input
-          maxLength={100}
-          title={'Google Play 링크'}
-          description={'(최대 100자)'}
-          validate={(value) => !value.startsWith('https://play.google.com/')}
-        />
-
-        <Input
-          maxLength={100}
-          title={'App Store 링크'}
-          description={'(최대 100자)'}
-          validate={(value) => !value.startsWith('https://www.apple.com/')}
-        />
-
-        <Input
-          maxLength={100}
-          title={'GitHub 링크'}
-          description={'(최대 100자)'}
-          validate={(value) => !value.startsWith('https://github.com/')}
-        />
+        {LINK.map((link) => (
+          <Input
+            key={link.name}
+            maxLength={100}
+            title={link.title}
+            description={'(최대 100자)'}
+            validate={(value) => validateLink(link.name, value)}
+          />
+        ))}
       </StyledInputContainer>
 
       <WarningBox />
