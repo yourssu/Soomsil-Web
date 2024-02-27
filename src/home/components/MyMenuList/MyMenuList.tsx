@@ -1,4 +1,5 @@
 import { IcArrowRightLine } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import {
@@ -12,6 +13,7 @@ import {
 
 export const MyMenuList = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <StyledContainer>
@@ -24,12 +26,16 @@ export const MyMenuList = () => {
         </StyledMenuContainer>
         <StyledMenuContainer>
           <StyledMenuTitle>내 서랍장</StyledMenuTitle>
-          <StyledListItem rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}>
+          <StyledListItem
+            rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}
+            onClick={() => navigate('/drawer/myDrawers', { state: 'MYDRAWER' })}
+          >
             등록한 콘텐츠
           </StyledListItem>
           <StyledListItem
             isPressed
             rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}
+            onClick={() => navigate('/drawer/myDrawers', { state: 'STAR' })}
           >
             즐겨찾기한 콘텐츠
           </StyledListItem>
