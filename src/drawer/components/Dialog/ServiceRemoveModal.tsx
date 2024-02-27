@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 import * as Dialog from '@radix-ui/react-dialog';
 import { BoxButton, IcXLine, IconContext } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
@@ -16,15 +14,13 @@ import {
 interface ServiceRemoveModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  children: ReactNode;
 }
 
-export const ServiceRemoveModal = ({ open, onOpenChange, children }: ServiceRemoveModalProps) => {
+export const ServiceRemoveModal = ({ open, onOpenChange }: ServiceRemoveModalProps) => {
   const theme = useTheme();
 
   return (
     <Dialog.Root modal={true} open={open} onOpenChange={onOpenChange}>
-      {children}
       <Dialog.Portal>
         <StyledDialogOverlay />
         <StyledDialogContent>
@@ -57,5 +53,3 @@ export const ServiceRemoveModal = ({ open, onOpenChange, children }: ServiceRemo
     </Dialog.Root>
   );
 };
-
-ServiceRemoveModal.Trigger = Dialog.Trigger;
