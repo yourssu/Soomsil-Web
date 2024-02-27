@@ -1,4 +1,6 @@
 import { Input } from '@/drawer/components/Input/Input';
+import { OverviewImage } from '@/drawer/components/OverviewImage/OverviewImage';
+import { ThumnailInput } from '@/drawer/components/ThumbnailInput/ThumbnailInput';
 
 import { StyledContainer, StyledInputContainer } from './Register.style';
 
@@ -34,6 +36,8 @@ export const Register = () => {
 
           <Input maxLength={100} title={'GitHub 링크'} description={'(최대 100자)'} />
         </StyledInputContainer>
+
+        <ThumnailInput isWarned={true} />
       </StyledContainer>
     </>
   );
