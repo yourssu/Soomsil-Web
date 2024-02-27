@@ -4,7 +4,7 @@ import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/Categ
 import { Input } from '@/drawer/components/Input/Input';
 import { TextArea } from '@/drawer/components/TextArea/TextArea';
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
-import { LINK, RESISTER_URL } from '@/drawer/constants/link.constant';
+import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
 
 import {
@@ -16,7 +16,7 @@ import {
 
 export const Register = () => {
   const validateLink = (name: string, value: string) => {
-    return !value.startsWith(RESISTER_URL[name as keyof typeof RESISTER_URL]);
+    return !value.startsWith(REGISTER_URL[name as keyof typeof REGISTER_URL]);
   };
 
   return (

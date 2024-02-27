@@ -1,25 +1,25 @@
-export const RESISTER_URL = {
-  WEB: 'https://',
-  GOOGLE_PLAY: 'https://play.google.com/',
-  APP_STORE: 'https://www.apple.com/',
-  GITHUB: 'https://github.com/',
+export const REGISTER_URL = {
+  webpageUrl: 'https://',
+  googlePlayUrl: 'https://play.google.com/',
+  appStoreUrl: 'https://www.apple.com/',
+  githubUrl: 'https://github.com/',
 };
 
 export const LINK = [
   {
-    name: 'WEB',
+    name: 'webpageUrl',
     title: '웹 페이지 링크',
   },
   {
-    name: 'GOOGLE_PLAY',
+    name: 'googlePlayUrl',
     title: 'Google Play 링크',
   },
   {
-    name: 'APP_STORE',
+    name: 'appStoreUrl',
     title: 'App Store 링크',
   },
   {
-    name: 'GITHUB',
+    name: 'githubUrl',
     title: 'Github 링크',
   },
 ];
