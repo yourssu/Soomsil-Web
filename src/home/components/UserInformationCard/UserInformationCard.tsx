@@ -43,7 +43,7 @@ export const UserInformationCard = () => {
         <StyledUserNickname>{Dummy.name}</StyledUserNickname>
         <StyledUserMail>{Dummy.mail}</StyledUserMail>
       </StyledInformationContainer>
-      {!activeEditMode ? (
+      {activeEditMode ? (
         <>
           <SimpleTextField
             fieldLabel="닉네임"
