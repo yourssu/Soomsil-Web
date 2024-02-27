@@ -1,6 +1,10 @@
 import { ChangeEvent, useState } from 'react';
 
+import { IcXLine, IconContext } from '@yourssu/design-system-react';
+import { useTheme } from 'styled-components';
+
 import {
+  StyledDeleteFileBtn,
   StyledFileUploadLabel,
   StyledImageUpload,
   StyledOverviewContainer,
@@ -12,6 +16,7 @@ import {
 
 export const OverviewImage = () => {
   const [files, setFiles] = useState<File[]>([]);
+  const theme = useTheme();
 
   const handleFileChange = (file: File | undefined, index: number) => {
     setFiles((prevFiles) => {
@@ -19,6 +24,7 @@ export const OverviewImage = () => {
       if (file !== undefined) {
         newFiles[index] = file;
       }
+      console.log(newFiles);
       return newFiles;
     });
   };
@@ -28,6 +34,14 @@ export const OverviewImage = () => {
     if (file) {
       handleFileChange(file, index);
     }
+  };
+
+  const handleDeleteFile = (index: number) => {
+    setFiles((prevFiles) => {
+      const newFiles = [...prevFiles];
+      newFiles.splice(index, 1);
+      return newFiles;
+    });
   };
 
   return (
@@ -46,8 +60,17 @@ export const OverviewImage = () => {
               style={{ display: 'none' }}
               onChange={(e) => handleInputChange(e, index)}
             />
-            <StyledFileUploadLabel htmlFor={`overviewFile${index}`}>파일첨부</StyledFileUploadLabel>
-            <StyledOverviewUpload key={index}>{files[index]?.name}</StyledOverviewUpload>
+            <StyledFileUploadLabel htmlFor={`overviewFile${index}`}>
+              파일 첨부
+            </StyledFileUploadLabel>
+            <StyledOverviewUpload key={index}>
+              {files[index] ? files[index]?.name : ''}
+            </StyledOverviewUpload>
+            <StyledDeleteFileBtn onClick={() => handleDeleteFile(index)}>
+              <IconContext.Provider value={{ color: theme.color.buttonNormal, size: '1.2rem' }}>
+                <IcXLine />
+              </IconContext.Provider>
+            </StyledDeleteFileBtn>
           </div>
         ))}
       </StyledImageUpload>

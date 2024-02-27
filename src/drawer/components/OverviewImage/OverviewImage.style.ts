@@ -6,7 +6,6 @@ export const StyledOverviewContainer = styled.div`
   flex-direction: row;
   gap: 8.19rem;
   margin-top: 1.25rem;
-  margin-bottom: 3.25rem;
   @media (max-width: 30rem) {
     width: 21.875rem;
     display: flex;
@@ -40,15 +39,18 @@ export const StyledOverviewDescription = styled.div`
   font-weight: 400;
   line-height: 1.3;
   color: ${({ theme }) => theme.color.textSecondary};
+  margin-top: 0.62rem;
 `;
 
 export const StyledImageUpload = styled.div`
+  margin-top: 0.62rem;
+  width: 62.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  margin-top: 0.63rem;
+  gap: 0.65rem;
   @media (max-width: 30rem) {
-    gap: 2.2rem;
+    width: 21.875rem;
+    gap: 0.75rem;
   }
 `;
 
@@ -89,4 +91,15 @@ export const StyledOverviewUpload = styled.label`
     padding-bottom: 0.25rem;
     padding-left: 4.8rem;
   }
+`;
+
+export const StyledDeleteFileBtn = styled.button`
+  margin-top: 0.4rem;
+  z-index: 1;
+  @media (max-width: 30rem) {
+    margin-top: 0rem;
+    padding-right: 0.2rem;
+  }
+  float: right;
+  padding-right: 0.5rem;
 `;
