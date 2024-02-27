@@ -24,7 +24,6 @@ export const OverviewImage = () => {
       if (file !== undefined) {
         newFiles[index] = file;
       }
-      console.log(newFiles);
       return newFiles;
     });
   };
