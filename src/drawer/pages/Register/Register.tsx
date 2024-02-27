@@ -38,6 +38,7 @@ export const Register = () => {
         </StyledInputContainer>
 
         <ThumnailInput isWarned={true} />
+        <OverviewImage />
       </StyledContainer>
     </>
   );
