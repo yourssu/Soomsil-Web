@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     width: 21.875rem;
   }
 
@@ -16,7 +16,7 @@ export const StyledLabelContainer = styled.div`
 `;
 
 export const StyledInputContainer = styled.div`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     width: 16rem;
   }
 
@@ -31,7 +31,7 @@ interface StyledInputProps {
 }
 
 export const StyledInput = styled.input<StyledInputProps>`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption2};
   }
 
@@ -69,7 +69,7 @@ export const StyledInputLength = styled.span<StyledInputProps>`
 `;
 
 export const StyledLabelTitle = styled.label`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
   }
 
