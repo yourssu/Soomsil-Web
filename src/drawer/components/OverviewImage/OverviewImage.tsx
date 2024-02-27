@@ -19,14 +19,12 @@ export const OverviewImage = () => {
       if (file !== undefined) {
         newFiles[index] = file;
       }
-      console.log(newFiles);
       return newFiles;
     });
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const file = e.target.files?.[0];
-    console.log(file);
     if (file) {
       handleFileChange(file, index);
     }
