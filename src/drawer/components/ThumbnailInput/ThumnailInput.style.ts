@@ -6,7 +6,7 @@ export const StyledThumbnailContainer = styled.div`
   flex-direction: row;
   gap: 10.69rem;
   margin-top: 1.24rem;
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     width: 21.875rem;
     align-items: flex-start;
     justify-content: space-between;
@@ -25,7 +25,7 @@ interface StyledThumnailProps {
 }
 
 export const StyledThumbnailTitle = styled.div<StyledThumnailProps>`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
     width: 2.625rem;
   }
@@ -54,7 +54,7 @@ export const StyledThumbnailNone = styled.label`
   align-items: center;
   overflow: hidden;
   cursor: pointer;
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     margin: 3.0625rem 0.75rem 0 0.75rem;
   }
 `;

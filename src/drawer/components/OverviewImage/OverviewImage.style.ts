@@ -7,7 +7,7 @@ export const StyledOverviewContainer = styled.div`
   gap: 8.19rem;
   margin-top: 1.25rem;
   margin-bottom: 3.25rem;
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     width: 21.875rem;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@ interface StyledOverviewProps {
 }
 
 export const StyledOverviewTitle = styled.div<StyledOverviewProps>`
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
   }
   ${({ theme }) => theme.typo.subtitle3};
@@ -47,7 +47,7 @@ export const StyledImageUpload = styled.div`
   flex-direction: column;
   gap: 2.5rem;
   margin-top: 0.63rem;
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     gap: 2.2rem;
   }
 `;
@@ -59,7 +59,7 @@ export const StyledFileUploadLabel = styled.label`
   background-color: ${({ theme }) => theme.color.textPointed};
   ${({ theme }) => theme.typo.button4}
   color: ${({ theme }) => theme.color.textBright};
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     padding: 0.25rem 1rem;
     font-family: 'Apple SD Gothic Neo';
     font-size: 0.625rem;
@@ -78,7 +78,7 @@ export const StyledOverviewUpload = styled.label`
   ${({ theme }) => theme.typo.button4}
   color: ${({ theme }) => theme.color.textPrimary};
   border: 1px solid ${({ theme }) => theme.color.buttonDisabled};
-  @media (max-width: 24.375rem) {
+  @media (max-width: 30rem) {
     width: 21.875rem;
     height: 1.3125rem;
     font-size: 0.625rem;
