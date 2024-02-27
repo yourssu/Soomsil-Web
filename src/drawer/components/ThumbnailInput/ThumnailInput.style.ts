@@ -5,6 +5,7 @@ export const StyledThumbnailContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 10.69rem;
+  margin-top: 1.24rem;
   @media (max-width: 24.375rem) {
     width: 21.875rem;
     align-items: flex-start;

@@ -5,6 +5,7 @@ export const StyledOverviewContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8.19rem;
+  margin-top: 1.25rem;
   margin-bottom: 3.25rem;
   @media (max-width: 24.375rem) {
     width: 21.875rem;
@@ -39,13 +40,13 @@ export const StyledOverviewDescription = styled.div`
   font-weight: 400;
   line-height: 1.3;
   color: ${({ theme }) => theme.color.textSecondary};
-  margin-top: 0.62rem;
 `;
 
 export const StyledImageUpload = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  margin-top: 0.63rem;
   @media (max-width: 24.375rem) {
     gap: 2.2rem;
   }
