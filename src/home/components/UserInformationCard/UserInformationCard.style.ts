@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.9375rem;
+
   width: 25rem;
   height: fit-content;
   padding: 1.375rem 1.5rem;
@@ -18,7 +22,6 @@ export const StyledInformationContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.12rem;
-  margin-bottom: 0.9375rem;
 `;
 
 export const StyledUserIconContainer = styled.div`
@@ -50,4 +53,9 @@ export const StyledUserNickname = styled.span`
 export const StyledUserMail = styled.span`
   ${({ theme }) => theme.typo.subtitle2};
   color: ${({ theme }) => theme.color.textTertiary};
+`;
+
+export const StyledButtonContainer = styled.div`
+  display: flex;
+  gap: 1rem;
 `;
