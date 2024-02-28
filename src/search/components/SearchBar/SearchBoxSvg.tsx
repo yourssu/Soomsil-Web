@@ -2,6 +2,7 @@ import { forwardRef, useEffect } from 'react';
 
 import { IcSearchLine, IcXcircleFilled } from '@yourssu/design-system-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useTheme } from 'styled-components';
 
 import Spacing from '@/components/Spacing/Spacing';
 import { SEARCH_BOX_RADIAL_GRADIENT, SEARCH_BOX_WIDTH } from '@/search/constant';
@@ -26,6 +27,8 @@ const SearchBoxForeignObject = forwardRef<HTMLInputElement, SearchBoxForeignObje
     const { value: searchInputText, setValue: setSearchInputText, handleChangeValue } = useForm('');
     const navigate = useNavigate();
 
+    const theme = useTheme();
+
     useEffect(() => {
       setSearchInputText(query);
     }, []);
@@ -48,7 +51,7 @@ const SearchBoxForeignObject = forwardRef<HTMLInputElement, SearchBoxForeignObje
           <Spacing direction="horizontal" size={24} />
           <IcXcircleFilled
             cursor="pointer"
-            color="rgba(181, 185, 189, 1)"
+            color={theme.color.buttonDisabled}
             size="1.5rem"
             onClick={() => {
               setSearchInputText('');
