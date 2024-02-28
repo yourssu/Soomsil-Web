@@ -63,7 +63,7 @@ export const StyledFileUploadLabel = styled.label`
   color: ${({ theme }) => theme.color.textBright};
   @media (max-width: 30rem) {
     padding: 0.25rem 1rem;
-    font-family: 'Apple SD Gothic Neo';
+    font-family: 'Spoqa Han Sans Neo';
     font-size: 0.625rem;
   }
 `;
