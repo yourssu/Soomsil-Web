@@ -40,7 +40,7 @@ import {
 } from './ServiceDetail.style';
 
 export const ServiceDetail = () => {
-  const { serviceId } = useParams();
+  // const { serviceId } = useParams();
   const theme = useTheme();
 
   const scrollRef = useRef<HTMLDivElement | null>(null);

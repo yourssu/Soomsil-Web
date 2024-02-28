@@ -26,7 +26,9 @@ export const TextArea = ({ title, description, isWarned, ...props }: TextAreaPro
   return (
     <StyledContainer>
       <StyledLabelContainer>
-        <StyledLabelTitle htmlFor={title}>{props.required ? `${title} *` : title}</StyledLabelTitle>
+        <StyledLabelTitle htmlFor={title} $isWarned={isWarned}>
+          {props.required ? `${title} *` : title}
+        </StyledLabelTitle>
         <StyledLabelDescription>{description}</StyledLabelDescription>
       </StyledLabelContainer>
       <StyledTextAreaContainer>
