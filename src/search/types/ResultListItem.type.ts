@@ -8,4 +8,5 @@ export interface ResultListItemResponse {
   date: string;
   thumbnail: thumbnailUrl[];
   favicon: string;
+  source: string;
 }
