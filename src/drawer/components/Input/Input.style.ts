@@ -68,13 +68,18 @@ export const StyledInputLength = styled.span<StyledInputProps>`
   text-align: right;
 `;
 
-export const StyledLabelTitle = styled.label`
+interface StyledLabelTitleProps {
+  $isWarned?: boolean;
+}
+
+export const StyledLabelTitle = styled.label<StyledLabelTitleProps>`
   @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
   }
 
   ${({ theme }) => theme.typo.subtitle3};
-  color: ${({ theme }) => theme.color.textPrimary};
+  color: ${({ $isWarned, theme }) =>
+    $isWarned ? theme.color.buttonWarned : theme.color.textPrimary};
   word-break: keep-all;
 
   &:hover {
