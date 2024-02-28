@@ -97,7 +97,7 @@ export const StyledDeleteFileBtn = styled.button`
   margin-top: 0.4rem;
   z-index: 1;
   @media (max-width: 30rem) {
-    margin-top: 0rem;
+    margin-top: 0.05rem;
     padding-right: 0.2rem;
   }
   float: right;
