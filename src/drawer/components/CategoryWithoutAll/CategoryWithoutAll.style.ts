@@ -17,12 +17,17 @@ export const StyledCategoryContainer = styled.div`
   flex-direction: column;
 `;
 
-export const StyledCategoryTitle = styled.div`
+interface StyledCategoryTitleProps {
+  $isWarned?: boolean;
+}
+
+export const StyledCategoryTitle = styled.div<StyledCategoryTitleProps>`
   @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
   }
   ${({ theme }) => theme.typo.subtitle3};
-  color: ${({ theme }) => theme.color.textPrimary};
+  color: ${({ $isWarned, theme }) =>
+    $isWarned ? theme.color.buttonWarned : theme.color.textPrimary};
   word-break: keep-all;
 `;
 
