@@ -39,7 +39,13 @@ export const Category = ({ isAll }: IsAllProps) => {
         <StyledCategoryContainer>
           <div>카테고리 유형</div>
           {CategoryList.map(({ id, title }) => (
-            <CheckBox key={id}>{title}</CheckBox>
+            <CheckBox
+              key={id}
+              isSelected={selectedCategory === id}
+              onChange={() => handleCategorySelect(id)}
+            >
+              {title}
+            </CheckBox>
           ))}
         </StyledCategoryContainer>
       ) : (
