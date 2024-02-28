@@ -1,5 +1,7 @@
+import { forwardRef, useEffect, useRef } from 'react';
+
 import { IcSearchLine, IcXcircleFilled } from '@yourssu/design-system-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Spacing from '@/components/Spacing/Spacing';
 import { SEARCH_BOX_RADIAL_GRADIENT, SEARCH_BOX_WIDTH } from '@/search/constant';
@@ -16,41 +18,51 @@ const SearchBoxSvgContainer = ({ children }: SearchBoxSvgContainerProps) => {
   return <>{children}</>;
 };
 
-const SearchBoxForeignObject = ({ size }: SearchBoxForeignObjectProps) => {
-  const { value: searchInputText, setValue: setSearchInputText, handleChangeValue } = useForm('');
-  const navigate = useNavigate();
+const SearchBoxForeignObject = forwardRef<HTMLInputElement, SearchBoxForeignObjectProps>(
+  ({ size }, ref) => {
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get('query') || '';
 
-  return (
-    <foreignObject x="0" y="0" width={SEARCH_BOX_WIDTH[size]} height="60">
-      <StyledInputContainer $containerSize={size}>
-        <Spacing direction="horizontal" size={24} />
-        <StyledInput
-          $inputSize={size}
-          value={searchInputText}
-          onChange={handleChangeValue}
-          onKeyUp={(e) => {
-            if (e.key === 'Enter') {
-              navigate(`/search?query=${searchInputText}`);
-            }
-          }}
-        />
-        <Spacing direction="horizontal" size={24} />
-        <IcXcircleFilled
-          cursor="pointer"
-          color="rgba(181, 185, 189, 1)"
-          size="1.5rem"
-          onClick={() => {
-            setSearchInputText('');
-          }}
-        />
-        <Spacing direction="horizontal" size={8} />
-        <StyledLink to={`/search?query=${searchInputText}`}>
-          <IcSearchLine size={36} color="rgba(138, 42, 197, 1)" />
-        </StyledLink>
-      </StyledInputContainer>
-    </foreignObject>
-  );
-};
+    const { value: searchInputText, setValue: setSearchInputText, handleChangeValue } = useForm('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      setSearchInputText(query);
+    }, []);
+
+    return (
+      <foreignObject x="0" y="0" width={SEARCH_BOX_WIDTH[size]} height="60">
+        <StyledInputContainer $containerSize={size}>
+          <Spacing direction="horizontal" size={24} />
+          <StyledInput
+            ref={ref}
+            $inputSize={size}
+            value={searchInputText}
+            onChange={handleChangeValue}
+            onKeyUp={(e) => {
+              if (e.key === 'Enter') {
+                navigate(`/search?query=${searchInputText}`);
+              }
+            }}
+          />
+          <Spacing direction="horizontal" size={24} />
+          <IcXcircleFilled
+            cursor="pointer"
+            color="rgba(181, 185, 189, 1)"
+            size="1.5rem"
+            onClick={() => {
+              setSearchInputText('');
+            }}
+          />
+          <Spacing direction="horizontal" size={8} />
+          <StyledLink to={`/search?query=${searchInputText}`}>
+            <IcSearchLine size={36} color="rgba(138, 42, 197, 1)" />
+          </StyledLink>
+        </StyledInputContainer>
+      </foreignObject>
+    );
+  }
+);
 
 const SearchBoxDefs = ({ size }: SearchBoxDefsProps) => {
   return (
