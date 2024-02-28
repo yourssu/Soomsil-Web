@@ -8,7 +8,7 @@ import { ServiceDetail } from './drawer/pages/ServiceDetail/ServiceDetail';
 import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
 import { Login } from './home/components/login/Login';
 import { Home } from './home/pages/Home';
-import { Search } from './search/Search';
+import { Search } from './search/pages/Search/Search';
 
 export const Router = () => {
   return (

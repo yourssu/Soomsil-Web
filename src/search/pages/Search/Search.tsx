@@ -4,10 +4,10 @@ import { useSearchParams } from 'react-router-dom';
 
 import Spacing from '@/components/Spacing/Spacing';
 
-import { ResultListItem } from './components/ResultListItem/ResultListItem';
-import { SearchBar } from './components/SearchBar/SearchBar';
-import { useGetSearch } from './hooks/useGetSearch';
-import { NoResult } from './pages/NoResult/NoResult';
+import { ResultListItem } from '../../components/ResultListItem/ResultListItem';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { useGetSearch } from '../../hooks/useGetSearch';
+import { NoResult } from '../NoResult/NoResult';
 
 export const Search = () => {
   const [searchParams] = useSearchParams();
