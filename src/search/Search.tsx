@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -37,21 +37,23 @@ export const Search = () => {
   return (
     <>
       <SearchBar />
-      {data?.pages.map((page) => {
-        if (page.length == 0) return <NoResult />;
-
-        return page.map((item, itemIndex) => {
-          if (page.length === itemIndex + 1) {
-            return <ResultListItem key={item.id} {...item} ref={lastElementRef}></ResultListItem>;
-          }
-          return (
-            <div key={item.id}>
-              <ResultListItem {...item}></ResultListItem>
-              <Spacing direction="vertical" size={8} />
-            </div>
-          );
-        });
-      })}
+      {data?.pages.length === 0 ? (
+        <NoResult />
+      ) : (
+        data?.pages.map((page) => {
+          return page.map((item, itemIndex) => {
+            if (page.length === itemIndex + 1) {
+              return <ResultListItem key={item.id} {...item} ref={lastElementRef}></ResultListItem>;
+            }
+            return (
+              <div key={item.id}>
+                <ResultListItem {...item}></ResultListItem>
+                <Spacing direction="vertical" size={8} />
+              </div>
+            );
+          });
+        })
+      )}
     </>
   );
 };

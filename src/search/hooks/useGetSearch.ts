@@ -9,9 +9,9 @@ export const useGetSearch = ({ query }: GetSearchProps) => {
     queryKey: ['getSearch', query],
     queryFn: ({ pageParam }) =>
       getSearch({ query, page: pageParam as number }).then((data) => data.resultList),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => {
-      return lastPageParam !== allPageParams[-1] ? (lastPageParam as number) + 1 : undefined;
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      return lastPage !== allPages[-1] ? (lastPageParam as number) + 1 : undefined;
     },
     enabled: !!query,
   });
