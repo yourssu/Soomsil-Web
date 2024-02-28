@@ -22,7 +22,7 @@ export const MyMenuList = () => {
         <StyledMenuContainer>
           <StyledMenuTitle>계정 관리</StyledMenuTitle>
           <StyledListItem>비밀번호 변경</StyledListItem>
-          <StyledListItem isPressed>로그아웃</StyledListItem>
+          <StyledListItem>로그아웃</StyledListItem>
         </StyledMenuContainer>
         <StyledMenuContainer>
           <StyledMenuTitle>내 서랍장</StyledMenuTitle>
@@ -33,7 +33,6 @@ export const MyMenuList = () => {
             등록한 콘텐츠
           </StyledListItem>
           <StyledListItem
-            isPressed
             rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}
             onClick={() => navigate('/drawer/myDrawers', { state: 'STAR' })}
           >
@@ -45,10 +44,7 @@ export const MyMenuList = () => {
           <StyledListItem rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}>
             서비스 이용약관
           </StyledListItem>
-          <StyledListItem
-            isPressed
-            rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}
-          >
+          <StyledListItem rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}>
             개인 정보 처리 방침
           </StyledListItem>
           <StyledListItem rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}>
