@@ -9,16 +9,16 @@ import {
   StyledThumbnailNone,
   StyledThumbnailTitle,
   StyledThumbnailTitleContainer,
-  StyledThumnailPreview,
-} from './ThumnailInput.style';
+  StyledThumbnailPreview,
+} from './ThumbnailInput.style';
 
-interface StyledThumnailProps {
-  isWarned: boolean;
+interface StyledThumbnailProps {
+  isWarned?: boolean;
 }
 
-export const ThumnailInput = ({ isWarned }: StyledThumnailProps) => {
+export const ThumbnailInput = ({ isWarned }: StyledThumbnailProps) => {
   const [postImg, setPostImg] = useState<File | null>();
-  const [ispreview, setIsPreview] = useState<string | null>('');
+  const [isPreview, setIsPreview] = useState<string | null>('');
   const theme = useTheme();
 
   const handleChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,8 +59,8 @@ export const ThumnailInput = ({ isWarned }: StyledThumnailProps) => {
         style={{ display: 'none' }}
       />
       <StyledThumbnailNone htmlFor="inputFile">
-        {ispreview ? (
-          <StyledThumnailPreview src={ispreview} alt="Thumbnail Preview" />
+        {isPreview ? (
+          <StyledThumbnailPreview src={isPreview} alt="Thumbnail Preview" />
         ) : (
           <IconContext.Provider
             value={{

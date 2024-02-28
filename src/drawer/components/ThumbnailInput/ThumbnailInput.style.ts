@@ -20,11 +20,11 @@ export const StyledThumbnailTitleContainer = styled.div`
   flex-direction: column;
 `;
 
-interface StyledThumnailProps {
+interface StyledThumbnailProps {
   $isWarned?: boolean;
 }
 
-export const StyledThumbnailTitle = styled.div<StyledThumnailProps>`
+export const StyledThumbnailTitle = styled.div<StyledThumbnailProps>`
   @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption0};
     width: 2.625rem;
@@ -59,7 +59,7 @@ export const StyledThumbnailNone = styled.label`
   }
 `;
 
-export const StyledThumnailPreview = styled.img`
+export const StyledThumbnailPreview = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
