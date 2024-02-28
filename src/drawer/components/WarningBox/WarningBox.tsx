@@ -12,7 +12,11 @@ import {
   StyledWarningBoxText,
 } from './WarningBox.style';
 
-export const WarningBox = () => {
+interface WarningBoxProps {
+  isWarned?: boolean;
+}
+
+export const WarningBox = ({ isWarned }: WarningBoxProps) => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= MOBILE_VIEW_WIDTH);
   const theme = useTheme();
 
@@ -32,9 +36,9 @@ export const WarningBox = () => {
   return (
     <StyledContainer>
       {isMobileView ? (
-        <WarningAccordion />
+        <WarningAccordion isWarned={isWarned} />
       ) : (
-        <StyledWarningBoxContainer>
+        <StyledWarningBoxContainer $isWarned={isWarned}>
           <IconContext.Provider
             value={{
               color: theme.color.buttonWarned,

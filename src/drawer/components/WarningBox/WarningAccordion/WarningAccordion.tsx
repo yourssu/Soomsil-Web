@@ -15,7 +15,11 @@ import {
   StyledAccordionHeaderContainer,
 } from './WarningAccordion.style';
 
-export const WarningAccordion = () => {
+interface WarningAccordionProps {
+  isWarned?: boolean;
+}
+
+export const WarningAccordion = ({ isWarned }: WarningAccordionProps) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const theme = useTheme();
 
@@ -23,7 +27,7 @@ export const WarningAccordion = () => {
     setIsAccordionOpen(!isAccordionOpen);
   };
   return (
-    <StyledAccordionContainer>
+    <StyledAccordionContainer $isWarned={isWarned}>
       <StyledAccordionHeaderContainer onClick={handleOpenAccordion}>
         <IconContext.Provider
           value={{
