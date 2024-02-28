@@ -40,7 +40,6 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>
           </StyledTitle>
           <Spacing direction="vertical" size={8} />
           <StyledContent $length={thumbnail.length}>{content}</StyledContent>
-          {/* 썸네일 5개 이상인 경우 */}
           {thumbnail.length >= 5 && (
             <>
               <Spacing direction="vertical" size={12} />
@@ -58,7 +57,6 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>
             </>
           )}
         </StyledContentWrap>
-        {/* 썸네일 1~4개인 경우 */}
         {thumbnail.length < 5 && (
           <StyledThumbnail $length={thumbnail.length}>
             <StyledThumbnailImage
