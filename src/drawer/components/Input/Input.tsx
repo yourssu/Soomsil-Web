@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useState } from 'react';
+import { InputHTMLAttributes, useMemo, useState } from 'react';
 
 import {
   StyledContainer,
@@ -13,37 +13,49 @@ import {
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   description: string;
-  isWarned?: boolean;
+  validate?: (value: string) => boolean;
 }
 
-export const Input = ({ title, description, isWarned, ...props }: InputProps) => {
+export const Input = ({ title, description, validate, ...props }: InputProps) => {
   const [inputValue, setInputValue] = useState('');
+  const [isWarned, setIsWarned] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
+  const checkValid = useMemo(() => {
+    if (validate && validate(inputValue) && inputValue.length > 0) {
+      setIsWarned(true);
+      return <StyledInputLength $isWarned={true}>유효하지 않은 링크입니다.</StyledInputLength>;
+    } else {
+      setIsWarned(false);
+      return (
+        <StyledInputLength>
+          {inputValue.length}/{props.maxLength}
+        </StyledInputLength>
+      );
+    }
+  }, [inputValue, props.maxLength, validate]);
+
   return (
     <StyledContainer>
       <StyledLabelContainer>
-        <StyledLabelTitle htmlFor={title}>{props.required ? `${title} *` : title}</StyledLabelTitle>
+        <StyledLabelTitle htmlFor={title} $isWarned={isWarned}>
+          {props.required ? `${title} *` : title}
+        </StyledLabelTitle>
         <StyledLabelDescription>{description}</StyledLabelDescription>
       </StyledLabelContainer>
       <StyledInputContainer>
         <StyledInput
+          id={title}
           value={inputValue}
           onChange={handleInputChange}
-          id={title}
           $isWarned={isWarned}
+          $hasText={inputValue.length > 0}
           {...props}
         />
-        {isWarned ? (
-          <StyledInputLength $isWarned={true}>*{title}은 필수값입니다.</StyledInputLength>
-        ) : (
-          <StyledInputLength>
-            {inputValue.length}/{props.maxLength}
-          </StyledInputLength>
-        )}
+        {checkValid}
       </StyledInputContainer>
     </StyledContainer>
   );
