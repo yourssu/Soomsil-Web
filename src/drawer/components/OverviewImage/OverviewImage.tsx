@@ -1,31 +1,26 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 
-import { IcXLine, IconContext } from '@yourssu/design-system-react';
-import { useTheme } from 'styled-components';
-
+import { OverviewFileUpload } from './OverviewFileUpload/OverviewFileUpload';
 import {
-  StyledDeleteFileBtn,
-  StyledFileUploadLabel,
   StyledImageUpload,
   StyledOverviewContainer,
   StyledOverviewDescription,
   StyledOverviewTitle,
   StyledOverviewTitleContainer,
-  StyledOverviewUpload,
 } from './OverviewImage.style';
 
-export const OverviewImage = () => {
+interface OverviewProps extends InputHTMLAttributes<HTMLLabelElement> {
+  isWarned?: boolean;
+}
+
+export const OverviewImage = ({ isWarned }: OverviewProps) => {
   const [files, setFiles] = useState<File[]>([]);
-  const theme = useTheme();
+  const MAX_FILE_COUNT = 5;
 
   const handleFileChange = (file: File | undefined, index: number) => {
-    setFiles((prevFiles) => {
-      const newFiles = [...prevFiles];
-      if (file !== undefined) {
-        newFiles[index] = file;
-      }
-      return newFiles;
-    });
+    setFiles(
+      (prevFiles) => prevFiles.map((prevFile, i) => (i === index ? file : prevFile)) as File[]
+    );
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -37,8 +32,8 @@ export const OverviewImage = () => {
 
   const handleDeleteFile = (index: number) => {
     setFiles((prevFiles) => {
-      const newFiles = [...prevFiles];
-      newFiles.splice(index, 1);
+      const newFiles = prevFiles.filter((_, i) => i !== index);
+      console.log(newFiles);
       return newFiles;
     });
   };
@@ -46,32 +41,23 @@ export const OverviewImage = () => {
   return (
     <StyledOverviewContainer>
       <StyledOverviewTitleContainer>
-        <StyledOverviewTitle $isWarned={files.length === 0}>소개 이미지 *</StyledOverviewTitle>
+        <StyledOverviewTitle $isWarned={isWarned}>소개 이미지 *</StyledOverviewTitle>
         <StyledOverviewDescription>(권장 : 1920px X 1080px, 최대 5장)</StyledOverviewDescription>
       </StyledOverviewTitleContainer>
       <StyledImageUpload>
-        {[...Array(5)].map((_, index) => (
-          <div key={index}>
-            <input
-              id={`overviewFile${index}`}
-              type="file"
-              accept="image/*"
-              style={{ display: 'none' }}
-              onChange={(e) => handleInputChange(e, index)}
+        {Array.from({ length: MAX_FILE_COUNT }).map((_, index) => {
+          const file = files[index];
+          const key = file ? `file-${file.name}-${file.lastModified}` : `file-empty-${index}`;
+          return (
+            <OverviewFileUpload
+              key={key}
+              index={index}
+              file={file}
+              handleInputChange={handleInputChange}
+              handleDeleteFile={handleDeleteFile}
             />
-            <StyledFileUploadLabel htmlFor={`overviewFile${index}`}>
-              파일 첨부
-            </StyledFileUploadLabel>
-            <StyledOverviewUpload key={index}>
-              {files[index] ? files[index]?.name : ''}
-            </StyledOverviewUpload>
-            <StyledDeleteFileBtn onClick={() => handleDeleteFile(index)}>
-              <IconContext.Provider value={{ color: theme.color.buttonNormal, size: '1.2rem' }}>
-                <IcXLine />
-              </IconContext.Provider>
-            </StyledDeleteFileBtn>
-          </div>
-        ))}
+          );
+        })}
       </StyledImageUpload>
     </StyledOverviewContainer>
   );
