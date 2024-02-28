@@ -36,9 +36,11 @@ export const UserInformationCard = () => {
       <StyledInformationContainer>
         <StyledUserIconContainer>
           <ProfileSvg imageUrl={Dummy.image} />
-          <StyledSettingButton>
-            <IcSettingLine color={theme.color.buttonNormal} size="1rem" />
-          </StyledSettingButton>
+          {activeEditMode && (
+            <StyledSettingButton>
+              <IcSettingLine color={theme.color.buttonNormal} size="1rem" />
+            </StyledSettingButton>
+          )}
         </StyledUserIconContainer>
         <StyledUserNickname>{Dummy.name}</StyledUserNickname>
         <StyledUserMail>{Dummy.mail}</StyledUserMail>
