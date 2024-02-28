@@ -23,7 +23,7 @@ export const Search = () => {
     (node: HTMLDivElement) => {
       if (isLoading) return;
 
-      if (observer.current) observer.current.disconnect(); // 🔵
+      if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasNextPage) {
           fetchNextPage();
