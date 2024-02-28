@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, useEffect } from 'react';
 
 import { IcSearchLine, IcXcircleFilled } from '@yourssu/design-system-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
