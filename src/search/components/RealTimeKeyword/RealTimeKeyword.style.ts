@@ -5,6 +5,7 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   padding: 1.25rem;
   width: 25rem;
+  height: 38.7rem;
   gap: 0.625rem;
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
