@@ -19,8 +19,8 @@ export const StyledDialogContent = styled(Dialog.Content)`
   align-items: center;
 
   background-color: ${({ theme }) => theme.color.buttonBright};
-  box-shadow: 0px 0px 6px 0px rgba(61, 61, 61, 0.2);
-  border-radius: 8px;
+  box-shadow: 0rem 0rem 0.375rem 0rem rgba(61, 61, 61, 0.2);
+  border-radius: 0.5rem;
 
   position: fixed;
   top: 50%;
@@ -39,8 +39,8 @@ export const StyledIconButton = styled.button`
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 24px;
-  height: 24px;
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 export const StyledDialogTitle = styled(Dialog.Title)`

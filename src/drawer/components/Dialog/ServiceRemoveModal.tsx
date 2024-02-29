@@ -30,7 +30,7 @@ export const ServiceRemoveModal = ({ open, onOpenChange }: ServiceRemoveModalPro
 
           <Dialog.Close asChild>
             <div>
-              <BoxButton size="medium" rounding={4} variant="filled" width="246px">
+              <BoxButton size="medium" rounding={4} variant="filled" width="15.375rem">
                 확인
               </BoxButton>
             </div>
