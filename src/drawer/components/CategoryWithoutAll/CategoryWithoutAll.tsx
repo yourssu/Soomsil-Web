@@ -7,11 +7,15 @@ import {
   StyledCategoryWithoutAllContainer,
 } from './CategoryWithoutAll.style';
 
-export const CategoryWithoutAll = () => {
+interface CategoryWithoutAllProps {
+  isWarned?: boolean;
+}
+
+export const CategoryWithoutAll = ({ isWarned }: CategoryWithoutAllProps) => {
   return (
     <StyledCategoryWithoutAllContainer>
       <StyledCategoryContainer>
-        <StyledCategoryTitle>카테고리 *</StyledCategoryTitle>
+        <StyledCategoryTitle $isWarned={isWarned}>카테고리 *</StyledCategoryTitle>
         <StyledCategoryDescription>(중복 선택 불가)</StyledCategoryDescription>
       </StyledCategoryContainer>
       <Category isAll={false} />
