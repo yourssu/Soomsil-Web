@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 
 import Spacing from '@/components/Spacing/Spacing';
 import { ResultListItemResponse } from '@/search/types/ResultListItem.type';
+import { onErrorImg } from '@/search/utils/onErrorImg';
 
 import {
   StyledContent,
@@ -19,7 +20,7 @@ import {
 } from './ResultListItem.style';
 
 export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>(
-  ({ title, link, content, date, thumbnail, favicon }, ref) => {
+  ({ title, link, content, date, thumbnail, favicon, source }, ref) => {
     return (
       <StyledResultListItem ref={ref}>
         <StyledContentWrap $length={thumbnail.length}>
@@ -28,7 +29,7 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>
               <StyledLinkImage src={favicon} alt="favicon" />
             </StyledLinkImageWrap>
             <Spacing direction="horizontal" size={4} />
-            <StyledLinkTitle>네이버 블로그</StyledLinkTitle>
+            <StyledLinkTitle>{source}</StyledLinkTitle>
             <Spacing direction="horizontal" size={4} />
             <StyledDate>·</StyledDate>
             <Spacing direction="horizontal" size={4} />
@@ -48,8 +49,9 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>
                   <StyledThumbnailImage
                     key={thumbnail[index]}
                     $length={thumbnail.length}
-                    src={thumbnail[index]}
+                    src={thumbnail[index] || '/'}
                     alt="썸네일"
+                    onError={onErrorImg}
                   ></StyledThumbnailImage>
                 ))}
                 <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
@@ -61,8 +63,9 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>
           <StyledThumbnail $length={thumbnail.length}>
             <StyledThumbnailImage
               $length={thumbnail.length}
-              src={thumbnail[0]}
+              src={thumbnail[0] || '/'}
               alt="썸네일"
+              onError={onErrorImg}
             ></StyledThumbnailImage>
             <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
           </StyledThumbnail>
