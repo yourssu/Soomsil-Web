@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
+  @media (max-width: 30rem) {
+    margin-right: 0rem;
+  }
+
   display: flex;
   flex-direction: column;
   align-items: end;
   gap: 1.06rem;
-  margin-bottom: 2rem;
+  margin-right: 1.2rem;
 `;
 
 export const StyledWarningBoxContainer = styled.div`
@@ -18,7 +22,6 @@ export const StyledWarningBoxContainer = styled.div`
   flex-direction: row;
   gap: 1.27rem;
   align-items: center;
-  margin-right: 1.2rem;
 `;
 
 export const StyledWarningBoxText = styled.div`

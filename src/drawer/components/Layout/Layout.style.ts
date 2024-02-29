@@ -8,5 +8,4 @@ export const StyledLayout = styled.div`
   align-items: center;
   position: relative;
   padding-bottom: 80px;
-  overflow-x: hidden;
 `;

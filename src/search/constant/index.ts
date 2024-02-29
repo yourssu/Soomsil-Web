@@ -33,3 +33,5 @@ export const SEARCH_BOX_RADIAL_GRADIENT: Record<string, Record<SearchSize, strin
     small: 'translate(316.58 30) rotate(-180) scale(316.58 168.318)',
   },
 };
+
+export const RESULT_LIST_ITEM_THUMNAIL_LENGTH = 5;
