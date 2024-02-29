@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { SearchSize } from '@/search/types/SearchBox.type';
@@ -25,4 +26,10 @@ export const StyledInput = styled.input<StyledInputProps>`
   &:focus {
     outline: none;
   }
+`;
+
+export const StyledLink = styled(Link)`
+  width: fit-content;
+  height: fit-content;
+  display: flex;
 `;

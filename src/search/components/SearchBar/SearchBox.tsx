@@ -1,10 +1,13 @@
+import { useEffect, useRef } from 'react';
+
+import { useSearchParams } from 'react-router-dom';
+
 import {
   SEARCH_BOX_PATH,
   SEARCH_BOX_RADIAL_GRADIENT,
   SEARCH_BOX_VIEW_BOX,
   SEARCH_BOX_WIDTH,
 } from '@/search/constant';
-import useForm from '@/search/hooks/useForm';
 import { SearchSize } from '@/search/types/SearchBox.type';
 
 import { SearchBoxSvg } from './SearchBoxSvg';
@@ -14,11 +17,16 @@ interface SearchBoxProps {
 }
 
 export const SearchBox = ({ size }: SearchBoxProps) => {
-  const {
-    value: searchInputText,
-    handleChangeValue: handleChangeSearchInputText,
-    setValue: setSearchInputText,
-  } = useForm('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('query') || '';
+
+  useEffect(() => {
+    if (query) {
+      inputRef.current?.blur();
+    }
+  }, [query]);
 
   return (
     <label htmlFor="searchBox">
@@ -34,12 +42,7 @@ export const SearchBox = ({ size }: SearchBoxProps) => {
           stroke={SEARCH_BOX_PATH['stroke'][size]}
           strokeWidth="2"
         />
-        <SearchBoxSvg.ForeignObject
-          size={size}
-          searchInputText={searchInputText}
-          setSearchInputText={setSearchInputText}
-          handleChangeSearchInputText={handleChangeSearchInputText}
-        />
+        <SearchBoxSvg.ForeignObject size={size} ref={inputRef} />
         <defs>
           <radialGradient
             id={SEARCH_BOX_RADIAL_GRADIENT['id'][size]}
