@@ -7,7 +7,7 @@ import {
   IconContext,
   IcStarFilled,
 } from '@yourssu/design-system-react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import backgroundImage from '@/assets/service_detail_background.png';
