@@ -11,19 +11,9 @@ export const ResultListItems = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
 
-  const { data, refetch, isLoading, isError, fetchNextPage, hasNextPage } = useGetSearch({
+  const { data, refetch, isLoading, fetchNextPage, hasNextPage } = useGetSearch({
     query: query || '',
   });
-
-  if (isError) {
-    refetch();
-  }
-
-  useEffect(() => {
-    if (isError) {
-      refetch();
-    }
-  }, [refetch, isError]);
 
   const prevQueryRef = useRef(query);
 
@@ -34,10 +24,6 @@ export const ResultListItems = () => {
 
     prevQueryRef.current = query;
   }, [refetch, query]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   const observer = useRef<IntersectionObserver>();
 
