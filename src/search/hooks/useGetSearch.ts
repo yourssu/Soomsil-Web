@@ -18,8 +18,12 @@ export const useGetSearch = ({ query }: GetSearchProps) => {
         return data;
       }),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      return lastPage !== allPages[-1] ? (lastPageParam as number) + 1 : undefined;
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.resultCount === 0 || lastPage.totalCount === lastPage.resultCount) {
+        return undefined;
+      }
+
+      return allPages.length;
     },
     retryDelay: (failureCount, error) => {
       if (error.message === '검색결과가 없습니다.') {

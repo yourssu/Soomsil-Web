@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
@@ -11,19 +11,9 @@ export const ResultListItems = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
 
-  const { data, refetch, isLoading, fetchNextPage, hasNextPage } = useGetSearch({
+  const { data, isLoading, fetchNextPage, hasNextPage } = useGetSearch({
     query: query || '',
   });
-
-  const prevQueryRef = useRef(query);
-
-  useEffect(() => {
-    if (prevQueryRef.current !== query) {
-      refetch();
-    }
-
-    prevQueryRef.current = query;
-  }, [refetch, query]);
 
   const observer = useRef<IntersectionObserver>();
 
@@ -47,7 +37,12 @@ export const ResultListItems = () => {
       {data?.pages.map((page) => {
         return page.resultList.map((item, itemIndex) => {
           if (page.resultList.length === itemIndex + 1) {
-            return <ResultListItem key={item.id} {...item} ref={lastElementRef}></ResultListItem>;
+            return (
+              <div key={item.id}>
+                <ResultListItem {...item} ref={lastElementRef}></ResultListItem>
+                <Spacing direction="vertical" size={8} />
+              </div>
+            );
           }
           return (
             <div key={item.id}>
