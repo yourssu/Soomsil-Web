@@ -8,6 +8,7 @@ import { ServiceDetail } from './drawer/pages/ServiceDetail/ServiceDetail';
 import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
 import { Login } from './home/components/login/Login';
 import { Home } from './home/pages/Home';
+import { Mypage } from './home/pages/Mypage/Mypage';
 import { Search } from './search/pages/Search/Search';
 
 export const Router = () => {
@@ -17,6 +18,7 @@ export const Router = () => {
         <Route path="" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
       </Route>
+      <Route path="/mypage" element={<Mypage />}></Route>
       <Route path="/drawer" element={<DrawerLayout />}>
         <Route index element={<Navigate to="rankings" replace />}></Route>
         <Route path="services/:serviceId" element={<ServiceDetail />} />
