@@ -33,7 +33,6 @@ export const OverviewImage = ({ isWarned }: OverviewProps) => {
   const handleDeleteFile = (index: number) => {
     setFiles((prevFiles) => {
       const newFiles = prevFiles.filter((_, i) => i !== index);
-      console.log(newFiles);
       return newFiles;
     });
   };
