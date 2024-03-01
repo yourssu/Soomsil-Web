@@ -1,10 +1,17 @@
 import styled from 'styled-components';
 
-export const StyledAccordionContainer = styled.div`
+interface StyledAccordionBoxProps {
+  $isWarned?: boolean;
+}
+
+export const StyledAccordionContainer = styled.div<StyledAccordionBoxProps>`
   width: 21.875rem;
   height: fit-content;
   border-radius: 0.75rem;
   background: ${({ theme }) => theme.color.buttonDisabledBG};
+  border: 1px solid
+    ${({ $isWarned, theme }) =>
+      $isWarned ? theme.color.buttonWarned : theme.color.buttonDisabledBG};
   padding-left: 1.12rem;
   padding-top: 0.69rem;
   padding-right: 1.25rem;
