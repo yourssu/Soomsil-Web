@@ -26,7 +26,7 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>
         <StyledContentWrap $length={thumbnail.length}>
           <StyledInformationWrap>
             <StyledLinkImageWrap>
-              <StyledLinkImage src={favicon} alt="favicon" />
+              <StyledLinkImage src={favicon || '/'} alt="favicon" onError={onErrorImg} />
             </StyledLinkImageWrap>
             <Spacing direction="horizontal" size={4} />
             <StyledLinkTitle>{source}</StyledLinkTitle>
