@@ -28,13 +28,13 @@ export const MyMenuList = () => {
           <StyledMenuTitle>내 서랍장</StyledMenuTitle>
           <StyledListItem
             rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}
-            onClick={() => navigate('/drawer/myDrawers', { state: 'MYDRAWER' })}
+            onClick={() => navigate('/drawer/myDrawers?tab=MYDRAWER')}
           >
             등록한 콘텐츠
           </StyledListItem>
           <StyledListItem
             rightIcon={<IcArrowRightLine color={theme.color.buttonNormal} />}
-            onClick={() => navigate('/drawer/myDrawers', { state: 'STAR' })}
+            onClick={() => navigate('/drawer/myDrawers?tab=STAR')}
           >
             즐겨찾기한 콘텐츠
           </StyledListItem>
