@@ -1,5 +1,11 @@
 type thumbnailUrl = string;
 
+export interface SearchResponse {
+  totalCount: number;
+  resultCount: number;
+  resultList: ResultListItemResponse[];
+}
+
 export interface ResultListItemResponse {
   id: string;
   title: string;
