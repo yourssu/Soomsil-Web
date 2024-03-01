@@ -1,24 +1,35 @@
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
+import { InfiniteData, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { getSearch } from '../apis/getSearch';
 import { GetSearchProps } from '../types/GetSearch.type';
-import { ResultListItemResponse } from '../types/ResultListItem.type';
+import { SearchResponse } from '../types/ResultListItem.type';
 
 export const useGetSearch = ({ query }: GetSearchProps) => {
-  return useInfiniteQuery<
-    ResultListItemResponse[],
+  return useSuspenseInfiniteQuery<
+    SearchResponse,
     Error,
-    InfiniteData<ResultListItemResponse[]>,
+    InfiniteData<SearchResponse>,
     string[],
     number
   >({
     queryKey: ['getSearch', query],
     queryFn: ({ pageParam }) =>
-      getSearch({ query, page: pageParam }).then((data) => data.resultList),
+      getSearch({ query, page: pageParam }).then((data) => {
+        return data;
+      }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
       return lastPage !== allPages[-1] ? (lastPageParam as number) + 1 : undefined;
     },
-    enabled: !!query,
+    retryDelay: (failureCount, error) => {
+      if (error.message === '검색결과가 없습니다.') {
+        return 0;
+      }
+      if (error) {
+        return 1000;
+      }
+    },
+    staleTime: 1000 * 60 * 5,
+    notifyOnChangeProps: ['data'],
   });
 };
