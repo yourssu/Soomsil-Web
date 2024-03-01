@@ -35,11 +35,12 @@ export const StyledLinkImageWrap = styled.span`
   padding: 0.188rem;
   border-radius: 62.438rem;
   background-color: ${(props) => props.theme.color.bgRecomment};
+  overflow: hidden;
 `;
 
 export const StyledLinkImage = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
 `;
 
 export const StyledLinkTitle = styled.span`
