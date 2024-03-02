@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { StyledContainer } from './Dropdown.style';
 
 export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -8,10 +10,19 @@ export interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
   left?: string;
 }
 
-export const Dropdown = ({ children, padding, bottom, right, left, onClick }: DropdownProps) => {
-  return (
-    <StyledContainer $padding={padding} $bottom={bottom} $right={right} $left={left} onClick={onClick}>
-      {children}
-    </StyledContainer>
-  );
-};
+export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
+  ({ children, padding, bottom, right, left, ...props }, ref) => {
+    return (
+      <StyledContainer
+        $padding={padding}
+        $bottom={bottom}
+        $right={right}
+        $left={left}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </StyledContainer>
+    );
+  }
+);
