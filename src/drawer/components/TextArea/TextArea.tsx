@@ -19,7 +19,7 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 export const TextArea = ({ title, description, name, ...props }: TextAreaProps) => {
-  const { register, formState } = useFormContext();
+  const { register, formState, getValues } = useFormContext();
 
   const [textAreaValue, setTextAreaValue] = useState('');
   const [isWarned, setIsWarned] = useState(false);
@@ -30,11 +30,9 @@ export const TextArea = ({ title, description, name, ...props }: TextAreaProps) 
   };
 
   useEffect(() => {
-    if (formState.errors[name]) {
-      console.log(formState.errors[name]); // 삭제 예정
-      setIsWarned(true);
-    }
-  }, [formState, setIsWarned, name]);
+    const value = getValues(name);
+    if (formState.isSubmitted && !value) setIsWarned(true);
+  }, [formState, getValues, setIsWarned, name]);
 
   return (
     <StyledContainer>

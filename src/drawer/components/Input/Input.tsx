@@ -44,13 +44,9 @@ export const Input = ({ title, description, validate, name, required, ...props }
   }, [inputValue, props.maxLength, validate]);
 
   useEffect(() => {
-    const error = formState.errors[name];
-    const type = error?.type;
-
-    if (error && type === 'required') {
-      setIsWarned(true);
-    }
-  }, [formState, setIsWarned, name]);
+    const value = getValues(name);
+    if (formState.isSubmitted && !value && required) setIsWarned(true);
+  }, [formState, getValues, setIsWarned, name, required]);
 
   return (
     <StyledContainer>

@@ -1,3 +1,7 @@
+import { useState, useEffect } from 'react';
+
+import { useFormContext } from 'react-hook-form';
+
 import { Category } from '../Category/Category';
 
 import {
@@ -7,11 +11,21 @@ import {
   StyledCategoryWithoutAllContainer,
 } from './CategoryWithoutAll.style';
 
-interface CategoryWithoutAllProps {
-  isWarned?: boolean;
-}
+export const CategoryWithoutAll = () => {
+  const { formState, getValues } = useFormContext();
 
-export const CategoryWithoutAll = ({ isWarned }: CategoryWithoutAllProps) => {
+  const [isWarned, setIsWarned] = useState(false);
+
+  useEffect(() => {
+    const value = getValues('category');
+
+    if (formState.isSubmitted && !value) {
+      setIsWarned(true);
+    } else {
+      setIsWarned(false);
+    }
+  }, [formState, getValues, setIsWarned]);
+
   return (
     <StyledCategoryWithoutAllContainer>
       <StyledCategoryContainer>
