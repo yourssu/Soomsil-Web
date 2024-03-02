@@ -5,5 +5,5 @@ export type Query = {
 
 export interface RealTimeKeywordData {
   basedTime: string;
-  querys: Query[];
+  querys: ReadonlyArray<Query>;
 }
