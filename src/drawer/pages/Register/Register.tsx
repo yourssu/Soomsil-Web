@@ -48,7 +48,7 @@ export const Register = () => {
         <form onSubmit={methods.handleSubmit(handleSubmit)} id={'registerForm'}>
           <StyledInputContainer>
             <StyledRightContainer>
-              <StyledImportText>별표 표시 * 는 필수 입력란</StyledImportText>
+              <StyledImportText $isWarned={false}>별표 표시 * 는 필수 입력란</StyledImportText>
             </StyledRightContainer>
 
             <Input
