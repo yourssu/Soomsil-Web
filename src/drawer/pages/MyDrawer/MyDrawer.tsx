@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
+
 import Spacing from '@/components/Spacing/Spacing';
 import { Button } from '@/drawer/components/Button/Button';
 import { CardLayout } from '@/drawer/components/CardLayout/CardLayout';
@@ -14,11 +16,24 @@ const Dummy = Array.from({ length: 12 }).map((_, index) => index);
 export type TabType = 'STAR' | 'MYDRAWER';
 
 export const MyDrawer = () => {
-  const [currentTab, setCurrentTab] = useState<TabType>('STAR');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab');
+
+  const [currentTab, setCurrentTab] = useState<TabType>(getTabFromURL() || 'STAR');
+
+  function isTabType(tab: string): tab is TabType {
+    return tab === 'STAR' || tab === 'MYDRAWER';
+  }
+
+  function getTabFromURL(): TabType | null {
+    if (initialTab && isTabType(initialTab)) return initialTab;
+    else return null;
+  }
 
   const handleClickTab = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
     setCurrentTab(target.name as TabType);
+    setSearchParams({ tab: target.name });
   };
 
   return (
