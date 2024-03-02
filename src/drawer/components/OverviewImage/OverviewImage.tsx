@@ -18,9 +18,13 @@ export const OverviewImage = ({ isWarned }: OverviewProps) => {
   const MAX_FILE_COUNT = 5;
 
   const handleFileChange = (file: File | undefined, index: number) => {
-    setFiles(
-      (prevFiles) => prevFiles.map((prevFile, i) => (i === index ? file : prevFile)) as File[]
-    );
+    setFiles((prevFiles) => {
+      const newFiles = [...prevFiles];
+      if (file !== undefined) {
+        newFiles[index] = file;
+      }
+      return newFiles;
+    });
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
