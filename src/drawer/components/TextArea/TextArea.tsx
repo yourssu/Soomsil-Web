@@ -1,4 +1,6 @@
-import { TextareaHTMLAttributes, useState } from 'react';
+import { TextareaHTMLAttributes, useState, useEffect } from 'react';
+
+import { useFormContext } from 'react-hook-form';
 
 import {
   StyledContainer,
@@ -13,15 +15,26 @@ import {
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   title: string;
   description: string;
-  isWarned?: boolean;
+  name: string;
 }
 
-export const TextArea = ({ title, description, isWarned, ...props }: TextAreaProps) => {
+export const TextArea = ({ title, description, name, ...props }: TextAreaProps) => {
+  const { register, formState } = useFormContext();
+
   const [textAreaValue, setTextAreaValue] = useState('');
+  const [isWarned, setIsWarned] = useState(false);
 
   const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setIsWarned(false);
     setTextAreaValue(event.target.value);
   };
+
+  useEffect(() => {
+    if (formState.errors[name]) {
+      console.log(formState.errors[name]); // 삭제 예정
+      setIsWarned(true);
+    }
+  }, [formState, setIsWarned, name]);
 
   return (
     <StyledContainer>
@@ -33,6 +46,7 @@ export const TextArea = ({ title, description, isWarned, ...props }: TextAreaPro
       </StyledLabelContainer>
       <StyledTextAreaContainer>
         <StyledTextArea
+          {...register(name, { required: props.required })}
           id={title}
           value={textAreaValue}
           onChange={handleTextAreaChange}
@@ -40,6 +54,7 @@ export const TextArea = ({ title, description, isWarned, ...props }: TextAreaPro
           $isWarned={isWarned}
           $hasText={textAreaValue.length > 0}
           {...props}
+          required={false}
         />
         {isWarned ? (
           <StyledTextAreaLength $isWarned={true}>*{title}은 필수값입니다.</StyledTextAreaLength>
