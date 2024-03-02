@@ -99,7 +99,7 @@ export const Register = () => {
             ))}
           </StyledInputContainer>
 
-          <ThumbnailInput />
+          <ThumbnailInput name={'thumbnailImage'} />
 
           <OverviewImage />
 
