@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getRealTimeKeyword } from '../apis/getRealTimeKeyword';
 
 export const useGetRealTimeKeyword = () => {
   const ONE_HOUR_TO_MS = 1000 * 60 * 60;
 
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['realTimeKeywords'],
     queryFn: async () => {
       try {
