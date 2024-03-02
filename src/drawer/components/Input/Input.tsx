@@ -20,7 +20,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = ({ title, description, validate, name, required, ...props }: InputProps) => {
-  const { register, formState } = useFormContext();
+  const { register, formState, getValues } = useFormContext();
 
   const [inputValue, setInputValue] = useState('');
   const [isWarned, setIsWarned] = useState(false);
@@ -44,8 +44,10 @@ export const Input = ({ title, description, validate, name, required, ...props }
   }, [inputValue, props.maxLength, validate]);
 
   useEffect(() => {
-    if (formState.errors[name]) {
-      console.log(formState.errors[name]); // 삭제 예정
+    const error = formState.errors[name];
+    const type = error?.type;
+
+    if (error && type === 'required') {
       setIsWarned(true);
     }
   }, [formState, setIsWarned, name]);
@@ -60,7 +62,17 @@ export const Input = ({ title, description, validate, name, required, ...props }
       </StyledLabelContainer>
       <StyledInputContainer>
         <StyledInput
-          {...register(name, { required: required })}
+          {...register(name, {
+            required: required,
+            validate: (value) => {
+              const { appStoreUrl, githubUrl, googlePlayUrl, webpageUrl } = getValues();
+              if (appStoreUrl || githubUrl || googlePlayUrl || webpageUrl)
+                if (value === '') return undefined;
+
+              if (validate) return validate(value) ? '실패 메시지' : undefined;
+              else return undefined;
+            },
+          })}
           id={title}
           value={inputValue}
           onChange={handleInputChange}

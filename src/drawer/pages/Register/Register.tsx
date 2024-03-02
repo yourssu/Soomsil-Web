@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import { BoxButton } from '@yourssu/design-system-react';
 import { useForm, FormProvider } from 'react-hook-form';
 
@@ -20,6 +22,8 @@ import {
 export const Register = () => {
   const methods = useForm();
 
+  const [linkExist, setLinkExist] = useState<boolean>(true);
+
   const validateLink = (name: string, value: string) => {
     return !value.startsWith(REGISTER_URL[name as keyof typeof REGISTER_URL]);
   };
@@ -27,6 +31,16 @@ export const Register = () => {
   const handleSubmit = (data) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    if (methods.formState.errors) {
+      const { appStoreUrl, githubUrl, googlePlayUrl, webpageUrl } = methods.formState.errors;
+      console.log(methods.formState.errors);
+      if (appStoreUrl && githubUrl && googlePlayUrl && webpageUrl) {
+        setLinkExist(false);
+      }
+    }
+  }, [methods.formState]);
 
   return (
     <FormProvider {...methods}>
@@ -66,7 +80,7 @@ export const Register = () => {
 
           <StyledInputContainer>
             <StyledRightContainer>
-              <StyledImportText>
+              <StyledImportText $isWarned={!linkExist}>
                 {window.innerWidth < MOBILE_VIEW_WIDTH
                   ? '웹 페이지, Google play, App store, Github\n링크 중 하나는 필수 기재 *'
                   : '웹 페이지, Google play, App store, Github 링크 중 하나는 필수 기재 *'}
