@@ -19,15 +19,12 @@ export const MyDrawer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialTab = searchParams.get('tab');
 
-  const [currentTab, setCurrentTab] = useState<TabType>(getTabFromURL() || 'STAR');
+  const [currentTab, setCurrentTab] = useState<TabType>(
+    isTabType(initialTab) ? initialTab : 'STAR'
+  );
 
-  function isTabType(tab: string): tab is TabType {
+  function isTabType(tab: string | null): tab is TabType {
     return tab === 'STAR' || tab === 'MYDRAWER';
-  }
-
-  function getTabFromURL(): TabType | null {
-    if (initialTab && isTabType(initialTab)) return initialTab;
-    else return null;
   }
 
   const handleClickTab = (event: React.MouseEvent<HTMLButtonElement>) => {
