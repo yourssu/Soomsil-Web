@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { CheckBox, IcNoticeFilled, IconContext } from '@yourssu/design-system-react';
+import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
@@ -13,11 +14,16 @@ import {
 } from './WarningBox.style';
 
 interface WarningBoxProps {
-  isWarned?: boolean;
+  isSelected: boolean;
+  handleSelected: () => void;
 }
 
-export const WarningBox = ({ isWarned }: WarningBoxProps) => {
+export const WarningBox = ({ isSelected, handleSelected }: WarningBoxProps) => {
+  const { formState } = useFormContext();
+
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= MOBILE_VIEW_WIDTH);
+  const [isWarned, setIsWarned] = useState(false);
+
   const theme = useTheme();
 
   useEffect(() => {
@@ -32,6 +38,12 @@ export const WarningBox = ({ isWarned }: WarningBoxProps) => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (formState.isSubmitted) {
+      setIsWarned(!isSelected);
+    }
+  }, [formState, isSelected]);
 
   return (
     <StyledContainer>
@@ -57,7 +69,9 @@ export const WarningBox = ({ isWarned }: WarningBoxProps) => {
           </StyledWarningBoxText>
         </StyledWarningBoxContainer>
       )}
-      <CheckBox>확인했습니다.</CheckBox>
+      <CheckBox isSelected={isSelected} onClick={handleSelected}>
+        확인했습니다.
+      </CheckBox>
     </StyledContainer>
   );
 };

@@ -22,20 +22,23 @@ import {
 export const Register = () => {
   const methods = useForm();
 
-  const [linkExist, setLinkExist] = useState<boolean>(true);
+  const [linkExist, setLinkExist] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
 
   const validateLink = (name: string, value: string) => {
     return !value.startsWith(REGISTER_URL[name as keyof typeof REGISTER_URL]);
   };
 
   const handleSubmit = (data) => {
-    console.log(data);
+    if (isChecked) {
+      console.log(data);
+    }
   };
 
   useEffect(() => {
     if (methods.formState.errors) {
       const { appStoreUrl, githubUrl, googlePlayUrl, webpageUrl } = methods.formState.errors;
-      console.log(methods.formState.errors);
+
       if (appStoreUrl && githubUrl && googlePlayUrl && webpageUrl) {
         setLinkExist(false);
       }
@@ -103,7 +106,13 @@ export const Register = () => {
 
           <OverviewImage />
 
-          <WarningBox />
+          <WarningBox
+            isSelected={isChecked}
+            handleSelected={() => {
+              setIsChecked((prev) => !prev);
+            }}
+          />
+
           <StyledRightContainer>
             <BoxButton size={'medium'} variant={'filled'} rounding={4} width="8.125rem">
               서비스 등록
