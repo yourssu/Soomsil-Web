@@ -17,6 +17,7 @@ import {
   StyledTitle,
   StyledThumbnail,
   StyledBookmarkContainer,
+  StyledSettingIconContainer,
 } from './Card.style';
 import {
   CardContainerProps,
@@ -83,11 +84,13 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
 const CardSetting = ({ onClick }: CardSettingProps) => {
   const theme = useTheme();
   return (
-    <IconContext.Provider
-      value={{ color: theme.color.buttonNormal, size: '36px', height: '100%', onClick: onClick }}
-    >
-      <IcDotsVerticalLine />
-    </IconContext.Provider>
+    <StyledSettingIconContainer>
+      <IconContext.Provider
+        value={{ color: theme.color.buttonNormal, size: '36px', onClick: onClick }}
+      >
+        <IcDotsVerticalLine />
+      </IconContext.Provider>
+    </StyledSettingIconContainer>
   );
 };
 
