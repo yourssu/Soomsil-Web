@@ -1,7 +1,7 @@
 import { IcSearchLine, IconContext } from '@yourssu/design-system-react';
 import { Link } from 'react-router-dom';
 
-import RealTimeKeywordImage from '@/assets/realTimeKeyword.png';
+import RealTimeKeywordImage from '@/assets/realTimeKeyword.webp';
 
 import {
   StyledContainer,
@@ -45,7 +45,7 @@ export const SearchKeyword = () => {
       <StyledImage src={RealTimeKeywordImage} alt="뿌슝이" />
       <StyledListContainer>
         {Dummy.keyword.map((keyword, index) => (
-          <Link key={keyword} to={`/search?keyword=${keyword}`}>
+          <Link key={keyword} to={`/search?query=${keyword}`}>
             <StyledListItem
               leftIcon={<StyledRank $rank={index + 1}>{index + 1}</StyledRank>}
               rightIcon={
