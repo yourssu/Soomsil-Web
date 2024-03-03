@@ -33,14 +33,18 @@ export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
           </StyledContentInnerContainer>
           <StyledButtonContainer>
             <Dialog.Close asChild>
-              <BoxButton variant="filled" size="large" rounding={4}>
-                로그아웃
-              </BoxButton>
+              <div>
+                <BoxButton variant="filled" size="large" rounding={4} width="100%">
+                  로그아웃
+                </BoxButton>
+              </div>
             </Dialog.Close>
             <Dialog.Close asChild>
-              <BoxButton variant="line" size="large" rounding={4}>
-                취소
-              </BoxButton>
+              <div>
+                <BoxButton variant="line" size="large" rounding={4} width="100%">
+                  취소
+                </BoxButton>
+              </div>
             </Dialog.Close>
           </StyledButtonContainer>
         </StyledDialogContent>
