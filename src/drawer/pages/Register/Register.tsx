@@ -2,7 +2,9 @@ import { BoxButton } from '@yourssu/design-system-react';
 
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
 import { Input } from '@/drawer/components/Input/Input';
+import { OverviewImage } from '@/drawer/components/OverviewImage/OverviewImage';
 import { TextArea } from '@/drawer/components/TextArea/TextArea';
+import { ThumbnailInput } from '@/drawer/components/ThumbnailInput/ThumbnailInput';
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
@@ -54,6 +56,10 @@ export const Register = () => {
           />
         ))}
       </StyledInputContainer>
+
+      <ThumbnailInput />
+
+      <OverviewImage />
 
       <WarningBox />
 
