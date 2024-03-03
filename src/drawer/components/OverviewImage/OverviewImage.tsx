@@ -1,4 +1,6 @@
-import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
+import { ChangeEvent, useState, useEffect, useRef } from 'react';
+
+import { useFormContext } from 'react-hook-form';
 
 import { OverviewFileUpload } from './OverviewFileUpload/OverviewFileUpload';
 import {
@@ -9,18 +11,24 @@ import {
   StyledOverviewTitleContainer,
 } from './OverviewImage.style';
 
-interface OverviewProps extends InputHTMLAttributes<HTMLLabelElement> {
-  isWarned?: boolean;
-}
+export const OverviewImage = () => {
+  const { register, formState, setValue } = useFormContext();
 
-export const OverviewImage = ({ isWarned }: OverviewProps) => {
   const [files, setFiles] = useState<File[]>([]);
+  const [isWarned, setIsWarned] = useState(false);
+
+  const multiFileRef = useRef<HTMLInputElement | null>(null);
+
   const MAX_FILE_COUNT = 5;
 
   const handleFileChange = (file: File | undefined, index: number) => {
-    setFiles(
-      (prevFiles) => prevFiles.map((prevFile, i) => (i === index ? file : prevFile)) as File[]
-    );
+    setFiles((prevFiles) => {
+      const newFiles = [...prevFiles];
+      if (file !== undefined) {
+        newFiles[index] = file;
+      }
+      return newFiles;
+    });
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -37,6 +45,19 @@ export const OverviewImage = ({ isWarned }: OverviewProps) => {
     });
   };
 
+  useEffect(() => {
+    if (formState.isSubmitted && files.length === 0) setIsWarned(true);
+    if (files.length) setIsWarned(false);
+  }, [files, formState, setIsWarned]);
+
+  useEffect(() => {
+    const dataTransfer = new DataTransfer();
+    files.forEach((file) => dataTransfer.items.add(file));
+    multiFileRef.current!.files = dataTransfer.files;
+
+    setValue('introductionImages', files);
+  }, [files, setValue]);
+
   return (
     <StyledOverviewContainer>
       <StyledOverviewTitleContainer>
@@ -44,6 +65,13 @@ export const OverviewImage = ({ isWarned }: OverviewProps) => {
         <StyledOverviewDescription>(권장 : 1920px X 1080px, 최대 5장)</StyledOverviewDescription>
       </StyledOverviewTitleContainer>
       <StyledImageUpload>
+        <input
+          type="file"
+          {...register('introductionImages', { required: true })}
+          ref={multiFileRef}
+          multiple
+          hidden
+        />
         {Array.from({ length: MAX_FILE_COUNT }).map((_, index) => {
           const file = files[index];
           const key = file ? `file-${file.name}-${file.lastModified}` : `file-empty-${index}`;
