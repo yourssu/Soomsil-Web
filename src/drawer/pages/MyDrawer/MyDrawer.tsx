@@ -27,10 +27,9 @@ export const MyDrawer = () => {
     return tab === 'STAR' || tab === 'MYDRAWER';
   }
 
-  const handleClickTab = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const target = event.target as HTMLButtonElement;
-    setCurrentTab(target.name as TabType);
-    setSearchParams({ tab: target.name });
+  const handleClickTab = (clickedTab: TabType) => {
+    setCurrentTab(clickedTab);
+    setSearchParams({ tab: clickedTab });
   };
 
   return (
@@ -38,19 +37,17 @@ export const MyDrawer = () => {
       <StyledTabWrapper>
         <Button
           text={'Stars'}
-          name={'STAR'}
           isFilled={currentTab === 'STAR'}
-          onClick={(event) => {
-            handleClickTab(event);
+          onClick={() => {
+            handleClickTab('STAR');
           }}
         />
         <Spacing direction={'horizontal'} size={16} />
         <Button
           text={'My Products'}
-          name={'MYDRAWER'}
           isFilled={currentTab === 'MYDRAWER'}
-          onClick={(event) => {
-            handleClickTab(event);
+          onClick={() => {
+            handleClickTab('MYDRAWER');
           }}
         />
       </StyledTabWrapper>
