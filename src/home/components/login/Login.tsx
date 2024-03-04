@@ -1,7 +1,10 @@
 import { BoxButton } from '@yourssu/design-system-react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import soomsil from '@/assets/soomsil.svg';
+import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
+import api from '@/service/TokenService';
 
 import {
   StyledLoginContainer,
@@ -18,6 +21,34 @@ import {
 } from './Login.style';
 export const Login = () => {
   const { register, control } = useForm();
+  const navigate = useNavigate();
+  const emailQuery = useWatch({
+    name: 'email',
+    control,
+  });
+  const passwordQuery = useWatch({
+    name: 'password',
+    control,
+  });
+  console.log(emailQuery, passwordQuery);
+
+  const handleLoginClick = async () => {
+    console.log('login click');
+    const loginParams = {
+      email: emailQuery + '@soongsil.ac.kr',
+      password: passwordQuery,
+    };
+    console.log('loginParmas', loginParams);
+    const res = await postAuthSignIn(loginParams);
+    console.log('res', res);
+    if (res) {
+      api.setAccessToken(res.accessToken);
+      api.setRefreshToken(res.refreshToken);
+      sessionStorage.setItem('accessExpiredIn', res.accessTokenExpiredIn.toString());
+      navigate('/');
+    }
+  };
+
   return (
     <StyledContainer>
       <img src={soomsil} alt={'soomsil-logo'} width={180} height={38} />
@@ -37,6 +68,7 @@ export const Login = () => {
                   onChange={(e) => {
                     field.onChange(e.target.value);
                   }}
+                  value={emailQuery}
                 />
                 <StyledInputSuffix>@soongsil.ac.kr</StyledInputSuffix>
               </StyledInputRowContainer>
@@ -57,14 +89,17 @@ export const Login = () => {
                   onChange={(e) => {
                     field.onChange(e.target.value);
                   }}
+                  value={passwordQuery}
                 />
               </StyledInputRowContainer>
             )}
           />
         </StyledInputContainer>
+
         <BoxButton size="large" variant="filled" rounding={8}>
-          로그인
+          <div onClick={handleLoginClick}>로그인</div>
         </BoxButton>
+
         <StyledBottomContainer>
           <StyledButtonLabel to="/mail">학교 메일 찾기</StyledButtonLabel>
           <StyledButtonDivider>|</StyledButtonDivider>
