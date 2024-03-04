@@ -67,8 +67,8 @@ export const StyledRank = styled.span<StyledRankProps>`
 export const StyledListItemKeyword = styled.div`
   width: 7.375rem;
   height: 1.6875rem;
-  
-  color: ${({ theme }) => theme.color.textPrimary}
+
+  color: ${({ theme }) => theme.color.textPrimary};
 
   /* PC & Android/body18 */
   font-family: 'Spoqa Han Sans Neo';
