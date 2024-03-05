@@ -29,6 +29,7 @@ export const Register = () => {
     return !value.startsWith(REGISTER_URL[name as keyof typeof REGISTER_URL]);
   };
 
+  // ProductRegisterRequest 타입으로 수정 필요
   const handleSubmit = (data) => {
     if (isChecked) {
       console.log(data);
