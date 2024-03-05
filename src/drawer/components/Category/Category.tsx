@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { CheckBox } from '@yourssu/design-system-react';
+import { useFormContext } from 'react-hook-form';
 
 import { StyledCategoryContainer, StyledCategoryWithoutAllContainer } from './Category.style';
 
@@ -26,6 +27,9 @@ const CategoryList: CategoryProps[] = [
 ];
 
 export const Category = ({ isAll }: IsAllProps) => {
+  const { register } = useFormContext();
+  const { onChange, name, ref } = register('category', { required: true });
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleCategorySelect = (category: string) => {
@@ -53,10 +57,17 @@ export const Category = ({ isAll }: IsAllProps) => {
         <StyledCategoryWithoutAllContainer>
           {CategoryList.slice(1).map(({ category, title, subcategories }) => (
             <CheckBox
+              value={category}
+              type={'radio'}
+              onChange={(event) => {
+                handleCategorySelect(category);
+                onChange(event);
+              }}
+              name={name}
+              ref={ref}
               size="medium"
               key={category}
               isSelected={selectedCategory === category}
-              onChange={() => handleCategorySelect(category)}
             >{`${title} ${subcategories ?? ''}`}</CheckBox>
           ))}
         </StyledCategoryWithoutAllContainer>
