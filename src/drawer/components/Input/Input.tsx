@@ -63,10 +63,9 @@ export const Input = ({ title, description, validate, name, required, ...props }
             validate: (value) => {
               const { appStoreUrl, githubUrl, googlePlayUrl, webpageUrl } = getValues();
               if (appStoreUrl || githubUrl || googlePlayUrl || webpageUrl)
-                if (value === '') return undefined;
+                if (value === '') return true;
 
-              if (validate) return validate(value) ? '실패 메시지' : undefined;
-              else return undefined;
+              return validate ? !validate(value) : true;
             },
           })}
           id={title}
