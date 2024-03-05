@@ -32,7 +32,7 @@ export const TextArea = ({ title, description, name, ...props }: TextAreaProps) 
   useEffect(() => {
     const value = getValues(name);
     if (formState.isSubmitted && !value) setIsWarned(true);
-  }, [formState, getValues, setIsWarned, name]);
+  }, [formState, getValues, name]);
 
   return (
     <StyledContainer>

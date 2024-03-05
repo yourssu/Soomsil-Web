@@ -46,7 +46,7 @@ export const Input = ({ title, description, validate, name, required, ...props }
   useEffect(() => {
     const value = getValues(name);
     if (formState.isSubmitted && !value && required) setIsWarned(true);
-  }, [formState, getValues, setIsWarned, name, required]);
+  }, [formState, getValues, name, required]);
 
   return (
     <StyledContainer>

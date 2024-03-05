@@ -48,7 +48,7 @@ export const OverviewImage = () => {
   useEffect(() => {
     if (formState.isSubmitted && files.length === 0) setIsWarned(true);
     if (files.length) setIsWarned(false);
-  }, [files, formState, setIsWarned]);
+  }, [files, formState]);
 
   useEffect(() => {
     const dataTransfer = new DataTransfer();

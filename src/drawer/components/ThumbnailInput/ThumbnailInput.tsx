@@ -54,7 +54,7 @@ export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
   useEffect(() => {
     const value = getValues(name);
     if (formState.isSubmitted && !value.length) setIsWarned(true);
-  }, [formState, getValues, setIsWarned, name]);
+  }, [formState, getValues, name]);
 
   return (
     <StyledThumbnailContainer>

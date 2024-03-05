@@ -24,7 +24,7 @@ export const CategoryWithoutAll = () => {
     } else {
       setIsWarned(false);
     }
-  }, [formState, getValues, setIsWarned]);
+  }, [formState, getValues]);
 
   return (
     <StyledCategoryWithoutAllContainer>
