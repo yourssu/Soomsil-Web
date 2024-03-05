@@ -16,15 +16,9 @@ export const CategoryWithoutAll = () => {
 
   const [isWarned, setIsWarned] = useState(false);
 
-  useEffect(() => {
-    const value = getValues('category');
-
-    if (formState.isSubmitted && !value) {
-      setIsWarned(true);
-    } else {
-      setIsWarned(false);
-    }
-  }, [formState, getValues]);
+useEffect(() => {
+  setIsWarned(formState.isSubmitted && !getValues('category'));
+}, [formState, getValues]);
 
   return (
     <StyledCategoryWithoutAllContainer>
