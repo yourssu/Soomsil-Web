@@ -1,4 +1,6 @@
-import { InputHTMLAttributes, useMemo, useState } from 'react';
+import { InputHTMLAttributes, useMemo, useState, useEffect } from 'react';
+
+import { useFormContext } from 'react-hook-form';
 
 import {
   StyledContainer,
@@ -14,9 +16,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   description: string;
   validate?: (value: string) => boolean;
+  name: string;
 }
 
-export const Input = ({ title, description, validate, ...props }: InputProps) => {
+export const Input = ({ title, description, validate, name, required, ...props }: InputProps) => {
+  const { register, formState, getValues } = useFormContext();
+
   const [inputValue, setInputValue] = useState('');
   const [isWarned, setIsWarned] = useState(false);
 
@@ -38,22 +43,38 @@ export const Input = ({ title, description, validate, ...props }: InputProps) =>
     }
   }, [inputValue, props.maxLength, validate]);
 
+  useEffect(() => {
+    const value = getValues(name);
+    if (formState.isSubmitted && !value && required) setIsWarned(true);
+  }, [formState, getValues, name, required]);
+
   return (
     <StyledContainer>
       <StyledLabelContainer>
         <StyledLabelTitle htmlFor={title} $isWarned={isWarned}>
-          {props.required ? `${title} *` : title}
+          {required ? `${title} *` : title}
         </StyledLabelTitle>
         <StyledLabelDescription>{description}</StyledLabelDescription>
       </StyledLabelContainer>
       <StyledInputContainer>
         <StyledInput
+          {...register(name, {
+            required: required,
+            validate: (value) => {
+              const { appStoreUrl, githubUrl, googlePlayUrl, webpageUrl } = getValues();
+              if (appStoreUrl || githubUrl || googlePlayUrl || webpageUrl)
+                if (value === '') return true;
+
+              return validate ? !validate(value) : true;
+            },
+          })}
           id={title}
           value={inputValue}
           onChange={handleInputChange}
           $isWarned={isWarned}
           $hasText={inputValue.length > 0}
           {...props}
+          required={false}
         />
         {checkValid}
       </StyledInputContainer>

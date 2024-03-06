@@ -32,7 +32,10 @@ export const StyledRightContainer = styled.div`
   margin-right: 1.2rem;
 `;
 
-export const StyledImportText = styled.p`
+interface StyledImportTextProps {
+  $isWarned: boolean;
+}
+export const StyledImportText = styled.p<StyledImportTextProps>`
   @media (max-width: 30rem) {
     /* Soomsil/Drawer/Web/body10 */
     font-size: 'Spoqa Han Sans Neo';
@@ -43,7 +46,9 @@ export const StyledImportText = styled.p`
   }
 
   ${({ theme }) => theme.typo.subtitle3};
-  color: ${({ theme }) => theme.color.textPrimary};
+  color: ${({ theme, $isWarned }) =>
+    $isWarned ? theme.color.textWarned : theme.color.textPrimary};
+
   text-align: right;
   white-space: pre-wrap;
 
