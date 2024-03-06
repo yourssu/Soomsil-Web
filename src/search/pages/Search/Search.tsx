@@ -1,59 +1,59 @@
-import { useCallback, useRef } from 'react';
+import { Suspense } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
 import Spacing from '@/components/Spacing/Spacing';
+import { ErrorBoundary } from '@/search/components/ErrorBoundary/ErrorBoundary';
+import {
+  ResultListFallbackComponent,
+  TotalFallbackComponent,
+} from '@/search/components/FallbackComponent/FallbackComponent';
+import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
+import { ResultListItemLoading } from '@/search/components/ResultListItem/ResultListItemLoading';
+import { ResultListItems } from '@/search/components/ResultListItem/ResultListItems';
+import { TotalCount } from '@/search/components/TotalCount/TotalCount';
 
-import { ResultListItem } from '../../components/ResultListItem/ResultListItem';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
-import { useGetSearch } from '../../hooks/useGetSearch';
-import { NoResult } from '../NoResult/NoResult';
+
+import {
+  StyledResultContent,
+  StyledResultContentWrap,
+  StyledResultWrap,
+  StyledSearchWrap,
+  StyledFlexGapContainer,
+  StyledResultListItemsWrap,
+} from './Search.style';
 
 export const Search = () => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('query');
-
-  const { data, isLoading, fetchNextPage, hasNextPage } = useGetSearch({
-    query: query as string,
-  });
-
-  const observer = useRef<IntersectionObserver>();
-
-  const lastElementRef = useCallback(
-    (node: HTMLDivElement) => {
-      if (isLoading) return;
-
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage();
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [isLoading, hasNextPage]
-  );
+  const query = searchParams.get('query') ?? '';
 
   return (
-    <>
+    <StyledSearchWrap>
       <SearchBar />
-      {data?.pages.length === 0 ? (
-        <NoResult />
-      ) : (
-        data?.pages.map((page) => {
-          return page.map((item, itemIndex) => {
-            if (page.length === itemIndex + 1) {
-              return <ResultListItem key={item.id} {...item} ref={lastElementRef}></ResultListItem>;
-            }
-            return (
-              <div key={item.id}>
-                <ResultListItem {...item}></ResultListItem>
-                <Spacing direction="vertical" size={8} />
-              </div>
-            );
-          });
-        })
-      )}
-    </>
+      <Spacing direction="vertical" size={108} />
+      <StyledResultWrap>
+        <StyledResultContentWrap>
+          <StyledResultContent>
+            <ErrorBoundary fallback={TotalFallbackComponent} query={query}>
+              <Suspense fallback={<Spacing direction="vertical" size={21} />}>
+                <TotalCount />
+              </Suspense>
+            </ErrorBoundary>
+            <Spacing direction="vertical" size={20} />
+            <StyledFlexGapContainer>
+              <StyledResultListItemsWrap>
+                <ErrorBoundary fallback={ResultListFallbackComponent} query={query}>
+                  <Suspense fallback={<ResultListItemLoading />}>
+                    <ResultListItems />
+                  </Suspense>
+                </ErrorBoundary>
+              </StyledResultListItemsWrap>
+              <RealTimeKeyword></RealTimeKeyword>
+            </StyledFlexGapContainer>
+          </StyledResultContent>
+        </StyledResultContentWrap>
+      </StyledResultWrap>
+    </StyledSearchWrap>
   );
 };
