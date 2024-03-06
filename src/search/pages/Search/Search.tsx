@@ -26,7 +26,7 @@ import {
 
 export const Search = () => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('query');
+  const query = searchParams.get('query') ?? '';
 
   return (
     <StyledSearchWrap>
@@ -35,7 +35,7 @@ export const Search = () => {
       <StyledResultWrap>
         <StyledResultContentWrap>
           <StyledResultContent>
-            <ErrorBoundary fallback={TotalFallbackComponent} query={query || ''}>
+            <ErrorBoundary fallback={TotalFallbackComponent} query={query}>
               <Suspense fallback={<Spacing direction="vertical" size={21} />}>
                 <TotalCount />
               </Suspense>
@@ -43,7 +43,7 @@ export const Search = () => {
             <Spacing direction="vertical" size={20} />
             <StyledFlexGapContainer>
               <StyledResultListItemsWrap>
-                <ErrorBoundary fallback={ResultListFallbackComponent} query={query || ''}>
+                <ErrorBoundary fallback={ResultListFallbackComponent} query={query}>
                   <Suspense fallback={<ResultListItemLoading />}>
                     <ResultListItems />
                   </Suspense>

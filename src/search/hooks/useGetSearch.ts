@@ -13,10 +13,7 @@ export const useGetSearch = ({ query }: GetSearchProps) => {
     number
   >({
     queryKey: ['getSearch', query],
-    queryFn: ({ pageParam }) =>
-      getSearch({ query, page: pageParam }).then((data) => {
-        return data;
-      }),
+    queryFn: ({ pageParam }) => getSearch({ query, page: pageParam }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.resultCount === 0 || lastPage.totalCount === lastPage.resultCount) {
@@ -29,9 +26,8 @@ export const useGetSearch = ({ query }: GetSearchProps) => {
       if (error.message === '검색결과가 없습니다.') {
         return 0;
       }
-      if (error) {
-        return 1000;
-      }
+
+      return 1000;
     },
     staleTime: 1000 * 60 * 5,
     notifyOnChangeProps: ['data'],

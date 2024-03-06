@@ -5,10 +5,10 @@ import { StyledTotalCount } from '@/search/pages/Search/Search.style';
 
 export const TotalCount = () => {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('query');
+  const query = searchParams.get('query') ?? '';
 
   const { data } = useGetSearch({
-    query: query || '',
+    query,
   });
 
   return (
