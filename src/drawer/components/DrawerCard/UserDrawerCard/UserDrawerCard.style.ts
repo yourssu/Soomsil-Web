@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+export const StyledCardContainer = styled.div`
+  position: relative;
+`;
+
 export const StyledServiceTextContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,12 +20,8 @@ export const StyledServiceModify = styled(Link)`
   }
 `;
 
-export const StyledServiceText = styled.div`
+export const StyledServiceText = styled.span`
   ${({ theme }) => theme.typo.button4}
   color: ${({ theme }) => theme.color.textSecondary};
   white-space: nowrap;
-`;
-
-export const StyledDropdownContainer = styled.div`
-  position: relative;
 `;

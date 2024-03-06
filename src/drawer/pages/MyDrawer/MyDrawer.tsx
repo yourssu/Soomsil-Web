@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
+
 import Spacing from '@/components/Spacing/Spacing';
 import { Button } from '@/drawer/components/Button/Button';
 import { CardLayout } from '@/drawer/components/CardLayout/CardLayout';
@@ -14,11 +16,20 @@ const Dummy = Array.from({ length: 12 }).map((_, index) => index);
 export type TabType = 'STAR' | 'MYDRAWER';
 
 export const MyDrawer = () => {
-  const [currentTab, setCurrentTab] = useState<TabType>('STAR');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab');
 
-  const handleClickTab = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const target = event.target as HTMLButtonElement;
-    setCurrentTab(target.name as TabType);
+  const [currentTab, setCurrentTab] = useState<TabType>(
+    isTabType(initialTab) ? initialTab : 'STAR'
+  );
+
+  function isTabType(tab: string | null): tab is TabType {
+    return tab === 'STAR' || tab === 'MYDRAWER';
+  }
+
+  const handleClickTab = (clickedTab: TabType) => {
+    setCurrentTab(clickedTab);
+    setSearchParams({ tab: clickedTab });
   };
 
   return (
@@ -26,19 +37,17 @@ export const MyDrawer = () => {
       <StyledTabWrapper>
         <Button
           text={'Stars'}
-          name={'STAR'}
           isFilled={currentTab === 'STAR'}
-          onClick={(event) => {
-            handleClickTab(event);
+          onClick={() => {
+            handleClickTab('STAR');
           }}
         />
         <Spacing direction={'horizontal'} size={16} />
         <Button
           text={'My Products'}
-          name={'MYDRAWER'}
           isFilled={currentTab === 'MYDRAWER'}
-          onClick={(event) => {
-            handleClickTab(event);
+          onClick={() => {
+            handleClickTab('MYDRAWER');
           }}
         />
       </StyledTabWrapper>
