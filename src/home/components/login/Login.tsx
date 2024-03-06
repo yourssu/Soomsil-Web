@@ -31,17 +31,15 @@ export const Login = () => {
     name: 'password',
     control,
   });
-  console.log(emailQuery, passwordQuery);
 
   const handleLoginClick = async () => {
-    console.log('login click');
     const loginParams = {
       email: emailQuery + '@soongsil.ac.kr',
       password: passwordQuery,
     };
-    console.log('loginParmas', loginParams);
+
     const res = await postAuthSignIn(loginParams);
-    console.log('res', res);
+
     if (res) {
       api.setAccessToken(res.accessToken);
       api.setRefreshToken(res.refreshToken);
