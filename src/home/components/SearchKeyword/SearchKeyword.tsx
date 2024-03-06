@@ -1,7 +1,7 @@
 import { IcSearchLine, IconContext } from '@yourssu/design-system-react';
 import { Link } from 'react-router-dom';
 
-import RealTimeKeywordImage from '@/assets/realTimeKeyword.png';
+import RealTimeKeywordImage from '@/assets/realTimeKeyword.webp';
 
 import {
   StyledContainer,
