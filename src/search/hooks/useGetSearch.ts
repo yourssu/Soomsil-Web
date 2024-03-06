@@ -22,7 +22,7 @@ export const useGetSearch = ({ query }: GetSearchProps) => {
 
       return allPages.length;
     },
-    retryDelay: (failureCount, error) => {
+    retryDelay: (_, error) => {
       if (error.message === '검색결과가 없습니다.') {
         return 0;
       }
