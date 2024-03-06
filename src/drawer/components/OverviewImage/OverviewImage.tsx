@@ -24,8 +24,10 @@ export const OverviewImage = () => {
   const handleFileChange = (file: File | undefined, index: number) => {
     setFiles((prevFiles) => {
       const newFiles = [...prevFiles];
-      if (file !== undefined) {
+      if (file && file.type.substring(0, 5) === 'image') {
         newFiles[index] = file;
+      } else {
+        alert('이미지 파일을 첨부해주세요.');
       }
       return newFiles;
     });
