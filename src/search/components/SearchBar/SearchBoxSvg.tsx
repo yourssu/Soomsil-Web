@@ -31,7 +31,7 @@ const SearchBoxForeignObject = forwardRef<HTMLInputElement, SearchBoxForeignObje
 
     useEffect(() => {
       setSearchInputText(query);
-    }, []);
+    }, [query]);
 
     return (
       <foreignObject x="0" y="0" width={SEARCH_BOX_WIDTH[size]} height="60">

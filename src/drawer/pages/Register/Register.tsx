@@ -30,7 +30,7 @@ export const Register = () => {
   };
 
   // ProductRegisterRequest 타입으로 수정 필요
-  const handleSubmit = (data) => {
+  const handleSubmit = (data: unknown) => {
     if (isChecked) {
       console.log(data);
     }
