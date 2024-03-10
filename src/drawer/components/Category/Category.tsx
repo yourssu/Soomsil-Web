@@ -9,13 +9,18 @@ interface IsAllProps {
   isAll: boolean;
 }
 
-interface CategoryProps {
+interface PageCategoryProps {
+  selectedCategory: string | null;
+  handleCategorySelect: (category: string) => void;
+}
+
+interface CategoryInfo {
   category: string;
   title: string;
   subcategories?: string;
 }
 
-const CategoryList: CategoryProps[] = [
+const CategoryList: CategoryInfo[] = [
   { category: '', title: '전체' },
   { category: 'CAMPUS', title: '교내생활' },
   { category: 'HOBBY', title: '취미', subcategories: '(음악, 스포츠, 게임, 여행)' },
@@ -26,10 +31,49 @@ const CategoryList: CategoryProps[] = [
   { category: 'ETC', title: '기타' },
 ];
 
-export const Category = ({ isAll }: IsAllProps) => {
+const RegisterCategory = ({ selectedCategory, handleCategorySelect }: PageCategoryProps) => {
   const { register } = useFormContext();
   const { onChange, name, ref } = register('category', { required: true });
 
+  return (
+    <StyledCategoryWithoutAllContainer>
+      {CategoryList.slice(1).map(({ category, title, subcategories }) => (
+        <CheckBox
+          value={category}
+          type={'radio'}
+          onChange={(event) => {
+            handleCategorySelect(category);
+            onChange(event);
+          }}
+          name={name}
+          ref={ref}
+          size="medium"
+          key={category}
+          isSelected={selectedCategory === category}
+        >{`${title} ${subcategories ?? ''}`}</CheckBox>
+      ))}
+    </StyledCategoryWithoutAllContainer>
+  );
+};
+
+const RankingCategory = ({ selectedCategory, handleCategorySelect }: PageCategoryProps) => {
+  return (
+    <StyledCategoryContainer>
+      <div>카테고리 유형</div>
+      {CategoryList.map(({ category, title }) => (
+        <CheckBox
+          key={category}
+          isSelected={selectedCategory === category}
+          onChange={() => handleCategorySelect(category)}
+        >
+          {title}
+        </CheckBox>
+      ))}
+    </StyledCategoryContainer>
+  );
+};
+
+export const Category = ({ isAll }: IsAllProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleCategorySelect = (category: string) => {
@@ -39,38 +83,15 @@ export const Category = ({ isAll }: IsAllProps) => {
   return (
     <>
       {isAll ? (
-        /* isAll이 true일 때 - 사이드에 위치한 카테고리*/
-        <StyledCategoryContainer>
-          <div>카테고리 유형</div>
-          {CategoryList.map(({ category, title }) => (
-            <CheckBox
-              key={category}
-              isSelected={selectedCategory === category}
-              onChange={() => handleCategorySelect(category)}
-            >
-              {title}
-            </CheckBox>
-          ))}
-        </StyledCategoryContainer>
+        <RankingCategory
+          selectedCategory={selectedCategory}
+          handleCategorySelect={handleCategorySelect}
+        />
       ) : (
-        /* isAll이 false일 때 - 등록 페이지에 위치한 카테고리*/
-        <StyledCategoryWithoutAllContainer>
-          {CategoryList.slice(1).map(({ category, title, subcategories }) => (
-            <CheckBox
-              value={category}
-              type={'radio'}
-              onChange={(event) => {
-                handleCategorySelect(category);
-                onChange(event);
-              }}
-              name={name}
-              ref={ref}
-              size="medium"
-              key={category}
-              isSelected={selectedCategory === category}
-            >{`${title} ${subcategories ?? ''}`}</CheckBox>
-          ))}
-        </StyledCategoryWithoutAllContainer>
+        <RegisterCategory
+          selectedCategory={selectedCategory}
+          handleCategorySelect={handleCategorySelect}
+        />
       )}
     </>
   );
