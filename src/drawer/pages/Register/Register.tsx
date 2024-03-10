@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { BoxButton } from '@yourssu/design-system-react';
 import { useForm, FormProvider } from 'react-hook-form';
 
+import { Loading } from '@/components/Loading/Loading';
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
 import { Input } from '@/drawer/components/Input/Input';
 import { OverviewImage } from '@/drawer/components/OverviewImage/OverviewImage';
@@ -11,6 +12,7 @@ import { ThumbnailInput } from '@/drawer/components/ThumbnailInput/ThumbnailInpu
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
+import { useRegisterProduct } from '@/drawer/hooks/useRegisterProduct';
 
 import {
   StyledContainer,
@@ -29,10 +31,11 @@ export const Register = () => {
     return !value.startsWith(REGISTER_URL[name as keyof typeof REGISTER_URL]);
   };
 
-  // ProductRegisterRequest 타입으로 수정 필요
+  const registerProductMutation = useRegisterProduct();
+
   const handleSubmit = (data: unknown) => {
     if (isChecked) {
-      console.log(data);
+      registerProductMutation.mutate(data);
     }
   };
 
@@ -49,6 +52,7 @@ export const Register = () => {
   return (
     <FormProvider {...methods}>
       <StyledContainer>
+        {registerProductMutation.isPending && <Loading />}
         <form onSubmit={methods.handleSubmit(handleSubmit)} id={'registerForm'}>
           <StyledInputContainer>
             <StyledRightContainer>
@@ -115,7 +119,13 @@ export const Register = () => {
           />
 
           <StyledRightContainer>
-            <BoxButton size={'medium'} variant={'filled'} rounding={4} width="8.125rem">
+            <BoxButton
+              size={'medium'}
+              variant={'filled'}
+              rounding={4}
+              width="8.125rem"
+              disabled={registerProductMutation.isPending}
+            >
               서비스 등록
             </BoxButton>
           </StyledRightContainer>
