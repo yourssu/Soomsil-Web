@@ -13,6 +13,7 @@ import { useTheme } from 'styled-components';
 import carouselLeftButton from '@/drawer/assets/carousel_left_button.svg';
 import carouselRightButton from '@/drawer/assets/carousel_right_button.svg';
 import { SmallDrawerCard } from '@/drawer/components/DrawerCard/SmallDrawerCard';
+import { useGetProductByProvider } from '@/drawer/hooks/useGetProductByProvider';
 import { useGetProductDetail } from '@/drawer/hooks/useGetProductDetail';
 
 import {
@@ -188,20 +189,34 @@ export const ServiceDetail = () => {
                 <StyledDescription>{data.detail.providerId}</StyledDescription>
               </StyledDescriptionPart>
             </StyledDescriptionSection>
-            <StyledMoreProductSection>
-              {data.detail.providerId}의 서비스 더보기
-              {Array.from({ length: 5 }).map(() => (
-                <SmallDrawerCard
-                  link={``}
-                  title={`TITLE`}
-                  body={data.detail.providerId}
-                  bookmarkCount={999}
-                  isBookmarked={true}
-                />
-              ))}
-            </StyledMoreProductSection>
+
+            <MoreProductSection providerId={data.detail.providerId} />
           </StyledLowerSection>
         </StyledServiceDetailContainer>
+      )}
+    </>
+  );
+};
+
+const MoreProductSection = ({ providerId }: { providerId: string }) => {
+  const { isSuccess, data } = useGetProductByProvider(providerId);
+
+  return (
+    <>
+      {isSuccess && data.productList.length > 0 && (
+        <StyledMoreProductSection>
+          {providerId}의 서비스 더보기
+          {data.productList.map(({ productTitle, count, productNo }) => (
+            <SmallDrawerCard
+              key={productNo}
+              link={`/drawer/services/${productNo}`}
+              title={productTitle}
+              body={providerId}
+              bookmarkCount={count}
+              isBookmarked={true}
+            />
+          ))}
+        </StyledMoreProductSection>
       )}
     </>
   );
