@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const drawerClient = axios.create({
-  baseURL: 'https://test.ground.yourssu.com/ground',
+  baseURL: import.meta.env.VITE_API_DRAWER_URL,
 });
