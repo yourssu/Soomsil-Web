@@ -1,8 +1,12 @@
+type ActionType = 'BROWSER' | 'DEEPLINK' | 'WEB_VIEW';
+
+type CategoryType = 'CAMPUS' | 'ETC' | 'HEALTH' | 'HOBBY' | 'IT' | 'KNOWLEDGE' | 'LIFESTYLE';
+
 export interface ProductDetailResult {
   actionContent?: string;
-  actionType: 'BROWSER' | 'DEEPLINK' | 'WEB_VIEW';
+  actionType: ActionType;
   appStoreUrl?: string;
-  category: 'CAMPUS' | 'ETC' | 'HEALTH' | 'HOBBY' | 'IT' | 'KNOWLEDGE' | 'LIFESTYLE';
+  category: CategoryType;
   count: number;
   expireDay: number;
   githubUrl?: string;
@@ -22,8 +26,8 @@ export interface ProductDetailResult {
 
 export interface ProductResult {
   actionContent?: string;
-  actionType: 'BROWSER' | 'DEEPLINK' | 'WEB_VIEW';
-  category: 'CAMPUS' | 'ETC' | 'HEALTH' | 'HOBBY' | 'IT' | 'KNOWLEDGE' | 'LIFESTYLE';
+  actionType: ActionType;
+  category: CategoryType;
   count: number;
   expireDay: number;
   introductionImage: string[];
