@@ -1,13 +1,8 @@
+import { ImageListResponse } from '../types/ImageListResponse.type';
+
 import { drawerClient } from './drawerClient';
 
-interface ImageListResponse {
-  images: {
-    imageKey: string;
-    imageUrl: string;
-  }[];
-}
-
-export const uploadImages = async (fileList: FileList) => {
+export const uploadImages = async (fileList: File[]) => {
   const formData = new FormData();
 
   for (let i = 0; i < fileList.length; i++) {
