@@ -206,7 +206,7 @@ const MoreProductSection = ({ providerId }: { providerId: string }) => {
       {isSuccess && data.productList.length > 0 && (
         <StyledMoreProductSection>
           {providerId}의 서비스 더보기
-          {data.productList.map(({ productTitle, count, productNo }) => (
+          {data.productList.map(({ productTitle, count, productNo, mainImage }) => (
             <SmallDrawerCard
               key={productNo}
               link={`/drawer/services/${productNo}`}
@@ -214,6 +214,7 @@ const MoreProductSection = ({ providerId }: { providerId: string }) => {
               body={providerId}
               bookmarkCount={count}
               isBookmarked={true}
+              smallImgSrc={mainImage}
             />
           ))}
         </StyledMoreProductSection>
