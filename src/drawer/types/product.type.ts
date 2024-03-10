@@ -17,6 +17,7 @@ export interface ProductDetailResult {
   productTitle: string;
   providerId: string;
   thumbnail: string;
+  webpageUrl?: string;
 }
 
 export interface ProductDetailResponse {
