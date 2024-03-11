@@ -17,6 +17,8 @@ export const StyledDialogContent = styled(Dialog.Content)`
   background: ${({ theme }) => theme.color.bgNormal};
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
   border-radius: 1rem;
+
+  width: 23.75rem;
   padding: 1.5rem;
 
   position: fixed;
@@ -42,25 +44,7 @@ export const StyledPpussungIcon = styled.img`
 export const StyledDialogTitle = styled(Dialog.Title)`
   padding: 0.75rem 0rem;
   color: ${({ theme }) => theme.color.textPrimary};
-
-  /* PC & Android/body18 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
-`;
-
-export const StyledDialogDescription = styled(Dialog.Description)`
-  padding: 0.5rem 0rem;
-  color: ${({ theme }) => theme.color.textTertiary};
-
-  /* body/body1 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
+  ${({ theme }) => theme.typo.body1};
 `;
 
 export const StyledButtonContainer = styled.div`

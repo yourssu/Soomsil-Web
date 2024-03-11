@@ -7,7 +7,6 @@ import {
   StyledButtonContainer,
   StyledContentInnerContainer,
   StyledDialogContent,
-  StyledDialogDescription,
   StyledDialogOverlay,
   StyledDialogTitle,
   StyledPpussungIcon,
@@ -27,9 +26,6 @@ export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
           <StyledContentInnerContainer>
             <StyledPpussungIcon src={PpussungIcon} alt="뿌슝이" />
             <StyledDialogTitle>'숨쉴때'에서 로그아웃할까요?</StyledDialogTitle>
-            <StyledDialogDescription>
-              다른 사용자의 접근을 막기 위해 어쩌구 저쩌구(생략가능)
-            </StyledDialogDescription>
           </StyledContentInnerContainer>
           <StyledButtonContainer>
             <Dialog.Close asChild>
