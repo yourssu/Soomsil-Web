@@ -24,13 +24,7 @@ export const StyledTitle = styled.div`
   margin-bottom: 0.5rem;
 
   color: ${({ theme }) => theme.color.textPrimary};
-
-  // YDS 지정이 되어 있지 않아 임시로 작업했습니다.
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%;
+  ${({ theme }) => theme.typo.subtitle3};
 `;
 
 export const StyledUpdateDate = styled.div`
@@ -67,15 +61,9 @@ export const StyledRank = styled.span<StyledRankProps>`
 export const StyledListItemKeyword = styled.div`
   width: 7.375rem;
   height: 1.6875rem;
-  
-  color: ${({ theme }) => theme.color.textPrimary}
 
-  /* PC & Android/body18 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
+  color: ${({ theme }) => theme.color.textPrimary};
+  ${({ theme }) => theme.typo.body1};
 
   white-space: nowrap;
   overflow: hidden;
