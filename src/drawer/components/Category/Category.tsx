@@ -1,17 +1,22 @@
-import { useState } from 'react';
-
 import { CheckBox } from '@yourssu/design-system-react';
 import { useFormContext } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+
+import { CategoryState } from '@/drawer/recoil/CategoryState';
 
 import { StyledCategoryContainer, StyledCategoryWithoutAllContainer } from './Category.style';
 
-interface IsAllProps {
+interface CategoryProps {
   isAll: boolean;
+  isRank?: boolean;
+  onCategorySelect: (category: string) => void;
 }
 
 interface PageCategoryProps {
   selectedCategory: string | null;
   handleCategorySelect: (category: string) => void;
+  isRank?: boolean;
 }
 
 interface CategoryInfo {
@@ -56,7 +61,9 @@ const RegisterCategory = ({ selectedCategory, handleCategorySelect }: PageCatego
   );
 };
 
-const RankingCategory = ({ selectedCategory, handleCategorySelect }: PageCategoryProps) => {
+const RankingCategory = ({ selectedCategory, handleCategorySelect, isRank }: PageCategoryProps) => {
+  const navigate = useNavigate();
+
   return (
     <StyledCategoryContainer>
       <div>카테고리 유형</div>
@@ -64,7 +71,12 @@ const RankingCategory = ({ selectedCategory, handleCategorySelect }: PageCategor
         <CheckBox
           key={category}
           isSelected={selectedCategory === category}
-          onChange={() => handleCategorySelect(category)}
+          onChange={() => {
+            handleCategorySelect(category);
+            if (!isRank) {
+              navigate('/drawer/newRelease');
+            }
+          }}
         >
           {title}
         </CheckBox>
@@ -73,11 +85,14 @@ const RankingCategory = ({ selectedCategory, handleCategorySelect }: PageCategor
   );
 };
 
-export const Category = ({ isAll }: IsAllProps) => {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+export const Category = ({ isAll, onCategorySelect, isRank }: CategoryProps) => {
+  const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
 
   const handleCategorySelect = (category: string) => {
-    setSelectedCategory((prev) => (prev === category ? null : category));
+    const newSelectedCategory = selectedCategory === category ? '' : category;
+
+    setSelectedCategory(newSelectedCategory);
+    onCategorySelect(newSelectedCategory);
   };
 
   return (
@@ -86,6 +101,7 @@ export const Category = ({ isAll }: IsAllProps) => {
         <RankingCategory
           selectedCategory={selectedCategory}
           handleCategorySelect={handleCategorySelect}
+          isRank={isRank}
         />
       ) : (
         <RegisterCategory
