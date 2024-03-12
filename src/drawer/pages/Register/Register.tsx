@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 
 import { Loading } from '@/components/Loading/Loading';
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
@@ -13,6 +13,7 @@ import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
 import { usePostRegisterProduct } from '@/drawer/hooks/usePostRegisterProduct';
+import { RegisterFormValues } from '@/drawer/types/form.type';
 
 import {
   StyledContainer,
@@ -22,7 +23,7 @@ import {
 } from './Register.style';
 
 export const Register = () => {
-  const methods = useForm();
+  const methods = useForm<RegisterFormValues>();
 
   const [linkExist, setLinkExist] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
@@ -33,7 +34,7 @@ export const Register = () => {
 
   const registerProductMutation = usePostRegisterProduct();
 
-  const handleSubmit = (data: unknown) => {
+  const handleSubmit: SubmitHandler<RegisterFormValues> = (data) => {
     if (isChecked) {
       registerProductMutation.mutate(data);
     }
