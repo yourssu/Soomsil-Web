@@ -1,4 +1,4 @@
-import { ImageListResponse } from '../types/ImageListResponse.type';
+import { ImageListResponse } from '../types/image.type';
 
 import { drawerClient } from './drawerClient';
 
