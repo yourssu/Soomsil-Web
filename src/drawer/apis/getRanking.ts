@@ -12,7 +12,6 @@ export const getRanking = async ({ responseType, category }: GetRanking) => {
       },
     })
     .then((response) => {
-      console.log(response.data);
       return response;
     });
   return response.data;
