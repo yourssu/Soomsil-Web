@@ -1,3 +1,4 @@
+import { RegisterFormValues } from '../types/form.type';
 import { ImageResult } from '../types/image.type';
 
 import { drawerClient } from './drawerClient';
@@ -9,8 +10,7 @@ const renameImageKeys = (image: ImageResult) => {
   };
 };
 
-// TODO: 추후 product 타입 수정 필요
-export const registerProduct = async (product: unknown, images: ImageResult[]) => {
+export const registerProduct = async (product: RegisterFormValues, images: ImageResult[]) => {
   const [thumbnailImage, ...introductionImages] = images;
 
   const response = await drawerClient.post('/v2/drawer', {
