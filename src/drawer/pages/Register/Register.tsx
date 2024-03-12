@@ -12,7 +12,7 @@ import { ThumbnailInput } from '@/drawer/components/ThumbnailInput/ThumbnailInpu
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
-import { useRegisterProduct } from '@/drawer/hooks/useRegisterProduct';
+import { usePostRegisterProduct } from '@/drawer/hooks/usePostRegisterProduct';
 
 import {
   StyledContainer,
@@ -31,7 +31,7 @@ export const Register = () => {
     return !value.startsWith(REGISTER_URL[name as keyof typeof REGISTER_URL]);
   };
 
-  const registerProductMutation = useRegisterProduct();
+  const registerProductMutation = usePostRegisterProduct();
 
   const handleSubmit = (data: unknown) => {
     if (isChecked) {
