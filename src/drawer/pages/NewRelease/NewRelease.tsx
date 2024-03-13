@@ -34,7 +34,7 @@ export const NewRelease = () => {
             {newReleases.map((product) => (
               <BigDrawerCard
                 key={product.productNo}
-                link={''}
+                link={`/drawer/services/${product.productNo}`}
                 title={product.productTitle}
                 body={product.productSubTitle}
                 bookmarkCount={product.productBookmarkKey}

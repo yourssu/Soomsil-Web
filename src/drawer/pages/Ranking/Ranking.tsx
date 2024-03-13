@@ -54,7 +54,7 @@ export const Ranking = () => {
             {rankings.slice(0, 3).map((product) => (
               <BigDrawerCard
                 key={product.productNo}
-                link={''}
+                link={`/drawer/services/${product.productNo}`}
                 title={product.productTitle}
                 body={product.productSubTitle}
                 bookmarkCount={product.productBookmarkKey}
@@ -84,7 +84,7 @@ export const Ranking = () => {
             {newReleases.slice(0, 3).map((product) => (
               <BigDrawerCard
                 key={product.productNo}
-                link={''}
+                link={`/drawer/services/${product.productNo}`}
                 title={product.productTitle}
                 body={product.productSubTitle}
                 bookmarkCount={product.productBookmarkKey}
