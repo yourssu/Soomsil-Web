@@ -112,33 +112,31 @@ export const ServiceDetail = () => {
               )}
               <StyledIconButtonContainer>
                 <button>
-                  {/* TODO: 추후 색상 변경 필요 */}
                   <IconContext.Provider
                     value={{
-                      color: theme.color.violetItemPrimary,
+                      color: theme.color.pointViolet,
                       size: '1.5rem',
                     }}
                   >
                     <IcShareLine />
                   </IconContext.Provider>
                 </button>
-                <StyledIconLabelText $color={theme.color.violetItemPrimary}>
-                  SHARE
-                </StyledIconLabelText>
+                <StyledIconLabelText $color={theme.color.pointViolet}>SHARE</StyledIconLabelText>
               </StyledIconButtonContainer>
               <StyledIconButtonContainer>
                 <button>
-                  {/* TODO: 추후 색상 변경 필요 */}
                   <IconContext.Provider
                     value={{
-                      color: '#FDD655',
+                      color: theme.color.pointYellow,
                       size: '1.5rem',
                     }}
                   >
                     {data.isBookmarked ? <IcStarFilled /> : <IcStarLine />}
                   </IconContext.Provider>
                 </button>
-                <StyledIconLabelText $color={'#FDD655'}>Recommend</StyledIconLabelText>
+                <StyledIconLabelText $color={theme.color.pointYellow}>
+                  Recommend
+                </StyledIconLabelText>
               </StyledIconButtonContainer>
             </StyledServiceActionContainer>
           </StyledBackgroundImageContainer>
