@@ -4,7 +4,7 @@ import { useGetProductByProvider } from '@/drawer/hooks/useGetProductByProvider'
 import { StyledMoreProductSection } from './MoreProductSection.style';
 
 export const MoreProductSection = ({ providerId }: { providerId: string }) => {
-  const { isSuccess, data } = useGetProductByProvider(providerId);
+  const { isSuccess, data } = useGetProductByProvider({ providerId });
 
   return (
     <>
