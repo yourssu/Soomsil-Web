@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom';
+
 import { CardLayout } from '@/drawer/components/CardLayout/CardLayout';
 import { Category } from '@/drawer/components/Category/Category';
 
@@ -11,7 +13,7 @@ import {
 const Dummy = Array.from({ length: 12 }).map((_, index) => index);
 
 export const Provider = () => {
-  const providerId = 'Test Name';
+  const { providerId } = useParams();
 
   return (
     <StyledContainer>
