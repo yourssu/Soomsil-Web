@@ -8,5 +8,6 @@ export const useGetProductDetail = (productNo: number) => {
     queryFn: () => {
       return getProductDetail(productNo);
     },
+    select: (data) => data.detail,
   });
 };

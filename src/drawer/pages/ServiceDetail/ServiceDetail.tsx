@@ -74,13 +74,13 @@ export const ServiceDetail = () => {
     <>
       {isSuccess && (
         <StyledServiceDetailContainer>
-          <StyledBackgroundImageContainer $backgroundImage={data.detail.thumbnail}>
-            <StyledServiceTitleText>{data.detail.productTitle}</StyledServiceTitleText>
-            <StyledServiceDeveloperText>{data.detail.providerId}</StyledServiceDeveloperText>
+          <StyledBackgroundImageContainer $backgroundImage={data.thumbnail}>
+            <StyledServiceTitleText>{data.productTitle}</StyledServiceTitleText>
+            <StyledServiceDeveloperText>{data.providerId}</StyledServiceDeveloperText>
             <StyledServiceInfoContainer>
-              <StyledThumbnailImage src={data.detail.thumbnail} />
+              <StyledThumbnailImage src={data.thumbnail} />
               <StyledCategoryContainer>
-                <StyledCategoryText>{Category[data.detail.category]}</StyledCategoryText>
+                <StyledCategoryText>{Category[data.category]}</StyledCategoryText>
                 <StyledCategoryHintText>카테고리</StyledCategoryHintText>
               </StyledCategoryContainer>
             </StyledServiceInfoContainer>
@@ -92,13 +92,13 @@ export const ServiceDetail = () => {
                 variant="filled"
                 width="200px"
                 onClick={() => {
-                  const { appStoreUrl, googlePlayUrl, webpageUrl } = data.detail;
+                  const { appStoreUrl, googlePlayUrl, webpageUrl } = data;
                   window.open(appStoreUrl || googlePlayUrl || webpageUrl);
                 }}
               >
                 DOWNLOAD
               </BoxButton>
-              {data.detail.githubUrl && (
+              {data.githubUrl && (
                 /* TODO: 버튼 사이즈 반응형 적용 필요*/
                 <BoxButton
                   size="medium"
@@ -106,7 +106,7 @@ export const ServiceDetail = () => {
                   variant="tinted"
                   width="200px"
                   onClick={() => {
-                    window.open(data.detail.githubUrl);
+                    window.open(data.githubUrl);
                   }}
                 >
                   Github
@@ -137,7 +137,7 @@ export const ServiceDetail = () => {
                       size: '1.5rem',
                     }}
                   >
-                    {data.detail.isBookmarked ? <IcStarFilled /> : <IcStarLine />}
+                    {data.isBookmarked ? <IcStarFilled /> : <IcStarLine />}
                   </IconContext.Provider>
                 </button>
                 <StyledIconLabelText $color={'#FDD655'}>Recommend</StyledIconLabelText>
@@ -147,7 +147,7 @@ export const ServiceDetail = () => {
           <StyledLowerSection>
             <StyledDescriptionSection>
               <StyledCarousel ref={scrollRef}>
-                {data.detail.introductionImage.length > 1 && (
+                {data.introductionImage.length > 1 && (
                   <>
                     <StyledCarouselButton
                       $backgroundImage={carouselLeftButton}
@@ -165,14 +165,14 @@ export const ServiceDetail = () => {
                     />
                   </>
                 )}
-                {data.detail.introductionImage.map((imageSrc) => (
+                {data.introductionImage.map((imageSrc) => (
                   <StyledProductImage src={imageSrc} key={imageSrc} />
                 ))}
               </StyledCarousel>
               <StyledDescriptionPart>
                 <StyledSubtitle>{`추천`}</StyledSubtitle>
                 <StyledDescription>
-                  {data.detail.count}+
+                  {data.count}+
                   <IconContext.Provider value={{ size: '15px', color: '#FDD655' }}>
                     <IcStarFilled />
                   </IconContext.Provider>
@@ -181,16 +181,16 @@ export const ServiceDetail = () => {
 
               <StyledDescriptionPart>
                 <StyledSubtitle>{`서비스 소개`}</StyledSubtitle>
-                <StyledDescription>{data.detail.productContent}</StyledDescription>
+                <StyledDescription>{data.productContent}</StyledDescription>
               </StyledDescriptionPart>
 
               <StyledDescriptionPart>
                 <StyledSubtitle>{`저작권`}</StyledSubtitle>
-                <StyledDescription>{data.detail.providerId}</StyledDescription>
+                <StyledDescription>{data.providerId}</StyledDescription>
               </StyledDescriptionPart>
             </StyledDescriptionSection>
 
-            <MoreProductSection providerId={data.detail.providerId} />
+            <MoreProductSection providerId={data.providerId} />
           </StyledLowerSection>
         </StyledServiceDetailContainer>
       )}
@@ -203,10 +203,10 @@ const MoreProductSection = ({ providerId }: { providerId: string }) => {
 
   return (
     <>
-      {isSuccess && data.productList.length > 0 && (
+      {isSuccess && data.length > 0 && (
         <StyledMoreProductSection>
           {providerId}의 서비스 더보기
-          {data.productList.map(({ productTitle, count, productNo, mainImage }) => (
+          {data.map(({ productTitle, count, productNo, mainImage }) => (
             <SmallDrawerCard
               key={productNo}
               link={`/drawer/services/${productNo}`}

@@ -8,5 +8,6 @@ export const useGetProductByProvider = (providerId: string) => {
     queryFn: () => {
       return getProductByProvider(providerId);
     },
+    select: (data) => data.productList,
   });
 };
