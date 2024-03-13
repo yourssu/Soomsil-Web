@@ -5,7 +5,7 @@ import { StyledCardLayoutContainer } from './CardLayout.style';
 
 interface CardLayoutProps {
   data: any[]; // ProductResult[] 타입으로 수정 필요
-  type: 'SEARCH' | 'STAR' | 'MYDRAWER';
+  type: 'SEARCH' | 'STAR' | 'MYDRAWER' | 'PROVIDER';
 }
 
 export const CardLayout = ({ data, type }: CardLayoutProps) => {
