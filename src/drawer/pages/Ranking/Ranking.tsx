@@ -35,7 +35,7 @@ export const Ranking = () => {
 
   return (
     <StyledContainer>
-      <Category isAll={true} onCategorySelect={handleCategorySelect} />
+      <Category isAll={true} handleCategorySelect={handleCategorySelect} />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>

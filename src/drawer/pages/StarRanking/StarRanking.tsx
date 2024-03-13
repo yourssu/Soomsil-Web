@@ -21,7 +21,7 @@ export const StarRanking = () => {
 
   return (
     <StyledContainer>
-      <Category isAll={true} isRank={true} onCategorySelect={handleCategorySelect} />
+      <Category isAll={true} isRank={true} handleCategorySelect={handleCategorySelect} />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>

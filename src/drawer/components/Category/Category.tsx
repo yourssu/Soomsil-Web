@@ -7,16 +7,17 @@ import { CategoryState } from '@/drawer/recoil/CategoryState';
 
 import { StyledCategoryContainer, StyledCategoryWithoutAllContainer } from './Category.style';
 
-interface CategoryProps {
-  isAll: boolean;
+interface CategoryCommonProps {
   isRank?: boolean;
-  onCategorySelect: (category: string) => void;
+  handleCategorySelect?: (category: string) => void;
 }
 
-interface PageCategoryProps {
+interface CategoryProps extends CategoryCommonProps {
+  isAll: boolean;
+}
+
+interface PageCategoryProps extends CategoryCommonProps {
   selectedCategory: string | null;
-  handleCategorySelect: (category: string) => void;
-  isRank?: boolean;
 }
 
 interface CategoryInfo {
@@ -47,7 +48,7 @@ const RegisterCategory = ({ selectedCategory, handleCategorySelect }: PageCatego
           value={category}
           type={'radio'}
           onChange={(event) => {
-            handleCategorySelect(category);
+            handleCategorySelect?.(category);
             onChange(event);
           }}
           name={name}
@@ -72,7 +73,7 @@ const RankingCategory = ({ selectedCategory, handleCategorySelect, isRank }: Pag
           key={category}
           isSelected={selectedCategory === category}
           onChange={() => {
-            handleCategorySelect(category);
+            handleCategorySelect?.(category);
             if (!isRank) {
               navigate('/drawer/newRelease');
             }
@@ -85,14 +86,14 @@ const RankingCategory = ({ selectedCategory, handleCategorySelect, isRank }: Pag
   );
 };
 
-export const Category = ({ isAll, onCategorySelect, isRank }: CategoryProps) => {
+export const Category = ({ isAll, handleCategorySelect, isRank }: CategoryProps) => {
   const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
 
-  const handleCategorySelect = (category: string) => {
+  const handleCategorySelectData = (category: string) => {
     const newSelectedCategory = selectedCategory === category ? '' : category;
 
     setSelectedCategory(newSelectedCategory);
-    onCategorySelect(newSelectedCategory);
+    handleCategorySelect?.(newSelectedCategory);
   };
 
   return (
@@ -100,13 +101,13 @@ export const Category = ({ isAll, onCategorySelect, isRank }: CategoryProps) => 
       {isAll ? (
         <RankingCategory
           selectedCategory={selectedCategory}
-          handleCategorySelect={handleCategorySelect}
+          handleCategorySelect={handleCategorySelectData}
           isRank={isRank}
         />
       ) : (
         <RegisterCategory
           selectedCategory={selectedCategory}
-          handleCategorySelect={handleCategorySelect}
+          handleCategorySelect={handleCategorySelectData}
         />
       )}
     </>

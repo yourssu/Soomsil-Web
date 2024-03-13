@@ -21,7 +21,7 @@ export const NewRelease = () => {
 
   return (
     <StyledContainer>
-      <Category isAll={true} onCategorySelect={handleCategorySelect} />
+      <Category isAll={true} handleCategorySelect={handleCategorySelect} />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>
