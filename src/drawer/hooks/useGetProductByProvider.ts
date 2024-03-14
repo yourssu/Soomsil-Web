@@ -10,7 +10,7 @@ export const useGetProductByProvider = ({
   page?: number;
 }) => {
   return useQuery({
-    queryKey: [providerId],
+    queryKey: ['productByProvider', providerId],
     queryFn: () => {
       return getProductByProvider({ providerId, page });
     },
