@@ -34,7 +34,6 @@ export const Ranking = () => {
             />
           </StyledBetweenContainer>
           <StyledCardContainer>
-            {/* 추후 card id로 map key index 수정 필요 */}
             {Array.from({ length: 3 }).map((_, index) => (
               <BigDrawerCard
                 key={index}
@@ -63,7 +62,6 @@ export const Ranking = () => {
             />
           </StyledBetweenContainer>
           <StyledCardContainer>
-            {/* 추후 card id로 map key index 수정 필요 */}
             {Array.from({ length: 3 }).map((_, index) => (
               <BigDrawerCard
                 key={index}
