@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
 import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
 import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
 import { Category } from '@/drawer/components/Category/Category';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
+import { useGetMain } from '@/drawer/hooks/useGetMain';
 
 import {
   StyledBetweenContainer,
@@ -16,32 +21,42 @@ import {
 } from './Ranking.style';
 
 export const Ranking = () => {
+  const navigate = useNavigate();
+
+  const { newReleases, rankings, setSelectedCategory } = useGetMain();
+
+  useEffect(() => {
+    setSelectedCategory('');
+  }, []);
+
   return (
     <StyledContainer>
-      <Category isAll={true} />
+      <Category isAll={true} handleCategorySelect={setSelectedCategory} />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>
             <StyledTextContainer>
               <StyledTitle>Star Ranking</StyledTitle>
-              <StyledDescription>service service service</StyledDescription>
+              <StyledDescription>실시간 랭킹을 확인해보세요.</StyledDescription>
             </StyledTextContainer>
             <GrayButton
               text={'더보기'}
               onClick={() => {
-                // TODO: Navigation
+                navigate('/drawer/starRanking');
               }}
             />
           </StyledBetweenContainer>
           <StyledCardContainer>
-            {Array.from({ length: 3 }).map((_, index) => (
+            {rankings.slice(0, 3).map((product) => (
               <BigDrawerCard
-                key={index}
-                link={''}
-                title={'service'}
-                body={'service introduction'}
-                bookmarkCount={999}
-                isBookmarked={true}
+                key={product.productNo}
+                link={`/drawer/services/${product.productNo}`}
+                title={product.productTitle}
+                body={product.productSubTitle}
+                bookmarkCount={product.productBookmarkKey}
+                isBookmarked={product.isBookmarked}
+                bigImgSrc={product.mainImage}
+                smallImgSrc={product.introductionImage[0]}
               />
             ))}
           </StyledCardContainer>
@@ -52,24 +67,26 @@ export const Ranking = () => {
           <StyledBetweenContainer>
             <StyledTextContainer>
               <StyledTitle>New Releases</StyledTitle>
-              <StyledDescription>service service service</StyledDescription>
+              <StyledDescription>새로 출시된 서비스를 확인해보세요.</StyledDescription>
             </StyledTextContainer>
             <GrayButton
               text={'더보기'}
               onClick={() => {
-                // TODO: Navigation
+                navigate('/drawer/newRelease');
               }}
             />
           </StyledBetweenContainer>
           <StyledCardContainer>
-            {Array.from({ length: 3 }).map((_, index) => (
+            {newReleases.slice(0, 3).map((product) => (
               <BigDrawerCard
-                key={index}
-                link={''}
-                title={'service'}
-                body={'service introduction'}
-                bookmarkCount={999}
-                isBookmarked={true}
+                key={product.productNo}
+                link={`/drawer/services/${product.productNo}`}
+                title={product.productTitle}
+                body={product.productSubTitle}
+                bookmarkCount={product.productBookmarkKey}
+                isBookmarked={product.isBookmarked}
+                bigImgSrc={product.mainImage}
+                smallImgSrc={product.introductionImage[0]}
               />
             ))}
           </StyledCardContainer>
