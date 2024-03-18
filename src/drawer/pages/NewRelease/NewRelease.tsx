@@ -15,13 +15,9 @@ import {
 export const NewRelease = () => {
   const { newReleases, setSelectedCategory } = useGetNewRelease();
 
-  const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category);
-  };
-
   return (
     <StyledContainer>
-      <Category isAll={true} handleCategorySelect={handleCategorySelect} />
+      <Category isAll={true} handleCategorySelect={setSelectedCategory} />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>

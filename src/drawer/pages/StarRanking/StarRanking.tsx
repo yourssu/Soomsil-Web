@@ -15,13 +15,9 @@ import {
 export const StarRanking = () => {
   const { rankings, setSelectedCategory } = useGetStarRank();
 
-  const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category);
-  };
-
   return (
     <StyledContainer>
-      <Category isAll={true} isRank={true} handleCategorySelect={handleCategorySelect} />
+      <Category isAll={true} isRank={true} handleCategorySelect={setSelectedCategory} />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>
