@@ -21,7 +21,7 @@ export const StyledInnerContainer = styled.div`
 `;
 
 export const StyledMenuListTitle = styled.span`
-  ${({ theme }) => theme.typo.subtitle1};
+  ${({ theme }) => theme.typo.subtitle3};
   color: ${({ theme }) => theme.color.textPrimary};
 `;
 
@@ -31,9 +31,11 @@ export const StyledMenuContainer = styled.div`
 
 export const StyledMenuTitle = styled.div`
   padding: 0.75rem 1.25rem;
+  ${({ theme }) => theme.typo.subtitle6};
 `;
 
 export const StyledListItem = styled(ListItem)`
   border-radius: 1rem;
   padding: 0rem 1.25rem;
+  ${({ theme }) => theme.typo.body1};
 `;

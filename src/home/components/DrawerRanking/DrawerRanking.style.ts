@@ -18,25 +18,13 @@ export const StyledTitleContainer = styled.div`
 
 export const StyledTitle = styled.div`
   color: ${({ theme }) => theme.color.textPrimary};
-
-  // YDS 지정이 되어 있지 않아 임시로 작업했습니다.
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%;
+  ${({ theme }) => theme.typo.subtitle3};
 `;
 
 export const StyledAllViewButton = styled(Link)`
   padding-right: 0.1875rem;
   color: ${({ theme }) => theme.color.textTertiary};
-
-  // YDS 지정이 되어 있지 않아 임시로 작업했습니다.
-  font-family: Pretendard;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  ${({ theme }) => theme.typo.button3};
 `;
 
 export const StyledRankCardContainer = styled.div`
