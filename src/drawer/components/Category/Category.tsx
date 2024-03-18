@@ -64,6 +64,11 @@ const RegisterCategory = ({ selectedCategory, handleCategorySelect }: PageCatego
 
 const RankingCategory = ({ selectedCategory, handleCategorySelect, isRank }: PageCategoryProps) => {
   const navigate = useNavigate();
+  const handleCheckRank = () => {
+    if (!isRank) {
+      navigate('/drawer/newRelease');
+    }
+  };
 
   return (
     <StyledCategoryContainer>
@@ -74,9 +79,7 @@ const RankingCategory = ({ selectedCategory, handleCategorySelect, isRank }: Pag
           isSelected={selectedCategory === category}
           onChange={() => {
             handleCategorySelect?.(category);
-            if (!isRank) {
-              navigate('/drawer/newRelease');
-            }
+            handleCheckRank();
           }}
         >
           {title}
