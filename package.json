@@ -23,6 +23,7 @@
     "react-lottie": "^1.2.4",
     "react-router-dom": "^6.21.0",
     "recoil": "^0.7.7",
+    "recoil-persist": "^5.1.0",
     "styled-components": "^6.1.2",
     "use-debounce": "^10.0.0"
   },

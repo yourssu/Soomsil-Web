@@ -14,10 +14,12 @@ export const StyledContainer = styled.div<StyledContainerProps>`
 
 interface StyledThumbnailProps {
   $width?: number;
+  $height?: number;
   $borderRadius: number;
 }
 export const StyledThumbnail = styled.img<StyledThumbnailProps>`
   width: ${(props) => `${props.$width}rem`};
+  height: ${(props) => `${props.$height}rem`};
   border-radius: ${(props) => `${props.$borderRadius}rem`};
   box-shadow:
     0px 1px 3px 1px rgba(60, 64, 67, 0.15),
