@@ -13,7 +13,11 @@ export const useGetStarRank = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getRanking({ responseType: 'WEB', category: selectedCategory });
+      const response = await getRanking({
+        responseType: 'WEB',
+        category: selectedCategory,
+        page: 0,
+      });
       setRankings(response.productList);
     };
 

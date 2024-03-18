@@ -12,11 +12,16 @@ export const useGetNewRelease = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getNewRelease({ responseType: 'WEB', category: selectedCategory });
+      const response = await getNewRelease({
+        responseType: 'WEB',
+        category: selectedCategory,
+        page: 0,
+      });
       setNewReleases(response.productList);
     };
 
     fetchData();
+    console.log(newReleases);
   }, [selectedCategory]);
 
   return { newReleases, selectedCategory, setSelectedCategory };
