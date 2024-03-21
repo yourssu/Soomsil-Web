@@ -7,7 +7,6 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:import/recommended',
     'prettier',
-    'plugin:storybook/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
