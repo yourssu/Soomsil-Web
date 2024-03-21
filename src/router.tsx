@@ -9,7 +9,7 @@ import { ServiceDetail } from './drawer/pages/ServiceDetail/ServiceDetail';
 import { StarRanking } from './drawer/pages/StarRanking/StarRanking';
 import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
 import { Home } from './home/pages/Home/Home';
-import { LoginPage } from './home/pages/LoginPage';
+import { LoginPage } from './home/pages/LoginPage/Login';
 import { Mypage } from './home/pages/Mypage/Mypage';
 import { Search } from './search/pages/Search/Search';
 
