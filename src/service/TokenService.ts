@@ -39,7 +39,6 @@ class TokenService {
     this.cookie.remove('email', { path: '/' });
     this.cookie.remove('name', { path: '/' });
     this.cookie.remove('id', { path: '/' });
-    console.log('로그아웃 끝!');
   }
   get headers() {
     return {

@@ -1,6 +1,6 @@
 import { PostAuthSignInData } from '../types/Auth';
 
-import customedAxios from './customedAxios';
+import { customedAxios } from './customedAxios';
 interface LoginProps {
   email: string;
   password: string;

@@ -23,7 +23,7 @@ export const HomeLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <StyledLayout>
-      {router.pathname === '/' ? <Nav isLoggedIn={isLoggedIn} /> : null}
+      {router.pathname === '/' && <Nav isLoggedIn={isLoggedIn} />}
       {children || <Outlet />}
     </StyledLayout>
   );
