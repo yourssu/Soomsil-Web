@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { IcPlusLine, IconContext } from '@yourssu/design-system-react';
+import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 
 import {
@@ -13,12 +14,17 @@ import {
 } from './ThumbnailInput.style';
 
 interface StyledThumbnailProps {
-  isWarned?: boolean;
+  name: string;
 }
 
-export const ThumbnailInput = ({ isWarned }: StyledThumbnailProps) => {
+export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
+  const { register, formState, getValues, setValue } = useFormContext();
+  const { onChange, ref } = register(name, { required: true });
+
   const [postImg, setPostImg] = useState<File | null>();
   const [isPreview, setIsPreview] = useState<string | null>('');
+  const [isWarned, setIsWarned] = useState<boolean>(false);
+
   const theme = useTheme();
 
   const handleChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +33,8 @@ export const ThumbnailInput = ({ isWarned }: StyledThumbnailProps) => {
       if (file && file.type.substring(0, 5) === 'image') {
         setPostImg(file);
       } else {
+        alert('이미지 파일을 첨부해주세요.');
+        setValue(name, null);
         setPostImg(null);
       }
     }
@@ -39,10 +47,16 @@ export const ThumbnailInput = ({ isWarned }: StyledThumbnailProps) => {
         setIsPreview(reader.result as string);
       };
       reader.readAsDataURL(postImg);
+      setIsWarned(false);
     } else {
       setIsPreview(null);
     }
   }, [postImg]);
+
+  useEffect(() => {
+    const value = getValues(name);
+    if (formState.isSubmitted && !value.length) setIsWarned(true);
+  }, [formState, getValues, name]);
 
   return (
     <StyledThumbnailContainer>
@@ -52,10 +66,14 @@ export const ThumbnailInput = ({ isWarned }: StyledThumbnailProps) => {
       </StyledThumbnailTitleContainer>
       <input
         id="inputFile"
-        name="img"
         type="file"
         accept="image/*"
-        onChange={handleChangeImg}
+        onChange={(event) => {
+          handleChangeImg(event);
+          onChange(event);
+        }}
+        name={name}
+        ref={ref}
         style={{ display: 'none' }}
       />
       <StyledThumbnailNone htmlFor="inputFile">

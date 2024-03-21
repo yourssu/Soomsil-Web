@@ -45,7 +45,7 @@ export const SearchKeyword = () => {
       <StyledImage src={RealTimeKeywordImage} alt="뿌슝이" />
       <StyledListContainer>
         {Dummy.keyword.map((keyword, index) => (
-          <Link key={keyword} to={`/search?keyword=${keyword}`}>
+          <Link key={keyword} to={`/search?query=${keyword}`}>
             <StyledListItem
               leftIcon={<StyledRank $rank={index + 1}>{index + 1}</StyledRank>}
               rightIcon={

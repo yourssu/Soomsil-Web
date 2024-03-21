@@ -6,7 +6,7 @@ import { Ranking } from './drawer/pages/Ranking/Ranking';
 import { Register } from './drawer/pages/Register/Register';
 import { ServiceDetail } from './drawer/pages/ServiceDetail/ServiceDetail';
 import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
-import { Home } from './home/pages/Home';
+import { Home } from './home/pages/Home/Home';
 import { LoginPage } from './home/pages/LoginPage';
 import { Mypage } from './home/pages/Mypage/Mypage';
 import { Search } from './search/pages/Search/Search';

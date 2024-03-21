@@ -46,12 +46,12 @@ export const StyledSettingButton = styled.button`
 `;
 
 export const StyledUserNickname = styled.span`
-  ${({ theme }) => theme.typo.subtitle1};
+  ${({ theme }) => theme.typo.subtitle3};
   color: ${({ theme }) => theme.color.textSecondary};
 `;
 
 export const StyledUserMail = styled.span`
-  ${({ theme }) => theme.typo.subtitle2};
+  ${({ theme }) => theme.typo.subtitle5};
   color: ${({ theme }) => theme.color.textTertiary};
 `;
 
