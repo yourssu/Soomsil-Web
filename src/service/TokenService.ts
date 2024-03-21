@@ -9,36 +9,17 @@ class TokenService {
   setRefreshToken(token: string) {
     this.cookie.set('refreshToken', token, { path: '/' });
   }
-  setId(id: string) {
-    this.cookie.set('id', id, { path: '/' });
-  }
-  setName(name: string) {
-    this.cookie.set('name', name, { path: '/' });
-  }
-  setEmail(email: string) {
-    this.cookie.set('email', email, { path: '/' });
-  }
+
   getAccessToken() {
     return this.cookie.get('accessToken');
   }
   getRefreshToken() {
     return this.cookie.get('refreshToken');
   }
-  getId() {
-    return this.cookie.get('id');
-  }
-  getName() {
-    return this.cookie.get('name');
-  }
-  getEmail() {
-    return this.cookie.get('email');
-  }
+
   logout() {
     this.cookie.remove('accessToken', { path: '/' });
     this.cookie.remove('refreshToken', { path: '/' });
-    this.cookie.remove('email', { path: '/' });
-    this.cookie.remove('name', { path: '/' });
-    this.cookie.remove('id', { path: '/' });
   }
   get headers() {
     return {
