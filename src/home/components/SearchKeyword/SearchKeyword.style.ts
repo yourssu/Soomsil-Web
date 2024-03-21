@@ -61,11 +61,6 @@ export const StyledRank = styled.span<StyledRankProps>`
 export const StyledListItemKeyword = styled.div`
   width: 7.375rem;
   height: 1.6875rem;
-<<<<<<< HEAD
-
-  color: ${({ theme }) => theme.color.textPrimary};
-=======
->>>>>>> b70bc6ef81a2ec9748e5eba52effe44374956004
 
   color: ${({ theme }) => theme.color.textPrimary};
   ${({ theme }) => theme.typo.body1};

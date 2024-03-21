@@ -1,4 +1,4 @@
-import { PostAuthSignInData } from '../types/Auth';
+import { PostAuthSignInData } from '../types/Auth.type';
 
 import { customedAxios } from './customedAxios';
 interface LoginProps {
