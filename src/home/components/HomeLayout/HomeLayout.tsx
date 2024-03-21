@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
 
-import moment from 'moment';
+import { isPast } from 'date-fns';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import api from '@/service/TokenService';
@@ -14,10 +14,12 @@ export const HomeLayout = ({ children }: PropsWithChildren) => {
   const accessToken = api.getAccessToken();
   const accessExpiredIn = sessionStorage.getItem('accessExpiredIn');
   useEffect(() => {
-    if (accessToken == null || moment(accessExpiredIn).diff(moment()) < 0) {
-      setIsLoggedIn(false);
-    } else {
-      setIsLoggedIn(true);
+    if (accessExpiredIn) {
+      if (accessToken == null || isPast(new Date(accessExpiredIn))) {
+        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(true);
+      }
     }
   }, [accessToken, accessExpiredIn]);
 

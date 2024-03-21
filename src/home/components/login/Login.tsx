@@ -95,8 +95,8 @@ export const Login = () => {
           />
         </StyledInputContainer>
 
-        <BoxButton size="large" variant="filled" rounding={8}>
-          <div onClick={handleLoginClick}>로그인</div>
+        <BoxButton size="large" variant="filled" rounding={8} onClick={handleLoginClick}>
+          로그인
         </BoxButton>
 
         <StyledBottomContainer>
