@@ -1,4 +1,5 @@
-import { RankDrawerCard } from '../RankDrawerCard/RankDrawerCard';
+import { RankDrawerCard } from '@/home/components/RankDrawerCard/RankDrawerCard';
+import { useGetDrawerRanking } from '@/home/hooks/useGetDrawerRanking';
 
 import {
   StyledAllViewButton,
@@ -8,13 +9,8 @@ import {
   StyledTitleContainer,
 } from './DrawerRanking.style';
 
-const Dummy = [
-  { link: '', title: 'title', body: 'description', bookmarkCount: 999, isBookmarked: false },
-  { link: '', title: 'title1', body: 'description', bookmarkCount: 999, isBookmarked: true },
-  { link: '', title: 'title2', body: 'description', bookmarkCount: 999, isBookmarked: false },
-];
-
 export const DrawerRanking = () => {
+  const { data } = useGetDrawerRanking();
   return (
     <StyledContainer>
       <StyledTitleContainer>
@@ -22,14 +18,13 @@ export const DrawerRanking = () => {
         <StyledAllViewButton to="/drawer">전체보기</StyledAllViewButton>
       </StyledTitleContainer>
       <StyledRankCardContainer>
-        {Dummy.map((drawerItem) => (
-          /* API 연동할 때 키 값 변경하기 => 프로덕트 고유 값으로 */
+        {data?.productList.map((drawerItem) => (
           <RankDrawerCard
-            key={drawerItem.title}
-            link={drawerItem.link}
-            title={drawerItem.title}
-            body={drawerItem.body}
-            bookmarkCount={drawerItem.bookmarkCount}
+            key={drawerItem.productNo}
+            link={`/drawerservices/${drawerItem.productNo}`}
+            title={drawerItem.productTitle}
+            body={drawerItem.productSubTitle}
+            bookmarkCount={drawerItem.count}
             isBookmarked={drawerItem.isBookmarked}
           />
         ))}
