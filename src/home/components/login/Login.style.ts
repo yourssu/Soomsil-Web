@@ -69,6 +69,15 @@ export const StyledInput = styled.input`
   padding-bottom: 0.75rem;
   padding-right: 1rem;
   padding-left: 1rem;
+  /* 자동 완성 시 스타일 변경 */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
+    box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
+    -webkit-text-fill-color: ${({ theme }) => theme.color.textTertiary} !important;
+  }
 `;
 export const StyledFailedInput = styled.input`
   width: 100%;
@@ -85,6 +94,15 @@ export const StyledFailedInput = styled.input`
   padding-bottom: 0.75rem;
   padding-right: 1rem;
   padding-left: 1rem;
+  /* 자동 완성 시 스타일 변경 */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
+    box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
+    -webkit-text-fill-color: ${({ theme }) => theme.color.textTertiary} !important;
+  }
 `;
 export const StyledFailedLeftInput = styled.input`
   width: 100%;
@@ -101,6 +119,15 @@ export const StyledFailedLeftInput = styled.input`
   padding-bottom: 0.75rem;
   padding-right: 1rem;
   padding-left: 1rem;
+  /* 자동 완성 시 스타일 변경 */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
+    box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
+    -webkit-text-fill-color: ${({ theme }) => theme.color.textTertiary} !important;
+  }
 `;
 export const StyledFailedInputSuffix = styled.div`
   background-color: ${({ theme }) => theme.color.inputFieldElevated};
