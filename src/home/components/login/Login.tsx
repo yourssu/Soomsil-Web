@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { BoxButton } from '@yourssu/design-system-react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -18,10 +20,15 @@ import {
   StyledInputRowContainer,
   StyledBottomContainer,
   StyledButtonDivider,
+  StyledFailedInput,
+  StyledErrorMessageContainer,
+  StyledFailedLeftInput,
+  StyledFailedRightInputSuffix,
 } from './Login.style';
 
 export const Login = () => {
   const { register, control } = useForm();
+  const [failedLogin, setFailedLogin] = useState(false);
   const navigate = useNavigate();
   const emailQuery = useWatch({
     name: 'email',
@@ -40,11 +47,15 @@ export const Login = () => {
 
     const res = await postAuthSignIn(loginParams);
 
-    if (res) {
-      api.setAccessToken(res.accessToken);
-      api.setRefreshToken(res.refreshToken);
-      sessionStorage.setItem('accessExpiredIn', res.accessTokenExpiredIn.toString());
+    if (res.data) {
+      api.setAccessToken(res.data.accessToken);
+      api.setRefreshToken(res.data.refreshToken);
+      sessionStorage.setItem('accessExpiredIn', res.data.accessTokenExpiredIn.toString());
       navigate('/');
+    } else if (res.error) {
+      if (res.error.status == 401) {
+        setFailedLogin(true);
+      }
     }
   };
 
@@ -59,18 +70,35 @@ export const Login = () => {
             control={control}
             name="email"
             render={({ field }) => (
-              <StyledInputRowContainer>
-                <StyledInput
-                  placeholder="ppushoong"
-                  {...register('email')}
-                  type="text"
-                  onChange={(e) => {
-                    field.onChange(e.target.value);
-                  }}
-                  value={emailQuery}
-                />
-                <StyledInputSuffix>@soongsil.ac.kr</StyledInputSuffix>
-              </StyledInputRowContainer>
+              <div>
+                {failedLogin ? (
+                  <StyledInputRowContainer>
+                    <StyledFailedLeftInput
+                      placeholder="ppushoong"
+                      {...register('email')}
+                      type="text"
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                      }}
+                      value={emailQuery}
+                    />
+                    <StyledFailedRightInputSuffix>@soongsil.ac.kr</StyledFailedRightInputSuffix>
+                  </StyledInputRowContainer>
+                ) : (
+                  <StyledInputRowContainer>
+                    <StyledInput
+                      placeholder="ppushoong"
+                      {...register('email')}
+                      type="text"
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                      }}
+                      value={emailQuery}
+                    />
+                    <StyledInputSuffix>@soongsil.ac.kr</StyledInputSuffix>
+                  </StyledInputRowContainer>
+                )}
+              </div>
             )}
           />
         </StyledInputContainer>
@@ -81,19 +109,37 @@ export const Login = () => {
             name="password"
             render={({ field }) => (
               <StyledInputRowContainer>
-                <StyledInput
-                  placeholder="영문숫자포함10글자"
-                  {...register('password')}
-                  type="password"
-                  onChange={(e) => {
-                    field.onChange(e.target.value);
-                  }}
-                  value={passwordQuery}
-                />
+                {failedLogin ? (
+                  <StyledFailedInput
+                    placeholder="영문숫자포함10글자"
+                    {...register('password')}
+                    type="password"
+                    onChange={(e) => {
+                      field.onChange(e.target.value);
+                    }}
+                    value={passwordQuery}
+                  />
+                ) : (
+                  <StyledInput
+                    placeholder="영문숫자포함10글자"
+                    {...register('password')}
+                    type="password"
+                    onChange={(e) => {
+                      field.onChange(e.target.value);
+                    }}
+                    value={passwordQuery}
+                  />
+                )}
               </StyledInputRowContainer>
             )}
           />
         </StyledInputContainer>
+        {failedLogin && (
+          <StyledErrorMessageContainer>
+            <div>학교 메일 또는 비밀번호를 잘못 입력했습니다.</div>
+            <div>입력하신 내용을 다시 확인해주세요.</div>
+          </StyledErrorMessageContainer>
+        )}
 
         <BoxButton size="large" variant="filled" rounding={8} onClick={handleLoginClick}>
           로그인

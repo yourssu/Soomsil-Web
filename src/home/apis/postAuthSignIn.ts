@@ -1,17 +1,29 @@
-import { PostAuthSignInData } from '../types/Auth.type';
+import { PostAuthErrorData, PostAuthResponse } from '../types/Auth.type';
 
 import { customedAxios } from './customedAxios';
+
 interface LoginProps {
   email: string;
   password: string;
 }
+
 export const postAuthSignIn = async ({
   email,
   password,
-}: LoginProps): Promise<PostAuthSignInData> => {
-  const res = await customedAxios.post(`/auth/sign-in`, {
-    email: email,
-    password: password,
-  });
-  return res.data;
+}: LoginProps): Promise<PostAuthResponse> => {
+  try {
+    const res = await customedAxios.post(`/auth/sign-in`, {
+      email: email,
+      password: password,
+    });
+
+    return { data: res.data };
+  } catch (error: any) {
+    const { message, status } = error.response.data;
+    const errorData: PostAuthErrorData = {
+      message: message,
+      status: status,
+    };
+    return { error: errorData };
+  }
 };
