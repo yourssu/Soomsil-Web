@@ -35,7 +35,7 @@ export const SearchKeyword = () => {
       </StyledTitleContainer>
       <StyledImage src={RealTimeKeywordImage} alt="뿌슝이" />
       <StyledListContainer>
-        {data.querys.map((value, index) => (
+        {data.queries.map((value, index) => (
           <Link key={value.query} to={`/search?query=${value.query}`}>
             <StyledListItem
               leftIcon={<StyledRank $rank={index + 1}>{index + 1}</StyledRank>}
