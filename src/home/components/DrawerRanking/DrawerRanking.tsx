@@ -18,16 +18,19 @@ export const DrawerRanking = () => {
         <StyledAllViewButton to="/drawer">전체보기</StyledAllViewButton>
       </StyledTitleContainer>
       <StyledRankCardContainer>
-        {data?.productList.map((drawerItem) => (
-          <RankDrawerCard
-            key={drawerItem.productNo}
-            link={`/drawerservices/${drawerItem.productNo}`}
-            title={drawerItem.productTitle}
-            body={drawerItem.productSubTitle}
-            bookmarkCount={drawerItem.count}
-            isBookmarked={drawerItem.isBookmarked}
-          />
-        ))}
+        {data?.productList
+          .slice(0, 3)
+          .map((drawerItem) => (
+            <RankDrawerCard
+              key={drawerItem.productNo}
+              link={`/drawerservices/${drawerItem.productNo}`}
+              smallImgSrc={drawerItem.mainImage}
+              title={drawerItem.productTitle}
+              body={drawerItem.productSubTitle}
+              bookmarkCount={drawerItem.count}
+              isBookmarked={drawerItem.isBookmarked}
+            />
+          ))}
       </StyledRankCardContainer>
     </StyledContainer>
   );
