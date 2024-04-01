@@ -24,6 +24,7 @@ import {
   StyledErrorMessageContainer,
   StyledFailedLeftInput,
   StyledFailedRightInputSuffix,
+  StyledLoginButtonContainer,
 } from './Login.style';
 
 export const Login = () => {
@@ -141,9 +142,11 @@ export const Login = () => {
           </StyledErrorMessageContainer>
         )}
 
-        <BoxButton size="large" variant="filled" rounding={8} onClick={handleLoginClick}>
-          로그인
-        </BoxButton>
+        <StyledLoginButtonContainer>
+          <BoxButton size="large" variant="filled" rounding={8} onClick={handleLoginClick}>
+            로그인
+          </BoxButton>
+        </StyledLoginButtonContainer>
 
         <StyledBottomContainer>
           <StyledButtonLabel to="/mail">학교 메일 찾기</StyledButtonLabel>

@@ -19,6 +19,7 @@ export const StyledLoginContainer = styled.section`
   padding-bottom: 1.38rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  /* gap: 1.5rem; */
 `;
 
 export const StyledTitle = styled.div`
@@ -175,4 +176,10 @@ export const StyledErrorMessageContainer = styled.section`
   ${({ theme }) => theme.typo.caption1};
   color: #ff5252;
   padding-top: 0.5rem;
+`;
+export const StyledLoginButtonContainer = styled.section`
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1.5rem;
 `;
