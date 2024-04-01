@@ -10,6 +10,6 @@ export interface PostAuthErrorData {
   status: number;
 }
 export interface PostAuthResponse {
-  data?: PostAuthSignInData; // 성공 시의 데이터
-  error?: PostAuthErrorData; // 에러 시의 데이터
+  data?: PostAuthSignInData;
+  error?: PostAuthErrorData;
 }

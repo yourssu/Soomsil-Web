@@ -11,7 +11,6 @@ export const StyledContainer = styled.article`
 
 export const StyledLoginContainer = styled.section`
   border-radius: 1rem;
-
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
   justify-content: center;
   display: flex;
@@ -20,7 +19,6 @@ export const StyledLoginContainer = styled.section`
   padding-bottom: 1.38rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  gap: 1.5rem;
 `;
 
 export const StyledTitle = styled.div`
@@ -38,6 +36,7 @@ export const StyledInputContainer = styled.article`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding-top: 1.5rem;
 `;
 export const StyledButtonLabel = styled(Link)`
   color: ${({ theme }) => theme.color.textTertiary};
@@ -69,7 +68,6 @@ export const StyledInput = styled.input`
   padding-bottom: 0.75rem;
   padding-right: 1rem;
   padding-left: 1rem;
-  /* 자동 완성 시 스타일 변경 */
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
@@ -86,15 +84,9 @@ export const StyledFailedInput = styled.input`
   ${({ theme }) => theme.typo.body1};
   color: ${({ theme }) => theme.color.textTertiary};
   height: 3rem;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  /* 자동 완성 시 스타일 변경 */
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
@@ -119,7 +111,7 @@ export const StyledFailedLeftInput = styled.input`
   padding-bottom: 0.75rem;
   padding-right: 1rem;
   padding-left: 1rem;
-  /* 자동 완성 시 스타일 변경 */
+
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
@@ -182,4 +174,5 @@ export const StyledErrorMessageContainer = styled.section`
   flex-direction: column;
   ${({ theme }) => theme.typo.caption1};
   color: #ff5252;
+  padding-top: 0.5rem;
 `;
