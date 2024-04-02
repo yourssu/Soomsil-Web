@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledCategoryContainer = styled.div`
+export const StyledRankingCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -12,7 +12,7 @@ export const StyledCategoryContainer = styled.div`
   ${({ theme }) => theme.typo.subtitle2};
 `;
 
-export const StyledCategoryWithoutAllContainer = styled.div`
+export const StyledRegisterCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.69rem;

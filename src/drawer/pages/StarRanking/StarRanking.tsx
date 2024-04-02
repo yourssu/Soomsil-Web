@@ -1,4 +1,4 @@
-import { Category } from '@/drawer/components/Category/Category';
+import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { useGetStarRank } from '@/drawer/hooks/useGetStarRank';
 
@@ -13,11 +13,11 @@ import {
 } from '../Ranking/Ranking.style';
 
 export const StarRanking = () => {
-  const { rankings, setSelectedCategory } = useGetStarRank();
+  const { rankings } = useGetStarRank();
 
   return (
     <StyledContainer>
-      <Category isAll={true} isRank={true} handleCategorySelect={setSelectedCategory} />
+      <RankingCategory />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>

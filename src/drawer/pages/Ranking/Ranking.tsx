@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
 import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
-import { Category } from '@/drawer/components/Category/Category';
+import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
 import { useGetMain } from '@/drawer/hooks/useGetMain';
@@ -31,7 +31,7 @@ export const Ranking = () => {
 
   return (
     <StyledContainer>
-      <Category isAll={true} handleCategorySelect={setSelectedCategory} />
+      <RankingCategory />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>

@@ -1,4 +1,4 @@
-import { Category } from '@/drawer/components/Category/Category';
+import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { useGetNewRelease } from '@/drawer/hooks/useGetNewRelease';
 
@@ -13,11 +13,11 @@ import {
 } from '../Ranking/Ranking.style';
 
 export const NewRelease = () => {
-  const { newReleases, setSelectedCategory } = useGetNewRelease();
+  const { newReleases } = useGetNewRelease();
 
   return (
     <StyledContainer>
-      <Category isAll={true} handleCategorySelect={setSelectedCategory} />
+      <RankingCategory />
       <StyledRankingContainer>
         <div>
           <StyledBetweenContainer>
