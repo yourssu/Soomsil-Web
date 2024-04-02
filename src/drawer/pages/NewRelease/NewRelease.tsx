@@ -1,6 +1,8 @@
+import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { useGetNewRelease } from '@/drawer/hooks/useGetNewRelease';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import {
   StyledBetweenContainer,
@@ -14,12 +16,14 @@ import {
 
 export const NewRelease = () => {
   const { newReleases } = useGetNewRelease();
+  const isSmallDesktop = useMediaQuery('(max-width: 85.375rem)'); // 1366 px
 
   return (
     <StyledContainer>
       <RankingCategory />
-      <StyledRankingContainer>
+      <StyledRankingContainer $isSmallDesktop={isSmallDesktop}>
         <div>
+          {isSmallDesktop && <CategoryDropdownMenu />}
           <StyledBetweenContainer>
             <StyledTextContainer>
               <StyledTitle>New Releases</StyledTitle>

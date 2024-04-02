@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
 import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
+import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
 import { useGetMain } from '@/drawer/hooks/useGetMain';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import {
   StyledBetweenContainer,
@@ -22,8 +24,8 @@ import {
 
 export const Ranking = () => {
   const navigate = useNavigate();
-
   const { newReleases, rankings, setSelectedCategory } = useGetMain();
+  const isSmallDesktop = useMediaQuery('(max-width: 85.375rem)'); // 1366 px
 
   useEffect(() => {
     setSelectedCategory('');
@@ -31,9 +33,10 @@ export const Ranking = () => {
 
   return (
     <StyledContainer>
-      <RankingCategory />
-      <StyledRankingContainer>
+      {!isSmallDesktop && <RankingCategory />}
+      <StyledRankingContainer $isSmallDesktop={isSmallDesktop}>
         <div>
+          {isSmallDesktop && <CategoryDropdownMenu />}
           <StyledBetweenContainer>
             <StyledTextContainer>
               <StyledTitle>Star Ranking</StyledTitle>
