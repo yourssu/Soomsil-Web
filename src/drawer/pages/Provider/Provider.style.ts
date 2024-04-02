@@ -9,7 +9,6 @@ export const StyledContainer = styled.div`
 export const StyledProviderContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   margin-top: 3.37rem;
   margin-bottom: 4rem;
 `;
