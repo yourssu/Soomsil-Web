@@ -18,7 +18,7 @@ interface StyledThumbnailProps {
 }
 
 export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
-  const { register, formState, getValues } = useFormContext();
+  const { register, formState, getValues, setValue } = useFormContext();
   const { onChange, ref } = register(name, { required: true });
 
   const [postImg, setPostImg] = useState<File | null>();
@@ -33,6 +33,8 @@ export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
       if (file && file.type.substring(0, 5) === 'image') {
         setPostImg(file);
       } else {
+        alert('이미지 파일을 첨부해주세요.');
+        setValue(name, null);
         setPostImg(null);
       }
     }

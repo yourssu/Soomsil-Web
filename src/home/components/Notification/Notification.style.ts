@@ -40,5 +40,5 @@ export const StyledNotification = styled.p`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  ${({ theme }) => theme.typo.subtitle1};
+  ${({ theme }) => theme.typo.subtitle3};
 `;
