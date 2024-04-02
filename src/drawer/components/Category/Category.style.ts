@@ -21,3 +21,16 @@ export const StyledRegisterCategoryContainer = styled.div`
   margin-bottom: 0.62rem;
   margin-left: 1rem;
 `;
+
+export const StyledSmallDesktopCategoryContainer = styled.div`
+  display: flex;
+  width: 155px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: 0px 1px 3px 0px rgba(107, 114, 128, 0.4);
+  ${({ theme }) => theme.typo.title5};
+`;

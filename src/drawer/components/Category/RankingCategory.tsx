@@ -4,10 +4,21 @@ import { useRecoilState } from 'recoil';
 
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 
-import { StyledRankingCategoryContainer } from './Category.style';
+import {
+  StyledRankingCategoryContainer,
+  StyledSmallDesktopCategoryContainer,
+} from './Category.style';
 import { CategoryList } from './Category.type';
 
-export const RankingCategory = () => {
+interface RankingCategoryProps {
+  isSmallDesktop?: boolean;
+  onDropdownOpenChange?: (open: boolean) => void;
+}
+
+export const RankingCategory = ({
+  isSmallDesktop = false,
+  onDropdownOpenChange,
+}: RankingCategoryProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
@@ -18,10 +29,18 @@ export const RankingCategory = () => {
     if (location.pathname === '/drawer/rankings') {
       navigate('/drawer/newRelease');
     }
+
+    if (onDropdownOpenChange) {
+      onDropdownOpenChange(false);
+    }
   };
 
+  const Container = isSmallDesktop
+    ? StyledSmallDesktopCategoryContainer
+    : StyledRankingCategoryContainer;
+
   return (
-    <StyledRankingCategoryContainer>
+    <Container>
       <div>카테고리 유형</div>
       {CategoryList.map(({ category, title }) => (
         <CheckBox
@@ -32,6 +51,6 @@ export const RankingCategory = () => {
           {title}
         </CheckBox>
       ))}
-    </StyledRankingCategoryContainer>
+    </Container>
   );
 };
