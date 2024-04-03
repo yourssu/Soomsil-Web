@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
 import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
+import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/components/Category/Category.type';
 import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
@@ -25,7 +26,7 @@ import {
 export const Ranking = () => {
   const navigate = useNavigate();
   const { newReleases, rankings, setSelectedCategory } = useGetMain();
-  const isSmallDesktop = useMediaQuery('(max-width: 85.375rem)'); // 1366 px
+  const isSmallDesktop = useMediaQuery(SMALL_DESKTOP_MEDIA_QUERY);
 
   useEffect(() => {
     setSelectedCategory('');

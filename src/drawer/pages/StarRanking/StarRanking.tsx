@@ -1,3 +1,4 @@
+import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/components/Category/Category.type';
 import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
@@ -16,11 +17,11 @@ import {
 
 export const StarRanking = () => {
   const { rankings } = useGetStarRank();
-  const isSmallDesktop = useMediaQuery('(max-width: 85.375rem)'); // 1366 px
+  const isSmallDesktop = useMediaQuery(SMALL_DESKTOP_MEDIA_QUERY);
 
   return (
     <StyledContainer>
-      <RankingCategory />
+      {!isSmallDesktop && <RankingCategory />}
       <StyledRankingContainer $isSmallDesktop={isSmallDesktop}>
         <div>
           {isSmallDesktop && <CategoryDropdownMenu />}
