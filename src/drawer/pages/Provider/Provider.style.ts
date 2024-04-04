@@ -17,12 +17,7 @@ export const StyledProviderName = styled.p`
   color: ${({ theme }) => theme.color.textPrimary};
   width: 80rem;
 
-  /* Soomsil/Drawer/Web/title22 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 130%; /* 28.6px */
+   ${({ theme }) => theme.typo.title3}
 `;
 
 export const StyledDescription = styled.p`
