@@ -2,10 +2,10 @@ import { CheckBox } from '@yourssu/design-system-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
+import { CategoryList } from '@/drawer/constants/category.constant';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 
 import { StyledDropdownCategoryContainer, StyledRankingCategoryContainer } from './Category.style';
-import { CategoryList } from './Category.type';
 
 interface RankingCategoryProps {
   isSmallDesktop?: boolean;

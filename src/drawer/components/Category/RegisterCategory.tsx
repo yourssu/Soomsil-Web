@@ -2,10 +2,10 @@ import { CheckBox } from '@yourssu/design-system-react';
 import { useFormContext } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 
+import { CategoryList } from '@/drawer/constants/category.constant';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 
 import { StyledRegisterCategoryContainer } from './Category.style';
-import { CategoryList } from './Category.type';
 
 export const RegisterCategory = () => {
   const { register } = useFormContext();
