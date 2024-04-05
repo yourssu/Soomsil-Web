@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
 import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
-import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/components/Category/Category.type';
 import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
+import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
 import { useGetMain } from '@/drawer/hooks/useGetMain';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 

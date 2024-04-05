@@ -13,5 +13,3 @@ export const CategoryList: CategoryInfo[] = [
   { category: 'LIFESTYLE', title: '라이프스타일', subcategories: '(소셜 네트워킹, 미디어, 일상)' },
   { category: 'ETC', title: '기타' },
 ];
-
-export const SMALL_DESKTOP_MEDIA_QUERY = '(max-width: 112rem)'; // 1792px

@@ -1,7 +1,7 @@
-import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/components/Category/Category.type';
 import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
+import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
 import { useGetStarRank } from '@/drawer/hooks/useGetStarRank';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
