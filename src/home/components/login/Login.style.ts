@@ -15,11 +15,7 @@ export const StyledLoginContainer = styled.section`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding-top: 1.38rem;
-  padding-bottom: 1.38rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  /* gap: 1.5rem; */
+  padding: 1.38rem 1.5rem;
 `;
 
 export const StyledTitle = styled.div`
@@ -65,10 +61,7 @@ export const StyledInput = styled.input`
   height: 3rem;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  padding: 0.75rem 1rem;
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
@@ -87,7 +80,6 @@ export const StyledFailedInput = styled.input`
   height: 3rem;
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
-
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
@@ -106,12 +98,8 @@ export const StyledFailedLeftInput = styled.input`
   ${({ theme }) => theme.typo.body1};
   color: ${({ theme }) => theme.color.textTertiary};
   height: 3rem;
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+  padding: 0.75rem 1rem;
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
@@ -128,12 +116,8 @@ export const StyledFailedInputSuffix = styled.div`
   ${({ theme }) => theme.typo.body1};
   color: ${({ theme }) => theme.color.textTertiary};
   height: 3rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.75rem 1rem;
 `;
 export const StyledFailedRightInputSuffix = styled.div`
   background-color: ${({ theme }) => theme.color.inputFieldElevated};
@@ -143,31 +127,22 @@ export const StyledFailedRightInputSuffix = styled.div`
   ${({ theme }) => theme.typo.body1};
   color: ${({ theme }) => theme.color.textTertiary};
   height: 3rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.75rem 1rem;
 `;
 export const StyledInputSuffix = styled.div`
   background-color: ${({ theme }) => theme.color.inputFieldElevated};
   ${({ theme }) => theme.typo.body1};
   color: ${({ theme }) => theme.color.textTertiary};
   height: 3rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.75rem 1rem;
 `;
 
 export const StyledBottomContainer = styled.section`
   display: flex;
   flex-direction: row;
-  padding-right: 2.25rem;
-  padding-left: 2.25rem;
+  padding: 0 2.25rem;
   gap: 2.25rem;
 `;
 export const StyledErrorMessageContainer = styled.section`
