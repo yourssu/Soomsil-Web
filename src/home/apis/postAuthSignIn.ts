@@ -1,4 +1,6 @@
-import { PostAuthErrorData, PostAuthResponse } from '../types/Auth.type';
+import { Error } from '@/types/Common.type';
+
+import { PostAuthResponse } from '../types/Auth.type';
 
 import { customedAxios } from './customedAxios';
 
@@ -16,14 +18,9 @@ export const postAuthSignIn = async ({
       email: email,
       password: password,
     });
-
     return { data: res.data };
   } catch (error: any) {
-    const { message, status } = error.response.data;
-    const errorData: PostAuthErrorData = {
-      message: message,
-      status: status,
-    };
+    const errorData: Error = { ...error.response.data };
     return { error: errorData };
   }
 };

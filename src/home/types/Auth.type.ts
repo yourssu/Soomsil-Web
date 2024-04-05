@@ -1,3 +1,5 @@
+import { Error } from '@/types/Common.type';
+
 export interface PostAuthSignInData {
   accessToken: string;
   accessTokenExpiredIn: number;
@@ -5,11 +7,7 @@ export interface PostAuthSignInData {
   refreshTokenExpiredIn: number;
 }
 
-export interface PostAuthErrorData {
-  message: string;
-  status: number;
-}
 export interface PostAuthResponse {
   data?: PostAuthSignInData;
-  error?: PostAuthErrorData;
+  error?: Error;
 }
