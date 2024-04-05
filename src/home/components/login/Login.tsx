@@ -1,20 +1,20 @@
 import { BoxButton } from '@yourssu/design-system-react';
 import { Controller, useForm } from 'react-hook-form';
 
-import soomsil from '@/assets/soomsil.svg';
+import soomsil from '@/assets/soomsil_v2_logo.svg';
 
 import {
-  StyledLoginContainer,
-  StyledContainer,
-  StyledTitle,
-  StyledLabel,
-  StyledButtonLabel,
-  StyledInput,
-  StyledInputContainer,
-  StyledInputSuffix,
-  StyledInputRowContainer,
   StyledBottomContainer,
   StyledButtonDivider,
+  StyledButtonLabel,
+  StyledContainer,
+  StyledInput,
+  StyledInputContainer,
+  StyledInputRowContainer,
+  StyledInputSuffix,
+  StyledLabel,
+  StyledLoginContainer,
+  StyledTitle,
 } from './Login.style';
 export const Login = () => {
   const { register, control } = useForm();

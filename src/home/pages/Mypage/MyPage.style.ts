@@ -24,6 +24,8 @@ export const StyledSoomsilLogo = styled.img`
   position: absolute;
   top: -9.4375rem;
   left: 0;
+  width: 180px;
+  height: 38px;
 `;
 
 export const StyledInnerContainer = styled.div`
