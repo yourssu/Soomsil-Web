@@ -1,4 +1,4 @@
-import { ProductResponses } from '../types/product.type';
+import { ProductResponses, GetProductByProviderProps } from '../types/product.type';
 
 import { drawerClient } from './drawerClient';
 
@@ -6,11 +6,7 @@ export const getProductByProvider = async ({
   providerId,
   page = 0,
   category = '',
-}: {
-  providerId: string;
-  page?: number;
-  category?: string;
-}): Promise<ProductResponses> => {
+}: GetProductByProviderProps): Promise<ProductResponses> => {
   const { data } = await drawerClient.get('/v2/drawer', {
     params: {
       responseType: 'WEB',
