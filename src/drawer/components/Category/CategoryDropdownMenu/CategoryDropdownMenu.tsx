@@ -3,8 +3,9 @@ import { useState } from 'react';
 import * as DropDownMenu from '@radix-ui/react-dropdown-menu';
 import { IcListLine } from '@yourssu/design-system-react';
 
+import { RankingCategory } from '../RankingCategory';
+
 import { StyledIconButton, StyledIconButtonContainer } from './CategoryDropdownMenu.style';
-import { RankingCategory } from './RankingCategory';
 
 export const CategoryDropdownMenu = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
