@@ -32,7 +32,7 @@ export const Provider = () => {
           <StyledProviderName>{providerId}</StyledProviderName>
           <StyledDescription>개발자의 서비스를 확인해보세요.</StyledDescription>
         </div>
-        {data?.length ? (
+        {data && data.length > 0 ? (
           <CardLayout data={data} type={'PROVIDER'} />
         ) : (
           <EmptyScreen {...NOT_FOUND_TEXT['PROVIDER']} type={'PROVIDER'} />
