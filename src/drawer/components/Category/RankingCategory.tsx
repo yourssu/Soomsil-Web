@@ -4,10 +4,7 @@ import { useRecoilState } from 'recoil';
 
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 
-import {
-  StyledRankingCategoryContainer,
-  StyledSmallDesktopCategoryContainer,
-} from './Category.style';
+import { StyledDropdownCategoryContainer, StyledRankingCategoryContainer } from './Category.style';
 import { CategoryList } from './Category.type';
 
 interface RankingCategoryProps {
@@ -36,7 +33,7 @@ export const RankingCategory = ({
   };
 
   const Container = isSmallDesktop
-    ? StyledSmallDesktopCategoryContainer
+    ? StyledDropdownCategoryContainer
     : StyledRankingCategoryContainer;
 
   return (

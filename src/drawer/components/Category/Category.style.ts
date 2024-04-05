@@ -22,7 +22,7 @@ export const StyledRegisterCategoryContainer = styled.div`
   margin-left: 1rem;
 `;
 
-export const StyledSmallDesktopCategoryContainer = styled.div`
+export const StyledDropdownCategoryContainer = styled.div`
   display: flex;
   width: 155px;
   flex-direction: column;
