@@ -14,8 +14,8 @@ export const useGetMain = () => {
 
   const fetchData = async () => {
     const [newReleaseResponse, rankingResponse] = await Promise.all([
-      getNewRelease({ responseType: 'WEB', category: '', page: 1 }),
-      getRanking({ responseType: 'WEB', category: '', page: 1 }),
+      getNewRelease({ responseType: 'WEB', category: '', page: 0 }),
+      getRanking({ responseType: 'WEB', category: '', page: 0 }),
     ]);
 
     setNewReleases(newReleaseResponse.productList);
