@@ -1,4 +1,4 @@
-interface Product {
+export interface Product {
   actionContent: string;
   actionType: string;
   category: string;
