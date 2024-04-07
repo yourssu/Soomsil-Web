@@ -27,5 +27,5 @@ class TokenService {
     };
   }
 }
-const api = new TokenService();
-export default api;
+
+export const api = new TokenService();

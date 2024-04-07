@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import soomsil from '@/assets/soomsil.svg';
 import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
-import api from '@/service/TokenService';
+import { api } from '@/service/TokenService';
 
 import {
   StyledBottomContainer,

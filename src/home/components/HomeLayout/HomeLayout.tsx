@@ -3,7 +3,7 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import { isPast } from 'date-fns';
 import { Outlet, useLocation } from 'react-router-dom';
 
-import api from '@/service/TokenService';
+import { api } from '@/service/TokenService';
 
 import { Nav } from '../Nav/Nav';
 
