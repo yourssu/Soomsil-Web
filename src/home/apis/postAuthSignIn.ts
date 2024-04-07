@@ -19,8 +19,8 @@ export const postAuthSignIn = async ({
       password: password,
     });
     return { data: res.data };
-  } catch (error: any) {
-    const errorData: Error = { ...error.response.data };
+  } catch (error: unknown) {
+    const errorData: Error = { ...(error as Error) };
     return { error: errorData };
   }
 };
