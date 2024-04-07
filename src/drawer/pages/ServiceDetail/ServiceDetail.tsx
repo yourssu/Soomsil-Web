@@ -10,6 +10,8 @@ import {
 import { useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
+import { deleteBookmarked } from '@/drawer/apis/deleteBookmarked';
+import { postBookmarked } from '@/drawer/apis/postBookmarked';
 import carouselLeftButton from '@/drawer/assets/carousel_left_button.svg';
 import carouselRightButton from '@/drawer/assets/carousel_right_button.svg';
 import { MoreProductSection } from '@/drawer/components/MoreProductSection/MoreProductSection';
@@ -50,7 +52,7 @@ const Category = {
 
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
-  const { isSuccess, data } = useGetProductDetail(Number(serviceId));
+  const { isSuccess, refetch, data } = useGetProductDetail(Number(serviceId));
 
   const theme = useTheme();
 
@@ -68,9 +70,21 @@ export const ServiceDetail = () => {
     }
   };
 
+  const handleBookmarkClick = (bookmarkedkey: number | undefined) => {
+    postBookmarked(bookmarkedkey).then(() => {
+      refetch();
+    });
+  };
+
+  const handleBookmarkDeleteClick = (bookmarkedkey: number | undefined) => {
+    deleteBookmarked(bookmarkedkey).then(() => {
+      refetch();
+    });
+  };
+
   return (
     <>
-      {isSuccess && (
+      {isSuccess && data && (
         <StyledServiceDetailContainer>
           <StyledBackgroundImageContainer $backgroundImage={data.thumbnail}>
             <StyledServiceTitleText>{data.productTitle}</StyledServiceTitleText>
@@ -131,7 +145,13 @@ export const ServiceDetail = () => {
                       size: '1.5rem',
                     }}
                   >
-                    {data.isBookmarked ? <IcStarFilled /> : <IcStarLine />}
+                    {data.isBookmarked ? (
+                      <IcStarFilled
+                        onClick={() => handleBookmarkDeleteClick(data.productBookmarkKey)}
+                      />
+                    ) : (
+                      <IcStarLine onClick={() => handleBookmarkClick(data.productBookmarkKey)} />
+                    )}
                   </IconContext.Provider>
                 </button>
                 <StyledIconLabelText $color={theme.color.pointYellow}>
