@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
-import Spacing from '@/components/Spacing/Spacing';
+import { Spacing } from '@/components/Spacing/Spacing';
 import { ErrorBoundary } from '@/search/components/ErrorBoundary/ErrorBoundary';
 import {
   ResultListFallbackComponent,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useForm = (initialValue: string) => {
+export const useForm = (initialValue: string) => {
   const [value, setValue] = useState<string>(initialValue);
 
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -9,5 +9,3 @@ const useForm = (initialValue: string) => {
 
   return { value, setValue, handleChangeValue };
 };
-
-export default useForm;
