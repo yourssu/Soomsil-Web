@@ -17,7 +17,7 @@ const ICON_LIST = [
   { icon: InstagramIcon, link: 'https://www.instagram.com/yourssu_official/' },
 ];
 
-const SocialNetworkService = () => {
+export const SocialNetworkService = () => {
   return (
     <>
       <StyledIconContainer>
@@ -31,5 +31,3 @@ const SocialNetworkService = () => {
     </>
   );
 };
-
-export default SocialNetworkService;

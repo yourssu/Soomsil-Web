@@ -7,8 +7,10 @@ interface SpacingProps extends HTMLAttributes<HTMLDivElement> {
   size: number;
 }
 
-const Spacing = memo(function Spacing({ direction = 'vertical', size, ...props }: SpacingProps) {
+export const Spacing = memo(function Spacing({
+  direction = 'vertical',
+  size,
+  ...props
+}: SpacingProps) {
   return <StyledSpacing $direction={direction} $size={size} {...props}></StyledSpacing>;
 });
-
-export default Spacing;

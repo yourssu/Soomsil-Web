@@ -1,16 +1,16 @@
 import { IcPersoncircleLine, IcSearchLine, IconContext } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
 
-import soomsil from '@/assets/soomsil.svg';
+import soomsil from '@/assets/soomsil_v2_logo.svg';
 import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 
 import {
   StyledHeader,
   StyledHeaderLogo,
-  StyledHeaderTab,
-  StyledHeaderTabs,
   StyledHeaderSearchContainer,
   StyledHeaderSearchInput,
+  StyledHeaderTab,
+  StyledHeaderTabs,
 } from './Header.style';
 
 export const Header = () => {
@@ -19,7 +19,7 @@ export const Header = () => {
   return (
     <StyledHeader>
       <StyledHeaderLogo to="/">
-        <img src={soomsil} alt="soomsil" />
+        <img src={soomsil} alt="soomsil" width={158} height={25.5} />
       </StyledHeaderLogo>
       <StyledHeaderTabs>
         <StyledHeaderTab to="rankings">랭킹</StyledHeaderTab>

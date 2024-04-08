@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
-import Spacing from '@/components/Spacing/Spacing';
+import { Spacing } from '@/components/Spacing/Spacing';
 import { useGetSearch } from '@/search/hooks/useGetSearch';
 
 import { ResultListItem } from './ResultListItem';
@@ -11,7 +11,7 @@ export const ResultListItems = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
 
-  const { data, isLoading, fetchNextPage, hasNextPage } = useGetSearch({
+  const { data, isPending, fetchNextPage, hasNextPage } = useGetSearch({
     query: query || '',
   });
 
@@ -19,7 +19,7 @@ export const ResultListItems = () => {
 
   const lastElementRef = useCallback(
     (node: HTMLDivElement) => {
-      if (isLoading) return;
+      if (isPending) return;
 
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
@@ -29,7 +29,7 @@ export const ResultListItems = () => {
       });
       if (node) observer.current.observe(node);
     },
-    [isLoading, hasNextPage]
+    [isPending, hasNextPage, fetchNextPage]
   );
 
   return (
