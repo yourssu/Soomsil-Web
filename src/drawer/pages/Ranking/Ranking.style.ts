@@ -6,11 +6,15 @@ export const StyledContainer = styled.div`
   gap: 8.56rem;
 `;
 
-export const StyledRankingContainer = styled.section`
+interface StyledRankingCategoryContainerProps {
+  $isSmallDesktop?: boolean;
+}
+
+export const StyledRankingContainer = styled.section<StyledRankingCategoryContainerProps>`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  margin-top: 3.37rem;
+  margin-top: ${({ $isSmallDesktop }) => ($isSmallDesktop ? '0' : '3.37rem')};
   margin-bottom: 4rem;
 `;
 

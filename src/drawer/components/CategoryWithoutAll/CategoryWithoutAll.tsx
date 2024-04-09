@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 
-import { Category } from '../Category/Category';
+import { RegisterCategory } from '../Category/RegisterCategory';
 
 import {
   StyledCategoryContainer,
@@ -26,7 +26,7 @@ export const CategoryWithoutAll = () => {
         <StyledCategoryTitle $isWarned={isWarned}>카테고리 *</StyledCategoryTitle>
         <StyledCategoryDescription>(중복 선택 불가)</StyledCategoryDescription>
       </StyledCategoryContainer>
-      <Category isAll={false} />
+      <RegisterCategory />
     </StyledCategoryWithoutAllContainer>
   );
 };
