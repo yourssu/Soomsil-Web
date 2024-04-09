@@ -13,7 +13,8 @@
   },
   "lint-staged": {
     "src/**": [
-      "eslint --fix"
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "dependencies": {
