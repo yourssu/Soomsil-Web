@@ -4,10 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
 import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
-import { Category } from '@/drawer/components/Category/Category';
+import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu/CategoryDropdownMenu';
+import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
+import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
 import { useGetMain } from '@/drawer/hooks/useGetMain';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import {
   StyledBetweenContainer,
@@ -22,8 +25,8 @@ import {
 
 export const Ranking = () => {
   const navigate = useNavigate();
-
   const { newReleases, rankings, setSelectedCategory } = useGetMain();
+  const isSmallDesktop = useMediaQuery(SMALL_DESKTOP_MEDIA_QUERY);
 
   useEffect(() => {
     setSelectedCategory('');
@@ -31,9 +34,10 @@ export const Ranking = () => {
 
   return (
     <StyledContainer>
-      <Category isAll={true} handleCategorySelect={setSelectedCategory} />
-      <StyledRankingContainer>
+      {!isSmallDesktop && <RankingCategory />}
+      <StyledRankingContainer $isSmallDesktop={isSmallDesktop}>
         <div>
+          {isSmallDesktop && <CategoryDropdownMenu />}
           <StyledBetweenContainer>
             <StyledTextContainer>
               <StyledTitle>Star Ranking</StyledTitle>

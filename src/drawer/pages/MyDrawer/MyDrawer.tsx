@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
-import Spacing from '@/components/Spacing/Spacing';
+import { Spacing } from '@/components/Spacing/Spacing';
 import { Button } from '@/drawer/components/Button/Button';
 import { CardLayout } from '@/drawer/components/CardLayout/CardLayout';
 import { EmptyScreen } from '@/drawer/components/EmptyScreen/EmptyScreen';
