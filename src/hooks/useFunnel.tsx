@@ -8,7 +8,7 @@ interface StepProps<StepType> {
 type StepElementType<StepType> = ReactElement<StepProps<StepType>>;
 
 interface FunnelProps<StepType> {
-  children: StepElementType<StepType>[];
+  children: StepElementType<StepType>[] | StepElementType<StepType>;
 }
 
 export const useFunnel = <StepType extends string>(initialStep: StepType) => {
