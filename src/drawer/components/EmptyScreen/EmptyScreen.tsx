@@ -12,7 +12,7 @@ import {
 interface EmptyScreenProps {
   boldText: string;
   subText: string;
-  type: 'SEARCH' | 'STAR' | 'MYDRAWER';
+  type: 'SEARCH' | 'STAR' | 'MYDRAWER' | 'PROVIDER';
 }
 
 export const EmptyScreen = ({ boldText, subText, type }: EmptyScreenProps) => {
