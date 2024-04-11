@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const useSecondTimer = (seconds: number) => {
   const intervalRef = useRef<number | null>(null);
   const [leftTime, setLeftTime] = useState(seconds);
 
-  const resetTimer = () => {
+  const resetTimer = useCallback(() => {
     if (intervalRef.current !== null) {
       clearInterval(intervalRef.current);
       setLeftTime(seconds);
@@ -26,7 +26,7 @@ export const useSecondTimer = (seconds: number) => {
         return next;
       });
     }, 1000);
-  };
+  }, [seconds]);
 
   useEffect(() => {
     resetTimer();
@@ -34,7 +34,7 @@ export const useSecondTimer = (seconds: number) => {
     return () => {
       clearInterval(intervalRef.current as number);
     };
-  }, []);
+  }, [resetTimer]);
 
   return {
     leftTime,
