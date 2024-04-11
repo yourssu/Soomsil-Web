@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios';
+
 import { Error } from '@/types/Common.type';
 
 import {
@@ -16,18 +18,16 @@ interface VerificationCheckProps {
   session: string;
 }
 
-export const postAuthVerificationEmail = async ({
-  email,
-  verificationType = 'SIGN_UP',
-}: EmailVerificationProps): Promise<PostAuthVerificationEmailResponse> => {
+export const postAuthVerificationEmail = async (
+  emailVerificationProps: EmailVerificationProps
+): Promise<PostAuthVerificationEmailResponse> => {
   try {
-    const res = await customedAxios.post(`/auth/verification/email`, {
-      email: email,
-      verificationType: verificationType,
-    });
+    const res = await customedAxios.post(`/auth/verification/email`, emailVerificationProps);
     return { data: res.data };
   } catch (error: unknown) {
-    const errorData: Error = { ...(error as Error) };
+    const { response } = error as AxiosError;
+    if (!response) return { error: undefined };
+    const errorData: Error = { ...(response.data as Error) };
     return { error: errorData };
   }
 };
@@ -39,7 +39,9 @@ export const getAuthVerificationCheck = async ({
     const res = await customedAxios.get(`/auth/verification/check?session=${session}`);
     return { data: res.data };
   } catch (error: unknown) {
-    const errorData: Error = { ...(error as Error) };
+    const { response } = error as AxiosError;
+    if (!response) return { error: undefined };
+    const errorData: Error = { ...(response.data as Error) };
     return { error: errorData };
   }
 };
