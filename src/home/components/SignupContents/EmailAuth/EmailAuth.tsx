@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
+import { Link } from 'react-router-dom';
 
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
 
 import {
-  StyledButtonContainer,
+  StyledPlainButtonContainer,
   StyledEmailAuthParagraph,
   StyledTimerSuffix,
 } from './EmailAuth.style';
@@ -32,11 +33,6 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
     resetTimer();
 
     // Todo: 여기에 인증 메일 전송하는 코드 작성하면 됨.
-  };
-
-  const openMailInNewTab = () => {
-    const url = 'https://outlook.office.com/mail/';
-    window.open(url, '_blank', 'noopener, noreferrer');
   };
 
   return (
@@ -68,7 +64,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
       >
         다음
       </BoxButton>
-      <StyledButtonContainer>
+      <StyledPlainButtonContainer>
         <PlainButton
           size="medium"
           isPointed={false}
@@ -78,10 +74,12 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
           인증 메일 재전송
         </PlainButton>
         <span>|</span>
-        <PlainButton size="medium" isPointed={false} isWarned={false} onClick={openMailInNewTab}>
-          학교 메일 열기
-        </PlainButton>
-      </StyledButtonContainer>
+        <Link to="https://outlook.office.com/mail/" target="_blank" rel="noopener noreferrer">
+          <PlainButton size="medium" isPointed={false} isWarned={false}>
+            학교 메일 열기
+          </PlainButton>
+        </Link>
+      </StyledPlainButtonContainer>
     </StyledSignupContentContainer>
   );
 };

@@ -5,14 +5,14 @@ export const StyledEmailAuthParagraph = styled.p`
   padding: 11px 16px 0 4px;
 `;
 
-export const StyledButtonContainer = styled.div`
+export const StyledPlainButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
   ${({ theme }) => theme.typo.button3};
 
-  button {
+  *:not(span) {
     width: 100%;
   }
 `;
