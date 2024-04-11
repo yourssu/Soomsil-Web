@@ -19,11 +19,6 @@ export const StyledAgreeTermsContainer = styled.div`
   gap: 24px;
 `;
 
-export const StyledAgreeTermsTitle = styled.div`
-  ${({ theme }) => theme.typo.title2};
-  text-align: center;
-`;
-
 export const StyledAllAgreeCheckBoxContainer = styled.div`
   width: 100%;
   height: 3em;

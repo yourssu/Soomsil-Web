@@ -7,10 +7,11 @@ import {
   IcArrowRightLine,
 } from '@yourssu/design-system-react';
 
+import { StyledAgreeTermsTitle } from '../SignupContents.styled';
+
 import {
   StyledAgreeTermCheckboxText,
   StyledAgreeTermsContainer,
-  StyledAgreeTermsTitle,
   StyledAllAgreeCheckBoxContainer,
   StyledDetailTermItem,
   StyledDetailTermList,
