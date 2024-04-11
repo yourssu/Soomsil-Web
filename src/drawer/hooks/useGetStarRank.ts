@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 import { ProductListResponse } from '@/drawer/types/ProductList.type';
@@ -9,7 +9,7 @@ import { getRanking } from '../apis/getRanking';
 
 export const useGetStarRank = () => {
   const [rankings, setRankings] = useState<ProductListResponse['productList']>([]);
-  const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
+  const selectedCategory = useRecoilValue(CategoryState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,5 +24,5 @@ export const useGetStarRank = () => {
     fetchData();
   }, [selectedCategory]);
 
-  return { rankings, selectedCategory, setSelectedCategory };
+  return { rankings };
 };
