@@ -1,4 +1,5 @@
 import {
+  StyledTermContentContainer,
   StyledTermContentTitle,
   StyledTermParagraph,
   StyledTermSectionHeading,
@@ -6,7 +7,7 @@ import {
 
 export const ServiceTerm = () => {
   return (
-    <div>
+    <StyledTermContentContainer>
       <StyledTermContentTitle>[숨쉴때 서비스 이용약관]</StyledTermContentTitle>
       <StyledTermSectionHeading>제1조(목적)</StyledTermSectionHeading>
       <StyledTermParagraph>
@@ -189,6 +190,6 @@ export const ServiceTerm = () => {
       </StyledTermParagraph>
 
       <StyledTermParagraph>본 약관은 2024년 2월 27일부터 시행됩니다.</StyledTermParagraph>
-    </div>
+    </StyledTermContentContainer>
   );
 };

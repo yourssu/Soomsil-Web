@@ -1,4 +1,5 @@
 import {
+  StyledTermContentContainer,
   StyledTermContentTitle,
   StyledTermParagraph,
   StyledTermSectionHeading,
@@ -6,7 +7,7 @@ import {
 
 export const PrivacyPolicyTerm = () => {
   return (
-    <div>
+    <StyledTermContentContainer>
       <StyledTermContentTitle>[숨쉴때 개인정보 처리방침]</StyledTermContentTitle>
 
       <StyledTermParagraph>
@@ -170,6 +171,6 @@ export const PrivacyPolicyTerm = () => {
         <br />
         문의: yourssu.com@gmail.com
       </StyledTermParagraph>
-    </div>
+    </StyledTermContentContainer>
   );
 };

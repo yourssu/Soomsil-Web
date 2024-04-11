@@ -1,4 +1,5 @@
 import {
+  StyledTermContentContainer,
   StyledTermContentTitle,
   StyledTermParagraph,
   StyledTermSectionHeading,
@@ -6,7 +7,7 @@ import {
 
 export const CommunityTerm = () => {
   return (
-    <div>
+    <StyledTermContentContainer>
       <StyledTermContentTitle>[숨쉴때 커뮤니티 이용규칙]</StyledTermContentTitle>
 
       <StyledTermSectionHeading>이용규칙 안내</StyledTermSectionHeading>
@@ -86,6 +87,6 @@ export const CommunityTerm = () => {
           <li>- 기타 문의 사항은 이메일로 문의 바랍니다. yourssu.com@gmail.com</li>
         </ul>
       </StyledTermParagraph>
-    </div>
+    </StyledTermContentContainer>
   );
 };

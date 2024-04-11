@@ -84,7 +84,7 @@ export const StyledExpandIconWrapper = styled.div`
 `;
 
 export const StyledExpandContentWrapper = styled.div<StyledExpandContentWrapperProps>`
-  padding: 0 16px;
+  padding: 0 48px;
 
   width: 100%;
   max-height: ${(props) => (props.$isExpanded ? '400px' : 0)};

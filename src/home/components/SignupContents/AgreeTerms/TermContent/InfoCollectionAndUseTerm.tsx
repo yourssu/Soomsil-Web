@@ -1,4 +1,5 @@
 import {
+  StyledTermContentContainer,
   StyledTermContentTitle,
   StyledTermParagraph,
   StyledTermSectionHeading,
@@ -6,7 +7,7 @@ import {
 
 export const InfoCollectionAndUseTerm = () => {
   return (
-    <div>
+    <StyledTermContentContainer>
       <StyledTermContentTitle>[숨쉴때 개인정보 수집 및 이용 동의]</StyledTermContentTitle>
 
       <StyledTermSectionHeading>수집 항목과 목적, 보유 및 이용기간</StyledTermSectionHeading>
@@ -43,6 +44,6 @@ export const InfoCollectionAndUseTerm = () => {
         * 이용자께서는 상기 동의를 거부할 수 있습니다. 단, 동의하지 않는 경우 회원 가입 및 숨쉴때
         서비스 제공에 제한을 받을 수 있습니다.
       </StyledTermParagraph>
-    </div>
+    </StyledTermContentContainer>
   );
 };
