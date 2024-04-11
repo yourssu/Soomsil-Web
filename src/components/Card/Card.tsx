@@ -57,6 +57,7 @@ const CardSmallThumbnail = ({ imgSrc }: CardThumbnailProps) => {
       src={imgSrc || SmallThumbnail}
       $borderRadius={0.75}
       $width={4}
+      $height={4}
     ></StyledThumbnail>
   );
 };
