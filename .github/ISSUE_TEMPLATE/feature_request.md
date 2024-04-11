@@ -1,8 +1,8 @@
 ---
 name: Feature request
-about: 새 기능 추가할 때 쓰는 이슈 템플릿
-title: '[FEAT] '
-labels: 'feat'
+about: Suggest an idea for this project
+title: ''
+labels: ''
 assignees: ''
 ---
 
@@ -18,6 +18,7 @@ assignees: ''
 
 ## TODO
 
+- [ ] todo
 - [ ] todo
 
 ## ETC
