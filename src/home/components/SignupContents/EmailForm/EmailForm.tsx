@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 
-import { StyledAgreeTermsContainer, StyledAgreeTermsTitle } from '../SignupContents.style';
+import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
 
 import {
   StyledButtonsContainer,
@@ -30,8 +30,8 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   };
 
   return (
-    <StyledAgreeTermsContainer>
-      <StyledAgreeTermsTitle>회원가입</StyledAgreeTermsTitle>
+    <StyledSignupContentContainer>
+      <StyledSignupContentTitle>회원가입</StyledSignupContentTitle>
       <div>
         <StyledTextFieldLabel>숭실대학교 메일을 입력해주세요.</StyledTextFieldLabel>
         <StyledEmailFieldWrapper>
@@ -60,6 +60,6 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           인증 메일 받기
         </BoxButton>
       </StyledButtonsContainer>
-    </StyledAgreeTermsContainer>
+    </StyledSignupContentContainer>
   );
 };

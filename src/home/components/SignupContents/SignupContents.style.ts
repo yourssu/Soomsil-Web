@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const StyledAgreeTermsContainer = styled.div`
+export const StyledSignupContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
 `;
 
-export const StyledAgreeTermsTitle = styled.div`
+export const StyledSignupContentTitle = styled.div`
   ${({ theme }) => theme.typo.title2};
   text-align: center;
 `;

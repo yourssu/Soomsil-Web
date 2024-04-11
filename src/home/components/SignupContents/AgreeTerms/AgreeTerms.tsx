@@ -7,7 +7,7 @@ import {
   IcArrowRightLine,
 } from '@yourssu/design-system-react';
 
-import { StyledAgreeTermsContainer, StyledAgreeTermsTitle } from '../SignupContents.style';
+import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
 
 import {
   StyledAgreeTermCheckboxText,
@@ -133,8 +133,8 @@ export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
   }, [agreeStates]);
 
   return (
-    <StyledAgreeTermsContainer>
-      <StyledAgreeTermsTitle>회원가입</StyledAgreeTermsTitle>
+    <StyledSignupContentContainer>
+      <StyledSignupContentTitle>회원가입</StyledSignupContentTitle>
       <StyledAllAgreeCheckBoxContainer onClick={toggleAllAgreeStates}>
         <StyledAgreeTermCheckboxText $forcePointed>
           <CheckBox size="large" isSelected={allAgreed} onClick={toggleAllAgreeStates} />
@@ -168,6 +168,6 @@ export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
       >
         확인
       </BoxButton>
-    </StyledAgreeTermsContainer>
+    </StyledSignupContentContainer>
   );
 };
