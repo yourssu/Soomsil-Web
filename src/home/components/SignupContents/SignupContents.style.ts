@@ -11,3 +11,7 @@ export const StyledSignupContentTitle = styled.div`
   ${({ theme }) => theme.typo.title2};
   text-align: center;
 `;
+
+export const StyledSignupButtonText = styled.div`
+  ${({ theme }) => theme.typo.button0};
+`;

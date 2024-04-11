@@ -2,7 +2,11 @@ import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 
-import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
+import {
+  StyledSignupButtonText,
+  StyledSignupContentContainer,
+  StyledSignupContentTitle,
+} from '../SignupContents.style';
 
 import {
   StyledButtonsContainer,
@@ -47,7 +51,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
       <StyledButtonsContainer>
         <StyledPlainButtonWrapper>
           <PlainButton size="medium" isPointed={false} isWarned={false}>
-            학교 메일 찾기
+            <StyledSignupButtonText>학교 메일 찾기</StyledSignupButtonText>
           </PlainButton>
         </StyledPlainButtonWrapper>
         <BoxButton
@@ -57,7 +61,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           disabled={email === ''}
           onClick={onEmailSubmit}
         >
-          인증 메일 받기
+          <StyledSignupButtonText>인증 메일 받기</StyledSignupButtonText>
         </BoxButton>
       </StyledButtonsContainer>
     </StyledSignupContentContainer>

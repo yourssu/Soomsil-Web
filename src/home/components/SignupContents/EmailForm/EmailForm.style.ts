@@ -13,10 +13,6 @@ export const StyledButtonsContainer = styled.div`
   & > * {
     width: 100%;
   }
-
-  button {
-    ${({ theme }) => theme.typo.button0};
-  }
 `;
 
 export const StyledPlainButtonWrapper = styled.div`

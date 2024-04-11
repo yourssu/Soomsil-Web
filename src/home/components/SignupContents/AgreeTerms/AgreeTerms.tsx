@@ -7,7 +7,11 @@ import {
   IcArrowRightLine,
 } from '@yourssu/design-system-react';
 
-import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
+import {
+  StyledSignupContentContainer,
+  StyledSignupContentTitle,
+  StyledSignupButtonText,
+} from '../SignupContents.style';
 
 import {
   StyledAgreeTermCheckboxText,
@@ -166,7 +170,7 @@ export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
         disabled={!allowConfirm}
         onClick={onConfirm}
       >
-        확인
+        <StyledSignupButtonText>확인</StyledSignupButtonText>
       </BoxButton>
     </StyledSignupContentContainer>
   );
