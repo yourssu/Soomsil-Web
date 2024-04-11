@@ -1,6 +1,6 @@
-import { ImageListResponse } from '../types/image.type';
+import { drawerClient } from '@/apis/soomsilClient';
 
-import { drawerClient } from './drawerClient';
+import { ImageListResponse } from '../types/image.type';
 
 export const uploadImages = async (fileList: File[]) => {
   const formData = new FormData();

@@ -1,7 +1,7 @@
-import { homeClient } from '@/home/apis/homeClient';
+import { drawerClient } from '@/apis/soomsilClient';
 import { AnnouncementResponse } from '@/home/types/announcement.type';
 
 export const getAnnouncement = async (): Promise<AnnouncementResponse> => {
-  const { data } = await homeClient.get('/announcement');
+  const { data } = await drawerClient.get('/announcement');
   return data;
 };

@@ -1,8 +1,7 @@
+import { customedAxios } from '@/apis/soomsilClient';
 import { Error } from '@/types/Common.type';
 
 import { PostAuthResponse } from '../types/Auth.type';
-
-import { customedAxios } from './customedAxios';
 
 interface LoginProps {
   email: string;

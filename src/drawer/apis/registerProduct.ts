@@ -1,7 +1,7 @@
+import { drawerClient } from '@/apis/soomsilClient';
+
 import { RegisterFormValues } from '../types/form.type';
 import { ImageResult } from '../types/image.type';
-
-import { drawerClient } from './drawerClient';
 
 const renameImageKeys = (image: ImageResult) => {
   return {

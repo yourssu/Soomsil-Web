@@ -1,6 +1,6 @@
-import { RealTimeKeywordData } from '../types/realTimeKeyword.type';
+import { searchClient } from '@/apis/soomsilClient';
 
-import { searchClient } from './searchClient';
+import { RealTimeKeywordData } from '../types/realTimeKeyword.type';
 
 export const getRealTimeKeyword = () => {
   const response = searchClient.get<RealTimeKeywordData>('search/topQueries');

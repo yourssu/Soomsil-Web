@@ -1,6 +1,6 @@
-import { ProductResponses } from '../types/product.type';
+import { drawerClient } from '@/apis/soomsilClient';
 
-import { drawerClient } from './drawerClient';
+import { ProductResponses } from '../types/product.type';
 
 export const getProductByProvider = async ({
   providerId,
