@@ -50,7 +50,7 @@ export const RealTimeKeyword = () => {
           <StyledHeaderImageSection src={RealTimeKeywordImage} alt="뿌슝이" />
         </StyledHeader>
         <StyledList>
-          {data.querys.map((value, index) => {
+          {data.queries.map((value, index) => {
             return (
               <ListItem
                 key={value.query}

@@ -26,5 +26,5 @@ export const useGetMain = () => {
     fetchData();
   }, [selectedCategory]);
 
-  return { newReleases, rankings, selectedCategory, setSelectedCategory, fetchData };
+  return { newReleases, rankings, setSelectedCategory };
 };
