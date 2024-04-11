@@ -110,6 +110,8 @@ export const SignupForm = ({ onConfirm }: SignupFormProps) => {
 
   const isFormValid = isNickNameValid && isPasswordValid;
   const hasOnlyNumberAndEnglish = (value: string) => /^[a-zA-Z0-9]*$/.test(value);
+  const hasOnlyNumberEnglishAndHangul = (value: string) =>
+    /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/.test(value);
 
   const onFormConfirm = () => {
     if (!isFormValid) {
@@ -121,7 +123,7 @@ export const SignupForm = ({ onConfirm }: SignupFormProps) => {
   };
 
   const nicknameValidator = useCallback((value: string) => {
-    return value.length >= 2 && value.length <= 12;
+    return value.length >= 2 && value.length <= 12 && hasOnlyNumberEnglishAndHangul(value);
   }, []);
 
   const passwordValidator = useCallback((value: string) => {
