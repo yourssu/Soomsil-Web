@@ -21,3 +21,12 @@ export interface PostAuthVerificationEmailResponse {
   data?: PostAuthVerificationEmailData;
   error?: Error;
 }
+
+export interface GetAuthVerificationCheckData {
+  isVerified: boolean;
+}
+
+export interface GetAuthVerificationCheckResponse {
+  data?: GetAuthVerificationCheckData;
+  error?: Error;
+}
