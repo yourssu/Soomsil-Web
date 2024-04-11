@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
 
 import { CardLayout } from '@/drawer/components/CardLayout/CardLayout';
-import { Category } from '@/drawer/components/Category/Category';
+import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu/CategoryDropdownMenu';
+import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { EmptyScreen } from '@/drawer/components/EmptyScreen/EmptyScreen';
 import { NOT_FOUND_TEXT } from '@/drawer/constants/empty.constant';
+import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
 import { useGetProductByProvider } from '@/drawer/hooks/useGetProductByProvider';
-import { CategoryState } from '@/drawer/recoil/CategoryState';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import {
   StyledDescription,
@@ -16,18 +17,19 @@ import {
 } from './Provider.style';
 
 export const Provider = () => {
+  const isSmallDesktop = useMediaQuery(SMALL_DESKTOP_MEDIA_QUERY);
+
   const { providerId } = useParams();
-  const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
 
   const { data } = useGetProductByProvider({
     providerId: String(providerId),
-    category: selectedCategory,
   });
 
   return (
     <StyledContainer>
-      <Category isAll={true} handleCategorySelect={setSelectedCategory} isRank={true} />
-      <StyledProviderContainer>
+      {!isSmallDesktop && <RankingCategory />}
+      <StyledProviderContainer $isSmallDesktop={isSmallDesktop}>
+        {isSmallDesktop && <CategoryDropdownMenu />}
         <div>
           <StyledProviderName>{providerId}</StyledProviderName>
           <StyledDescription>개발자의 서비스를 확인해보세요.</StyledDescription>
