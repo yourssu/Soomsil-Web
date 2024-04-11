@@ -1,12 +1,12 @@
 ---
 name: Bug report
 about: 버그 생겼을 때 쓰는 이슈 템플릿 ╯︿╰
-title: 'bug: '
+title: '[FIX]: '
 labels: bug, fix
 assignees: ''
 ---
 
-# ISSUE ✅ :
+# ISSUE ✅ : BUG
 
 ## 📖 Summary
 
@@ -19,3 +19,7 @@ assignees: ''
 ## Photo
 
 버그 재현 스크린샷을 첨부해주세요.
+
+## ETC
+
+예상되는 동작을 설명해주세요.
