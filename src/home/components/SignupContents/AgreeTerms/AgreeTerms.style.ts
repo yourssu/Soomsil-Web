@@ -12,13 +12,6 @@ interface StyledExpandContentWrapperProps {
   $isExpanded: boolean;
 }
 
-export const StyledAgreeTermsContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-`;
-
 export const StyledAllAgreeCheckBoxContainer = styled.div`
   width: 100%;
   height: 3em;
