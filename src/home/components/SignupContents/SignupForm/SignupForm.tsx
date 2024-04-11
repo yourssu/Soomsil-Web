@@ -52,7 +52,7 @@ const SignupInput = ({
   onChange,
 }: SignupInputProps) => {
   const [value, setValue] = useState('');
-  const [isFieldHidden, setIsFieldHidden] = useState(!hiddenField);
+  const [isFieldHidden, setIsFieldHidden] = useState(true);
 
   const fieldType = hiddenField && isFieldHidden ? 'password' : 'text';
   const isHiddenFieldSuffixVisible = hiddenField && value.length > 0;
