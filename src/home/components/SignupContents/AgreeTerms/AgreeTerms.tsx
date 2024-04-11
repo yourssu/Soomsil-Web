@@ -37,6 +37,10 @@ interface AgreeTermState {
   detailTermContent: React.ReactNode;
 }
 
+interface AgreeTermsProps {
+  onConfirm: () => void;
+}
+
 const DetailTermItem = ({
   term,
   detailTermContent,
@@ -72,7 +76,7 @@ const DetailTermItem = ({
   );
 };
 
-export const AgreeTerms = () => {
+export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
   const [allAgreed, setAllAgreed] = useState(false);
   const [agreeStates, setAgreeStates] = useState<Record<string, AgreeTermState>>({
     '서비스 이용약관': {
@@ -155,7 +159,13 @@ export const AgreeTerms = () => {
           />
         ))}
       </StyledDetailTermList>
-      <BoxButton size="large" rounding={8} variant="filled" disabled={!allowConfirm}>
+      <BoxButton
+        size="large"
+        rounding={8}
+        variant="filled"
+        disabled={!allowConfirm}
+        onClick={onConfirm}
+      >
         확인
       </BoxButton>
     </StyledAgreeTermsContainer>
