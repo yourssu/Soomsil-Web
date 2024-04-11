@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 
-import { StyledAgreeTermsContainer, StyledAgreeTermsTitle } from '../SignupContents.styled';
+import { StyledAgreeTermsContainer, StyledAgreeTermsTitle } from '../SignupContents.style';
 
 import {
   StyledButtonsContainer,
