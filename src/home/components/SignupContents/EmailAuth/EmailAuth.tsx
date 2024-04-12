@@ -40,12 +40,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
       <StyledSignupContentTitle>회원가입</StyledSignupContentTitle>
       <div>
         <StyledEmailAuthParagraph>
-          입력한 메일으로
-          <br />
-          인증 메일이 발송되었습니다.
-          <br />
-          <br />
-          메일 내에 있는 인증 버튼을 클릭해주세요.
+          {'입력한 메일로\n인증 메일이 발송되었습니다.\n\n메일 내에 있는 인증 버튼을 클릭해주세요.'}
         </StyledEmailAuthParagraph>
         <div>
           <SimpleTextField
