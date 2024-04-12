@@ -17,7 +17,7 @@ export const StyledTermSectionHeading = styled.p`
   margin-bottom: 0.4rem;
 `;
 
-export const StyledTermParagraph = styled.p`
+export const StyledTermParagraph = styled.div`
   ${({ theme }) => theme.typo.body3};
   margin-bottom: 2rem;
 `;
