@@ -14,6 +14,11 @@ export const StyledSignupInputSuffix = styled.div`
     justify-content: center;
     align-items: center;
 
+    input::-ms-reveal,
+    input::-ms-clear {
+      display: none;
+    }
+
     svg {
       width: 100%;
       height: 100%;
