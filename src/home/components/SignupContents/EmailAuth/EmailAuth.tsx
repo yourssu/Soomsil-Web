@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
+import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
 import { useSecondTimer } from '@/hooks/useSecondTimer';
@@ -23,9 +24,8 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
   const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(8 * 60);
 
   const leftTimeToString = () => {
-    const minutes = Math.floor(leftTime / 60);
-    const seconds = leftTime % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    const targetTime = addSeconds(new Date(0), leftTime);
+    return format(targetTime, 'mm:ss');
   };
 
   const sendAuthenticationMail = () => {
