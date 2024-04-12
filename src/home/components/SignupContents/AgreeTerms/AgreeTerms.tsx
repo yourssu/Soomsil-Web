@@ -22,6 +22,7 @@ import {
   StyledExpandContentWrapper,
   StyledExpandIconWrapper,
 } from './AgreeTerms.style';
+import { AgreeTermData, AgreeTermNameType } from './AgreeTerms.type';
 import { CommunityTerm } from './TermContent/CommunityTerm';
 import { InfoCollectionAndUseTerm } from './TermContent/InfoCollectionAndUseTerm';
 import { PrivacyPolicyTerm } from './TermContent/PrivacyPolicyTerm';
@@ -30,25 +31,38 @@ import { ServiceTerm } from './TermContent/ServiceTerm';
 interface DetailTermItemProps {
   term: string;
   detailTermContent: React.ReactNode;
-  selected?: boolean;
+  agreed?: boolean;
   onCheckBoxClicked?: React.MouseEventHandler<HTMLElement>;
   isRequired?: boolean;
-}
-
-interface AgreeTermState {
-  selected: boolean;
-  required: boolean;
-  detailTermContent: React.ReactNode;
 }
 
 interface AgreeTermsProps {
   onConfirm: () => void;
 }
 
+const agreeTermDatas: Record<AgreeTermNameType, AgreeTermData> = {
+  '서비스 이용약관': {
+    required: true,
+    detailTermContent: <ServiceTerm />,
+  },
+  '커뮤니티 이용규칙': {
+    required: false,
+    detailTermContent: <CommunityTerm />,
+  },
+  '개인정보 수집 및 이용 동의': {
+    required: true,
+    detailTermContent: <InfoCollectionAndUseTerm />,
+  },
+  '개인정보 처리방침': {
+    required: true,
+    detailTermContent: <PrivacyPolicyTerm />,
+  },
+};
+
 const DetailTermItem = ({
   term,
   detailTermContent,
-  selected = false,
+  agreed = false,
   onCheckBoxClicked = () => {},
   isRequired = false,
 }: DetailTermItemProps) => {
@@ -63,7 +77,7 @@ const DetailTermItem = ({
     <div>
       <StyledDetailTermItem onClick={onCheckBoxClicked}>
         <StyledAgreeTermCheckboxText>
-          <CheckBox size="large" isSelected={selected} />
+          <CheckBox size="large" isSelected={agreed} />
           <StyledDetailTermType $isRequired={isRequired}>
             {isRequired ? '[필수]' : '[준비중]'}
           </StyledDetailTermType>
@@ -82,34 +96,22 @@ const DetailTermItem = ({
 
 export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
   const [allAgreed, setAllAgreed] = useState(false);
-  const [agreeStates, setAgreeStates] = useState<Record<string, AgreeTermState>>({
-    '서비스 이용약관': {
-      selected: false,
-      required: true,
-      detailTermContent: <ServiceTerm />,
-    },
-    '커뮤니티 이용규칙': {
-      selected: false,
-      required: false,
-      detailTermContent: <CommunityTerm />,
-    },
-    '개인정보 수집 및 이용 동의': {
-      selected: false,
-      required: true,
-      detailTermContent: <InfoCollectionAndUseTerm />,
-    },
-    '개인정보 처리방침': {
-      selected: false,
-      required: true,
-      detailTermContent: <PrivacyPolicyTerm />,
-    },
+  const [agreedStates, setAgreedStates] = useState<Record<AgreeTermNameType, boolean>>({
+    '서비스 이용약관': false,
+    '커뮤니티 이용규칙': false,
+    '개인정보 수집 및 이용 동의': false,
+    '개인정보 처리방침': false,
   });
 
   const allowConfirm = useMemo(() => {
-    const isSelected = ({ selected }: AgreeTermState) => selected;
-    const requiredAgreeStates = Object.values(agreeStates).filter(({ required }) => required);
-    return requiredAgreeStates.every(isSelected);
-  }, [agreeStates]);
+    const requiredAgreeTermNames = Object.keys(agreeTermDatas).filter(
+      (termName) => agreeTermDatas[termName as AgreeTermNameType].required
+    );
+    const requiredTermAgreements = requiredAgreeTermNames.map(
+      (termName) => agreedStates[termName as AgreeTermNameType]
+    );
+    return requiredTermAgreements.every((agreed) => agreed);
+  }, [agreedStates]);
 
   const toggleAllAgreeStates = () => {
     let prevAllAgreed: boolean;
@@ -119,22 +121,22 @@ export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
       return !prev;
     });
 
-    setAgreeStates((prev) => {
+    setAgreedStates((prev) => {
       const nextState = { ...prev };
       Object.keys(nextState).forEach((term) => {
-        nextState[term].selected = !prevAllAgreed;
+        nextState[term as AgreeTermNameType] = !prevAllAgreed;
       });
       return nextState;
     });
   };
 
+  /*
+   * 모든 약관에 동의하지 않은 상태라면, 전체 동의 체크박스를 해제합니다.
+   */
   useEffect(() => {
-    const isSelected = ({ selected }: AgreeTermState) => selected;
-
-    if (Object.values(agreeStates).every(isSelected)) return;
-
+    if (Object.values(agreedStates).every((agreed) => agreed)) return;
     setAllAgreed(false);
-  }, [agreeStates]);
+  }, [agreedStates]);
 
   return (
     <StyledSignupContentContainer>
@@ -146,22 +148,26 @@ export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
         </StyledAgreeTermCheckboxText>
       </StyledAllAgreeCheckBoxContainer>
       <StyledDetailTermList>
-        {Object.entries(agreeStates).map(([term, { selected, required, detailTermContent }]) => (
-          <DetailTermItem
-            key={term}
-            term={term}
-            onCheckBoxClicked={() => {
-              setAgreeStates((prev) => {
-                const nextState = { ...prev };
-                nextState[term].selected = !selected;
-                return nextState;
-              });
-            }}
-            detailTermContent={detailTermContent}
-            selected={selected}
-            isRequired={required}
-          />
-        ))}
+        {Object.entries(agreedStates).map(([term, agreed]) => {
+          const termName = term as AgreeTermNameType;
+          const { detailTermContent, required } = agreeTermDatas[termName];
+          return (
+            <DetailTermItem
+              key={termName}
+              term={termName}
+              onCheckBoxClicked={() => {
+                setAgreedStates((prev) => {
+                  const nextState = { ...prev };
+                  nextState[termName] = !agreed;
+                  return nextState;
+                });
+              }}
+              detailTermContent={detailTermContent}
+              agreed={agreed}
+              isRequired={required}
+            />
+          );
+        })}
       </StyledDetailTermList>
       <BoxButton
         size="large"
