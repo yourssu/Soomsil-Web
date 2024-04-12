@@ -67,7 +67,7 @@ export const StyledExpandIconWrapper = styled.div`
   border-radius: 50%;
 
   &:hover {
-    background-color: #ffffff11;
+    background-color: ${({ theme }) => theme.color.bgSelected};
   }
 `;
 
