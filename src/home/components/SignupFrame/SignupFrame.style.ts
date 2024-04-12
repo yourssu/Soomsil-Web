@@ -22,7 +22,7 @@ export const StyledSignupFrameContentContainer = styled.div`
   gap: 24px;
 
   width: 480px;
-  padding: 22px 24px 22px 24px;
+  padding: 22px 24px;
 
   border: 1px solid ${(props) => props.theme.color.borderNormal};
   border-radius: 16px;
