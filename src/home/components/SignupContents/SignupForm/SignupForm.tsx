@@ -76,9 +76,9 @@ const SignupInput = ({
     }
 
     return {
-      suffix: isHiddenFieldSuffixVisible ? (
+      suffix: isHiddenFieldSuffixVisible && (
         <HiddenFieldEyeButton isFieldHidden={isFieldHidden} onClick={toggleHiddenField} />
-      ) : undefined,
+      ),
     };
   };
 
