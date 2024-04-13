@@ -114,11 +114,6 @@ export const SignupForm = ({ onConfirm }: SignupFormProps) => {
     /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/.test(value);
 
   const onFormConfirm = () => {
-    if (!isFormValid) {
-      if (!isNickNameValid) setIsNicknameFieldWarned(true);
-      if (!isPasswordValid) setIsPasswordFieldWarned(true);
-      return;
-    }
     onConfirm({ nickname, password });
   };
 
@@ -140,7 +135,7 @@ export const SignupForm = ({ onConfirm }: SignupFormProps) => {
         warn={isNicknameFieldWarned}
         validator={nicknameValidator}
         onChange={({ value, isValid }) => {
-          setIsNicknameFieldWarned(false);
+          setIsNicknameFieldWarned(!isValid);
           setNickname(value);
           setIsNickNameValid(isValid);
         }}
@@ -153,12 +148,18 @@ export const SignupForm = ({ onConfirm }: SignupFormProps) => {
         warn={isPasswordFieldWarned}
         validator={passwordValidator}
         onChange={({ value, isValid }) => {
-          setIsPasswordFieldWarned(false);
+          setIsPasswordFieldWarned(!isValid);
           setPassword(value);
           setIsPasswordValid(isValid);
         }}
       />
-      <BoxButton rounding={8} size="large" variant="filled" onClick={onFormConfirm}>
+      <BoxButton
+        rounding={8}
+        size="large"
+        variant="filled"
+        onClick={onFormConfirm}
+        disabled={!isFormValid}
+      >
         <StyledSignupButtonText>회원가입</StyledSignupButtonText>
       </BoxButton>
     </StyledSignupContentContainer>
