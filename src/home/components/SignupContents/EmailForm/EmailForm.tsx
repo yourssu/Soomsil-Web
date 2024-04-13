@@ -20,6 +20,8 @@ interface EmailFormProps {
   onConfirm: (email: string) => void;
 }
 
+const EMAIL_DOMAIN = '@soongsil.ac.kr';
+
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   const [email, setEmail] = useState('');
 
@@ -28,8 +30,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   };
 
   const onEmailSubmit = () => {
-    const emailDomain = '@soongsil.ac.kr';
-    const fullEmail = email.replace(emailDomain, '') + '@soongsil.ac.kr';
+    const fullEmail = email.replace(EMAIL_DOMAIN, '') + EMAIL_DOMAIN;
     onConfirm(fullEmail);
   };
 
@@ -43,7 +44,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
             value={email}
             onChange={onChange}
             placeholder="ppushoong"
-            suffix={<StyledEmailSuffix>@soongsil.ac.kr</StyledEmailSuffix>}
+            suffix={<StyledEmailSuffix>{EMAIL_DOMAIN}</StyledEmailSuffix>}
             autoFocus
           />
         </StyledEmailFieldWrapper>
