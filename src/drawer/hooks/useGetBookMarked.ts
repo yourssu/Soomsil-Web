@@ -6,7 +6,9 @@ import { GetRanking } from '../types/GetRanking.type';
 export const useGetBookmarked = ({ responseType, page }: GetRanking) => {
   return useQuery({
     queryKey: ['bookmarked', { responseType, page }],
-    queryFn: () => getBookmarked({ responseType, page }),
+    queryFn: () => {
+      return getBookmarked({ responseType, page });
+    },
     select: (data) => data.productList,
   });
 };
