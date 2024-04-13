@@ -1,11 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
-import {
-  BoxButton,
-  IcEyeclosedLine,
-  IcEyeopenLine,
-  SimpleTextField,
-} from '@yourssu/design-system-react';
+import { BoxButton } from '@yourssu/design-system-react';
+
+import { useSignupFormValidation } from '@/hooks/useSignupFormValidator';
 
 import {
   StyledSignupButtonText,
@@ -13,117 +10,28 @@ import {
   StyledSignupContentTitle,
 } from '../SignupContents.style';
 
-import { StyledSignupInputSuffix, StyledSignupInputTitle } from './SignupForm.style';
+import { SignupInput } from './SignupInput/SignupInput';
 
-interface SignupInputProps {
-  title: string;
-  placeholder: string;
-  helperLabel: string;
-  hiddenField?: boolean;
-  warn?: boolean;
-  validator: (value: string) => boolean;
-  onChange: ({ value, isValid }: { value: string; isValid: boolean }) => void;
+interface SignupConfirmPayload {
+  nickname: string;
+  password: string;
 }
 
 interface SignupFormProps {
-  onConfirm: ({ nickname, password }: { nickname: string; password: string }) => void;
+  onConfirm: ({ nickname, password }: SignupConfirmPayload) => void;
 }
-
-interface HiddenFieldEyeButtonProps {
-  isFieldHidden: boolean;
-  onClick: () => void;
-}
-
-const HiddenFieldEyeButton = ({ isFieldHidden, onClick }: HiddenFieldEyeButtonProps) => {
-  return (
-    <button className="suffix-icon" onClick={onClick}>
-      {isFieldHidden ? <IcEyeclosedLine /> : <IcEyeopenLine />}
-    </button>
-  );
-};
-
-const SignupInput = ({
-  title,
-  placeholder,
-  helperLabel,
-  hiddenField = false,
-  warn = false,
-  validator,
-  onChange,
-}: SignupInputProps) => {
-  const [value, setValue] = useState('');
-  const [isFieldHidden, setIsFieldHidden] = useState(true);
-
-  const fieldType = hiddenField && isFieldHidden ? 'password' : 'text';
-  const isHiddenFieldSuffixVisible = hiddenField && value.length > 0;
-
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setValue(inputValue);
-    onChange({ value: inputValue, isValid: validator(inputValue) });
-  };
-
-  const toggleHiddenField = () => {
-    if (!hiddenField) return;
-    setIsFieldHidden((prev) => !prev);
-  };
-
-  const getSuffixProps = () => {
-    if (!hiddenField) {
-      return {
-        onClickClearButton: () => setValue(''),
-      };
-    }
-
-    return {
-      suffix: isHiddenFieldSuffixVisible && (
-        <HiddenFieldEyeButton isFieldHidden={isFieldHidden} onClick={toggleHiddenField} />
-      ),
-    };
-  };
-
-  return (
-    <div>
-      <StyledSignupInputTitle>{title}</StyledSignupInputTitle>
-      <StyledSignupInputSuffix>
-        <SimpleTextField
-          value={value}
-          type={fieldType}
-          onChange={onInputChange}
-          placeholder={placeholder}
-          helperLabel={helperLabel}
-          isNegative={warn}
-          {...getSuffixProps()}
-        />
-      </StyledSignupInputSuffix>
-    </div>
-  );
-};
 
 export const SignupForm = ({ onConfirm }: SignupFormProps) => {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
-  const [isNickNameValid, setIsNickNameValid] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [isNicknameFieldWarned, setIsNicknameFieldWarned] = useState(false);
-  const [isPasswordFieldWarned, setIsPasswordFieldWarned] = useState(false);
-
-  const isFormValid = isNickNameValid && isPasswordValid;
-  const hasOnlyNumberAndEnglish = (value: string) => /^[a-zA-Z0-9]*$/.test(value);
-  const hasOnlyNumberEnglishAndHangul = (value: string) =>
-    /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/.test(value);
+  const { isFormValid, nicknameValidator, passwordValidator } = useSignupFormValidation(
+    nickname,
+    password
+  );
 
   const onFormConfirm = () => {
     onConfirm({ nickname, password });
   };
-
-  const nicknameValidator = useCallback((value: string) => {
-    return value.length >= 2 && value.length <= 12 && hasOnlyNumberEnglishAndHangul(value);
-  }, []);
-
-  const passwordValidator = useCallback((value: string) => {
-    return value.length >= 8 && hasOnlyNumberAndEnglish(value);
-  }, []);
 
   return (
     <StyledSignupContentContainer>
@@ -132,26 +40,16 @@ export const SignupForm = ({ onConfirm }: SignupFormProps) => {
         title="사용할 닉네임을 입력해주세요."
         helperLabel="한글, 영어, 숫자를 사용해 2~12자로 입력해주세요"
         placeholder="ppushoong"
-        warn={isNicknameFieldWarned}
         validator={nicknameValidator}
-        onChange={({ value, isValid }) => {
-          setIsNicknameFieldWarned(!isValid);
-          setNickname(value);
-          setIsNickNameValid(isValid);
-        }}
+        onChange={(value) => setNickname(value)}
       />
       <SignupInput
         hiddenField
         title="사용할 비밀번호를 입력해주세요."
         helperLabel="숫자와 영문자 조합으로 8자 이상 입력해주세요"
         placeholder="비밀번호"
-        warn={isPasswordFieldWarned}
         validator={passwordValidator}
-        onChange={({ value, isValid }) => {
-          setIsPasswordFieldWarned(!isValid);
-          setPassword(value);
-          setIsPasswordValid(isValid);
-        }}
+        onChange={(value) => setPassword(value)}
       />
       <BoxButton
         rounding={8}
