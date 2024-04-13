@@ -19,6 +19,7 @@ const Dummy = [
   '이거슨 테스트여',
 ];
 
+// TODO: 추후 공지사항 API 연결 확인 필요
 export const Notification = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [activeTransition, setActiveTransition] = useState(true);
