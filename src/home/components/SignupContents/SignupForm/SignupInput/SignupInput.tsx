@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { IcEyeclosedLine, IcEyeopenLine, SimpleTextField } from '@yourssu/design-system-react';
 
@@ -35,14 +35,22 @@ export const SignupInput = ({
   validator,
   onChange,
 }: SignupInputProps) => {
+  const validValueOnceRef = useRef(false);
   const [value, setValue] = useState('');
   const [isFieldHidden, setIsFieldHidden] = useState(true);
 
   const fieldType = hiddenField && isFieldHidden ? 'password' : 'text';
   const isHiddenFieldSuffixVisible = hiddenField && value.length > 0;
 
+  const setValidValueOnce = (inputValue: string) => {
+    if (validValueOnceRef.current) return;
+    if (!validator(inputValue)) return;
+    validValueOnceRef.current = true;
+  };
+
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
+    setValidValueOnce(inputValue);
     setValue(inputValue);
     onChange(inputValue);
   };
@@ -76,7 +84,7 @@ export const SignupInput = ({
           onChange={onInputChange}
           placeholder={placeholder}
           helperLabel={helperLabel}
-          isNegative={!validator(value)}
+          isNegative={validValueOnceRef.current && !validator(value)}
           {...getSuffixProps()}
         />
       </StyledSignupInputSuffix>
