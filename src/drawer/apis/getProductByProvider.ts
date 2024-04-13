@@ -1,4 +1,4 @@
-import { drawerClient } from '@/apis/soomsilClient';
+import { soomsilClient } from '@/apis';
 import { GetProductByProviderProps, ProductResponses } from '@/drawer/types/product.type';
 
 export const getProductByProvider = async ({
@@ -6,7 +6,7 @@ export const getProductByProvider = async ({
   page = 0,
   category = '',
 }: GetProductByProviderProps): Promise<ProductResponses> => {
-  const { data } = await drawerClient.get('/v2/drawer', {
+  const { data } = await soomsilClient.get('/v2/drawer', {
     params: {
       responseType: 'WEB',
       providerId,

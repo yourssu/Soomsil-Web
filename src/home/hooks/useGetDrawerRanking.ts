@@ -6,12 +6,7 @@ export const useGetDrawerRanking = () => {
   return useQuery({
     queryKey: ['drawerRanking'],
     queryFn: async () => {
-      try {
-        const response = await getRanking({ responseType: 'WEB', category: '', page: 0 });
-        return response;
-      } catch {
-        throw Error;
-      }
+      return await getRanking({ responseType: 'WEB', category: '', page: 0 });
     },
   });
 };

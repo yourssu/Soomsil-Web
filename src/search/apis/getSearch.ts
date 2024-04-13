@@ -1,4 +1,4 @@
-import { searchClient } from '@/apis/soomsilClient';
+import { searchClient } from '@/apis';
 
 import { GetSearchProps } from '../types/GetSearch.type';
 import { SearchResponse } from '../types/ResultListItem.type';

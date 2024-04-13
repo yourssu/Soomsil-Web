@@ -1,4 +1,4 @@
-import { drawerClient } from '@/apis/soomsilClient';
+import { soomsilClient } from '@/apis';
 
 import { ImageListResponse } from '../types/image.type';
 
@@ -9,7 +9,7 @@ export const uploadImages = async (fileList: File[]) => {
     formData.append('images', fileList[i]);
   }
 
-  const response = await drawerClient.post<ImageListResponse>('/v3/image/list', formData, {
+  const response = await soomsilClient.post<ImageListResponse>('/v3/image/list', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

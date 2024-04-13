@@ -1,4 +1,4 @@
-import { searchClient } from '@/apis/soomsilClient';
+import { searchClient } from '@/apis';
 
 import { RealTimeKeywordData } from '../types/realTimeKeyword.type';
 
