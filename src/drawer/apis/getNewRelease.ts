@@ -11,6 +11,5 @@ export const getNewRelease = async ({ responseType, category, page }: GetRanking
       page,
     },
   });
-  console.log(response.data);
   return response.data;
 };

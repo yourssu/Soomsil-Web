@@ -21,7 +21,6 @@ export const useGetNewRelease = () => {
     };
 
     fetchData();
-    console.log(newReleases);
   }, [selectedCategory]);
 
   return { newReleases, selectedCategory, setSelectedCategory };
