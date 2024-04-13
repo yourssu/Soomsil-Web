@@ -1,4 +1,4 @@
-import { useState, Children, ReactElement } from 'react';
+import { useState, Children, ReactElement, ReactNode } from 'react';
 
 interface StepProps<StepType> {
   name: StepType;
@@ -18,10 +18,14 @@ export const useFunnel = <StepType extends string>(initialStep: StepType) => {
     return <>{props.children}</>;
   };
 
+  const isFunnelStep = (child: ReactNode): child is StepElementType<StepType> => {
+    return (child as StepElementType<StepType>).props.name !== undefined;
+  };
+
   const Funnel = ({ children }: FunnelProps<StepType>) => {
     const targetStep = Children.toArray(children).find((child) => {
-      const stepChild = child as StepElementType<StepType>;
-      return stepChild.props.name === currentStep;
+      if (!isFunnelStep(child)) return false;
+      return child.props.name === currentStep;
     }) as StepElementType<StepType> | undefined;
 
     return targetStep;
