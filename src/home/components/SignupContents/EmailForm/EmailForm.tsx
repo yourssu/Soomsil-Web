@@ -30,7 +30,8 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   };
 
   const onEmailSubmit = () => {
-    const fullEmail = email.replace(EMAIL_DOMAIN, '') + EMAIL_DOMAIN;
+    let fullEmail = email;
+    if (!email.endsWith(EMAIL_DOMAIN)) fullEmail += EMAIL_DOMAIN;
     onConfirm(fullEmail);
   };
 
