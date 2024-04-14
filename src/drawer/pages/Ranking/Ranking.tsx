@@ -57,10 +57,10 @@ export const Ranking = () => {
                 link={`/drawer/services/${product.productNo}`}
                 title={product.productTitle}
                 body={product.productSubTitle}
-                bookmarkCount={product.productBookmarkKey}
+                bookmarkCount={product.count}
                 isBookmarked={product.isBookmarked}
-                bigImgSrc={product.mainImage}
-                smallImgSrc={product.introductionImage[0]}
+                bigImgSrc={product.introductionImage[0]}
+                smallImgSrc={product.mainImage}
               />
             ))}
           </StyledCardContainer>
@@ -87,10 +87,10 @@ export const Ranking = () => {
                 link={`/drawer/services/${product.productNo}`}
                 title={product.productTitle}
                 body={product.productSubTitle}
-                bookmarkCount={product.productBookmarkKey}
+                bookmarkCount={product.count}
                 isBookmarked={product.isBookmarked}
-                bigImgSrc={product.mainImage}
-                smallImgSrc={product.introductionImage[0]}
+                bigImgSrc={product.introductionImage[0]}
+                smallImgSrc={product.mainImage}
               />
             ))}
           </StyledCardContainer>

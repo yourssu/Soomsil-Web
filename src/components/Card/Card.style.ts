@@ -24,6 +24,7 @@ export const StyledThumbnail = styled.img<StyledThumbnailProps>`
   box-shadow:
     0px 1px 3px 1px rgba(60, 64, 67, 0.15),
     0px 1px 2px 0px rgba(60, 64, 67, 0.3);
+  object-fit: cover;
 `;
 
 export const StyledTitle = styled.p`
