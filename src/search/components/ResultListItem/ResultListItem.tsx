@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-import Spacing from '@/components/Spacing/Spacing';
+import { Spacing } from '@/components/Spacing/Spacing';
 import { ResultListItemResponse } from '@/search/types/ResultListItem.type';
 import { onErrorImg } from '@/search/utils/onErrorImg';
 

@@ -4,9 +4,9 @@ import { IcSearchLine, IcXcircleFilled } from '@yourssu/design-system-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
-import Spacing from '@/components/Spacing/Spacing';
+import { Spacing } from '@/components/Spacing/Spacing';
 import { SEARCH_BOX_RADIAL_GRADIENT, SEARCH_BOX_WIDTH } from '@/search/constant';
-import useForm from '@/search/hooks/useForm';
+import { useForm } from '@/search/hooks/useForm';
 import {
   SearchBoxDefsProps,
   SearchBoxForeignObjectProps,

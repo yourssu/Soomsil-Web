@@ -32,6 +32,7 @@ export interface ProductResult {
   expireDay: number;
   introductionImage: string[];
   isAd: boolean;
+  isBookmarked: boolean;
   mainImage: string;
   productBookmarkKey?: number;
   productNo: number;
@@ -46,4 +47,10 @@ export interface ProductDetailResponse {
 
 export interface ProductResponses {
   productList: ProductResult[];
+}
+
+export interface GetProductByProviderProps {
+  providerId: string;
+  page?: number;
+  category?: string;
 }
