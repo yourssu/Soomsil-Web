@@ -1,8 +1,7 @@
+import { authClient } from '@/apis';
 import { Error } from '@/types/Common.type';
 
 import { PostAuthResponse } from '../types/Auth.type';
-
-import { customedAxios } from './customedAxios';
 
 interface LoginProps {
   email: string;
@@ -14,7 +13,7 @@ export const postAuthSignIn = async ({
   password,
 }: LoginProps): Promise<PostAuthResponse> => {
   try {
-    const res = await customedAxios.post(`/auth/sign-in`, {
+    const res = await authClient.post(`/auth/sign-in`, {
       email: email,
       password: password,
     });

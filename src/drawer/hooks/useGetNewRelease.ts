@@ -4,10 +4,11 @@ import { useRecoilValue } from 'recoil';
 
 import { getNewRelease } from '@/drawer/apis/getNewRelease';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
-import { ProductListResponse } from '@/drawer/types/ProductList.type';
+
+import { ProductResponses } from '../types/product.type';
 
 export const useGetNewRelease = () => {
-  const [newReleases, setNewReleases] = useState<ProductListResponse['productList']>([]);
+  const [newReleases, setNewReleases] = useState<ProductResponses['productList']>([]);
   const selectedCategory = useRecoilValue(CategoryState);
 
   useEffect(() => {
@@ -21,7 +22,6 @@ export const useGetNewRelease = () => {
     };
 
     fetchData();
-    console.log(newReleases);
   }, [selectedCategory]);
 
   return { newReleases };

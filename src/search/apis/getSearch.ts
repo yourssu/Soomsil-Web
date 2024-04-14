@@ -1,7 +1,7 @@
+import { searchClient } from '@/apis';
+
 import { GetSearchProps } from '../types/GetSearch.type';
 import { SearchResponse } from '../types/ResultListItem.type';
-
-import { searchClient } from './searchClient';
 
 export const getSearch = async ({ query, page }: GetSearchProps) => {
   const response = await searchClient
