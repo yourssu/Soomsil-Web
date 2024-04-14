@@ -1,7 +1,11 @@
+import { Suspense } from 'react';
+
 import { IcSearchLine, IconContext } from '@yourssu/design-system-react';
 import { Link } from 'react-router-dom';
 
 import RealTimeKeywordImage from '@/assets/realTimeKeyword.webp';
+import { useGetRealTimeKeyword } from '@/search/hooks/useGetRealTimeKeyword';
+import { formatDateTime } from '@/utils/formatDateTime';
 
 import {
   StyledContainer,
@@ -15,37 +19,24 @@ import {
   StyledUpdateDate,
 } from './SearchKeyword.style';
 
-const Dummy = {
-  keyword: [
-    '숭실대학교',
-    '유어슈',
-    '복학신청',
-    '글로벌미디어학부',
-    '뿌슝이',
-    '로지',
-    '에린',
-    '혀니',
-    '엘리아',
-    '복학하기싫어요',
-  ],
-  date: '2024.01.01.12:00',
-};
-
 export const SearchKeyword = () => {
+  const { data } = useGetRealTimeKeyword();
+
   return (
     <StyledContainer>
+      <Suspense fallback={<StyledUpdateDate>연결 중입니다.</StyledUpdateDate>}></Suspense>
       <StyledTitleContainer>
         <StyledTitle>
           숨쉬듯이
           <br />
           검색된 키워드
         </StyledTitle>
-        <StyledUpdateDate>{Dummy.date} 기준</StyledUpdateDate>
+        <StyledUpdateDate>{formatDateTime(data.basedTime)} 기준</StyledUpdateDate>
       </StyledTitleContainer>
       <StyledImage src={RealTimeKeywordImage} alt="뿌슝이" />
       <StyledListContainer>
-        {Dummy.keyword.map((keyword, index) => (
-          <Link key={keyword} to={`/search?query=${keyword}`}>
+        {data.queries.map((value, index) => (
+          <Link key={value.query} to={`/search?query=${value.query}`}>
             <StyledListItem
               leftIcon={<StyledRank $rank={index + 1}>{index + 1}</StyledRank>}
               rightIcon={
@@ -60,7 +51,7 @@ export const SearchKeyword = () => {
               }
               width="15rem"
             >
-              <StyledListItemKeyword>{keyword}</StyledListItemKeyword>
+              <StyledListItemKeyword>{value.query}</StyledListItemKeyword>
             </StyledListItem>
           </Link>
         ))}

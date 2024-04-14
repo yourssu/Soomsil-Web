@@ -1,4 +1,4 @@
-import Spacing from '@/components/Spacing/Spacing';
+import { Spacing } from '@/components/Spacing/Spacing';
 import { NoResult } from '@/search/pages/NoResult/NoResult';
 
 import { FallbackProps } from '../ErrorBoundary/ErrorBoundary';
