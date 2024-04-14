@@ -64,6 +64,16 @@ const Mypage = lazy(() =>
     default: Mypage,
   }))
 );
+const Signup = lazy(() =>
+  import('./home/pages/Signup/Signup').then(({ Signup }) => ({
+    default: Signup,
+  }))
+);
+const Provider = lazy(() =>
+  import('./drawer/pages/Provider/Provider').then(({ Provider }) => ({
+    default: Provider,
+  }))
+);
 
 export const Router = () => {
   const [state, setState] = useState({
@@ -98,6 +108,7 @@ export const Router = () => {
         <Route path="/" element={<HomeLayout />}>
           <Route path="" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
         </Route>
         <Route path="/mypage" element={<Mypage />}></Route>
         <Route path="/drawer" element={<DrawerLayout />}>
@@ -108,6 +119,7 @@ export const Router = () => {
           <Route path="myDrawers" element={<MyDrawer />} />
           <Route path="/drawer/newRelease" element={<NewRelease />} />
           <Route path="/drawer/starRanking" element={<StarRanking />} />
+          <Route path=":providerId" element={<Provider />} />
         </Route>
         <Route path="/search" element={<Search />} />
       </Routes>

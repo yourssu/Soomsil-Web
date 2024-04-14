@@ -22,6 +22,8 @@ export const CardLayout = ({ data, type }: CardLayoutProps) => {
             body={product.productSubTitle}
             bookmarkCount={product.count}
             isBookmarked={product.isBookmarked}
+            bigImgSrc={product.introductionImage[0]}
+            smallImgSrc={product.mainImage}
           />
         ) : (
           <BigDrawerCard
