@@ -5,11 +5,12 @@ import { useRecoilState } from 'recoil';
 import { getNewRelease } from '@/drawer/apis/getNewRelease';
 import { getRanking } from '@/drawer/apis/getRanking';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
-import { ProductListResponse } from '@/drawer/types/ProductList.type';
+
+import { ProductResponses } from '../types/product.type';
 
 export const useGetMain = () => {
-  const [newReleases, setNewReleases] = useState<ProductListResponse['productList']>([]);
-  const [rankings, setRankings] = useState<ProductListResponse['productList']>([]);
+  const [newReleases, setNewReleases] = useState<ProductResponses['productList']>([]);
+  const [rankings, setRankings] = useState<ProductResponses['productList']>([]);
   const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
 
   const fetchData = async () => {

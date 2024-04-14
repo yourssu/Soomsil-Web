@@ -1,4 +1,4 @@
-import { Product } from '@/drawer/types/ProductList.type';
+import { ProductResult } from '@/drawer/types/product.type';
 
 import { BigDrawerCard } from '../DrawerCard/BigDrawerCard';
 import { UserDrawerCard } from '../DrawerCard/UserDrawerCard/UserDrawerCard';
@@ -6,8 +6,8 @@ import { UserDrawerCard } from '../DrawerCard/UserDrawerCard/UserDrawerCard';
 import { StyledCardLayoutContainer } from './CardLayout.style';
 
 interface CardLayoutProps {
-  data: Product[];
-  type: 'SEARCH' | 'STAR' | 'MYDRAWER';
+  data: ProductResult[];
+  type: 'SEARCH' | 'STAR' | 'MYDRAWER' | 'PROVIDER';
 }
 
 export const CardLayout = ({ data, type }: CardLayoutProps) => {
