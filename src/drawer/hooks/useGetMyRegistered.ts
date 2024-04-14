@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { getMyProduct } from '../apis/getMyProduct';
-import { GetRanking } from '../types/GetRanking.type';
+import { RankingRequestParams } from '../types/RankingRequestParams.type';
 
-export const useGetMyRegistered = ({ responseType, page }: GetRanking) => {
+export const useGetMyRegistered = ({ responseType, page }: RankingRequestParams) => {
   return useQuery({
     queryKey: ['myRegistered', { responseType, page }],
     queryFn: () => {
