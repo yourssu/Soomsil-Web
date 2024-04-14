@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
+import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
 import { ErrorBoundary } from '@/search/components/ErrorBoundary/ErrorBoundary';
 import {
@@ -9,7 +10,6 @@ import {
   TotalFallbackComponent,
 } from '@/search/components/FallbackComponent/FallbackComponent';
 import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
-import { ResultListItemLoading } from '@/search/components/ResultListItem/ResultListItemLoading';
 import { ResultListItems } from '@/search/components/ResultListItem/ResultListItems';
 import { TotalCount } from '@/search/components/TotalCount/TotalCount';
 
@@ -44,7 +44,7 @@ export const Search = () => {
             <StyledFlexGapContainer>
               <StyledResultListItemsWrap>
                 <ErrorBoundary fallback={ResultListFallbackComponent} query={query}>
-                  <Suspense fallback={<ResultListItemLoading />}>
+                  <Suspense fallback={<Loading />}>
                     <ResultListItems />
                   </Suspense>
                 </ErrorBoundary>
