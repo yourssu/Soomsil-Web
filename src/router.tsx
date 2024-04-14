@@ -12,6 +12,7 @@ import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
 import { Home } from './home/pages/Home/Home';
 import { Login } from './home/pages/Login/Login';
 import { Mypage } from './home/pages/Mypage/Mypage';
+import { Signup } from './home/pages/Signup/Signup';
 import { Search } from './search/pages/Search/Search';
 
 export const Router = () => {
@@ -20,6 +21,7 @@ export const Router = () => {
       <Route path="/" element={<HomeLayout />}>
         <Route path="" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
       </Route>
       <Route path="/mypage" element={<Mypage />}></Route>
       <Route path="/drawer" element={<DrawerLayout />}>
