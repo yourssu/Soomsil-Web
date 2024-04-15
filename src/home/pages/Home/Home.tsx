@@ -1,19 +1,47 @@
-import { DrawerRanking } from '../../components/DrawerRanking/DrawerRanking';
-import { Notification } from '../../components/Notification/Notification';
-import { SearchKeyword } from '../../components/SearchKeyword/SearchKeyword';
-import { SocialNetworkService } from '../../components/SocialNetworkService/SocialNetworkService';
+import { useEffect, useState } from 'react';
 
-import { StyledComponentContainer } from './Home.style';
+import { isPast } from 'date-fns';
+
+import { DrawerRanking } from '@/home/components/DrawerRanking/DrawerRanking';
+import { Header } from '@/home/components/Header/Header';
+import { Nav } from '@/home/components/Nav/Nav';
+import { Notification } from '@/home/components/Notification/Notification';
+import { SearchKeyword } from '@/home/components/SearchKeyword/SearchKeyword';
+import { SocialNetworkService } from '@/home/components/SocialNetworkService/SocialNetworkService';
+import { api } from '@/service/TokenService';
+
+import {
+  StyledComponentContainer,
+  StyledComponentInnerContainer,
+  StyledContainer,
+} from './Home.style';
 
 export const Home = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const accessToken = api.getAccessToken();
+  const accessExpiredIn = sessionStorage.getItem('accessExpiredIn');
+  useEffect(() => {
+    if (accessExpiredIn) {
+      if (accessToken == null || isPast(new Date(accessExpiredIn))) {
+        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(true);
+      }
+    }
+  }, [accessToken, accessExpiredIn]);
+
   return (
-    <>
-      <Notification />
+    <StyledContainer>
+      <Nav isLoggedIn={isLoggedIn} />
+      <Header />
       <StyledComponentContainer>
-        <DrawerRanking />
-        <SearchKeyword />
-        <SocialNetworkService />
+        <Notification />
+        <StyledComponentInnerContainer>
+          <DrawerRanking />
+          <SearchKeyword />
+          <SocialNetworkService />
+        </StyledComponentInnerContainer>
       </StyledComponentContainer>
-    </>
+    </StyledContainer>
   );
 };
