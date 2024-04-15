@@ -54,7 +54,7 @@ export const Login = () => {
       sessionStorage.setItem('accessExpiredIn', res.data.accessTokenExpiredIn.toString());
       navigate('/');
     } else if (res.error) {
-      if (res.error.status == 401) {
+      if (res.error.response?.status == 401) {
         setFailedLogin(true);
       }
     }

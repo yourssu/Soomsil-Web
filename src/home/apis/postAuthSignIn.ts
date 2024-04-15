@@ -1,5 +1,6 @@
+import { AxiosError } from 'axios';
+
 import { authClient } from '@/apis';
-import { Error } from '@/types/Common.type';
 
 import { PostAuthResponse } from '../types/Auth.type';
 
@@ -19,7 +20,6 @@ export const postAuthSignIn = async ({
     });
     return { data: res.data };
   } catch (error: unknown) {
-    const errorData: Error = { ...(error as Error) };
-    return { error: errorData };
+    return { error: error as AxiosError };
   }
 };
