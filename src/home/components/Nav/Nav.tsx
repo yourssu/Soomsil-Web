@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Profile from '@/assets/home/profile.svg';
 import { Dropdown } from '@/components/Dropdown/Dropdown';
@@ -18,14 +18,29 @@ interface NavProps {
   isLoggedIn: boolean;
 }
 export const Nav = ({ isLoggedIn }: NavProps) => {
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const handleProfileClick = () => {
     setIsProfileClicked((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsProfileClicked(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <StyledContainer>
       {isLoggedIn ? (
-        <div>
+        <div ref={dropdownRef}>
           <StyledProfileContainer src={Profile} alt="profile" onClick={handleProfileClick} />
           {isProfileClicked && (
             <Dropdown padding="1rem" bottom="-10rem" right="0">
