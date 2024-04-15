@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const soomsilClient = axios.create({
-  baseURL: import.meta.env.VITE_API_DRAWER_URL,
+  baseURL: import.meta.env.VITE_API_SOOMSIL_URL,
 });
 
 export const searchClient = axios.create({
@@ -9,9 +9,8 @@ export const searchClient = axios.create({
 });
 
 export const authClient = axios.create({
-  baseURL: import.meta.env.VITE_API_HOME_URL,
+  baseURL: import.meta.env.VITE_API_AUTH_URL,
   headers: {
-    'Content-Type': 'application/json',
     withCredentials: true,
   },
 });
