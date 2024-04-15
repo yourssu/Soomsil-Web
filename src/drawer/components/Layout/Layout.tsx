@@ -1,5 +1,7 @@
+import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom';
 
+import { FallbackDrawer } from '@/drawer/components/FallbackDrawer/FallbackDrawer';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { Footer } from '../Footer/Footer';
@@ -17,7 +19,12 @@ export const Layout = () => {
   return (
     <StyledLayout>
       {isMobileRegisterRoute ? <MobileRegisterHeader /> : <Header />}
-      <Outlet />
+      <ErrorBoundary
+        fallbackRender={(fallbackProps) => <FallbackDrawer {...fallbackProps} />}
+        resetKeys={[location.pathname]}
+      >
+        <Outlet />
+      </ErrorBoundary>
       <Footer />
     </StyledLayout>
   );
