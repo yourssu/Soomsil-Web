@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { postAuthVerificationEmail } from '@/home/apis/authVerification.ts';
 import { AgreeTerms } from '@/home/components/SignupContents/AgreeTerms/AgreeTerms';
 import { EmailAuth } from '@/home/components/SignupContents/EmailAuth/EmailAuth';
 import { EmailForm } from '@/home/components/SignupContents/EmailForm/EmailForm';
@@ -21,6 +22,28 @@ export const Signup = () => {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
 
+  const sendAuthenticationMail = async (email: string) => {
+    const verificationProps = {
+      email: email,
+      verificationType: 'SIGN_UP',
+    };
+
+    const res = await postAuthVerificationEmail(verificationProps);
+
+    if (res.data) {
+      sessionStorage.setItem('emailAuthSessionToken', res.data.sessionToken);
+      sessionStorage.setItem(
+        'emailAuthSessionTokenExpiredIn',
+        res.data.sessionTokenExpiredIn.toString()
+      );
+      return true;
+    } else if (res.error) {
+      alert(res.error.message);
+    }
+
+    return false;
+  };
+
   // TODO: 회원가입 API 연결 시 삭제
   console.log(nickname, password);
 
@@ -36,6 +59,7 @@ export const Signup = () => {
         </Funnel.Step>
         <Funnel.Step name="이메일입력">
           <EmailForm
+            sendAuthenticationMail={sendAuthenticationMail}
             onConfirm={(emailValue) => {
               setEmail(emailValue);
               setStep('이메일인증');
@@ -44,10 +68,8 @@ export const Signup = () => {
         </Funnel.Step>
         <Funnel.Step name="이메일인증">
           <EmailAuth
+            sendAuthenticationMail={sendAuthenticationMail}
             email={email}
-            backToEmailForm={() => {
-              setStep('이메일입력');
-            }}
             onConfirm={() => {
               setStep('회원가입폼');
             }}

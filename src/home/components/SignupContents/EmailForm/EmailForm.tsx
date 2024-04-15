@@ -18,21 +18,22 @@ import {
 
 interface EmailFormProps {
   onConfirm: (email: string) => void;
+  sendAuthenticationMail: (email: string) => Promise<boolean>;
 }
 
 const EMAIL_DOMAIN = '@soongsil.ac.kr';
 
-export const EmailForm = ({ onConfirm }: EmailFormProps) => {
+export const EmailForm = ({ onConfirm, sendAuthenticationMail }: EmailFormProps) => {
   const [email, setEmail] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const onEmailSubmit = () => {
+  const onEmailSubmit = async () => {
     let fullEmail = email;
     if (!email.endsWith(EMAIL_DOMAIN)) fullEmail += EMAIL_DOMAIN;
-    onConfirm(fullEmail);
+    if (await sendAuthenticationMail(fullEmail)) onConfirm(fullEmail);
   };
 
   return (

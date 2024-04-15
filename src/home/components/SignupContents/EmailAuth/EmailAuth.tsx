@@ -1,13 +1,10 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
-import {
-  getAuthVerificationCheck,
-  postAuthVerificationEmail,
-} from '@/home/apis/authVerification.ts';
+import { getAuthVerificationCheck } from '@/home/apis/authVerification.ts';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
@@ -21,11 +18,11 @@ import {
 interface EmailAuthProps {
   email: string;
   onConfirm: () => void;
-  backToEmailForm: () => void;
+  sendAuthenticationMail: (email: string) => Promise<boolean>;
 }
 
-export const EmailAuth = ({ email, onConfirm, backToEmailForm }: EmailAuthProps) => {
-  const [authed, setAuthed] = useState(false);
+export const EmailAuth = ({ email, onConfirm, sendAuthenticationMail }: EmailAuthProps) => {
+  const [authed, setAuthed] = useState(true);
   const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(8 * 60);
 
   const leftTimeToString = () => {
@@ -33,40 +30,10 @@ export const EmailAuth = ({ email, onConfirm, backToEmailForm }: EmailAuthProps)
     return format(targetTime, 'mm:ss');
   };
 
-  const sendAuthenticationMail = useCallback(async () => {
+  const reSendAuthenticationMail = async () => {
+    setAuthed(await sendAuthenticationMail(email));
     resetTimer();
-
-    const verificationProps = {
-      email: email,
-      verificationType: 'SIGN_UP',
-    };
-
-    const res = await postAuthVerificationEmail(verificationProps);
-
-    if (res.data) {
-      sessionStorage.setItem('emailAuthSessionToken', res.data.sessionToken);
-      sessionStorage.setItem(
-        'emailAuthSessionTokenExpiredIn',
-        res.data.sessionTokenExpiredIn.toString()
-      );
-      setAuthed(true);
-      return;
-    } else if (res.error) {
-      alert(res.error.message);
-      backToEmailForm();
-    }
-
-    setAuthed(false);
-  }, [backToEmailForm, email, resetTimer]);
-
-  useEffect(() => {
-    if (authed) return;
-    if (!sendAuthenticationMail) return;
-
-    (async () => {
-      await sendAuthenticationMail();
-    })();
-  }, [sendAuthenticationMail, authed]);
+  };
 
   const onClickNext = async () => {
     const session = sessionStorage.getItem('emailAuthSessionToken');
@@ -115,7 +82,7 @@ export const EmailAuth = ({ email, onConfirm, backToEmailForm }: EmailAuthProps)
           size="medium"
           isPointed={false}
           isWarned={false}
-          onClick={sendAuthenticationMail}
+          onClick={reSendAuthenticationMail}
         >
           인증 메일 재전송
         </PlainButton>
