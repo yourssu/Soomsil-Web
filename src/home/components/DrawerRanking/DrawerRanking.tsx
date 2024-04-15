@@ -23,7 +23,7 @@ export const DrawerRanking = () => {
           .map((drawerItem) => (
             <RankDrawerCard
               key={drawerItem.productNo}
-              link={`/drawerservices/${drawerItem.productNo}`}
+              link={`/drawer/services/${drawerItem.productNo}`}
               smallImgSrc={drawerItem.mainImage}
               title={drawerItem.productTitle}
               body={drawerItem.productSubTitle}
