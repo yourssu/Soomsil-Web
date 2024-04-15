@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
+import {
+  getAuthVerificationCheck,
+  postAuthVerificationEmail,
+} from '@/home/apis/authVerification.ts';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
@@ -17,10 +21,11 @@ import {
 interface EmailAuthProps {
   email: string;
   onConfirm: () => void;
+  backToEmailForm: () => void;
 }
 
-export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
-  const [authed, setAuthed] = useState(true); // Todo: 인증 기능 구현 완료시 false로 변경
+export const EmailAuth = ({ email, onConfirm, backToEmailForm }: EmailAuthProps) => {
+  const [authed, setAuthed] = useState(false);
   const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(8 * 60);
 
   const leftTimeToString = () => {
@@ -28,11 +33,57 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
     return format(targetTime, 'mm:ss');
   };
 
-  const sendAuthenticationMail = () => {
-    setAuthed(false);
+  const sendAuthenticationMail = useCallback(async () => {
     resetTimer();
 
-    // Todo: 여기에 인증 메일 전송하는 코드 작성하면 됨.
+    const verificationProps = {
+      email: email,
+      verificationType: 'SIGN_UP',
+    };
+
+    const res = await postAuthVerificationEmail(verificationProps);
+
+    if (res.data) {
+      sessionStorage.setItem('emailAuthSessionToken', res.data.sessionToken);
+      sessionStorage.setItem(
+        'emailAuthSessionTokenExpiredIn',
+        res.data.sessionTokenExpiredIn.toString()
+      );
+      setAuthed(true);
+      return;
+    } else if (res.error) {
+      alert(res.error.message);
+      backToEmailForm();
+    }
+
+    setAuthed(false);
+  }, [backToEmailForm, email, resetTimer]);
+
+  useEffect(() => {
+    if (authed) return;
+    if (!sendAuthenticationMail) return;
+
+    (async () => {
+      await sendAuthenticationMail();
+    })();
+  }, [sendAuthenticationMail, authed]);
+
+  const onClickNext = async () => {
+    const session = sessionStorage.getItem('emailAuthSessionToken');
+    if (!session) return;
+
+    const verificationCheckProps = {
+      session: session,
+    };
+
+    const res = await getAuthVerificationCheck(verificationCheckProps);
+
+    if (res.data) {
+      if (res.data.isVerified) onConfirm();
+      else alert('이메일 인증을 완료해주세요.');
+    } else if (res.error) {
+      alert(res.error.message);
+    }
   };
 
   return (
@@ -54,7 +105,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
         rounding={8}
         size="large"
         variant="filled"
-        onClick={onConfirm}
+        onClick={onClickNext}
         disabled={isTimerEnd || !authed}
       >
         다음

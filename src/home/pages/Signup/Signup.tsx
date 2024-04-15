@@ -45,6 +45,9 @@ export const Signup = () => {
         <Funnel.Step name="이메일인증">
           <EmailAuth
             email={email}
+            backToEmailForm={() => {
+              setStep('이메일입력');
+            }}
             onConfirm={() => {
               setStep('회원가입폼');
             }}
