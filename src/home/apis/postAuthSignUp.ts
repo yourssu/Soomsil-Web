@@ -1,10 +1,9 @@
 import { AxiosError } from 'axios';
 
+import { authClient } from '@/apis';
 import { Error } from '@/types/Common.type';
 
 import { PostAuthResponse } from '../types/Auth.type';
-
-import { customedAxios } from './customedAxios';
 
 interface SignUpProps {
   email: string;
@@ -20,7 +19,7 @@ export const postAuthSignUp = async ({
   sessionToken,
 }: SignUpProps): Promise<PostAuthResponse> => {
   try {
-    const res = await customedAxios.post(`/auth/sign-up`, {
+    const res = await authClient.post(`/auth/sign-up`, {
       email: email,
       nickName: nickName,
       password: password,
