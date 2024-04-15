@@ -28,7 +28,7 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
         <div>
           <StyledProfileContainer src={Profile} alt="profile" onClick={handleProfileClick} />
           {isProfileClicked && (
-            <Dropdown padding="1rem" bottom="-10rem" right="0.8rem">
+            <Dropdown padding="1rem" bottom="-10rem" right="0">
               <StyledDropDownName>뿌슝이</StyledDropDownName>
               <StyledDropDownEmail>cuteppussung@naver.com</StyledDropDownEmail>
               <StyledDropDownMyPage to="/mypage">마이페이지</StyledDropDownMyPage>
@@ -37,13 +37,11 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
           )}
         </div>
       ) : (
-        <div>
-          <StyledNonLoginContainer>
-            <StyledNonLoginText to="/login">로그인</StyledNonLoginText>
-            <StyledColDivider>|</StyledColDivider>
-            <StyledNonLoginText to="/signup">회원가입</StyledNonLoginText>
-          </StyledNonLoginContainer>
-        </div>
+        <StyledNonLoginContainer>
+          <StyledNonLoginText to="/login">로그인</StyledNonLoginText>
+          <StyledColDivider>|</StyledColDivider>
+          <StyledNonLoginText to="/signup">회원가입</StyledNonLoginText>
+        </StyledNonLoginContainer>
       )}
     </StyledContainer>
   );

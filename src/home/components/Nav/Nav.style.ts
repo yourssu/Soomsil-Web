@@ -5,7 +5,10 @@ export const StyledContainer = styled.nav`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  position: relative;
+
+  position: absolute;
+  top: 6%;
+  right: calc(50% - 627px);
 `;
 
 export const StyledProfileContainer = styled.img`
@@ -15,7 +18,6 @@ export const StyledProfileContainer = styled.img`
 `;
 export const StyledNonLoginContainer = styled.div`
   display: flex;
-  flex-direction: row;
   gap: 1.5rem;
 `;
 
@@ -30,7 +32,7 @@ export const StyledNonLoginText = styled(NavLink)`
 `;
 
 export const StyledDropDownName = styled.div`
-  ${({ theme }) => theme.typo.body2};
+  ${({ theme }) => theme.typo.body1};
   color: ${({ theme }) => theme.color.textPrimary};
 `;
 
