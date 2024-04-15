@@ -5,6 +5,7 @@ import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
 import { getAuthVerificationCheck } from '@/home/apis/authVerification.ts';
+import { PostAuthVerificationEmailResponse } from '@/home/types/Auth.type.ts';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
@@ -18,7 +19,7 @@ import {
 interface EmailAuthProps {
   email: string;
   onConfirm: () => void;
-  sendAuthenticationMail: (email: string) => Promise<boolean>;
+  sendAuthenticationMail: (email: string) => Promise<PostAuthVerificationEmailResponse>;
 }
 
 export const EmailAuth = ({ email, onConfirm, sendAuthenticationMail }: EmailAuthProps) => {
@@ -31,7 +32,7 @@ export const EmailAuth = ({ email, onConfirm, sendAuthenticationMail }: EmailAut
   };
 
   const reSendAuthenticationMail = async () => {
-    setAuthed(await sendAuthenticationMail(email));
+    setAuthed(!!(await sendAuthenticationMail(email)).data);
     resetTimer();
   };
 

@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 
+import { PostAuthVerificationEmailResponse } from '@/home/types/Auth.type.ts';
+
 import {
   StyledSignupButtonText,
   StyledSignupContentContainer,
@@ -18,13 +20,14 @@ import {
 
 interface EmailFormProps {
   onConfirm: (email: string) => void;
-  sendAuthenticationMail: (email: string) => Promise<boolean>;
+  sendAuthenticationMail: (email: string) => Promise<PostAuthVerificationEmailResponse>;
 }
 
 const EMAIL_DOMAIN = '@soongsil.ac.kr';
 
 export const EmailForm = ({ onConfirm, sendAuthenticationMail }: EmailFormProps) => {
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState<string | undefined>(undefined);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -33,7 +36,9 @@ export const EmailForm = ({ onConfirm, sendAuthenticationMail }: EmailFormProps)
   const onEmailSubmit = async () => {
     let fullEmail = email;
     if (!email.endsWith(EMAIL_DOMAIN)) fullEmail += EMAIL_DOMAIN;
-    if (await sendAuthenticationMail(fullEmail)) onConfirm(fullEmail);
+    const res = await sendAuthenticationMail(fullEmail);
+    if (res.data) onConfirm(fullEmail);
+    else setEmailError(res.error?.message || '이메일을 다시 확인해주세요.');
   };
 
   return (
@@ -45,6 +50,8 @@ export const EmailForm = ({ onConfirm, sendAuthenticationMail }: EmailFormProps)
           <SimpleTextField
             value={email}
             onChange={onChange}
+            isNegative={!!emailError}
+            helperLabel={emailError}
             placeholder="ppushoong"
             suffix={<StyledEmailSuffix>{EMAIL_DOMAIN}</StyledEmailSuffix>}
             autoFocus

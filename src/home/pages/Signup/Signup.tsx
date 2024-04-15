@@ -36,12 +36,9 @@ export const Signup = () => {
         'emailAuthSessionTokenExpiredIn',
         res.data.sessionTokenExpiredIn.toString()
       );
-      return true;
-    } else if (res.error) {
-      alert(res.error.message);
     }
 
-    return false;
+    return res;
   };
 
   // TODO: 회원가입 API 연결 시 삭제
