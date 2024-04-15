@@ -32,6 +32,7 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
               <StyledDropDownName>뿌슝이</StyledDropDownName>
               <StyledDropDownEmail>cuteppussung@naver.com</StyledDropDownEmail>
               <StyledDropDownMyPage to="/mypage">마이페이지</StyledDropDownMyPage>
+              {/* TODO: 로그아웃 기능 구현 */}
               <StyledDropDownLogout>로그아웃</StyledDropDownLogout>
             </Dropdown>
           )}

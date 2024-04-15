@@ -50,4 +50,5 @@ export const StyledDropDownMyPage = styled(NavLink)`
 export const StyledDropDownLogout = styled.div`
   ${({ theme }) => theme.typo.body2};
   padding-top: 0.75rem;
+  cursor: pointer;
 `;
