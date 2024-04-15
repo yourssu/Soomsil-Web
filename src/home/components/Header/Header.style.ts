@@ -27,7 +27,7 @@ export const StyledSoomsilLogo = styled.img`
   height: 3.75rem;
 `;
 
-export const StyledSearchBar = styled.div`
+export const StyledSearchBar = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,4 +45,9 @@ export const StyledSearchBox = styled.input`
 
   ${({ theme }) => theme.typo.display3};
   color: ${({ theme }) => theme.color.textSecondary};
+`;
+
+export const StyledSubmitButton = styled.button`
+  width: 2rem;
+  height: 2rem;
 `;
