@@ -14,10 +14,18 @@ export const postAuthSignIn = async ({
   password,
 }: LoginProps): Promise<PostAuthResponse> => {
   try {
-    const res = await authClient.post(`/auth/sign-in`, {
-      email: email,
-      password: password,
-    });
+    const res = await authClient.post(
+      `/auth/sign-in`,
+      {
+        email: email,
+        password: password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     return { data: res.data };
   } catch (error: unknown) {
     return { error: error as AxiosError };
