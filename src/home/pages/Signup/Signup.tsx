@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { StyledFlexContainer } from '@/components/FlexContainer/FlexContainer.style';
 import { AgreeTerms } from '@/home/components/SignupContents/AgreeTerms/AgreeTerms';
 import { EmailAuth } from '@/home/components/SignupContents/EmailAuth/EmailAuth';
 import { EmailForm } from '@/home/components/SignupContents/EmailForm/EmailForm';
@@ -26,46 +25,44 @@ export const Signup = () => {
   console.log(nickname, password);
 
   return (
-    <StyledFlexContainer>
-      <SignupFrame>
-        <Funnel>
-          <Funnel.Step name="약관동의">
-            <AgreeTerms
-              onConfirm={() => {
-                setStep('이메일입력');
-              }}
-            />
-          </Funnel.Step>
-          <Funnel.Step name="이메일입력">
-            <EmailForm
-              onConfirm={(emailValue) => {
-                setEmail(emailValue);
-                setStep('이메일인증');
-              }}
-            />
-          </Funnel.Step>
-          <Funnel.Step name="이메일인증">
-            <EmailAuth
-              email={email}
-              onConfirm={() => {
-                setStep('회원가입폼');
-              }}
-            />
-          </Funnel.Step>
-          <Funnel.Step name="회원가입폼">
-            <SignupForm
-              onConfirm={({ nickname, password }) => {
-                setNickname(nickname);
-                setPassword(password);
-                setStep('회원가입완료');
-              }}
-            />
-          </Funnel.Step>
-          <Funnel.Step name="회원가입완료">
-            <SignupEnd />
-          </Funnel.Step>
-        </Funnel>
-      </SignupFrame>
-    </StyledFlexContainer>
+    <SignupFrame>
+      <Funnel>
+        <Funnel.Step name="약관동의">
+          <AgreeTerms
+            onConfirm={() => {
+              setStep('이메일입력');
+            }}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="이메일입력">
+          <EmailForm
+            onConfirm={(emailValue) => {
+              setEmail(emailValue);
+              setStep('이메일인증');
+            }}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="이메일인증">
+          <EmailAuth
+            email={email}
+            onConfirm={() => {
+              setStep('회원가입폼');
+            }}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="회원가입폼">
+          <SignupForm
+            onConfirm={({ nickname, password }) => {
+              setNickname(nickname);
+              setPassword(password);
+              setStep('회원가입완료');
+            }}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="회원가입완료">
+          <SignupEnd />
+        </Funnel.Step>
+      </Funnel>
+    </SignupFrame>
   );
 };
