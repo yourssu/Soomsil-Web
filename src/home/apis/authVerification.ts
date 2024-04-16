@@ -10,7 +10,7 @@ import {
 
 interface EmailVerificationProps {
   email: string;
-  verificationType: string;
+  verificationType: 'SIGN_UP' | 'PASSWORD';
 }
 
 interface VerificationCheckProps {
