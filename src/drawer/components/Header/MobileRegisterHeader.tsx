@@ -2,7 +2,7 @@ import { IcPersoncircleLine, IconContext } from '@yourssu/design-system-react';
 import { Link } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
-import soomsil from '@/assets/soomsil.svg';
+import soomsil from '@/assets/soomsil_v2_logo.svg';
 import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 
 import { StyledContainer, StyledHeaderTab } from './MobileRegisterHeader.style';
