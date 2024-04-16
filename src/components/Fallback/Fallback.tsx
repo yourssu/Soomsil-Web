@@ -1,4 +1,3 @@
-import { isAxiosError } from 'axios';
 import { FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,8 +12,6 @@ import {
 } from '@/components/Fallback/Fallback.style';
 import { FallbackWithNavigateProps, FallbackContent } from '@/components/Fallback/Fallback.type';
 import { FALLBACK_TEXT } from '@/constants/fallback.constant';
-import { FallbackDrawer } from '@/drawer/components/FallbackDrawer/FallbackDrawer';
-import { Error as CustomError } from '@/types/Common.type';
 
 const getFallbackContent = (status: number): FallbackContent => {
   if (status >= 500) return FALLBACK_TEXT['SERVER'];
@@ -23,36 +20,37 @@ const getFallbackContent = (status: number): FallbackContent => {
 };
 
 export const Fallback = ({ error, resetErrorBoundary }: FallbackProps) => {
-  const page = isAxiosError(error) ? error.response?.data.error : (error as CustomError).error;
-
-  const renderFallback = (page: string) => {
-    switch (page) {
-      case 'Drawer':
-      case 'System':
-        return <FallbackDrawer error={error} resetErrorBoundary={resetErrorBoundary} />;
-
-      case 'Auth':
-      case 'Search':
-      default:
-        return (
-          <FallbackWithNavigate
-            error={error.status}
-            resetErrorBoundary={resetErrorBoundary}
-            backUrl="/"
-          />
-        );
+  const getBackUrl = () => {
+    if (window.location.pathname.startsWith('/drawer')) {
+      return '/drawer';
     }
+    return '/';
   };
 
-  return <>{renderFallback(page.split('-')[0])}</>;
+  const renderFallback = () => {
+    const status = error.response?.data.status;
+
+    if (status >= 500) {
+      return <FallbackWithDetail status={status} />;
+    }
+    return (
+      <FallbackWithNavigate
+        error={error}
+        resetErrorBoundary={resetErrorBoundary}
+        backUrl={getBackUrl()}
+      />
+    );
+  };
+
+  return <>{renderFallback()}</>;
 };
 
-export const FallbackWithNavigate = ({
+const FallbackWithNavigate = ({
   error,
   resetErrorBoundary,
   backUrl,
 }: FallbackWithNavigateProps) => {
-  const { boldText, buttonText } = getFallbackContent(error);
+  const { boldText, buttonText } = getFallbackContent(error.response.data.status);
 
   const navigate = useNavigate();
 
@@ -72,8 +70,8 @@ export const FallbackWithNavigate = ({
   );
 };
 
-export const FallbackWithDetail = () => {
-  const { boldText, subText } = getFallbackContent(500);
+const FallbackWithDetail = ({ status }: { status: number }) => {
+  const { boldText, subText } = getFallbackContent(status);
 
   return (
     <StyledFallbackContainer>
