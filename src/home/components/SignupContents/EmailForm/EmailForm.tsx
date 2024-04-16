@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 
-import { PostAuthVerificationEmailResponse } from '@/home/types/Auth.type.ts';
+import { postAuthVerificationEmail } from '@/home/apis/authVerification.ts';
 
 import {
   StyledSignupButtonText,
@@ -20,12 +20,11 @@ import {
 
 interface EmailFormProps {
   onConfirm: (email: string) => void;
-  sendAuthenticationMail: (email: string) => Promise<PostAuthVerificationEmailResponse>;
 }
 
 const EMAIL_DOMAIN = '@soongsil.ac.kr';
 
-export const EmailForm = ({ onConfirm, sendAuthenticationMail }: EmailFormProps) => {
+export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState<string | undefined>(undefined);
 
@@ -36,7 +35,7 @@ export const EmailForm = ({ onConfirm, sendAuthenticationMail }: EmailFormProps)
   const onEmailSubmit = async () => {
     let fullEmail = email;
     if (!email.endsWith(EMAIL_DOMAIN)) fullEmail += EMAIL_DOMAIN;
-    const res = await sendAuthenticationMail(fullEmail);
+    const res = await postAuthVerificationEmail({ email: fullEmail, verificationType: 'SIGN_UP' });
     if (res.data) onConfirm(fullEmail);
     else setEmailError(res.error?.message || '이메일을 다시 확인해주세요.');
   };

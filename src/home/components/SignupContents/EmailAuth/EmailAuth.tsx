@@ -4,8 +4,10 @@ import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-
 import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
-import { getAuthVerificationCheck } from '@/home/apis/authVerification.ts';
-import { PostAuthVerificationEmailResponse } from '@/home/types/Auth.type.ts';
+import {
+  getAuthVerificationCheck,
+  postAuthVerificationEmail,
+} from '@/home/apis/authVerification.ts';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
@@ -19,10 +21,9 @@ import {
 interface EmailAuthProps {
   email: string;
   onConfirm: () => void;
-  sendAuthenticationMail: (email: string) => Promise<PostAuthVerificationEmailResponse>;
 }
 
-export const EmailAuth = ({ email, onConfirm, sendAuthenticationMail }: EmailAuthProps) => {
+export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
   const [authed, setAuthed] = useState(true);
   const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(8 * 60);
 
@@ -31,8 +32,10 @@ export const EmailAuth = ({ email, onConfirm, sendAuthenticationMail }: EmailAut
     return format(targetTime, 'mm:ss');
   };
 
-  const reSendAuthenticationMail = async () => {
-    setAuthed(!!(await sendAuthenticationMail(email)).data);
+  const sendAuthenticationMail = async () => {
+    setAuthed(
+      !!(await postAuthVerificationEmail({ email: email, verificationType: 'SIGN_UP' })).data
+    );
     resetTimer();
   };
 
@@ -83,7 +86,7 @@ export const EmailAuth = ({ email, onConfirm, sendAuthenticationMail }: EmailAut
           size="medium"
           isPointed={false}
           isWarned={false}
-          onClick={reSendAuthenticationMail}
+          onClick={sendAuthenticationMail}
         >
           인증 메일 재전송
         </PlainButton>

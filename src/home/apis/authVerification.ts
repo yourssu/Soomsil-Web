@@ -22,6 +22,13 @@ export const postAuthVerificationEmail = async (
 ): Promise<PostAuthVerificationEmailResponse> => {
   try {
     const res = await authClient.post(`/auth/verification/email`, emailVerificationProps);
+    if (res.data) {
+      sessionStorage.setItem('emailAuthSessionToken', res.data.sessionToken);
+      sessionStorage.setItem(
+        'emailAuthSessionTokenExpiredIn',
+        res.data.sessionTokenExpiredIn.toString()
+      );
+    }
     return { data: res.data };
   } catch (error: unknown) {
     const { response } = error as AxiosError;
