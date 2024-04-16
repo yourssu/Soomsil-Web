@@ -1,7 +1,7 @@
+import { FallbackProps } from 'react-error-boundary';
+
 import { Spacing } from '@/components/Spacing/Spacing';
 import { NoResult } from '@/search/pages/NoResult/NoResult';
-
-import { FallbackProps } from '../ErrorBoundary/ErrorBoundary';
 
 export const ResultListFallbackComponent = ({ error }: FallbackProps) => {
   if (error?.message === '검색결과가 없습니다.') {
