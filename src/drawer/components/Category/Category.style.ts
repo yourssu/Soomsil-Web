@@ -22,6 +22,10 @@ export const StyledRegisterCategoryContainer = styled.div`
   margin-left: 1rem;
 `;
 
+export const StyledCategoryTitle = styled.p`
+  ${({ theme }) => theme.typo.title5};
+`;
+
 export const StyledDropdownCategoryContainer = styled.div`
   display: flex;
   width: 155px;
