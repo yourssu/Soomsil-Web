@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { useRecoilValue } from 'recoil';
+
 import Profile from '@/assets/home/profile.svg';
 import { Dropdown } from '@/components/Dropdown/Dropdown';
+import { UserState } from '@/home/recoil/UserState';
 
 import {
   StyledContainer,
@@ -20,6 +23,8 @@ interface NavProps {
 export const Nav = ({ isLoggedIn }: NavProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
+  const currentUser = useRecoilValue(UserState);
+
   const handleProfileClick = () => {
     setIsProfileClicked((prev) => !prev);
   };
@@ -42,10 +47,10 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
       {isLoggedIn ? (
         <div ref={dropdownRef}>
           <StyledProfileContainer src={Profile} alt="profile" onClick={handleProfileClick} />
-          {isProfileClicked && (
+          {isProfileClicked && currentUser && (
             <Dropdown padding="1rem" bottom="-10rem" right="0">
-              <StyledDropDownName>뿌슝이</StyledDropDownName>
-              <StyledDropDownEmail>cuteppussung@naver.com</StyledDropDownEmail>
+              <StyledDropDownName>{currentUser.nickName}</StyledDropDownName>
+              <StyledDropDownEmail>{currentUser.email}</StyledDropDownEmail>
               <StyledDropDownMyPage to="/mypage">마이페이지</StyledDropDownMyPage>
               {/* TODO: 로그아웃 기능 구현 */}
               <StyledDropDownLogout>로그아웃</StyledDropDownLogout>
