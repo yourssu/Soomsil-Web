@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import soomsil from '@/assets/soomsil.svg';
 import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
+import { useGetUserData } from '@/home/hooks/useGetUserData';
 import { api } from '@/service/TokenService';
 
 import {
@@ -30,7 +31,10 @@ import {
 export const Login = () => {
   const { register, control } = useForm();
   const [failedLogin, setFailedLogin] = useState(false);
+  const { refetch } = useGetUserData();
+
   const navigate = useNavigate();
+
   const emailQuery = useWatch({
     name: 'email',
     control,
@@ -53,6 +57,7 @@ export const Login = () => {
       api.setRefreshToken(res.data.refreshToken);
       sessionStorage.setItem('accessExpiredIn', res.data.accessTokenExpiredIn.toString());
       navigate('/');
+      refetch();
     } else if (res.error) {
       if (res.error.status == 401) {
         setFailedLogin(true);
