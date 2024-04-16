@@ -8,7 +8,7 @@ export const StyledContainer = styled.nav`
 
   position: absolute;
   top: 6%;
-  right: calc(50% - 627px);
+  right: calc(50% - 39.1875rem);
 `;
 
 export const StyledProfileContainer = styled.img`
