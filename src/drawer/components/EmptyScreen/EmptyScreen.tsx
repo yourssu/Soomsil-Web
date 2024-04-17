@@ -25,12 +25,10 @@ export const EmptyScreen = ({ type }: EmptyScreenProps) => {
       </StyledNotTextContainer>
       <StyledNotImg src={NotIllust} />
 
-      {type === 'SEARCH' || type === 'MYDRAWER' ? (
+      {(type === 'SEARCH' || type === 'MYDRAWER') && (
         <BoxButton size="small" variant="filled" rounding={4}>
           서비스 등록하기
         </BoxButton>
-      ) : (
-        <></>
       )}
     </StyledNotContainer>
   );
