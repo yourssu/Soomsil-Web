@@ -20,12 +20,7 @@ const getFallbackContent = (status: number): FallbackContent => {
 };
 
 export const Fallback = ({ error, resetErrorBoundary }: FallbackProps) => {
-  const getBackUrl = () => {
-    if (window.location.pathname.startsWith('/drawer')) {
-      return '/drawer';
-    }
-    return '/';
-  };
+  const backUrl = window.location.pathname.startsWith('/drawer') ? '/drawer' : '/';
 
   const renderFallback = () => {
     const status = error.response?.data.status;
@@ -37,7 +32,7 @@ export const Fallback = ({ error, resetErrorBoundary }: FallbackProps) => {
       <FallbackWithNavigate
         error={error}
         resetErrorBoundary={resetErrorBoundary}
-        backUrl={getBackUrl()}
+        backUrl={backUrl}
       />
     );
   };
