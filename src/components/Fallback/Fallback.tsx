@@ -21,23 +21,14 @@ const getFallbackContent = (status: number): FallbackContent => {
 
 export const Fallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   const backUrl = window.location.pathname.startsWith('/drawer') ? '/drawer' : '/';
+  const status = error.response?.data.status;
 
-  const renderFallback = () => {
-    const status = error.response?.data.status;
-
-    if (status >= 500) {
-      return <FallbackWithDetail status={status} />;
-    }
-    return (
-      <FallbackWithNavigate
-        error={error}
-        resetErrorBoundary={resetErrorBoundary}
-        backUrl={backUrl}
-      />
-    );
-  };
-
-  return <>{renderFallback()}</>;
+  if (status >= 500) {
+    return <FallbackWithDetail status={status} />;
+  }
+  return (
+    <FallbackWithNavigate error={error} resetErrorBoundary={resetErrorBoundary} backUrl={backUrl} />
+  );
 };
 
 const FallbackWithNavigate = ({
