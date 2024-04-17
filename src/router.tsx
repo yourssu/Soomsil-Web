@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { Fallback } from '@/components/Fallback/Fallback';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 
 const Search = lazy(() =>
@@ -73,11 +74,6 @@ const Signup = lazy(() =>
 const Provider = lazy(() =>
   import('./drawer/pages/Provider/Provider').then(({ Provider }) => ({
     default: Provider,
-  }))
-);
-const Fallback = lazy(() =>
-  import('@/components/Fallback/Fallback').then(({ Fallback }) => ({
-    default: Fallback,
   }))
 );
 
