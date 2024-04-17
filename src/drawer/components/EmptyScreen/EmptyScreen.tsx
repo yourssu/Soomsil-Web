@@ -15,7 +15,7 @@ interface EmptyScreenProps {
 }
 
 export const EmptyScreen = ({ type }: EmptyScreenProps) => {
-  const { boldText, subText } = { ...NOT_FOUND_TEXT[type] };
+  const { boldText, subText } = NOT_FOUND_TEXT[type];
 
   return (
     <StyledNotContainer>
