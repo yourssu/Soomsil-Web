@@ -57,6 +57,7 @@ export const Signup = () => {
               setPassword(password);
               setStep('회원가입완료');
             }}
+            email={email}
           />
         </Funnel.Step>
         <Funnel.Step name="회원가입완료">

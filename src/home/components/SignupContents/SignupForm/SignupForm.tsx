@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
+import { AxiosError } from 'axios';
 
+import { postAuthSignUp } from '@/home/apis/postAuthSignUp.ts';
+import { AuthErrorData } from '@/home/types/Auth.type.ts';
 import { useSignupFormValidation } from '@/hooks/useSignupFormValidator';
 
 import {
@@ -19,9 +22,10 @@ interface SignupConfirmPayload {
 
 interface SignupFormProps {
   onConfirm: ({ nickname, password }: SignupConfirmPayload) => void;
+  email: string;
 }
 
-export const SignupForm = ({ onConfirm }: SignupFormProps) => {
+export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const { isFormValid, nicknameValidator, passwordValidator } = useSignupFormValidation(
@@ -29,8 +33,31 @@ export const SignupForm = ({ onConfirm }: SignupFormProps) => {
     password
   );
 
-  const onFormConfirm = () => {
-    onConfirm({ nickname, password });
+  const onFormConfirm = async () => {
+    const sessionToken = sessionStorage.getItem('emailAuthSessionToken');
+
+    if (!sessionToken) {
+      alert('세션 토큰이 없습니다.');
+      return;
+    }
+
+    const signUpParams = {
+      nickName: nickname,
+      password: password,
+      sessionToken: sessionToken,
+      email: email,
+    };
+
+    const res = await postAuthSignUp(signUpParams);
+
+    if (res.data) {
+      onConfirm({ nickname, password });
+    } else if (res.error) {
+      alert(
+        (res.error as AxiosError<AuthErrorData>).response?.data.message ||
+          '회원가입에 실패했습니다.'
+      );
+    }
   };
 
   return (
