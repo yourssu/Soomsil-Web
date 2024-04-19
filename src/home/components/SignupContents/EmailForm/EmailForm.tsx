@@ -27,6 +27,7 @@ const EMAIL_DOMAIN = '@soongsil.ac.kr';
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState<string | undefined>(undefined);
+  const [emailSending, setEmailSending] = useState(false);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -35,9 +36,11 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   const onEmailSubmit = async () => {
     let fullEmail = email;
     if (!email.endsWith(EMAIL_DOMAIN)) fullEmail += EMAIL_DOMAIN;
+    setEmailSending(true);
     const res = await postAuthVerificationEmail({ email: fullEmail, verificationType: 'SIGN_UP' });
     if (res.data) onConfirm(fullEmail);
     else setEmailError(res.error?.response?.data.message || '이메일을 다시 확인해주세요.');
+    setEmailSending(false);
   };
 
   return (
@@ -67,7 +70,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           size="large"
           variant="filled"
           rounding={8}
-          disabled={email === ''}
+          disabled={email === '' || emailSending}
           onClick={onEmailSubmit}
         >
           <StyledSignupButtonText>인증 메일 받기</StyledSignupButtonText>
