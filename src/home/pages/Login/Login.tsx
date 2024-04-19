@@ -46,15 +46,15 @@ export const Login = () => {
       password: passwordQuery,
     };
 
-    const res = await postAuthSignIn(loginParams);
+    const { data, error } = await postAuthSignIn(loginParams);
 
-    if (res.data) {
-      api.setAccessToken(res.data.accessToken);
-      api.setRefreshToken(res.data.refreshToken);
-      sessionStorage.setItem('accessExpiredIn', res.data.accessTokenExpiredIn.toString());
+    if (data) {
+      api.setAccessToken(data.accessToken);
+      api.setRefreshToken(data.refreshToken);
+      sessionStorage.setItem('accessExpiredIn', data.accessTokenExpiredIn.toString());
       navigate('/');
-    } else if (res.error) {
-      if (res.error.status == 401) {
+    } else if (error) {
+      if (error.response?.status == 401) {
         setFailedLogin(true);
       }
     }

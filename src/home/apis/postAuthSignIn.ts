@@ -1,5 +1,6 @@
+import { AxiosError } from 'axios';
+
 import { authClient } from '@/apis';
-import { Error } from '@/types/Common.type';
 
 import { PostAuthResponse } from '../types/Auth.type';
 
@@ -13,13 +14,20 @@ export const postAuthSignIn = async ({
   password,
 }: LoginProps): Promise<PostAuthResponse> => {
   try {
-    const res = await authClient.post(`/auth/sign-in`, {
-      email: email,
-      password: password,
-    });
+    const res = await authClient.post(
+      `/auth/sign-in`,
+      {
+        email: email,
+        password: password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     return { data: res.data };
   } catch (error: unknown) {
-    const errorData: Error = { ...(error as Error) };
-    return { error: errorData };
+    return { error: error as AxiosError };
   }
 };
