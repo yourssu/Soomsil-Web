@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 
 import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
 import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
@@ -9,7 +10,9 @@ import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
 import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
-import { useGetMain } from '@/drawer/hooks/useGetMain';
+import { useGetNewRelease } from '@/drawer/hooks/useGetNewRelease';
+import { useGetStarRank } from '@/drawer/hooks/useGetStarRank';
+import { CategoryState } from '@/drawer/recoil/CategoryState';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import {
@@ -25,7 +28,17 @@ import {
 
 export const Ranking = () => {
   const navigate = useNavigate();
-  const { newReleases, rankings, setSelectedCategory } = useGetMain();
+  const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
+  const { data: newReleases } = useGetNewRelease({
+    responseType: 'WEB',
+    category: selectedCategory,
+    page: 0,
+  });
+  const { data: rankings } = useGetStarRank({
+    responseType: 'WEB',
+    category: selectedCategory,
+    page: 0,
+  });
   const isSmallDesktop = useMediaQuery(SMALL_DESKTOP_MEDIA_QUERY);
 
   useEffect(() => {
@@ -51,18 +64,21 @@ export const Ranking = () => {
             />
           </StyledBetweenContainer>
           <StyledCardContainer>
-            {rankings.slice(0, 3).map((product) => (
-              <BigDrawerCard
-                key={product.productNo}
-                link={`/drawer/services/${product.productNo}`}
-                title={product.productTitle}
-                body={product.productSubTitle}
-                bookmarkCount={product.count}
-                isBookmarked={product.isBookmarked}
-                bigImgSrc={product.introductionImage[0]}
-                smallImgSrc={product.mainImage}
-              />
-            ))}
+            {rankings &&
+              rankings
+                .slice(0, 3)
+                .map((product) => (
+                  <BigDrawerCard
+                    key={product.productNo}
+                    link={`/drawer/services/${product.productNo}`}
+                    title={product.productTitle}
+                    body={product.productSubTitle}
+                    bookmarkCount={product.count}
+                    isBookmarked={product.isBookmarked}
+                    bigImgSrc={product.introductionImage[0]}
+                    smallImgSrc={product.mainImage}
+                  />
+                ))}
           </StyledCardContainer>
         </div>
         <StyledImage src={drawerMainImage1} alt="drawer main image1" />
@@ -81,18 +97,21 @@ export const Ranking = () => {
             />
           </StyledBetweenContainer>
           <StyledCardContainer>
-            {newReleases.slice(0, 3).map((product) => (
-              <BigDrawerCard
-                key={product.productNo}
-                link={`/drawer/services/${product.productNo}`}
-                title={product.productTitle}
-                body={product.productSubTitle}
-                bookmarkCount={product.count}
-                isBookmarked={product.isBookmarked}
-                bigImgSrc={product.introductionImage[0]}
-                smallImgSrc={product.mainImage}
-              />
-            ))}
+            {newReleases &&
+              newReleases
+                .slice(0, 3)
+                .map((product) => (
+                  <BigDrawerCard
+                    key={product.productNo}
+                    link={`/drawer/services/${product.productNo}`}
+                    title={product.productTitle}
+                    body={product.productSubTitle}
+                    bookmarkCount={product.count}
+                    isBookmarked={product.isBookmarked}
+                    bigImgSrc={product.introductionImage[0]}
+                    smallImgSrc={product.mainImage}
+                  />
+                ))}
           </StyledCardContainer>
         </div>
       </StyledRankingContainer>
