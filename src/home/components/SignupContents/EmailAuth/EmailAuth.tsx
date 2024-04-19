@@ -53,7 +53,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
       if (res.data.isVerified) onConfirm();
       else alert('이메일 인증을 완료해주세요.');
     } else if (res.error) {
-      alert(res.error.message);
+      alert(res.error.response?.data.message || '이메일 인증 확인에 실패했습니다.');
     }
   };
 

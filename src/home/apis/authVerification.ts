@@ -1,9 +1,9 @@
 import { AxiosError } from 'axios';
 
 import { authClient } from '@/apis';
-import { Error } from '@/types/Common.type';
 
 import {
+  AuthErrorData,
   GetAuthVerificationCheckResponse,
   PostAuthVerificationEmailResponse,
 } from '../types/Auth.type';
@@ -22,6 +22,7 @@ export const postAuthVerificationEmail = async (
 ): Promise<PostAuthVerificationEmailResponse> => {
   try {
     const res = await authClient.post(`/auth/verification/email`, emailVerificationProps);
+    console.log(res);
     if (res.data) {
       sessionStorage.setItem('emailAuthSessionToken', res.data.sessionToken);
       sessionStorage.setItem(
@@ -31,10 +32,7 @@ export const postAuthVerificationEmail = async (
     }
     return { data: res.data };
   } catch (error: unknown) {
-    const { response } = error as AxiosError;
-    if (!response) return { error: undefined };
-    const errorData: Error = { ...(response.data as Error) };
-    return { error: errorData };
+    return { error: error as AxiosError<AuthErrorData> };
   }
 };
 
@@ -45,9 +43,6 @@ export const getAuthVerificationCheck = async ({
     const res = await authClient.get(`/auth/verification/check?session=${session}`);
     return { data: res.data };
   } catch (error: unknown) {
-    const { response } = error as AxiosError;
-    if (!response) return { error: undefined };
-    const errorData: Error = { ...(response.data as Error) };
-    return { error: errorData };
+    return { error: error as AxiosError<AuthErrorData> };
   }
 };

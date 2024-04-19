@@ -37,7 +37,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
     if (!email.endsWith(EMAIL_DOMAIN)) fullEmail += EMAIL_DOMAIN;
     const res = await postAuthVerificationEmail({ email: fullEmail, verificationType: 'SIGN_UP' });
     if (res.data) onConfirm(fullEmail);
-    else setEmailError(res.error?.message || '이메일을 다시 확인해주세요.');
+    else setEmailError(res.error?.response?.data.message || '이메일을 다시 확인해주세요.');
   };
 
   return (

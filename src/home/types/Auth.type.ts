@@ -19,7 +19,7 @@ export interface PostAuthVerificationEmailData {
 
 export interface PostAuthVerificationEmailResponse {
   data?: PostAuthVerificationEmailData;
-  error?: Error;
+  error?: AxiosError<AuthErrorData>;
 }
 
 export interface GetAuthVerificationCheckData {
@@ -28,5 +28,12 @@ export interface GetAuthVerificationCheckData {
 
 export interface GetAuthVerificationCheckResponse {
   data?: GetAuthVerificationCheckData;
-  error?: Error;
+  error?: AxiosError<AuthErrorData>;
+}
+
+export interface AuthErrorData {
+  timestamp: string;
+  status: number;
+  error: string;
+  message: string;
 }

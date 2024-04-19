@@ -1,9 +1,8 @@
 import { AxiosError } from 'axios';
 
 import { authClient } from '@/apis';
-import { Error } from '@/types/Common.type';
 
-import { PostAuthResponse } from '../types/Auth.type';
+import { AuthErrorData, PostAuthResponse } from '../types/Auth.type';
 
 interface SignUpProps {
   email: string;
@@ -27,9 +26,6 @@ export const postAuthSignUp = async ({
     });
     return { data: res.data };
   } catch (error: unknown) {
-    const { response } = error as AxiosError;
-    if (!response) return { error: undefined };
-    const errorData: Error = { ...(response.data as Error) };
-    return { error: errorData };
+    return { error: error as AxiosError<AuthErrorData> };
   }
 };
