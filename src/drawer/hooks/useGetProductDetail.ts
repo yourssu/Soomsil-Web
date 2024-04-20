@@ -11,5 +11,5 @@ export const useGetProductDetail = (productNo: number) => {
     select: (data) => data.detail,
   });
 
-  return { data, refetch, ...queryResult };
+  return { product: data, refetch, ...queryResult };
 };
