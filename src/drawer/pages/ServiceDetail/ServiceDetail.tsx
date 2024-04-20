@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   BoxButton,
   IcShareLine,
@@ -52,7 +53,8 @@ const Category = {
 
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
-  const { isSuccess, refetch, data } = useGetProductDetail(Number(serviceId));
+  const { isSuccess, product } = useGetProductDetail(Number(serviceId));
+  const queryClient = useQueryClient();
 
   const theme = useTheme();
 
@@ -70,29 +72,31 @@ export const ServiceDetail = () => {
     }
   };
 
-  const handleBookmarkClick = (bookmarkedkey: number | undefined) => {
-    postBookmarked(bookmarkedkey).then(() => {
-      refetch();
-    });
-  };
+  const addBookmarkMutation = useMutation({
+    mutationFn: postBookmarked,
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['productDetail'] });
+    },
+  });
 
-  const handleBookmarkDeleteClick = (bookmarkedkey: number | undefined) => {
-    deleteBookmarked(bookmarkedkey).then(() => {
-      refetch();
-    });
-  };
+  const deleteBookmarkMutation = useMutation({
+    mutationFn: deleteBookmarked,
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['productDetail'] });
+    },
+  });
 
   return (
     <>
-      {isSuccess && data && (
+      {isSuccess && product && (
         <StyledServiceDetailContainer>
-          <StyledBackgroundImageContainer $backgroundImage={data.thumbnail}>
-            <StyledServiceTitleText>{data.productTitle}</StyledServiceTitleText>
-            <StyledServiceDeveloperText>{data.providerId}</StyledServiceDeveloperText>
+          <StyledBackgroundImageContainer $backgroundImage={product.thumbnail}>
+            <StyledServiceTitleText>{product.productTitle}</StyledServiceTitleText>
+            <StyledServiceDeveloperText>{product.providerId}</StyledServiceDeveloperText>
             <StyledServiceInfoContainer>
-              <StyledThumbnailImage src={data.thumbnail} />
+              <StyledThumbnailImage src={product.thumbnail} />
               <StyledCategoryContainer>
-                <StyledCategoryText>{Category[data.category]}</StyledCategoryText>
+                <StyledCategoryText>{Category[product.category]}</StyledCategoryText>
                 <StyledCategoryHintText>카테고리</StyledCategoryHintText>
               </StyledCategoryContainer>
             </StyledServiceInfoContainer>
@@ -104,13 +108,13 @@ export const ServiceDetail = () => {
                 variant="filled"
                 width="200px"
                 onClick={() => {
-                  const { appStoreUrl, googlePlayUrl, webpageUrl } = data;
+                  const { appStoreUrl, googlePlayUrl, webpageUrl } = product;
                   window.open(appStoreUrl || googlePlayUrl || webpageUrl);
                 }}
               >
                 DOWNLOAD
               </BoxButton>
-              {data.githubUrl && (
+              {product.githubUrl && (
                 /* TODO: 버튼 사이즈 반응형 적용 필요*/
                 <BoxButton
                   size="medium"
@@ -118,7 +122,7 @@ export const ServiceDetail = () => {
                   variant="tinted"
                   width="200px"
                   onClick={() => {
-                    window.open(data.githubUrl);
+                    window.open(product.githubUrl);
                   }}
                 >
                   Github
@@ -145,12 +149,14 @@ export const ServiceDetail = () => {
                       size: '1.5rem',
                     }}
                   >
-                    {data.isBookmarked ? (
+                    {product.isBookmarked ? (
                       <IcStarFilled
-                        onClick={() => handleBookmarkDeleteClick(data.productBookmarkKey)}
+                        onClick={() => deleteBookmarkMutation.mutate(product.productBookmarkKey)}
                       />
                     ) : (
-                      <IcStarLine onClick={() => handleBookmarkClick(data.productBookmarkKey)} />
+                      <IcStarLine
+                        onClick={() => addBookmarkMutation.mutate(product.productBookmarkKey)}
+                      />
                     )}
                   </IconContext.Provider>
                 </button>
@@ -163,7 +169,7 @@ export const ServiceDetail = () => {
           <StyledLowerSection>
             <StyledDescriptionSection>
               <StyledCarousel ref={scrollRef}>
-                {data.introductionImage.length > 1 && (
+                {product.introductionImage.length > 1 && (
                   <>
                     <StyledCarouselButton
                       $backgroundImage={carouselLeftButton}
@@ -181,14 +187,14 @@ export const ServiceDetail = () => {
                     />
                   </>
                 )}
-                {data.introductionImage.map((imageSrc) => (
+                {product.introductionImage.map((imageSrc) => (
                   <StyledProductImage src={imageSrc} key={imageSrc} />
                 ))}
               </StyledCarousel>
               <StyledDescriptionPart>
                 <StyledSubtitle>{`추천`}</StyledSubtitle>
                 <StyledDescription>
-                  {data.count}+
+                  {product.count}+
                   <IconContext.Provider value={{ size: '15px', color: '#FDD655' }}>
                     <IcStarFilled />
                   </IconContext.Provider>
@@ -197,16 +203,16 @@ export const ServiceDetail = () => {
 
               <StyledDescriptionPart>
                 <StyledSubtitle>{`서비스 소개`}</StyledSubtitle>
-                <StyledDescription>{data.productContent}</StyledDescription>
+                <StyledDescription>{product.productContent}</StyledDescription>
               </StyledDescriptionPart>
 
               <StyledDescriptionPart>
                 <StyledSubtitle>{`저작권`}</StyledSubtitle>
-                <StyledDescription>{data.providerId}</StyledDescription>
+                <StyledDescription>{product.providerId}</StyledDescription>
               </StyledDescriptionPart>
             </StyledDescriptionSection>
 
-            <MoreProductSection providerId={data.providerId} />
+            <MoreProductSection providerId={product.providerId} />
           </StyledLowerSection>
         </StyledServiceDetailContainer>
       )}
