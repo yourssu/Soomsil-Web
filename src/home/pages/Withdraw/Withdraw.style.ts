@@ -22,28 +22,28 @@ export const StyledWithdrawContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
 `;
 
-export const TitleText = styled.p`
+export const StyledTitleText = styled.p`
   ${({ theme }) => theme.typo.title2};
   color: ${({ theme }) => theme.color.textSecondary};
 `;
 
-export const SubTitleTextThree = styled.p`
+export const StyledSubTitleTextThree = styled.p`
   ${({ theme }) => theme.typo.subtitle3};
   color: ${({ theme }) => theme.color.buttonNormal};
   align-self: self-start;
 `;
 
-export const ButtonText = styled.p`
+export const StyledButtonText = styled.p`
   ${({ theme }) => theme.typo.button3};
   color: ${({ theme }) => theme.color.buttonDisabled};
   text-align: left;
 `;
 
-export const Left = styled.div`
+export const StyledLeft = styled.div`
   align-self: self-start;
 `;
 
-export const SubTitleTextFive = styled.ul`
+export const StyledSubTitleTextFive = styled.ul`
   ${({ theme }) => theme.typo.subtitle5};
   color: ${({ theme }) => theme.color.buttonNormal};
   text-align: left;
@@ -51,6 +51,6 @@ export const SubTitleTextFive = styled.ul`
   padding: 0px 24px;
 `;
 
-export const ListItem = styled.li`
+export const StyledListItem = styled.li`
   margin-bottom: 10px;
 `;

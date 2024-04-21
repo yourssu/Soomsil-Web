@@ -2,12 +2,12 @@ import Logo from '@/assets/soomsil_v2_logo.svg';
 import {
   StyledWrapper,
   StyledWithdrawContainer,
-  TitleText,
-  SubTitleTextThree,
-  SubTitleTextFive,
-  ButtonText,
-  Left,
-  ListItem,
+  StyledTitleText,
+  StyledSubTitleTextThree,
+  StyledSubTitleTextFive,
+  StyledButtonText,
+  StyledLeft,
+  StyledListItem,
 } from './Withdraw.style';
 import { BoxButton, CheckBox } from '@yourssu/design-system-react';
 import { useState } from 'react';
@@ -33,22 +33,22 @@ export const Withdraw = () => {
           <Withdrawn />
         ) : (
           <>
-            <TitleText>계정 탈퇴</TitleText>
-            <SubTitleTextThree>계정 탈퇴 전 꼭 확인하세요.</SubTitleTextThree>
-            <SubTitleTextFive>
-              <ListItem>탈퇴하는 즉시 데이터가 제거되며, 복구가 불가능합니다.</ListItem>
-              <ListItem>
+            <StyledTitleText>계정 탈퇴</StyledTitleText>
+            <StyledSubTitleTextThree>계정 탈퇴 전 꼭 확인하세요.</StyledSubTitleTextThree>
+            <StyledSubTitleTextFive>
+              <StyledListItem>탈퇴하는 즉시 데이터가 제거되며, 복구가 불가능합니다.</StyledListItem>
+              <StyledListItem>
                 닉네임, 이메일 등 사용자를 특정할 수 있는 모든 계정 정보가 지워집니다.
-              </ListItem>
-              <ListItem>
+              </StyledListItem>
+              <StyledListItem>
                 등록된 글이나 댓글의 삭제를 원한다면 탈퇴 이전에 삭제하시기 바랍니다.
-              </ListItem>
-            </SubTitleTextFive>
-            <Left>
+              </StyledListItem>
+            </StyledSubTitleTextFive>
+            <StyledLeft>
               <CheckBox size="medium" isSelected={agreed} onClick={handleCheckAgree} type="button">
-                <ButtonText>안내사항을 확인하였으며, 이에 동의합니다.</ButtonText>
+                <StyledButtonText>안내사항을 확인하였으며, 이에 동의합니다.</StyledButtonText>
               </CheckBox>
-            </Left>
+            </StyledLeft>
             <BoxButton
               style={{ width: '100%' }}
               rounding={8}
