@@ -74,7 +74,7 @@ export const ServiceDetail = () => {
         <StyledServiceDetailContainer>
           <StyledBackgroundImageContainer $backgroundImage={data.thumbnail}>
             <StyledServiceTitleText>{data.productTitle}</StyledServiceTitleText>
-            <StyledServiceDeveloperText>{data.providerId}</StyledServiceDeveloperText>
+            <StyledServiceDeveloperText>{data.providerName}</StyledServiceDeveloperText>
             <StyledServiceInfoContainer>
               <StyledThumbnailImage src={data.thumbnail} />
               <StyledCategoryContainer>
@@ -182,11 +182,11 @@ export const ServiceDetail = () => {
 
               <StyledDescriptionPart>
                 <StyledSubtitle>{`저작권`}</StyledSubtitle>
-                <StyledDescription>{data.providerId}</StyledDescription>
+                <StyledDescription>{data.providerName}</StyledDescription>
               </StyledDescriptionPart>
             </StyledDescriptionSection>
 
-            <MoreProductSection providerId={data.providerId} />
+            <MoreProductSection providerName={data.providerName} providerId={data.providerId} />
           </StyledLowerSection>
         </StyledServiceDetailContainer>
       )}
