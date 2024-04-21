@@ -17,11 +17,11 @@ export const Withdraw = () => {
   const [agreed, setAgreed] = useState(false);
   const [draw, setDraw] = useState(false);
 
-  const checkAgree = () => {
+  const handleCheckAgree = () => {
     setAgreed(!agreed);
   };
 
-  const withdrawAgree = () => {
+  const handleWithdrawAgree = () => {
     setDraw(true);
   };
 
@@ -45,7 +45,7 @@ export const Withdraw = () => {
               </ListItem>
             </SubTitleTextFive>
             <Left>
-              <CheckBox size="medium" isSelected={agreed} onClick={checkAgree} type="button">
+              <CheckBox size="medium" isSelected={agreed} onClick={handleCheckAgree} type="button">
                 <ButtonText>안내사항을 확인하였으며, 이에 동의합니다.</ButtonText>
               </CheckBox>
             </Left>
@@ -54,7 +54,7 @@ export const Withdraw = () => {
               rounding={8}
               size="large"
               variant="filled"
-              onClick={withdrawAgree}
+              onClick={handleWithdrawAgree}
               disabled={!agreed}
             >
               탈퇴하기
