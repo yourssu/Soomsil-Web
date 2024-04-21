@@ -20,6 +20,7 @@ export interface ProductDetailResult {
   productSubTitle: string;
   productTitle: string;
   providerId: string;
+  providerName: string;
   thumbnail: string;
   webpageUrl?: string;
 }
