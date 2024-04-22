@@ -33,9 +33,8 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
   };
 
   const sendAuthenticationMail = async () => {
-    setAuthed(
-      !!(await postAuthVerificationEmail({ email: email, verificationType: 'SIGN_UP' })).data
-    );
+    const { data } = await postAuthVerificationEmail({ email: email, verificationType: 'SIGN_UP' });
+    setAuthed(!!data);
     resetTimer();
   };
 
