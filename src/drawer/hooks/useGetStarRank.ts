@@ -1,28 +1,18 @@
-import { useEffect, useState } from 'react';
-
-import { useRecoilValue } from 'recoil';
-
-import { CategoryState } from '@/drawer/recoil/CategoryState';
+import { useQuery } from '@tanstack/react-query';
 
 import { getRanking } from '../apis/getRanking';
-import { ProductResponses } from '../types/product.type';
+import { RankingRequestParams } from '../types/RankingRequestParams.type';
 
-export const useGetStarRank = () => {
-  const [rankings, setRankings] = useState<ProductResponses['productList']>([]);
-  const selectedCategory = useRecoilValue(CategoryState);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getRanking({
-        responseType: 'WEB',
-        category: selectedCategory,
-        page: 0,
+export const useGetStarRank = ({ responseType, category, page }: RankingRequestParams) => {
+  return useQuery({
+    queryKey: ['getRanking', { responseType, category, page }],
+    queryFn: () => {
+      return getRanking({
+        responseType,
+        category,
+        page,
       });
-      setRankings(response.productList);
-    };
-
-    fetchData();
-  }, [selectedCategory]);
-
-  return { rankings };
+    },
+    select: (data) => data.productList,
+  });
 };
