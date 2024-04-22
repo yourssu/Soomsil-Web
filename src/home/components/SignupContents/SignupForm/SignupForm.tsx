@@ -15,13 +15,8 @@ import {
 
 import { SignupInput } from './SignupInput/SignupInput';
 
-interface SignupConfirmPayload {
-  nickname: string;
-  password: string;
-}
-
 interface SignupFormProps {
-  onConfirm: ({ nickname, password }: SignupConfirmPayload) => void;
+  onConfirm: () => void;
   email: string;
 }
 
@@ -51,7 +46,7 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
     const res = await postAuthSignUp(signUpParams);
 
     if (res.data) {
-      onConfirm({ nickname, password });
+      onConfirm();
     } else if (res.error) {
       alert(
         (res.error as AxiosError<AuthErrorData>).response?.data.message ||

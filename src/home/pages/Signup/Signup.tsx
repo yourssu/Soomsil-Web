@@ -18,11 +18,6 @@ type SignupFunnelStepsType =
 export const Signup = () => {
   const [Funnel, setStep] = useFunnel<SignupFunnelStepsType>('약관동의');
   const [email, setEmail] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [password, setPassword] = useState('');
-
-  // TODO: 회원가입 API 연결 시 삭제
-  console.log(nickname, password);
 
   return (
     <SignupFrame>
@@ -52,9 +47,7 @@ export const Signup = () => {
         </Funnel.Step>
         <Funnel.Step name="회원가입폼">
           <SignupForm
-            onConfirm={({ nickname, password }) => {
-              setNickname(nickname);
-              setPassword(password);
+            onConfirm={() => {
               setStep('회원가입완료');
             }}
             email={email}

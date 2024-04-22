@@ -22,7 +22,6 @@ export const postAuthVerificationEmail = async (
 ): Promise<PostAuthVerificationEmailResponse> => {
   try {
     const res = await authClient.post(`/auth/verification/email`, emailVerificationProps);
-    console.log(res);
     if (res.data) {
       sessionStorage.setItem('emailAuthSessionToken', res.data.sessionToken);
       sessionStorage.setItem(
