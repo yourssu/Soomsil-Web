@@ -4,7 +4,7 @@ import { authClient } from '@/apis';
 
 import { AuthErrorData, PostAuthResponse } from '../types/Auth.type';
 
-interface SignUpProps {
+interface SignUpParams {
   email: string;
   nickName: string;
   password: string;
@@ -16,7 +16,7 @@ export const postAuthSignUp = async ({
   nickName,
   password,
   sessionToken,
-}: SignUpProps): Promise<PostAuthResponse> => {
+}: SignUpParams): Promise<PostAuthResponse> => {
   try {
     const res = await authClient.post(`/auth/sign-up`, {
       email: email,

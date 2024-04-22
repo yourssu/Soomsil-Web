@@ -8,20 +8,24 @@ import {
   PostAuthVerificationEmailResponse,
 } from '../types/Auth.type';
 
-interface EmailVerificationProps {
+interface EmailVerificationParams {
   email: string;
   verificationType: 'SIGN_UP' | 'PASSWORD';
 }
 
-interface VerificationCheckProps {
+interface VerificationCheckParams {
   session: string;
 }
 
-export const postAuthVerificationEmail = async (
-  emailVerificationProps: EmailVerificationProps
-): Promise<PostAuthVerificationEmailResponse> => {
+export const postAuthVerificationEmail = async ({
+  email,
+  verificationType,
+}: EmailVerificationParams): Promise<PostAuthVerificationEmailResponse> => {
   try {
-    const res = await authClient.post(`/auth/verification/email`, emailVerificationProps);
+    const res = await authClient.post(`/auth/verification/email`, {
+      email: email,
+      verificationType: verificationType,
+    });
     if (res.data) {
       sessionStorage.setItem('emailAuthSessionToken', res.data.sessionToken);
       sessionStorage.setItem(
@@ -37,7 +41,7 @@ export const postAuthVerificationEmail = async (
 
 export const getAuthVerificationCheck = async ({
   session,
-}: VerificationCheckProps): Promise<GetAuthVerificationCheckResponse> => {
+}: VerificationCheckParams): Promise<GetAuthVerificationCheckResponse> => {
   try {
     const res = await authClient.get(`/auth/verification/check?session=${session}`);
     return { data: res.data };
