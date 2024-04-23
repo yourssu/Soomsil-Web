@@ -8,7 +8,7 @@ export const StyledContainer = styled.div`
   align-items: flex-end;
 
   width: 100%;
-  height: 40vh;
+  height: 35vh;
 
   background-image: url(${Background});
   background-size: cover;
@@ -33,7 +33,7 @@ export const StyledSearchBar = styled.form`
   justify-content: space-between;
 
   width: 46.6875rem;
-  padding: 1.0625rem 2rem 1rem 2.5rem;
+  padding: 1.1875rem 1.8125rem 0.8125rem 2.3125rem;
 
   border-radius: 4rem 3.125rem 3.125rem 0.125rem;
   border: 0.1875rem solid #423fcc;
