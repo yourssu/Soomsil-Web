@@ -9,6 +9,7 @@ import { Register } from './drawer/pages/Register/Register';
 import { ServiceDetail } from './drawer/pages/ServiceDetail/ServiceDetail';
 import { StarRanking } from './drawer/pages/StarRanking/StarRanking';
 import { HomeLayout } from './home/components/HomeLayout/HomeLayout';
+import { ChangePassword } from './home/pages/ChangePassword/ChangePassword';
 import { Home } from './home/pages/Home/Home';
 import { Login } from './home/pages/Login/Login';
 import { Mypage } from './home/pages/Mypage/Mypage';
@@ -21,6 +22,7 @@ export const Router = () => {
         <Route path="" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
       </Route>
+      <Route path="changePassword" element={<ChangePassword />} />
       <Route path="/mypage" element={<Mypage />}></Route>
       <Route path="/drawer" element={<DrawerLayout />}>
         <Route index element={<Navigate to="rankings" replace />}></Route>
