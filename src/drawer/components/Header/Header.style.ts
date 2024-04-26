@@ -12,7 +12,7 @@ export const StyledHeader = styled.header`
   background-color: ${({ theme }) => theme.color.bgNormal};
   border-bottom: 1px solid ${({ theme }) => theme.color.borderNormal};
 
-  z-index: 0;
+  z-index: 9;
 `;
 
 export const StyledHeaderLogo = styled(Link)`

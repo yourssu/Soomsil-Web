@@ -11,6 +11,7 @@ export const StyledDialogOverlay = styled(Dialog.Overlay)`
   position: fixed;
   inset: 0;
   animation: ${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 11;
 `;
 
 export const StyledDialogContent = styled(Dialog.Content)`
@@ -30,6 +31,7 @@ export const StyledDialogContent = styled(Dialog.Content)`
   width: 20rem;
   height: 10.75rem;
   padding: 2rem;
+  z-index: 11;
 `;
 
 export const StyledIconButton = styled.button`
