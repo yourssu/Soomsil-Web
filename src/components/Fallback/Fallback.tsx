@@ -22,6 +22,25 @@ const getFallbackContent = (status: number): FallbackContent => {
 export const Fallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   const backUrl = window.location.pathname.startsWith('/drawer') ? '/drawer' : '/';
   const status = error.response?.data.status;
+  const { boldText, subText, buttonText } = getFallbackContent(status);
 
-  return <></>;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    resetErrorBoundary();
+
+    if (status >= 500) navigate(0);
+    else navigate(backUrl);
+  };
+
+  return (
+    <StyledFallbackContainer>
+      <StyledErrorTextContainer>
+        <StyledBoldText>{boldText}</StyledBoldText>
+        {subText && <StyledSubText>{subText}</StyledSubText>}
+      </StyledErrorTextContainer>
+      <StyledErrorImg src={ErrorPpussung} />
+      <StyledNavigateButton onClick={handleClick}>{buttonText}</StyledNavigateButton>
+    </StyledFallbackContainer>
+  );
 };
