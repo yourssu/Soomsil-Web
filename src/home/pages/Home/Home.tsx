@@ -4,7 +4,7 @@ import { Nav } from '@/home/components/Nav/Nav';
 import { Notification } from '@/home/components/Notification/Notification';
 import { SearchKeyword } from '@/home/components/SearchKeyword/SearchKeyword';
 import { SocialNetworkService } from '@/home/components/SocialNetworkService/SocialNetworkService';
-import { useIsLoggedIn } from '@/home/hooks/useIsLoggedIn';
+import { useIsLoggedIn } from '@/hooks/useIsLoggedIn';
 
 import {
   StyledComponentContainer,
