@@ -56,8 +56,8 @@ export const Login = () => {
       api.setAccessToken(data.accessToken);
       api.setRefreshToken(data.refreshToken);
       sessionStorage.setItem('accessExpiredIn', data.accessTokenExpiredIn.toString());
-      navigate('/');
       refetch();
+      navigate('/');
     } else if (error) {
       if (error.response?.status == 401) {
         setFailedLogin(true);
