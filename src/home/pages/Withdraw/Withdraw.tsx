@@ -1,4 +1,10 @@
+import { useEffect, useState } from 'react';
+
+import { BoxButton, CheckBox } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
+
 import Logo from '@/assets/soomsil_v2_logo.svg';
+
 import {
   StyledWrapper,
   StyledWithdrawContainer,
@@ -9,9 +15,6 @@ import {
   StyledLeft,
   StyledListItem,
 } from './Withdraw.style';
-import { BoxButton, CheckBox } from '@yourssu/design-system-react';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export const Withdraw = () => {
   const [agreed, setAgreed] = useState(false);
