@@ -44,14 +44,13 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
       email: email,
     };
 
-    const res = await postAuthSignUp(signUpParams);
+    const { data, error } = await postAuthSignUp(signUpParams);
 
-    if (res.data) {
+    if (data) {
       onConfirm();
-    } else if (res.error) {
+    } else if (error) {
       alert(
-        (res.error as AxiosError<AuthErrorData>).response?.data.message ||
-          '회원가입에 실패했습니다.'
+        (error as AxiosError<AuthErrorData>).response?.data.message || '회원가입에 실패했습니다.'
       );
     }
   };
