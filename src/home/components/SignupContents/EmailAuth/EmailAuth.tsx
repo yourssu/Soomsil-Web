@@ -9,6 +9,7 @@ import {
   postAuthVerificationEmail,
 } from '@/home/apis/authVerification.ts';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
+import { STORAGE_KEYS } from '@/utils/storageKeys.ts';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
 
@@ -39,7 +40,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
   };
 
   const onClickNext = async () => {
-    const session = sessionStorage.getItem('emailAuthSessionToken');
+    const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
     if (!session) return;
 
     const verificationCheckProps = {

@@ -6,6 +6,7 @@ import { AxiosError } from 'axios';
 import { postAuthSignUp } from '@/home/apis/postAuthSignUp.ts';
 import { AuthErrorData } from '@/home/types/Auth.type.ts';
 import { useSignupFormValidation } from '@/hooks/useSignupFormValidator';
+import { STORAGE_KEYS } from '@/utils/storageKeys.ts';
 
 import {
   StyledSignupButtonText,
@@ -29,7 +30,7 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
   );
 
   const onFormConfirm = async () => {
-    const sessionToken = sessionStorage.getItem('emailAuthSessionToken');
+    const sessionToken = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
 
     if (!sessionToken) {
       alert('세션 토큰이 없습니다.');

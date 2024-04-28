@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 
 import { authClient } from '@/apis';
+import { STORAGE_KEYS } from '@/utils/storageKeys.ts';
 
 import {
   AuthErrorData,
@@ -27,9 +28,9 @@ export const postAuthVerificationEmail = async ({
       verificationType: verificationType,
     });
     if (res.data) {
-      sessionStorage.setItem('emailAuthSessionToken', res.data.sessionToken);
+      sessionStorage.setItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN, res.data.sessionToken);
       sessionStorage.setItem(
-        'emailAuthSessionTokenExpiredIn',
+        STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN_EXPIRED_IN,
         res.data.sessionTokenExpiredIn.toString()
       );
     }
