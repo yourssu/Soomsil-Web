@@ -9,16 +9,17 @@ export const StyledContainer = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 22px;
 `;
 
 export const StyledButtonContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-top: 1.5rem;
 `;
 
 export const StyledBoxContainer = styled.section`
+  margin-top: 2rem;
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
   border: 1px 0px 0px 0px;
@@ -32,26 +33,26 @@ export const StyledBoxContainer = styled.section`
   top: 342px;
   left: 720px;
   opacity: 0px;
-  gap: 30px;
 `;
 
 export const StyledInputTitle = styled.div`
   ${({ theme }) => theme.typo.subtitle3};
+  color: #505458;
   padding-left: 4px;
   padding-bottom: 3px;
-  color: #505458;
 `;
 
 export const StyledTitle = styled.div`
   color: ${({ theme }) => theme.color.textSecondary};
   ${({ theme }) => theme.typo.title2};
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const StyledInputContainer = styled.article`
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 `;
 
 export const StyledInput = styled(SimpleTextField)`

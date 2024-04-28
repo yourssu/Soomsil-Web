@@ -9,13 +9,13 @@ export const StyledContainer = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 22px;
 `;
 
 export const StyledButtonContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-top: 1.5rem;
 `;
 
 export const StyledBoxContainer = styled.section`
@@ -32,26 +32,47 @@ export const StyledBoxContainer = styled.section`
   top: 342px;
   left: 720px;
   opacity: 0px;
-  gap: 30px;
+  margin-top: 2rem;
 `;
 
 export const StyledInputTitle = styled.div`
   ${({ theme }) => theme.typo.subtitle3};
+  color: #505458;
   padding-left: 4px;
   padding-bottom: 3px;
-  color: #505458;
 `;
-
 export const StyledTitle = styled.div`
   color: ${({ theme }) => theme.color.textSecondary};
   ${({ theme }) => theme.typo.title2};
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `;
 
 export const StyledInputContainer = styled.article`
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const StyledInputContainerAnimation = styled.article`
+  display: flex;
+  flex-direction: column;
+  transition:
+    visibility 0s 0.5s,
+    opacity 0.5s ease,
+    max-height 0.5s ease;
+  visibility: hidden; // 요소를 숨깁니다.
+  opacity: 0; // 요소를 투명하게 만듭니다.
+  max-height: 0; // 요소의 최대 높이를 0으로 설정하여 요소를 숨깁니다.
+  overflow: hidden; // 초과 내용을 숨깁니다.
+
+  &.active {
+    margin-top: 1rem;
+    visibility: visible; // 요소를 보이게 만듭니다.
+    opacity: 1; // 요소를 불투명하게 만듭니다.
+    max-height: 150px; // 요소의 최대 높이를 증가시켜 요소를 보이게 합니다.
+    transition-delay: 0s; // 활성화 상태일 때는 지연 없이 즉시 전환을 시작합니다.
+  }
 `;
 
 export const StyledInput = styled(SimpleTextField)`

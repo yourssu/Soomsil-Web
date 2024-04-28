@@ -74,6 +74,11 @@ const Provider = lazy(() =>
     default: Provider,
   }))
 );
+const ChangePassword = lazy(() =>
+  import('./home/pages/ChangePassword/ChangePassword').then(({ ChangePassword }) => ({
+    default: ChangePassword,
+  }))
+);
 
 export const Router = () => {
   const [state, setState] = useState({
@@ -109,6 +114,7 @@ export const Router = () => {
           <Route path="" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/change-password" element={<ChangePassword />}></Route>
         </Route>
         <Route path="/mypage" element={<Mypage />}></Route>
         <Route path="/drawer" element={<DrawerLayout />}>
