@@ -9,8 +9,8 @@ import {
   StyledWrapper,
   StyledWithdrawContainer,
   StyledTitleText,
-  StyledSubTitleTextThree,
-  StyledSubTitleTextFive,
+  StyledSubTitleText,
+  StyledText,
   StyledButtonText,
   StyledLeft,
   StyledListItem,
@@ -50,8 +50,8 @@ export const Withdraw = () => {
         ) : (
           <>
             <StyledTitleText>계정 탈퇴</StyledTitleText>
-            <StyledSubTitleTextThree>계정 탈퇴 전 꼭 확인하세요.</StyledSubTitleTextThree>
-            <StyledSubTitleTextFive>
+            <StyledSubTitleText>계정 탈퇴 전 꼭 확인하세요.</StyledSubTitleText>
+            <StyledText>
               <StyledListItem>탈퇴하는 즉시 데이터가 제거되며, 복구가 불가능합니다.</StyledListItem>
               <StyledListItem>
                 닉네임, 이메일 등 사용자를 특정할 수 있는 모든 계정 정보가 지워집니다.
@@ -59,7 +59,7 @@ export const Withdraw = () => {
               <StyledListItem>
                 등록된 글이나 댓글의 삭제를 원한다면 탈퇴 이전에 삭제하시기 바랍니다.
               </StyledListItem>
-            </StyledSubTitleTextFive>
+            </StyledText>
             <StyledLeft>
               <CheckBox size="medium" isSelected={agreed} onClick={handleCheckAgree} type="button">
                 <StyledButtonText>안내사항을 확인하였으며, 이에 동의합니다.</StyledButtonText>

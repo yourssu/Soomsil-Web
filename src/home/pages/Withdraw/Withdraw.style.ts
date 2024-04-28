@@ -27,7 +27,7 @@ export const StyledTitleText = styled.p`
   color: ${({ theme }) => theme.color.textSecondary};
 `;
 
-export const StyledSubTitleTextThree = styled.p`
+export const StyledSubTitleText = styled.p`
   ${({ theme }) => theme.typo.subtitle3};
   color: ${({ theme }) => theme.color.buttonNormal};
   align-self: self-start;
@@ -43,7 +43,7 @@ export const StyledLeft = styled.div`
   align-self: self-start;
 `;
 
-export const StyledSubTitleTextFive = styled.ul`
+export const StyledText = styled.ul`
   ${({ theme }) => theme.typo.subtitle5};
   color: ${({ theme }) => theme.color.buttonNormal};
   text-align: left;
