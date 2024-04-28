@@ -20,19 +20,6 @@ export const Withdraw = () => {
   const [agreed, setAgreed] = useState(false);
   const [draw, setDraw] = useState(false);
 
-  const Withdrawn = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        navigate('/');
-      }, 3000);
-      return () => clearTimeout(timer);
-    }, [navigate]);
-
-    return <p>계정 탈퇴가 완료되었습니다.</p>;
-  };
-
   const handleCheckAgree = () => {
     setAgreed(!agreed);
   };
@@ -80,4 +67,17 @@ export const Withdraw = () => {
       </StyledWithdrawContainer>
     </StyledWrapper>
   );
+};
+
+const Withdrawn = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/');
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
+  return <p>계정 탈퇴가 완료되었습니다.</p>;
 };
