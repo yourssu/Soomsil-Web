@@ -31,7 +31,9 @@ export const MyMenuList = () => {
           <StyledMenuListTitle>마이페이지</StyledMenuListTitle>
           <StyledMenuContainer>
             <StyledMenuTitle>계정 관리</StyledMenuTitle>
-            <StyledListItem>비밀번호 변경</StyledListItem>
+            <StyledListItem onClick={() => navigate('/changePassword')}>
+              비밀번호 변경
+            </StyledListItem>
             <StyledListItem onClick={() => setIsOpenModal(true)}>로그아웃</StyledListItem>
           </StyledMenuContainer>
           <StyledMenuContainer>

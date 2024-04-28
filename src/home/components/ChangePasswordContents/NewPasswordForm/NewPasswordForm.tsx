@@ -1,9 +1,11 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/soomsil_v2_logo.svg';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
+import { api } from '@/service/TokenService';
 
 import {
   StyledContainer,
@@ -23,6 +25,7 @@ export const NewPasswordForm = () => {
   const [isNewPasswordCheckError, setIsNewPasswordCheckError] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [validationAttempted, setValidationAttempted] = useState(false);
+  const navigate = useNavigate();
 
   const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
 
@@ -40,11 +43,16 @@ export const NewPasswordForm = () => {
     setValidationAttempted(true);
     const isValid = regexp.test(newPassword);
     if (isValid && newPassword === newPasswordCheck) {
-      alert('비밀번호가 변경됐습니다.');
-    } else {
-      if (!isValid) setIsNewPasswordError(true);
-      if (newPassword !== newPasswordCheck) setIsNewPasswordCheckError(true);
+      const accessToken = api.getAccessToken();
+      if (!accessToken) {
+        alert('로그인이 필요합니다.');
+        navigate('/Login');
+        return;
+      }
     }
+
+    if (!isValid) setIsNewPasswordError(true);
+    if (newPassword !== newPasswordCheck) setIsNewPasswordCheckError(true);
   };
 
   useEffect(() => {
@@ -70,7 +78,9 @@ export const NewPasswordForm = () => {
             errorMessage="숫자와 영문자 조합으로 8자 이상 입력해주세요."
           />
         </StyledInputContainer>
-        <StyledInputContainerAnimation className={!isNewPasswordError ? 'active' : ''}>
+        <StyledInputContainerAnimation
+          className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
+        >
           <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
           <PasswordInput
             value={newPasswordCheck}
