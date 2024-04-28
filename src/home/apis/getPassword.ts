@@ -1,6 +1,6 @@
-import { ErrorResponse, GetPasswordRespose } from '../types/GetPassword.type';
+import { authClient } from '@/apis';
 
-import { customedAxios } from './customedAxios';
+import { ErrorResponse, GetPasswordRespose } from '../types/GetPassword.type';
 
 const authorization = (accessToken: string) => {
   return { Authorization: `Bearer ${accessToken}` };
@@ -17,7 +17,7 @@ export const getPassword = async (props: getPasswordProps) => {
     return null;
   }
   try {
-    const res = await customedAxios.get('/auth/verification/password', {
+    const res = await authClient.get('/auth/verification/password', {
       params: { password },
       headers: authorization(accessToken),
     });
