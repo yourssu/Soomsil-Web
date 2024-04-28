@@ -11,6 +11,9 @@ dependencies:
   '@radix-ui/react-dropdown-menu':
     specifier: ^2.0.6
     version: 2.0.6(@types/react-dom@18.2.22)(@types/react@18.2.67)(react-dom@18.2.0)(react@18.2.0)
+  '@tanem/react-nprogress':
+    specifier: ^5.0.51
+    version: 5.0.51(react-dom@18.2.0)(react@18.2.0)
   '@tanstack/react-query':
     specifier: ^5.14.2
     version: 5.28.4(react@18.2.0)
@@ -1325,6 +1328,18 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@tanem/react-nprogress@5.0.51(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-YxNUCpznuBVA+PhjEzFmxaa1czXgU+5Ojchw5JBK7DQS6SHIgNudpFohWpNBWMu2KWByGJ2OLH2OwbM/XyP18Q==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@babel/runtime': 7.24.1
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /@tanstack/query-core@5.28.4:
     resolution: {integrity: sha512-uQZqOFqLWUvXNIQZ63XdKzg22NtHzgCBUfDmjDHi3BoF+nUYeBNvMi/xFPtFrMhqRzG2Ir4mYaGsWZzmiEjXpA==}
