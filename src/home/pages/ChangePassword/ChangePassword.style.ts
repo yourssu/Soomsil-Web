@@ -1,3 +1,4 @@
+import { SimpleTextField } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.article`
@@ -51,46 +52,10 @@ export const StyledInputContainer = styled.article`
   gap: 0.5rem;
 `;
 
-export const StyledInputRowContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const StyledInput = styled.input`
+export const StyledInput = styled(SimpleTextField)`
   width: 100%;
-  background-color: ${({ theme }) => theme.color.inputFieldElevated};
-  ${({ theme }) => theme.typo.body1};
-  color: ${({ theme }) => theme.color.textTertiary};
   height: 3rem;
-  border-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
   padding: 0.75rem 1rem;
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus,
-  &:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
-    box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
-    -webkit-text-fill-color: ${({ theme }) => theme.color.textTertiary} !important;
-  }
-`;
-export const StyledFailedInput = styled.input`
-  width: 100%;
-  border: 1px solid #ff5252;
-  background-color: ${({ theme }) => theme.color.inputFieldElevated};
-  ${({ theme }) => theme.typo.body1};
-  color: ${({ theme }) => theme.color.textTertiary};
-  height: 3rem;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus,
-  &:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
-    box-shadow: 0 0 0px 1000px ${({ theme }) => theme.color.inputFieldElevated} inset;
-    -webkit-text-fill-color: ${({ theme }) => theme.color.textTertiary} !important;
-  }
 `;
 
 export const StyledErrorMessageContainer = styled.section`

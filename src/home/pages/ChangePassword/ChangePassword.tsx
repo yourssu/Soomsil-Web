@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/soomsil_v2_logo.svg';
+import { getPassword } from '@/home/apis/getPassword';
+import { PasswordInput } from '@/home/components/PasswordInput/PasswordInput';
+import { api } from '@/service/TokenService';
 
 import {
   StyledContainer,
   StyledInputContainer,
-  StyledInputRowContainer,
-  StyledInput,
-  StyledFailedInput,
-  StyledErrorMessageContainer,
   StyledLogo,
   StyledBoxContainer,
   StyledTitle,
@@ -20,11 +20,34 @@ import {
 
 export const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
-  const [matchCurrentPassword, setMatchCurrentPassword] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
 
   const checkCurrentPassword = (currentPassword: string) => {
-    // 예시를 위해 '1234'를 올바른 비밀번호로 설정
-    setMatchCurrentPassword(currentPassword === '1234');
+    const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$');
+    if (!currentPassword || !regexp.test(currentPassword)) {
+      setIsError(true);
+      return;
+    }
+
+    const accessToken = api.getAccessToken();
+    if (!accessToken) navigate('/');
+
+    getPassword({ password: currentPassword, accessToken }).then((res) => {
+      if (!res) navigate('/');
+      if (res?.match) {
+        setIsError(false);
+        // navigate('/change-password/new');
+      } else {
+        setIsError(true);
+      }
+    });
+  };
+
+  const handlePasswordChange = (password: string) => {
+    if (isError) setIsError(false);
+
+    setCurrentPassword(password);
   };
 
   return (
@@ -34,24 +57,12 @@ export const ChangePassword = () => {
         <StyledTitle>비밀번호 변경</StyledTitle>
         <StyledInputContainer>
           <StyledInputTitle>현재 비밀번호를 입력 해주세요.</StyledInputTitle>
-          <StyledInputRowContainer>
-            {matchCurrentPassword ? (
-              <StyledInput
-                type="password"
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-              />
-            ) : (
-              <StyledFailedInput
-                type="password"
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-              />
-            )}
-          </StyledInputRowContainer>
-          {!matchCurrentPassword && (
-            <StyledErrorMessageContainer>비밀번호가 일치하지 않습니다.</StyledErrorMessageContainer>
-          )}
+          <PasswordInput
+            value={currentPassword}
+            onChangeHandler={handlePasswordChange}
+            isError={isError}
+            errorMessage="비밀번호가 일치하지 않습니다."
+          />
         </StyledInputContainer>
         <StyledButtonContainer>
           <BoxButton
