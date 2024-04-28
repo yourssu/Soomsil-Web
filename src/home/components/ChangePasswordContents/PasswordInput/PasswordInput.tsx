@@ -10,6 +10,7 @@ interface PasswordInputProps {
 }
 
 export const PasswordInput = ({
+  placeholder,
   value,
   onChangeHandler,
   isError,
@@ -19,7 +20,8 @@ export const PasswordInput = ({
   return (
     <div>
       <StyledInput
-        placeholder="비밀번호를 입력해주세요."
+        isFocused={true}
+        placeholder={placeholder}
         type="password"
         value={value}
         onChange={(event) => onChangeHandler(event.target.value)}

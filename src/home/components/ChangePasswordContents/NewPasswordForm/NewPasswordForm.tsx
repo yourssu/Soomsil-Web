@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
 
@@ -20,34 +20,39 @@ export const NewPasswordForm = () => {
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setNewPasswordCheck] = useState('');
   const [isNewPasswordError, setIsNewPasswordError] = useState(false);
+  const [isNewPasswordCheckError, setIsNewPasswordCheckError] = useState(false);
+  const [isFirstRender, setIsFirstRender] = useState(true);
   const [validationAttempted, setValidationAttempted] = useState(false);
+
+  const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
 
   const handleNewPasswordChange = (password: string) => {
     setNewPassword(password);
-    // 최소 8자 이상, 반드시 영문자와 숫자 포함
-    const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
-    setIsNewPasswordError(!regexp.test(password));
+    if (password.length >= 8) {
+      setIsFirstRender(false);
+      setIsNewPasswordError(!regexp.test(password));
+    } else {
+      setIsNewPasswordError(true);
+    }
   };
 
   const handleSubmit = () => {
     setValidationAttempted(true);
-    const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
     const isValid = regexp.test(newPassword);
     if (isValid && newPassword === newPasswordCheck) {
-      alert('비밀번호 변경에 성공했습니다.');
+      alert('비밀번호가 변경됐습니다.');
     } else {
-      setIsNewPasswordError(true);
-      if (!isValid) {
-        alert('비밀번호는 최소 8자 이상이어야 하며, 영문자와 숫자를 반드시 포함해야 합니다.');
-      }
-      if (newPassword !== newPasswordCheck) {
-        alert('입력한 비밀번호가 일치하지 않습니다.');
-      }
+      if (!isValid) setIsNewPasswordError(true);
+      if (newPassword !== newPasswordCheck) setIsNewPasswordCheckError(true);
     }
   };
 
   useEffect(() => {
-    setIsNewPasswordError(false);
+    if (newPassword.length < 8) {
+      setIsNewPasswordCheckError(false);
+      setNewPasswordCheck('');
+      setValidationAttempted(false);
+    }
   }, [newPassword]);
 
   return (
@@ -58,20 +63,19 @@ export const NewPasswordForm = () => {
         <StyledInputContainer>
           <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>
           <PasswordInput
+            placeholder="숫자와 영문자 조합으로 8자 이상 입력해주세요."
             value={newPassword}
             onChangeHandler={handleNewPasswordChange}
-            isError={isNewPasswordError && validationAttempted}
+            isError={!isFirstRender && isNewPasswordError}
             errorMessage="숫자와 영문자 조합으로 8자 이상 입력해주세요."
           />
         </StyledInputContainer>
-        <StyledInputContainerAnimation
-          className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
-        >
+        <StyledInputContainerAnimation className={!isNewPasswordError ? 'active' : ''}>
           <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
           <PasswordInput
             value={newPasswordCheck}
             onChangeHandler={setNewPasswordCheck}
-            isError={newPassword !== newPasswordCheck && validationAttempted}
+            isError={isNewPasswordCheckError && validationAttempted}
             errorMessage="비밀번호가 일치하지 않습니다."
           />
         </StyledInputContainerAnimation>
@@ -84,3 +88,5 @@ export const NewPasswordForm = () => {
     </StyledContainer>
   );
 };
+
+export default NewPasswordForm;
