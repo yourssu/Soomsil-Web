@@ -15,7 +15,7 @@ export const StyledWrapper = styled.div`
 export const StyledWithdrawContainer = styled.div`
   ${Center}
 
-  padding: 22px 24px 22px 24px;
+  padding: 22px 24px;
   gap: 24px;
   width: 480px;
   border-radius: 16px;
