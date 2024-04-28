@@ -36,7 +36,6 @@ export const StyledSubTitleText = styled.p`
 export const StyledButtonText = styled.p`
   ${({ theme }) => theme.typo.button3};
   color: ${({ theme }) => theme.color.buttonDisabled};
-  text-align: left;
 `;
 
 export const StyledLeft = styled.div`
@@ -46,7 +45,6 @@ export const StyledLeft = styled.div`
 export const StyledText = styled.ul`
   ${({ theme }) => theme.typo.subtitle5};
   color: ${({ theme }) => theme.color.buttonNormal};
-  text-align: left;
   list-style-type: disc;
   padding: 0px 24px;
 `;
