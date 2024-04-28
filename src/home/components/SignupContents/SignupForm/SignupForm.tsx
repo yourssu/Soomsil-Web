@@ -47,6 +47,8 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
     const { data, error } = await postAuthSignUp(signUpParams);
 
     if (data) {
+      sessionStorage.removeItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
+      sessionStorage.removeItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN_EXPIRED_IN);
       onConfirm();
     } else if (error) {
       alert(
