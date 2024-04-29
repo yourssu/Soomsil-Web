@@ -3,15 +3,12 @@ import { useEffect, useState } from 'react';
 import { BoxButton } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
-import Logo from '@/assets/soomsil_v2_logo.svg';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
 import { sessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
 import {
-  StyledContainer,
   StyledInputContainer,
-  StyledLogo,
   StyledBoxContainer,
   StyledTitle,
   StyledInputTitle,
@@ -45,6 +42,7 @@ export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
   };
 
   const handleSubmit = () => {
+    //api 연결 후 삭제
     console.log(sessionToken);
     setValidationAttempted(true);
     const isValid = regexp.test(newPassword);
@@ -71,44 +69,41 @@ export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
   }, [newPassword]);
 
   return (
-    <StyledContainer>
-      <StyledLogo src={Logo} alt="Soomsil" />
-      <StyledBoxContainer>
-        <StyledTitle>비밀번호 변경</StyledTitle>
-        <StyledInputContainer>
-          <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>
+    <StyledBoxContainer>
+      <StyledTitle>비밀번호 변경</StyledTitle>
+      <StyledInputContainer>
+        <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>
+        <PasswordInput
+          placeholder="숫자와 영문자 조합으로 8자 이상 입력해주세요."
+          value={newPassword}
+          onChangeHandler={handleNewPasswordChange}
+          isError={!isFirstRender && isNewPasswordError}
+          errorMessage="숫자와 영문자 조합으로 8자 이상 입력해주세요."
+        />
+        <StyledInputAnimation
+          className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
+        >
+          <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
           <PasswordInput
-            placeholder="숫자와 영문자 조합으로 8자 이상 입력해주세요."
-            value={newPassword}
-            onChangeHandler={handleNewPasswordChange}
-            isError={!isFirstRender && isNewPasswordError}
-            errorMessage="숫자와 영문자 조합으로 8자 이상 입력해주세요."
+            value={newPasswordCheck}
+            onChangeHandler={setNewPasswordCheck}
+            isError={isNewPasswordCheckError && validationAttempted}
+            errorMessage="비밀번호가 일치하지 않습니다."
           />
-          <StyledInputAnimation
-            className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
-          >
-            <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
-            <PasswordInput
-              value={newPasswordCheck}
-              onChangeHandler={setNewPasswordCheck}
-              isError={isNewPasswordCheckError && validationAttempted}
-              errorMessage="비밀번호가 일치하지 않습니다."
-            />
-          </StyledInputAnimation>
-        </StyledInputContainer>
-        <StyledButtonContainer>
-          <BoxButton
-            rounding={8}
-            size="large"
-            variant="filled"
-            onClick={handleSubmit}
-            disabled={isFirstRender || isNewPasswordError}
-          >
-            변경하기
-          </BoxButton>
-        </StyledButtonContainer>
-      </StyledBoxContainer>
-    </StyledContainer>
+        </StyledInputAnimation>
+      </StyledInputContainer>
+      <StyledButtonContainer>
+        <BoxButton
+          rounding={8}
+          size="large"
+          variant="filled"
+          onClick={handleSubmit}
+          disabled={isFirstRender || isNewPasswordError}
+        >
+          변경하기
+        </BoxButton>
+      </StyledButtonContainer>
+    </StyledBoxContainer>
   );
 };
 

@@ -1,10 +1,8 @@
 import { SimpleTextField } from '@yourssu/design-system-react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.article`
-  width: fit-content;
-  flex: 1;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,6 +55,10 @@ export const StyledErrorMessageContainer = styled.section`
   flex-direction: column;
   ${({ theme }) => theme.typo.caption1};
   color: #ff5252;
+`;
+
+export const StyledLogoLink = styled(Link)`
+  display: flex;
 `;
 
 export const StyledLogo = styled.img`

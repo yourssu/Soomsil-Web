@@ -3,16 +3,13 @@ import { useState } from 'react';
 import { BoxButton } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
-import Logo from '@/assets/soomsil_v2_logo.svg';
 import { getPassword } from '@/home/apis/getPassword';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
 import { sessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
 import {
-  StyledContainer,
   StyledInputContainer,
-  StyledLogo,
   StyledBoxContainer,
   StyledTitle,
   StyledInputTitle,
@@ -53,32 +50,29 @@ export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
   };
 
   return (
-    <StyledContainer>
-      <StyledLogo src={Logo} alt="soomsil" />
-      <StyledBoxContainer>
-        <StyledTitle>비밀번호 변경</StyledTitle>
-        <StyledInputContainer>
-          <StyledInputTitle>현재 비밀번호를 입력 해주세요.</StyledInputTitle>
-          <PasswordInput
-            placeholder="비밀번호를 입력해주세요."
-            value={currentPassword}
-            onChangeHandler={handlePasswordChange}
-            isError={isError}
-            errorMessage="비밀번호가 일치하지 않습니다."
-          />
-        </StyledInputContainer>
-        <StyledButtonContainer>
-          <BoxButton
-            rounding={8}
-            size="large"
-            variant="filled"
-            onClick={() => checkCurrentPassword(currentPassword)}
-            disabled={currentPassword.length === 0}
-          >
-            다음
-          </BoxButton>
-        </StyledButtonContainer>
-      </StyledBoxContainer>
-    </StyledContainer>
+    <StyledBoxContainer>
+      <StyledTitle>비밀번호 변경</StyledTitle>
+      <StyledInputContainer>
+        <StyledInputTitle>현재 비밀번호를 입력 해주세요.</StyledInputTitle>
+        <PasswordInput
+          placeholder="비밀번호를 입력해주세요."
+          value={currentPassword}
+          onChangeHandler={handlePasswordChange}
+          isError={isError}
+          errorMessage="비밀번호가 일치하지 않습니다."
+        />
+      </StyledInputContainer>
+      <StyledButtonContainer>
+        <BoxButton
+          rounding={8}
+          size="large"
+          variant="filled"
+          onClick={() => checkCurrentPassword(currentPassword)}
+          disabled={currentPassword.length === 0}
+        >
+          다음
+        </BoxButton>
+      </StyledButtonContainer>
+    </StyledBoxContainer>
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { ChangePasswordFrame } from '@/home/components/ChangePasswordContents/ChangePasswordFrame/ChangePasswordFrame';
 import { CurrentPasswordForm } from '@/home/components/ChangePasswordContents/CurrentPasswordForm/CurrentPasswordForm';
 import { NewPasswordForm } from '@/home/components/ChangePasswordContents/NewPasswordForm/NewPasswordForm';
 import { sessionTokenType } from '@/home/types/GetPassword.type';
@@ -12,16 +13,18 @@ export const ChangePassword = () => {
   const [sessionToken, setSessionToken] = useState<sessionTokenType | null>(null);
 
   return (
-    <Funnel>
-      <Funnel.Step name="현재비밀번호입력">
-        <CurrentPasswordForm
-          onConfirm={() => setStep('새비밀번호입력')}
-          setSessionToken={setSessionToken}
-        />
-      </Funnel.Step>
-      <Funnel.Step name="새비밀번호입력">
-        <NewPasswordForm sessionToken={sessionToken as sessionTokenType} />
-      </Funnel.Step>
-    </Funnel>
+    <ChangePasswordFrame>
+      <Funnel>
+        <Funnel.Step name="현재비밀번호입력">
+          <CurrentPasswordForm
+            onConfirm={() => setStep('새비밀번호입력')}
+            setSessionToken={setSessionToken}
+          />
+        </Funnel.Step>
+        <Funnel.Step name="새비밀번호입력">
+          <NewPasswordForm sessionToken={sessionToken as sessionTokenType} />
+        </Funnel.Step>
+      </Funnel>
+    </ChangePasswordFrame>
   );
 };

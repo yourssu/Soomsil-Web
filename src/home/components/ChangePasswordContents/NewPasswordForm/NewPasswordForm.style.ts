@@ -2,9 +2,6 @@ import { SimpleTextField } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.article`
-  width: fit-content;
-  flex: 1;
-
   display: flex;
   flex-direction: column;
   justify-content: center;

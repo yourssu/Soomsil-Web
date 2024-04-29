@@ -23,7 +23,6 @@ export const StyledHeader = styled.div`
 
 export const StyledLogoContainer = styled(Link)`
   display: flex;
-  margin-left: 2.5rem;
 `;
 
 export const StyledSoomsilLogo = styled.img`

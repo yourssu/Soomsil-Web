@@ -116,7 +116,9 @@ export const Router = () => {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/changePassword" element={<ChangePassword />}></Route>
         </Route>
-        <Route path="/mypage" element={<Mypage />}></Route>
+        <Route path="/mypage" element={<Mypage />}>
+          <Route path="changePassword" element={<ChangePassword />} />
+        </Route>
         <Route path="/drawer" element={<DrawerLayout />}>
           <Route index element={<Navigate to="rankings" replace />}></Route>
           <Route path="services/:serviceId" element={<ServiceDetail />} />
