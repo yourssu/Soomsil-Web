@@ -23,13 +23,13 @@ export const getPassword = async (props: getPasswordProps) => {
     });
 
     if (res.status === 200) {
-      const data: GetPasswordRespose = { match: true };
+      const data: GetPasswordRespose = { match: true, sessionToken: res.data.sessionToken };
       console.log(data);
       return data;
     }
   } catch (error: unknown) {
-    const errorData: ErrorResponse = { ...(error as ErrorResponse) };
-    console.log(errorData);
-    return { match: false, error: errorData };
+    const data: GetPasswordRespose = { match: false, error: error as ErrorResponse };
+    console.log(data);
+    return data;
   }
 };

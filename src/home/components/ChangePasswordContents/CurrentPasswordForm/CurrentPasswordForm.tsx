@@ -20,9 +20,11 @@ import {
 
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
+  setSessionToken: (sessionToken: string) => void;
 }
 
-export const CurrentPasswordForm = ({ onConfirm }: CurrentPasswordFormProps) => {
+export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
+  const { onConfirm, setSessionToken } = Props;
   const [currentPassword, setCurrentPassword] = useState('');
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
@@ -32,9 +34,10 @@ export const CurrentPasswordForm = ({ onConfirm }: CurrentPasswordFormProps) => 
     if (!accessToken) navigate('/');
 
     getPassword({ password: currentPassword, accessToken }).then((res) => {
-      if (!res) navigate('/');
+      if (!res) navigate('/Login');
       if (res?.match) {
         setIsError(false);
+        setSessionToken(res.sessionToken?.sessionToken as string);
         onConfirm();
       } else {
         setIsError(true);
@@ -69,6 +72,7 @@ export const CurrentPasswordForm = ({ onConfirm }: CurrentPasswordFormProps) => 
             size="large"
             variant="filled"
             onClick={() => checkCurrentPassword(currentPassword)}
+            disabled={currentPassword.length === 0}
           >
             다음
           </BoxButton>

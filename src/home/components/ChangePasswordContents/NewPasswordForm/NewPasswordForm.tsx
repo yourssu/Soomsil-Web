@@ -91,7 +91,13 @@ export const NewPasswordForm = () => {
           </StyledInputAnimation>
         </StyledInputContainer>
         <StyledButtonContainer>
-          <BoxButton rounding={8} size="large" variant="filled" onClick={handleSubmit}>
+          <BoxButton
+            rounding={8}
+            size="large"
+            variant="filled"
+            onClick={handleSubmit}
+            disabled={isFirstRender || isNewPasswordError}
+          >
             변경하기
           </BoxButton>
         </StyledButtonContainer>
