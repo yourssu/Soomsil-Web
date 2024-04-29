@@ -1,14 +1,15 @@
-import React from 'react';
+import { StyledBarBackground, StyledBar } from './Bar.style';
 
-import { StyeldBarBackground, StyledBar } from './Bar.style';
-
-const Bar: React.FC<{ animationDuration: number; progress: number }> = ({
-  progress,
+export const Bar = ({
   animationDuration,
-}) => (
-  <StyeldBarBackground $progress={progress} $animationDuration={animationDuration}>
-    <StyledBar />
-  </StyeldBarBackground>
-);
-
-export default Bar;
+  progress,
+}: {
+  animationDuration: number;
+  progress: number;
+}) => {
+  return (
+    <StyledBarBackground $progress={progress} $animationDuration={animationDuration}>
+      <StyledBar />
+    </StyledBarBackground>
+  );
+};
