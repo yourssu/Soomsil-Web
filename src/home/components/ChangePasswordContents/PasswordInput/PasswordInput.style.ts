@@ -4,13 +4,15 @@ import styled from 'styled-components';
 export const StyledInput = styled(SimpleTextField)`
   width: 100%;
   height: 3rem;
-  padding: 0.75rem 1rem;
 `;
 
 export const StyledErrorMessageContainer = styled.section`
   display: flex;
   flex-direction: column;
+`;
+
+export const StyledErrorMessage = styled.div`
   ${({ theme }) => theme.typo.caption1};
   color: #ff5252;
-  padding-top: 0.1rem;
+  margin: 8px 8px 0 8px;
 `;

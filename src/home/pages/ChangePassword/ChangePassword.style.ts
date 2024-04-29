@@ -9,7 +9,7 @@ export const StyledContainer = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 22px;
+  gap: 24px;
 `;
 
 export const StyledButtonContainer = styled.section`
@@ -46,7 +46,6 @@ export const StyledTitle = styled.div`
   color: ${({ theme }) => theme.color.textSecondary};
   ${({ theme }) => theme.typo.title2};
   text-align: center;
-  margin-bottom: 1rem;
 `;
 
 export const StyledInputContainer = styled.article`

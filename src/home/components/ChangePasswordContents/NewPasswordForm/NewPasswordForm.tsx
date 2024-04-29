@@ -15,7 +15,7 @@ import {
   StyledTitle,
   StyledInputTitle,
   StyledButtonContainer,
-  StyledInputContainerAnimation,
+  StyledInputAnimation,
 } from './NewPasswordForm.style';
 
 export const NewPasswordForm = () => {
@@ -49,6 +49,7 @@ export const NewPasswordForm = () => {
         navigate('/Login');
         return;
       }
+      setIsNewPasswordCheckError(false);
     }
 
     if (!isValid) setIsNewPasswordError(true);
@@ -77,18 +78,18 @@ export const NewPasswordForm = () => {
             isError={!isFirstRender && isNewPasswordError}
             errorMessage="숫자와 영문자 조합으로 8자 이상 입력해주세요."
           />
+          <StyledInputAnimation
+            className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
+          >
+            <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
+            <PasswordInput
+              value={newPasswordCheck}
+              onChangeHandler={setNewPasswordCheck}
+              isError={isNewPasswordCheckError && validationAttempted}
+              errorMessage="비밀번호가 일치하지 않습니다."
+            />
+          </StyledInputAnimation>
         </StyledInputContainer>
-        <StyledInputContainerAnimation
-          className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
-        >
-          <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
-          <PasswordInput
-            value={newPasswordCheck}
-            onChangeHandler={setNewPasswordCheck}
-            isError={isNewPasswordCheckError && validationAttempted}
-            errorMessage="비밀번호가 일치하지 않습니다."
-          />
-        </StyledInputContainerAnimation>
         <StyledButtonContainer>
           <BoxButton rounding={8} size="large" variant="filled" onClick={handleSubmit}>
             변경하기

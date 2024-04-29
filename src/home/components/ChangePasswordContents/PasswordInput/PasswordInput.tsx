@@ -1,4 +1,4 @@
-import { StyledInput, StyledErrorMessageContainer } from './PasswordInput.style';
+import { StyledInput, StyledErrorMessage } from './PasswordInput.style';
 
 interface PasswordInputProps {
   placeholder?: string;
@@ -18,7 +18,7 @@ export const PasswordInput = ({
   disabled = false,
 }: PasswordInputProps) => {
   return (
-    <div>
+    <>
       <StyledInput
         isFocused={true}
         placeholder={placeholder}
@@ -28,7 +28,7 @@ export const PasswordInput = ({
         isNegative={isError}
         disabled={disabled}
       />
-      {isError && <StyledErrorMessageContainer>{errorMessage}</StyledErrorMessageContainer>}
-    </div>
+      {isError && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
+    </>
   );
 };
