@@ -8,12 +8,15 @@ import {
   StyledChangePasswordFrame,
   StyledLogo,
   StyledContainer,
+  StyledLink,
 } from './ChangePasswordFrame.style';
 
 export const ChangePasswordFrame = ({ children }: ChangePasswordFrameProps) => {
   return (
     <StyledChangePasswordFrame>
-      <StyledLogo src={Logo} alt="soomsil" />
+      <StyledLink to="/">
+        <StyledLogo src={Logo} alt="soomsil" />
+      </StyledLink>
       <StyledContainer>{children}</StyledContainer>
     </StyledChangePasswordFrame>
   );
