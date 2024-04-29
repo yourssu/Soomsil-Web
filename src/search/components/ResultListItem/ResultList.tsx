@@ -1,9 +1,8 @@
-import { useCallback, useRef } from 'react';
-
 import { useSearchParams } from 'react-router-dom';
 
 import { Spacing } from '@/components/Spacing/Spacing';
 import { useGetSearch } from '@/search/hooks/useGetSearch';
+import { useScrollObserve } from '@/search/hooks/useScrollObserve';
 
 import { ResultListItem } from './ResultListItem';
 
@@ -15,22 +14,7 @@ export const ResultList = () => {
     query: query || '',
   });
 
-  const observer = useRef<IntersectionObserver>();
-
-  const lastElementRef = useCallback(
-    (node: HTMLDivElement) => {
-      if (isPending) return;
-
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage();
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [isPending, hasNextPage, fetchNextPage]
-  );
+  const { lastElementRef } = useScrollObserve({ isPending, fetchNextPage, hasNextPage });
 
   return (
     <>
