@@ -1,19 +1,18 @@
 import { Suspense } from 'react';
 
+import { ErrorBoundary } from 'react-error-boundary';
 import { useSearchParams } from 'react-router-dom';
 
 import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
-import { ErrorBoundary } from '@/search/components/ErrorBoundary/ErrorBoundary';
 import {
   ResultListFallbackComponent,
   TotalFallbackComponent,
 } from '@/search/components/FallbackComponent/FallbackComponent';
 import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
 import { ResultListItems } from '@/search/components/ResultListItem/ResultListItems';
+import { SearchBar } from '@/search/components/SearchBar/SearchBar';
 import { TotalCount } from '@/search/components/TotalCount/TotalCount';
-
-import { SearchBar } from '../../components/SearchBar/SearchBar';
 
 import {
   StyledResultContent,
@@ -35,7 +34,10 @@ export const Search = () => {
       <StyledResultWrap>
         <StyledResultContentWrap>
           <StyledResultContent>
-            <ErrorBoundary fallback={TotalFallbackComponent} query={query}>
+            <ErrorBoundary
+              fallbackRender={(fallbackProps) => <TotalFallbackComponent {...fallbackProps} />}
+              resetKeys={[query]}
+            >
               <Suspense fallback={<Spacing direction="vertical" size={21} />}>
                 <TotalCount />
               </Suspense>
@@ -43,7 +45,12 @@ export const Search = () => {
             <Spacing direction="vertical" size={20} />
             <StyledFlexGapContainer>
               <StyledResultListItemsWrap>
-                <ErrorBoundary fallback={ResultListFallbackComponent} query={query}>
+                <ErrorBoundary
+                  fallbackRender={(fallbackProps) => (
+                    <ResultListFallbackComponent {...fallbackProps} />
+                  )}
+                  resetKeys={[query]}
+                >
                   <Suspense fallback={<Loading />}>
                     <ResultListItems />
                   </Suspense>
