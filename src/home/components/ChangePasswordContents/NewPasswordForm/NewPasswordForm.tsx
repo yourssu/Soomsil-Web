@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/soomsil_v2_logo.svg';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
+import { sessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
 import {
@@ -18,7 +19,11 @@ import {
   StyledInputAnimation,
 } from './NewPasswordForm.style';
 
-export const NewPasswordForm = () => {
+interface NewPasswordFormProps {
+  sessionToken: sessionTokenType;
+}
+
+export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setNewPasswordCheck] = useState('');
   const [isNewPasswordError, setIsNewPasswordError] = useState(false);
@@ -40,6 +45,7 @@ export const NewPasswordForm = () => {
   };
 
   const handleSubmit = () => {
+    console.log(sessionToken);
     setValidationAttempted(true);
     const isValid = regexp.test(newPassword);
     if (isValid && newPassword === newPasswordCheck) {

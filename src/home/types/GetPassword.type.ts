@@ -5,13 +5,13 @@ export interface ErrorResponse {
   path: string;
 }
 
-export interface sessionToken {
+export interface sessionTokenType {
   sessionToken: string;
   sessionTokenExpiresAt: string;
 }
 
 export interface GetPasswordRespose {
   match: boolean;
-  sessionToken?: sessionToken;
+  sessionToken?: sessionTokenType;
   error?: ErrorResponse;
 }

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '@/assets/soomsil_v2_logo.svg';
 import { getPassword } from '@/home/apis/getPassword';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
+import { sessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
 import {
@@ -20,7 +21,7 @@ import {
 
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
-  setSessionToken: (sessionToken: string) => void;
+  setSessionToken: ({ sessionToken }: sessionTokenType) => void;
 }
 
 export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
@@ -37,7 +38,7 @@ export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
       if (!res) navigate('/Login');
       if (res?.match) {
         setIsError(false);
-        setSessionToken(res.sessionToken?.sessionToken as string);
+        setSessionToken(res.sessionToken as sessionTokenType);
         onConfirm();
       } else {
         setIsError(true);

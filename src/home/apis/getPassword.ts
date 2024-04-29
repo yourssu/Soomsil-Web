@@ -1,6 +1,5 @@
 import { authClient } from '@/apis';
-
-import { ErrorResponse, GetPasswordRespose } from '../types/GetPassword.type';
+import { ErrorResponse, GetPasswordRespose, sessionToken } from '@/home/types/GetPassword.type';
 
 const authorization = (accessToken: string) => {
   return { Authorization: `Bearer ${accessToken}` };
@@ -23,7 +22,7 @@ export const getPassword = async (props: getPasswordProps) => {
     });
 
     if (res.status === 200) {
-      const data: GetPasswordRespose = { match: true, sessionToken: res.data.sessionToken };
+      const data: GetPasswordRespose = { match: true, sessionToken: res.data as sessionToken };
       console.log(data);
       return data;
     }
