@@ -5,14 +5,13 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
-import {
-  ResultListFallbackComponent,
-  TotalFallbackComponent,
-} from '@/search/components/FallbackComponent/FallbackComponent';
+import { FallbackComponent } from '@/search/components/FallbackComponent/FallbackComponent';
 import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
 import { ResultListItems } from '@/search/components/ResultListItem/ResultListItems';
 import { SearchBar } from '@/search/components/SearchBar/SearchBar';
 import { TotalCount } from '@/search/components/TotalCount/TotalCount';
+
+import { NoResult } from '../NoResult/NoResult';
 
 import {
   StyledResultContent,
@@ -35,7 +34,11 @@ export const Search = () => {
         <StyledResultContentWrap>
           <StyledResultContent>
             <ErrorBoundary
-              fallbackRender={(fallbackProps) => <TotalFallbackComponent {...fallbackProps} />}
+              fallbackRender={(fallbackProps) => (
+                <FallbackComponent {...fallbackProps}>
+                  <Spacing direction="vertical" size={21} />
+                </FallbackComponent>
+              )}
               resetKeys={[query]}
             >
               <Suspense fallback={<Spacing direction="vertical" size={21} />}>
@@ -47,7 +50,9 @@ export const Search = () => {
               <StyledResultListItemsWrap>
                 <ErrorBoundary
                   fallbackRender={(fallbackProps) => (
-                    <ResultListFallbackComponent {...fallbackProps} />
+                    <FallbackComponent {...fallbackProps}>
+                      <NoResult />
+                    </FallbackComponent>
                   )}
                   resetKeys={[query]}
                 >
