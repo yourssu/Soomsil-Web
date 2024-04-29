@@ -11,19 +11,9 @@ interface SignUpParams {
   sessionToken: string;
 }
 
-export const postAuthSignUp = async ({
-  email,
-  nickName,
-  password,
-  sessionToken,
-}: SignUpParams): Promise<PostAuthResponse> => {
+export const postAuthSignUp = async (signUpParams: SignUpParams): Promise<PostAuthResponse> => {
   try {
-    const res = await authClient.post(`/auth/sign-up`, {
-      email: email,
-      nickName: nickName,
-      password: password,
-      sessionToken: sessionToken,
-    });
+    const res = await authClient.post(`/auth/sign-up`, signUpParams);
     return { data: res.data };
   } catch (error: unknown) {
     return { error: error as AxiosError<AuthErrorData> };

@@ -18,15 +18,11 @@ interface VerificationCheckParams {
   session: string;
 }
 
-export const postAuthVerificationEmail = async ({
-  email,
-  verificationType,
-}: EmailVerificationParams): Promise<PostAuthVerificationEmailResponse> => {
+export const postAuthVerificationEmail = async (
+  emailVerificationParams: EmailVerificationParams
+): Promise<PostAuthVerificationEmailResponse> => {
   try {
-    const res = await authClient.post(`/auth/verification/email`, {
-      email: email,
-      verificationType: verificationType,
-    });
+    const res = await authClient.post(`/auth/verification/email`, emailVerificationParams);
     if (res.data) {
       sessionStorage.setItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN, res.data.sessionToken);
       sessionStorage.setItem(
