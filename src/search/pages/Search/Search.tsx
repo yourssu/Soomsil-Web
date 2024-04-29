@@ -7,7 +7,7 @@ import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
 import { FallbackComponent } from '@/search/components/FallbackComponent/FallbackComponent';
 import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
-import { ResultListItems } from '@/search/components/ResultListItem/ResultListItems';
+import { ResultList } from '@/search/components/ResultListItem/ResultList';
 import { SearchBar } from '@/search/components/SearchBar/SearchBar';
 import { TotalCount } from '@/search/components/TotalCount/TotalCount';
 
@@ -57,7 +57,7 @@ export const Search = () => {
                   resetKeys={[query]}
                 >
                   <Suspense fallback={<Loading />}>
-                    <ResultListItems />
+                    <ResultList />
                   </Suspense>
                 </ErrorBoundary>
               </StyledResultListItemsWrap>

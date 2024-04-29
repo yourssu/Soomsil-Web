@@ -7,7 +7,7 @@ import { useGetSearch } from '@/search/hooks/useGetSearch';
 
 import { ResultListItem } from './ResultListItem';
 
-export const ResultListItems = () => {
+export const ResultList = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
 
