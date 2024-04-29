@@ -1,7 +1,7 @@
 import { useNProgress } from '@tanem/react-nprogress';
 
-import Bar from '../Bar/Bar';
-import { Container } from '../Container/Container';
+import { Bar } from '@/components/Bar/Bar';
+import { Container } from '@/components/Container/Container';
 
 import { ProgressBarProps } from './ProgressBar.type';
 

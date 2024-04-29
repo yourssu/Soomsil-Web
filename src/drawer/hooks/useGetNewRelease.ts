@@ -1,28 +1,19 @@
-import { useEffect, useState } from 'react';
-
-import { useRecoilValue } from 'recoil';
+import { useQuery } from '@tanstack/react-query';
 
 import { getNewRelease } from '@/drawer/apis/getNewRelease';
-import { CategoryState } from '@/drawer/recoil/CategoryState';
 
-import { ProductResponses } from '../types/product.type';
+import { RankingRequestParams } from '../types/RankingRequestParams.type';
 
-export const useGetNewRelease = () => {
-  const [newReleases, setNewReleases] = useState<ProductResponses['productList']>([]);
-  const selectedCategory = useRecoilValue(CategoryState);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getNewRelease({
-        responseType: 'WEB',
-        category: selectedCategory,
-        page: 0,
+export const useGetNewRelease = ({ responseType, category, page }: RankingRequestParams) => {
+  return useQuery({
+    queryKey: ['newReleases', { responseType, category, page }],
+    queryFn: () => {
+      return getNewRelease({
+        responseType,
+        category,
+        page,
       });
-      setNewReleases(response.productList);
-    };
-
-    fetchData();
-  }, [selectedCategory]);
-
-  return { newReleases };
+    },
+    select: (data) => data.productList,
+  });
 };
