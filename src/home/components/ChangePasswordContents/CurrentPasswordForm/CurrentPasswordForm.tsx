@@ -29,7 +29,10 @@ export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
 
   const checkCurrentPassword = (currentPassword: string) => {
     const accessToken = api.getAccessToken();
-    if (!accessToken) navigate('/');
+    if (!accessToken) {
+      alert('로그인이 필요합니다.');
+      navigate('/');
+    }
 
     getPassword({ password: currentPassword, accessToken }).then((res) => {
       if (!res) navigate('/Login');
