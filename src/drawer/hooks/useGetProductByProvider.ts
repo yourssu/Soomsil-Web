@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useRecoilValue } from 'recoil';
 
 import { CategoryState } from '@/drawer/recoil/CategoryState';
@@ -14,11 +14,12 @@ export const useGetProductByProvider = ({
 }) => {
   const selectedCategory = useRecoilValue(CategoryState);
 
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['productByProvider', providerId, selectedCategory],
     queryFn: () => {
       return getProductByProvider({ providerId, page, category: selectedCategory });
     },
+    retry: false,
     select: (data) => data.productList,
   });
 };

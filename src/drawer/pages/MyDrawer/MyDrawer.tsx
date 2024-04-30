@@ -55,7 +55,7 @@ export const MyDrawer = () => {
         />
       </StyledTabWrapper>
       <Spacing direction={'vertical'} size={14} />
-      {drawerData && drawerData.length > 0 ? (
+      {drawerData.length > 0 ? (
         <>
           <StyledDescription>{TAB_DESCRIPTION[currentTab]}</StyledDescription>
           <CardLayout data={drawerData} type={currentTab} />
