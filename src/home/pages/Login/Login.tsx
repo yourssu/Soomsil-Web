@@ -26,6 +26,7 @@ import {
   StyledLabel,
   StyledLoginContainer,
   StyledTitle,
+  StyledLogo,
 } from './Login.style';
 
 export const Login = () => {
@@ -67,7 +68,7 @@ export const Login = () => {
 
   return (
     <StyledContainer>
-      <img src={soomsil} alt={'soomsil-logo'} width={180} height={38} />
+      <StyledLogo src={soomsil} alt="soomsil-logo" onClick={() => navigate('/')} />
       <StyledLoginContainer>
         <StyledTitle>로그인</StyledTitle>
         <StyledInputContainer>
