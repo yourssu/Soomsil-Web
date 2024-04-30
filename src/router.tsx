@@ -1,7 +1,9 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 
+import { ErrorBoundary } from 'react-error-boundary';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { Fallback } from '@/components/Fallback/Fallback';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
 
 const Search = lazy(() =>
@@ -98,38 +100,41 @@ export const Router = () => {
       }));
     };
   }, []);
+
   return (
-    <Suspense
-      fallback={
-        <ProgressBar
-          animationDuration={200}
-          incrementDuration={800}
-          isAnimating={state.isAnimating}
-          minimum={0.8}
-        />
-      }
-    >
-      <Routes>
-        <Route path="/" element={<HomeLayout />}>
-          <Route path="" element={<Home />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-        </Route>
-        <Route path="/mypage" element={<Mypage />}>
-          <Route path="changePassword" element={<ChangePassword />} />
-        </Route>
-        <Route path="/drawer" element={<DrawerLayout />}>
-          <Route index element={<Navigate to="rankings" replace />}></Route>
-          <Route path="services/:serviceId" element={<ServiceDetail />} />
-          <Route path="rankings" element={<Ranking />} />
-          <Route path="register" element={<Register />} />
-          <Route path="myDrawers" element={<MyDrawer />} />
-          <Route path="/drawer/newRelease" element={<NewRelease />} />
-          <Route path="/drawer/starRanking" element={<StarRanking />} />
-          <Route path=":providerId" element={<Provider />} />
-        </Route>
-        <Route path="/search" element={<Search />} />
-      </Routes>
-    </Suspense>
+    <ErrorBoundary fallbackRender={(fallbackProps) => <Fallback {...fallbackProps} />}>
+      <Suspense
+        fallback={
+          <ProgressBar
+            animationDuration={200}
+            incrementDuration={800}
+            isAnimating={state.isAnimating}
+            minimum={0.8}
+          />
+        }
+      >
+        <Routes>
+          <Route path="/" element={<HomeLayout />}>
+            <Route path="" element={<Home />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+          </Route>
+          <Route path="/mypage" element={<Mypage />}>
+            <Route path="changePassword" element={<ChangePassword />} />
+          </Route>
+          <Route path="/drawer" element={<DrawerLayout />}>
+            <Route index element={<Navigate to="rankings" replace />}></Route>
+            <Route path="services/:serviceId" element={<ServiceDetail />} />
+            <Route path="rankings" element={<Ranking />} />
+            <Route path="register" element={<Register />} />
+            <Route path="myDrawers" element={<MyDrawer />} />
+            <Route path="/drawer/newRelease" element={<NewRelease />} />
+            <Route path="/drawer/starRanking" element={<StarRanking />} />
+            <Route path=":providerId" element={<Provider />} />
+          </Route>
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </Suspense>
+    </ErrorBoundary>
   );
 };
