@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-interface StyeldBarBackgroundProps {
+interface StyledBarBackgroundProps {
   $progress: number;
   $animationDuration: number;
 }
 
-export const StyeldBarBackground = styled.div<StyeldBarBackgroundProps>`
+export const StyledBarBackground = styled.div<StyledBarBackgroundProps>`
   background: #423fcc;
   height: 4px;
   left: 0;

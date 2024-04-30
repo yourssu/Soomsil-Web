@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
+import { useErrorBoundary } from 'react-error-boundary';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,6 +31,8 @@ import {
 } from './Login.style';
 
 export const Login = () => {
+  const { showBoundary } = useErrorBoundary();
+
   const { register, control } = useForm();
   const [failedLogin, setFailedLogin] = useState(false);
   const { refetch } = useGetUserData();
@@ -61,6 +64,8 @@ export const Login = () => {
     } else if (error) {
       if (error.response?.status == 401) {
         setFailedLogin(true);
+      } else if (error.response?.status != 400) {
+        showBoundary(error);
       }
     }
   };
