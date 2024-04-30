@@ -1,6 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { Z_INDEX } from '@/constants/zIndex.constant';
+
 export const StyledHeader = styled.header`
   display: flex;
   align-items: center;
@@ -12,7 +14,7 @@ export const StyledHeader = styled.header`
   background-color: ${({ theme }) => theme.color.bgNormal};
   border-bottom: 1px solid ${({ theme }) => theme.color.borderNormal};
 
-  z-index: 9;
+  z-index: ${Z_INDEX.drawerHeader};
 `;
 
 export const StyledHeaderLogo = styled(Link)`
