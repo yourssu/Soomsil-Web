@@ -54,9 +54,8 @@ export const Login = () => {
     const { data, error } = await postAuthSignIn(loginParams);
 
     if (data) {
-      api.setAccessToken(data.accessToken);
-      api.setRefreshToken(data.refreshToken);
-      sessionStorage.setItem('accessExpiredIn', data.accessTokenExpiredIn.toString());
+      api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
+      api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
       refetch();
       navigate('/');
     } else if (error) {
