@@ -34,11 +34,7 @@ export const Search = () => {
         <StyledResultContentWrap>
           <StyledResultContent>
             <ErrorBoundary
-              fallbackRender={(fallbackProps) => (
-                <FallbackComponent {...fallbackProps}>
-                  <Spacing direction="vertical" size={21} />
-                </FallbackComponent>
-              )}
+              fallbackRender={() => <Spacing direction="vertical" size={21} />}
               resetKeys={[query]}
             >
               <Suspense fallback={<Spacing direction="vertical" size={21} />}>
