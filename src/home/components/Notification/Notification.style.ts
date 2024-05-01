@@ -7,7 +7,7 @@ interface StyledNotificationArrayProps {
 }
 
 export const StyledContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   background: #e7ecf6;
 `;
 

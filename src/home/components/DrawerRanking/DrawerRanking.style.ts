@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-  width: min-content;
+  width: 26.8125rem;
   padding: 1.4375rem;
 
   border-radius: 0.75rem;
