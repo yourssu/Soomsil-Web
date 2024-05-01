@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledSignupFrame = styled.div`
-  width: fit-content;
-  flex: 1; // vertical centering
+  width: 100%;
 
   display: flex;
   flex-direction: column;
