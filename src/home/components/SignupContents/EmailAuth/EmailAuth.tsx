@@ -43,11 +43,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
     const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
     if (!session) return;
 
-    const verificationCheckProps = {
-      session: session,
-    };
-
-    const res = await getAuthVerificationCheck(verificationCheckProps);
+    const res = await getAuthVerificationCheck({ session });
 
     if (res.data) {
       if (res.data.isVerified) onConfirm();
