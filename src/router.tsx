@@ -11,11 +11,6 @@ const Search = lazy(() =>
     default: Search,
   }))
 );
-const HomeLayout = lazy(() =>
-  import('./home/components/HomeLayout/HomeLayout').then(({ HomeLayout }) => ({
-    default: HomeLayout,
-  }))
-);
 const DrawerLayout = lazy(() =>
   import('./drawer/components/Layout/Layout').then(({ Layout }) => ({
     default: Layout,
@@ -114,11 +109,9 @@ export const Router = () => {
         }
       >
         <Routes>
-          <Route path="/" element={<HomeLayout />}>
-            <Route path="" element={<Home />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-          </Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
           <Route path="/mypage" element={<Mypage />}>
             <Route path="changePassword" element={<ChangePassword />} />
           </Route>
