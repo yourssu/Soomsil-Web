@@ -10,6 +10,7 @@ import { StyledSignupContentTitle } from '@/home/components/SignupContents/Signu
 import { SignupFrame } from '@/home/components/SignupFrame/SignupFrame';
 import { useGetUserData } from '@/home/hooks/useGetUserData';
 import { useFullEmail } from '@/hooks/useFullEmail';
+import { useRedirectLoggedInEffect } from '@/hooks/useRedirectLoggedInEffect';
 import { api } from '@/service/TokenService';
 
 import {
@@ -50,6 +51,9 @@ export const Login = () => {
       return;
     }
   };
+
+  // 로그인 상태에서는 홈으로 리다이렉트
+  useRedirectLoggedInEffect();
 
   return (
     <SignupFrame>
