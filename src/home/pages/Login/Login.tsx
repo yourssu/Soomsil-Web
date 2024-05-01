@@ -1,171 +1,103 @@
 import { useState } from 'react';
 
-import { BoxButton } from '@yourssu/design-system-react';
+import { BoxButton, PlainButton } from '@yourssu/design-system-react';
 import { useErrorBoundary } from 'react-error-boundary';
-import { Controller, useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import soomsil from '@/assets/soomsil.svg';
 import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
+import { LoginInput } from '@/home/components/LoginInput/LoginInput';
+import { StyledSignupContentTitle } from '@/home/components/SignupContents/SignupContents.style';
+import { SignupFrame } from '@/home/components/SignupFrame/SignupFrame';
 import { useGetUserData } from '@/home/hooks/useGetUserData';
+import { useFullEmail } from '@/hooks/useFullEmail';
 import { api } from '@/service/TokenService';
 
 import {
-  StyledBottomContainer,
-  StyledButtonDivider,
-  StyledFailedInput,
-  StyledErrorMessageContainer,
-  StyledFailedLeftInput,
-  StyledFailedRightInputSuffix,
-  StyledLoginButtonContainer,
-  StyledButtonLabel,
-  StyledContainer,
-  StyledInput,
-  StyledInputContainer,
-  StyledInputRowContainer,
-  StyledInputSuffix,
-  StyledLabel,
+  StyledBottomButtonContainer,
+  StyledBottomButtonWrapper,
+  StyledButtonButtonSeparator,
   StyledLoginContainer,
-  StyledTitle,
-  StyledLogo,
 } from './Login.style';
 
 export const Login = () => {
-  const { showBoundary } = useErrorBoundary();
-
-  const { register, control } = useForm();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [failedLogin, setFailedLogin] = useState(false);
-  const { refetch } = useGetUserData();
 
+  const { showBoundary } = useErrorBoundary();
+  const { refetch } = useGetUserData();
+  const getFullEmail = useFullEmail(email);
   const navigate = useNavigate();
 
-  const emailQuery = useWatch({
-    name: 'email',
-    control,
-  });
-  const passwordQuery = useWatch({
-    name: 'password',
-    control,
-  });
-
   const handleLoginClick = async () => {
-    const loginParams = {
-      email: emailQuery + '@soongsil.ac.kr',
-      password: passwordQuery,
-    };
-
-    const { data, error } = await postAuthSignIn(loginParams);
+    const { data, error } = await postAuthSignIn({ email: getFullEmail(), password });
 
     if (data) {
       api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
       api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
       refetch();
       navigate('/');
-    } else if (error) {
-      if (error.response?.status == 401) {
-        setFailedLogin(true);
-      } else if (error.response?.status != 400) {
-        showBoundary(error);
-      }
+      return;
+    }
+
+    if (error?.response?.status == 401) {
+      setFailedLogin(true);
+      return;
+    }
+
+    if (error?.response?.status != 400) {
+      showBoundary(error);
+      return;
     }
   };
 
   return (
-    <StyledContainer>
-      <StyledLogo src={soomsil} alt="soomsil-logo" onClick={() => navigate('/')} />
+    <SignupFrame>
       <StyledLoginContainer>
-        <StyledTitle>로그인</StyledTitle>
-        <StyledInputContainer>
-          <StyledLabel>학교 메일</StyledLabel>
-          <Controller
-            control={control}
-            name="email"
-            render={({ field }) => (
-              <div>
-                {failedLogin ? (
-                  <StyledInputRowContainer>
-                    <StyledFailedLeftInput
-                      placeholder="ppushoong"
-                      {...register('email')}
-                      type="text"
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                      }}
-                      value={emailQuery}
-                    />
-                    <StyledFailedRightInputSuffix>@soongsil.ac.kr</StyledFailedRightInputSuffix>
-                  </StyledInputRowContainer>
-                ) : (
-                  <StyledInputRowContainer>
-                    <StyledInput
-                      placeholder="ppushoong"
-                      {...register('email')}
-                      type="text"
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                      }}
-                      value={emailQuery}
-                    />
-                    <StyledInputSuffix>@soongsil.ac.kr</StyledInputSuffix>
-                  </StyledInputRowContainer>
-                )}
-              </div>
-            )}
-          />
-        </StyledInputContainer>
-        <StyledInputContainer>
-          <StyledLabel>비밀번호</StyledLabel>
-          <Controller
-            control={control}
-            name="password"
-            render={({ field }) => (
-              <StyledInputRowContainer>
-                {failedLogin ? (
-                  <StyledFailedInput
-                    placeholder="영문숫자포함10글자"
-                    {...register('password')}
-                    type="password"
-                    onChange={(e) => {
-                      field.onChange(e.target.value);
-                    }}
-                    value={passwordQuery}
-                  />
-                ) : (
-                  <StyledInput
-                    placeholder="영문숫자포함10글자"
-                    {...register('password')}
-                    type="password"
-                    onChange={(e) => {
-                      field.onChange(e.target.value);
-                    }}
-                    value={passwordQuery}
-                  />
-                )}
-              </StyledInputRowContainer>
-            )}
-          />
-        </StyledInputContainer>
-        {failedLogin && (
-          <StyledErrorMessageContainer>
-            <div>학교 메일 또는 비밀번호를 잘못 입력했습니다.</div>
-            <div>입력하신 내용을 다시 확인해주세요.</div>
-          </StyledErrorMessageContainer>
-        )}
+        <StyledSignupContentTitle>로그인</StyledSignupContentTitle>
+        <LoginInput
+          title="학교 메일"
+          helperLabel=""
+          placeholder="이메일"
+          onChange={(value) => setEmail(value)}
+          isNegative={failedLogin}
+        />
+        <LoginInput
+          hiddenField
+          title="비밀번호"
+          helperLabel={
+            '학교 메일 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.'
+          }
+          placeholder="비밀번호"
+          onChange={(value) => setPassword(value)}
+          isNegative={failedLogin}
+        />
 
-        <StyledLoginButtonContainer>
-          <BoxButton size="large" variant="filled" rounding={8} onClick={handleLoginClick}>
-            로그인
-          </BoxButton>
-        </StyledLoginButtonContainer>
+        <BoxButton size="large" rounding={8} variant="filled" onClick={handleLoginClick}>
+          로그인
+        </BoxButton>
 
-        <StyledBottomContainer>
-          <StyledButtonLabel to="/mail">학교 메일 찾기</StyledButtonLabel>
-          <StyledButtonDivider>|</StyledButtonDivider>
-          <StyledButtonLabel to="password">비밀번호 찾기</StyledButtonLabel>
-          <StyledButtonDivider>|</StyledButtonDivider>
-          <StyledButtonLabel to="signup">회원가입</StyledButtonLabel>
-        </StyledBottomContainer>
+        <StyledBottomButtonContainer>
+          {/* TODO: 학교 메일 찾기 route 완성되면 navigate 기능 추가 */}
+          <PlainButton size="medium" isPointed={false} isWarned={false}>
+            <StyledBottomButtonWrapper>학교 메일 찾기</StyledBottomButtonWrapper>
+          </PlainButton>
+          <StyledButtonButtonSeparator>|</StyledButtonButtonSeparator>
+          {/* 비밀번호 찾기 route 완성되면 navigate 기능 추가 */}
+          <PlainButton size="medium" isPointed={false} isWarned={false}>
+            <StyledBottomButtonWrapper>비밀번호 찾기</StyledBottomButtonWrapper>
+          </PlainButton>
+          <StyledButtonButtonSeparator>|</StyledButtonButtonSeparator>
+          <PlainButton
+            size="medium"
+            isPointed={false}
+            isWarned={false}
+            onClick={() => navigate('/signup')}
+          >
+            <StyledBottomButtonWrapper>회원가입</StyledBottomButtonWrapper>
+          </PlainButton>
+        </StyledBottomButtonContainer>
       </StyledLoginContainer>
-    </StyledContainer>
+    </SignupFrame>
   );
 };
