@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 
 import { authClient } from '@/apis';
-import { STORAGE_KEYS } from '@/utils/storageKeys.ts';
+import { STORAGE_KEYS } from '@/constants/storage.constant.ts';
 
 import {
   AuthErrorData,

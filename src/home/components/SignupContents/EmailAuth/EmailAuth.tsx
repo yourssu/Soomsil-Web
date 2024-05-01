@@ -4,12 +4,12 @@ import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-
 import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
+import { STORAGE_KEYS } from '@/constants/storage.constant.ts';
 import {
   getAuthVerificationCheck,
   postAuthVerificationEmail,
 } from '@/home/apis/authVerification.ts';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
-import { STORAGE_KEYS } from '@/utils/storageKeys.ts';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
 

@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { BoxButton } from '@yourssu/design-system-react';
 import { AxiosError } from 'axios';
 
+import { STORAGE_KEYS } from '@/constants/storage.constant.ts';
 import { postAuthSignUp } from '@/home/apis/postAuthSignUp.ts';
 import { AuthErrorData } from '@/home/types/Auth.type.ts';
 import { useSignupFormValidation } from '@/hooks/useSignupFormValidator';
-import { STORAGE_KEYS } from '@/utils/storageKeys.ts';
 
 import {
   StyledSignupButtonText,
