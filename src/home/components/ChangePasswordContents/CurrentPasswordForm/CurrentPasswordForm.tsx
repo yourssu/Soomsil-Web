@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { BoxButton } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
-import { getPassword } from '@/home/apis/getPassword';
+import { getPassword } from '@/home/apis/getUserPasswordMatch';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
 import { sessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
