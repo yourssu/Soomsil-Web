@@ -2,6 +2,9 @@ import { useState } from 'react';
 
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 
+import { EMAIL_DOMAIN } from '@/constants/email.constant';
+import { useFullEmail } from '@/hooks/useFullEmail';
+
 import {
   StyledSignupButtonText,
   StyledSignupContentContainer,
@@ -20,19 +23,16 @@ interface EmailFormProps {
   onConfirm: (email: string) => void;
 }
 
-const EMAIL_DOMAIN = '@soongsil.ac.kr';
-
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   const [email, setEmail] = useState('');
+  const getFullEmail = useFullEmail(email);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
   const onEmailSubmit = () => {
-    let fullEmail = email;
-    if (!email.endsWith(EMAIL_DOMAIN)) fullEmail += EMAIL_DOMAIN;
-    onConfirm(fullEmail);
+    onConfirm(getFullEmail());
   };
 
   return (
