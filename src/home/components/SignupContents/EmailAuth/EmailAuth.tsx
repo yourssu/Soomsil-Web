@@ -41,8 +41,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
     const { data } = await postAuthVerificationEmail({ email: email, verificationType: 'SIGN_UP' });
     setEmailSending(false);
     setAuthed(!!data);
-    if (!data) setError('인증 메일 재전송에 실패했습니다.');
-    else setError('');
+    setError(!data ? '인증 메일 재전송에 실패했습니다.' : '');
     resetTimer();
   };
 
