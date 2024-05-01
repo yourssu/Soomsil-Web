@@ -9,6 +9,12 @@ export const StyledContainer = styled.article`
   gap: 2.25rem;
 `;
 
+export const StyledLogo = styled.img`
+  width: 11.25rem;
+  height: 2.375rem;
+  cursor: pointer;
+`;
+
 export const StyledLoginContainer = styled.section`
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
