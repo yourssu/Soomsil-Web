@@ -17,7 +17,11 @@ export const StyledTextButtonContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const StyledTextContainer = styled.div``;
+export const StyledTextContainer = styled.div`
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+`;
 
 export const StyledButtonContainer = styled.div`
   display: flex;
