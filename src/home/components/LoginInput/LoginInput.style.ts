@@ -10,5 +10,5 @@ export const StyledLoginInputHelperLabel = styled.div`
   ${({ theme }) => theme.typo.caption1};
   margin-top: 8px;
   white-space: pre-line;
-  color: #ff5252; // theme에서 못 찾겠네요...
+  color: ${({ theme }) => theme.color.textWarned};
 `;
