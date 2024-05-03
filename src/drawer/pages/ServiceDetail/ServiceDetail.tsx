@@ -90,7 +90,7 @@ export const ServiceDetail = () => {
     <StyledServiceDetailContainer>
       <StyledBackgroundImageContainer $backgroundImage={product.thumbnail}>
         <StyledServiceTitleText>{product.productTitle}</StyledServiceTitleText>
-        <StyledServiceDeveloperText>{product.providerId}</StyledServiceDeveloperText>
+        <StyledServiceDeveloperText>{product.providerName}</StyledServiceDeveloperText>
         <StyledServiceInfoContainer>
           <StyledThumbnailImage src={product.thumbnail} />
           <StyledCategoryContainer>
@@ -204,7 +204,7 @@ export const ServiceDetail = () => {
 
           <StyledDescriptionPart>
             <StyledSubtitle>{`저작권`}</StyledSubtitle>
-            <StyledDescription>{product.providerId}</StyledDescription>
+            <StyledDescription>{product.providerName}</StyledDescription>
           </StyledDescriptionPart>
         </StyledDescriptionSection>
 
