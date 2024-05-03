@@ -6,6 +6,7 @@ interface StyledRankProps {
 }
 
 export const StyledContainer = styled.div`
+  width: 32.5rem;
   position: relative;
   padding: 0.9375rem;
 

@@ -1,13 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getProductDetail } from '../apis/getProductDetail';
 
 export const useGetProductDetail = (productNo: number) => {
-  return useQuery({
+  const { data, refetch, ...queryResult } = useSuspenseQuery({
     queryKey: ['productDetail', productNo],
     queryFn: () => {
       return getProductDetail(productNo);
     },
+    retry: false,
     select: (data) => data.detail,
   });
+
+  return { product: data, refetch, ...queryResult };
 };

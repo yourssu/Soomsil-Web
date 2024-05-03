@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
+import { useErrorBoundary } from 'react-error-boundary';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import soomsil from '@/assets/soomsil.svg';
 import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
+import { useGetUserData } from '@/home/hooks/useGetUserData';
 import { api } from '@/service/TokenService';
 
 import {
@@ -25,12 +27,18 @@ import {
   StyledLabel,
   StyledLoginContainer,
   StyledTitle,
+  StyledLogo,
 } from './Login.style';
 
 export const Login = () => {
+  const { showBoundary } = useErrorBoundary();
+
   const { register, control } = useForm();
   const [failedLogin, setFailedLogin] = useState(false);
+  const { refetch } = useGetUserData();
+
   const navigate = useNavigate();
+
   const emailQuery = useWatch({
     name: 'email',
     control,
@@ -49,20 +57,22 @@ export const Login = () => {
     const { data, error } = await postAuthSignIn(loginParams);
 
     if (data) {
-      api.setAccessToken(data.accessToken);
-      api.setRefreshToken(data.refreshToken);
-      sessionStorage.setItem('accessExpiredIn', data.accessTokenExpiredIn.toString());
+      api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
+      api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
+      refetch();
       navigate('/');
     } else if (error) {
       if (error.response?.status == 401) {
         setFailedLogin(true);
+      } else if (error.response?.status != 400) {
+        showBoundary(error);
       }
     }
   };
 
   return (
     <StyledContainer>
-      <img src={soomsil} alt={'soomsil-logo'} width={180} height={38} />
+      <StyledLogo src={soomsil} alt="soomsil-logo" onClick={() => navigate('/')} />
       <StyledLoginContainer>
         <StyledTitle>로그인</StyledTitle>
         <StyledInputContainer>
