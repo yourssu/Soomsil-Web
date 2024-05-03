@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Z_INDEX } from '@/constants/zIndex.constant';
+
 interface StyledDropDownProps {
   $padding: string;
   $bottom: string;
@@ -13,7 +15,7 @@ export const StyledContainer = styled.div<StyledDropDownProps>`
   display: flex;
   flex-direction: column;
   position: absolute;
-  z-index: 10;
+  z-index: ${Z_INDEX.dropdown};
   bottom: ${(props) => props.$bottom};
   right: ${(props) => props.$right};
   border-radius: 0.25rem;
