@@ -5,7 +5,11 @@ import { useRecoilState } from 'recoil';
 import { CategoryList } from '@/drawer/constants/category.constant';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 
-import { StyledDropdownCategoryContainer, StyledRankingCategoryContainer } from './Category.style';
+import {
+  StyledCategoryTitle,
+  StyledDropdownCategoryContainer,
+  StyledRankingCategoryContainer,
+} from './Category.style';
 
 interface RankingCategoryProps {
   isSmallDesktop?: boolean;
@@ -38,7 +42,7 @@ export const RankingCategory = ({
 
   return (
     <Container>
-      <div>카테고리 유형</div>
+      <StyledCategoryTitle>카테고리 유형</StyledCategoryTitle>
       {CategoryList.map(({ category, title }) => (
         <CheckBox
           key={category}

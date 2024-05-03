@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Z_INDEX } from '@/constants/zIndex.constant';
+
 export const StyledFileUploadLabel = styled.label`
   position: absolute;
   padding: 0.48rem 1.56rem;
@@ -15,7 +17,7 @@ export const StyledFileUploadLabel = styled.label`
 `;
 
 export const StyledOverviewUpload = styled.label`
-  z-index: -999;
+  z-index: ${Z_INDEX.fileUploadLabel};
   position: absolute;
   width: 62.5rem;
   height: 2rem;
@@ -41,7 +43,6 @@ export const StyledOverviewUpload = styled.label`
 
 export const StyledDeleteFileBtn = styled.button`
   margin-top: 0.4rem;
-  z-index: 1;
   @media (max-width: 30rem) {
     margin-top: 0.05rem;
     padding-right: 0.2rem;

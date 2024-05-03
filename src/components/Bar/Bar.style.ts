@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Z_INDEX } from '@/constants/zIndex.constant';
+
 interface StyledBarBackgroundProps {
   $progress: number;
   $animationDuration: number;
@@ -14,7 +16,7 @@ export const StyledBarBackground = styled.div<StyledBarBackgroundProps>`
   top: 0;
   transition: margin-left ${(props) => props.$animationDuration}ms linear;
   width: 100vw;
-  z-index: 1031;
+  z-index: ${Z_INDEX.loadingBar};
 `;
 
 export const StyledBar = styled.div`
