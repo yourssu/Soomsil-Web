@@ -208,7 +208,7 @@ export const ServiceDetail = () => {
           </StyledDescriptionPart>
         </StyledDescriptionSection>
 
-        <MoreProductSection providerId={product.providerId} />
+        <MoreProductSection providerName={product.providerName} providerId={product.providerId} />
       </StyledLowerSection>
     </StyledServiceDetailContainer>
   );
