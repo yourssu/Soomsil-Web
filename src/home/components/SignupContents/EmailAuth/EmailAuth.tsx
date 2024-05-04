@@ -1,15 +1,9 @@
-import { useState } from 'react';
-
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
-import { STORAGE_KEYS } from '@/constants/storage.constant.ts';
-import {
-  getAuthVerificationCheck,
-  postAuthVerificationEmail,
-} from '@/home/apis/authVerification.ts';
-import { useSecondTimer } from '@/hooks/useSecondTimer';
+import { EmailAuthProps } from '@/home/components/SignupContents/EmailAuth/EmailAuth.type.ts';
+import { useEmailAuth } from '@/home/components/SignupContents/EmailAuth/useEmailAuth.ts';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
 
@@ -20,43 +14,13 @@ import {
   StyledErrorText,
 } from './EmailAuth.style';
 
-interface EmailAuthProps {
-  email: string;
-  onConfirm: () => void;
-}
-
 export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
-  const [authed, setAuthed] = useState(true);
-  const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(8 * 60);
-  const [error, setError] = useState<string>('');
-  const [emailSending, setEmailSending] = useState(false);
+  const { authed, isTimerEnd, error, leftTime, emailSending, sendAuthenticationMail, onClickNext } =
+    useEmailAuth({ email, onConfirm });
 
   const leftTimeToString = () => {
     const targetTime = addSeconds(new Date(0), leftTime);
     return format(targetTime, 'mm:ss');
-  };
-
-  const sendAuthenticationMail = async () => {
-    setEmailSending(true);
-    const { data } = await postAuthVerificationEmail({ email: email, verificationType: 'SIGN_UP' });
-    setEmailSending(false);
-    setAuthed(!!data);
-    setError(!data ? '인증 메일 재전송에 실패했습니다.' : '');
-    resetTimer();
-  };
-
-  const onClickNext = async () => {
-    const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
-    if (!session) return;
-
-    const res = await getAuthVerificationCheck({ session });
-
-    if (res.data) {
-      if (res.data.isVerified) onConfirm();
-      else setError('이메일 인증을 완료해주세요.');
-    } else if (res.error) {
-      setError(res.error.response?.data.message || '이메일 인증 확인에 실패했습니다.');
-    }
   };
 
   return (
