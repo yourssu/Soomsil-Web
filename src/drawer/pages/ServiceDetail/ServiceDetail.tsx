@@ -54,6 +54,12 @@ const Category = {
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
   const { product } = useGetProductDetail(Number(serviceId));
+  const productUrls = [
+    { url: product.webpageUrl, text: '웹페이지로 이동' },
+    { url: product.appStoreUrl, text: 'App store로 다운로드' },
+    { url: product.googlePlayUrl, text: 'Google play로 다운로드' },
+    { url: product.githubUrl, text: 'GitHub' },
+  ];
   const queryClient = useQueryClient();
 
   const theme = useTheme();
@@ -100,32 +106,23 @@ export const ServiceDetail = () => {
         </StyledServiceInfoContainer>
         <StyledServiceActionContainer>
           {/* TODO: 버튼 사이즈 반응형 적용 필요 */}
-          <BoxButton
-            size="medium"
-            rounding={8}
-            variant="filled"
-            width="200px"
-            onClick={() => {
-              const { appStoreUrl, googlePlayUrl, webpageUrl } = product;
-              window.open(appStoreUrl || googlePlayUrl || webpageUrl);
-            }}
-          >
-            DOWNLOAD
-          </BoxButton>
-          {product.githubUrl && (
-            /* TODO: 버튼 사이즈 반응형 적용 필요*/
-            <BoxButton
-              size="medium"
-              rounding={8}
-              variant="tinted"
-              width="200px"
-              onClick={() => {
-                window.open(product.githubUrl);
-              }}
-            >
-              Github
-            </BoxButton>
-          )}
+          {productUrls.map(({ url, text }) => {
+            return (
+              url && (
+                <BoxButton
+                  size="medium"
+                  rounding={8}
+                  variant={url == product.githubUrl ? 'tinted' : 'filled'}
+                  width="200px"
+                  onClick={() => {
+                    window.open(url);
+                  }}
+                >
+                  {text}
+                </BoxButton>
+              )
+            );
+          })}
           <StyledIconButtonContainer>
             <button>
               <IconContext.Provider
