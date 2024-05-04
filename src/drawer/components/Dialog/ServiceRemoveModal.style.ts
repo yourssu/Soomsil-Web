@@ -1,6 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import styled, { keyframes } from 'styled-components';
 
+import { Z_INDEX } from '@/constants/zIndex.constant';
+
 const overlayShow = keyframes({
   from: { opacity: 0 },
   to: { opacity: 1 },
@@ -11,6 +13,7 @@ export const StyledDialogOverlay = styled(Dialog.Overlay)`
   position: fixed;
   inset: 0;
   animation: ${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: ${Z_INDEX.dialog};
 `;
 
 export const StyledDialogContent = styled(Dialog.Content)`
@@ -30,6 +33,7 @@ export const StyledDialogContent = styled(Dialog.Content)`
   width: 20rem;
   height: 10.75rem;
   padding: 2rem;
+  z-index: ${Z_INDEX.dialog};
 `;
 
 export const StyledIconButton = styled.button`

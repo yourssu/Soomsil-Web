@@ -16,7 +16,10 @@ import { FALLBACK_TEXT } from '@/constants/fallback.constant';
 const getFallbackContent = (status: number): FallbackContent => {
   if (status >= 500) return FALLBACK_TEXT['SERVER'];
   if (status >= 400) return FALLBACK_TEXT['CLIENT'];
-  return { boldText: '' };
+  return {
+    boldText: '',
+    buttonText: '',
+  };
 };
 
 export const Fallback = ({ error, resetErrorBoundary }: FallbackProps) => {

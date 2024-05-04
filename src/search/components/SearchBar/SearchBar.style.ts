@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Z_INDEX } from '@/constants/zIndex.constant';
+
 export const StyledLogo = styled.img`
   width: 6.875rem;
   height: 1.43406rem;
@@ -21,7 +23,7 @@ export const StyledSearchBar = styled.div`
   position: fixed;
   top: 0;
 
-  z-index: 100;
+  z-index: ${Z_INDEX.searchBar};
 `;
 
 export const StyledSearchBoxWrap = styled.div`

@@ -12,15 +12,15 @@ export const CategoryDropdownMenu = () => {
 
   return (
     <DropDownMenu.Root open={openDropdown} onOpenChange={setOpenDropdown}>
-      <DropDownMenu.Trigger asChild>
-        <StyledIconButtonContainer>
+      <StyledIconButtonContainer>
+        <DropDownMenu.Trigger asChild>
           <StyledIconButton>
             <IcListLine width={36} height={36} />
           </StyledIconButton>
-        </StyledIconButtonContainer>
-      </DropDownMenu.Trigger>
+        </DropDownMenu.Trigger>
+      </StyledIconButtonContainer>
       <DropDownMenu.Portal>
-        <DropDownMenu.Content align="end" alignOffset={32}>
+        <DropDownMenu.Content align="end" alignOffset={4}>
           <RankingCategory isSmallDesktop={true} onDropdownOpenChange={setOpenDropdown} />
         </DropDownMenu.Content>
       </DropDownMenu.Portal>
