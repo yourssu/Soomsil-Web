@@ -36,11 +36,13 @@ export const postAuthVerificationEmail = async (
   }
 };
 
-export const getAuthVerificationCheck = async ({
-  session,
-}: VerificationCheckParams): Promise<GetAuthVerificationCheckResponse> => {
+export const getAuthVerificationCheck = async (
+  verificationCheckParams: VerificationCheckParams
+): Promise<GetAuthVerificationCheckResponse> => {
   try {
-    const res = await authClient.get(`/auth/verification/check?session=${session}`);
+    const res = await authClient.get('/auth/verification/check', {
+      params: verificationCheckParams,
+    });
     return { data: res.data };
   } catch (error: unknown) {
     return { error: error as AxiosError<AuthErrorData> };
