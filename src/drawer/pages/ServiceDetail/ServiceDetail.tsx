@@ -116,6 +116,7 @@ export const ServiceDetail = () => {
             return (
               url && (
                 <BoxButton
+                  key={url}
                   size="medium"
                   rounding={8}
                   variant={url == product.githubUrl ? 'tinted' : 'filled'}
