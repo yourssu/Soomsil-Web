@@ -92,6 +92,12 @@ export const ServiceDetail = () => {
     },
   });
 
+  const handleClickShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    // TODO: 임시
+    alert('url이 복사되었습니다!');
+  };
+
   return (
     <StyledServiceDetailContainer>
       <StyledBackgroundImageContainer $backgroundImage={product.thumbnail}>
@@ -131,7 +137,7 @@ export const ServiceDetail = () => {
                   size: '1.5rem',
                 }}
               >
-                <IcShareLine />
+                <IcShareLine onClick={handleClickShare} />
               </IconContext.Provider>
             </button>
             <StyledIconLabelText $color={theme.color.pointViolet}>SHARE</StyledIconLabelText>
