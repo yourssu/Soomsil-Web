@@ -8,11 +8,27 @@ export const StyledMoreProductSection = styled.div`
   padding: 0 0.5rem;
   margin-left: 5.25rem;
 
-  /* Soomsil/Drawer/Web/title22 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.375rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 130%; /* 1.7875rem */
+  ${({ theme }) => theme.typo.title3};
   color: ${({ theme }) => theme.color.textPrimary};
+`;
+
+interface StyledArrowButtonProps {
+  $backgroundImage: string;
+}
+
+export const StyledArrowButton = styled.input<StyledArrowButtonProps>`
+  background-image: url(${(props) => props.$backgroundImage});
+  background-color: transparent;
+
+  width: 3rem;
+  height: 3rem;
+  margin-left: 0.625rem;
+
+  border: none;
+  cursor: pointer;
+`;
+
+export const StyledContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
