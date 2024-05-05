@@ -71,6 +71,11 @@ const Provider = lazy(() =>
     default: Provider,
   }))
 );
+const Withdraw = lazy(() =>
+  import('./home/pages/Withdraw/Withdraw').then(({ Withdraw }) => ({
+    default: Withdraw,
+  }))
+);
 
 export const Router = () => {
   const [state, setState] = useState({
@@ -108,6 +113,7 @@ export const Router = () => {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
+          <Route path="/withdraw" element={<Withdraw />}></Route>
           <Route path="/drawer" element={<DrawerLayout />}>
             <Route index element={<Navigate to="rankings" replace />}></Route>
             <Route path="services/:serviceId" element={<ServiceDetail />} />
