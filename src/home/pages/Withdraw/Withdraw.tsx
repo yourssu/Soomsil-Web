@@ -21,7 +21,7 @@ export const Withdraw = () => {
   const [draw, setDraw] = useState(false);
 
   const handleCheckAgree = () => {
-    setAgreed(!agreed);
+    setAgreed((prevAgreed) => !prevAgreed);
   };
 
   const handleWithdrawAgree = () => {
