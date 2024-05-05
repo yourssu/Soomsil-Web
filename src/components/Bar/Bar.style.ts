@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
-interface StyeldBarBackgroundProps {
+import { Z_INDEX } from '@/constants/zIndex.constant';
+
+interface StyledBarBackgroundProps {
   $progress: number;
   $animationDuration: number;
 }
 
-export const StyeldBarBackground = styled.div<StyeldBarBackgroundProps>`
+export const StyledBarBackground = styled.div<StyledBarBackgroundProps>`
   background: #423fcc;
   height: 4px;
   left: 0;
@@ -14,7 +16,7 @@ export const StyeldBarBackground = styled.div<StyeldBarBackgroundProps>`
   top: 0;
   transition: margin-left ${(props) => props.$animationDuration}ms linear;
   width: 100vw;
-  z-index: 1031;
+  z-index: ${Z_INDEX.loadingBar};
 `;
 
 export const StyledBar = styled.div`

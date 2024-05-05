@@ -153,6 +153,7 @@ export const StyledCarouselButton = styled.input<StyledCarouselButtonProps>`
 `;
 
 export const StyledProductImage = styled.img`
+  flex-shrink: 0;
   width: 440px;
   height: 296px;
   border-radius: 0.5rem;

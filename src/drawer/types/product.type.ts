@@ -14,12 +14,13 @@ export interface ProductDetailResult {
   introductionImage: string[];
   isAd: boolean;
   isBookmarked: boolean;
-  productBookmarkKey?: number;
+  productBookmarkKey: number;
   productContent: string;
   productNo: number;
   productSubTitle: string;
   productTitle: string;
   providerId: string;
+  providerName: string;
   thumbnail: string;
   webpageUrl?: string;
 }
@@ -34,7 +35,7 @@ export interface ProductResult {
   isAd: boolean;
   isBookmarked: boolean;
   mainImage: string;
-  productBookmarkKey?: number;
+  productBookmarkKey: number;
   productNo: number;
   productSubTitle: string;
   productTitle: string;

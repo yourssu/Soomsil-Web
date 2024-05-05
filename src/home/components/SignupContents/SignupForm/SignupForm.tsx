@@ -1,8 +1,8 @@
-import { useState } from 'react';
-
 import { BoxButton } from '@yourssu/design-system-react';
 
-import { useSignupFormValidation } from '@/hooks/useSignupFormValidator';
+import { SignupFormProps } from '@/home/components/SignupContents/SignupForm/SignUpForm.type.ts';
+import { useSignUpForm } from '@/home/components/SignupContents/SignupForm/useSignUpForm.ts';
+import { useSignupFormValidation } from '@/hooks/useSignupFormValidator.ts';
 
 import {
   StyledSignupButtonText,
@@ -12,26 +12,16 @@ import {
 
 import { SignupInput } from './SignupInput/SignupInput';
 
-interface SignupConfirmPayload {
-  nickname: string;
-  password: string;
-}
+export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
+  const { nickname, password, onFormConfirm, setNickname, setPassword } = useSignUpForm({
+    email,
+    onConfirm,
+  });
 
-interface SignupFormProps {
-  onConfirm: ({ nickname, password }: SignupConfirmPayload) => void;
-}
-
-export const SignupForm = ({ onConfirm }: SignupFormProps) => {
-  const [nickname, setNickname] = useState('');
-  const [password, setPassword] = useState('');
   const { isFormValid, nicknameValidator, passwordValidator } = useSignupFormValidation(
     nickname,
     password
   );
-
-  const onFormConfirm = () => {
-    onConfirm({ nickname, password });
-  };
 
   return (
     <StyledSignupContentContainer>
