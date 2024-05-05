@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import Logo from '@/assets/soomsil_v2_logo.svg';
 
 import {
@@ -13,7 +15,9 @@ interface SignupFrameProps {
 export const SignupFrame = ({ children }: SignupFrameProps) => {
   return (
     <StyledSignupFrame>
-      <StyledSignupFrameLogo src={Logo} />
+      <Link to={'/'}>
+        <StyledSignupFrameLogo src={Logo} />
+      </Link>
       <StyledSignupFrameContentContainer>{children}</StyledSignupFrameContentContainer>
     </StyledSignupFrame>
   );
