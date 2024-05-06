@@ -1,15 +1,15 @@
 import Logo from '@/assets/soomsil_v2_logo.svg';
 
-interface ChangePasswordFrameProps {
-  children: React.ReactNode;
-}
-
 import {
   StyledChangePasswordFrame,
   StyledLogo,
   StyledContainer,
   StyledLink,
 } from './ChangePasswordFrame.style';
+
+interface ChangePasswordFrameProps {
+  children: React.ReactNode;
+}
 
 export const ChangePasswordFrame = ({ children }: ChangePasswordFrameProps) => {
   return (
