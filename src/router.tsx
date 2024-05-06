@@ -117,7 +117,7 @@ export const Router = () => {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
-          <Route path="changePassword" element={<ChangePassword />} />
+          <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/withdraw" element={<Withdraw />}></Route>
           <Route path="/drawer" element={<DrawerLayout />}>
