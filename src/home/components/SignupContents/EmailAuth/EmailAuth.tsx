@@ -1,10 +1,9 @@
-import { useState } from 'react';
-
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
-import { useSecondTimer } from '@/hooks/useSecondTimer';
+import { EmailAuthProps } from '@/home/components/SignupContents/EmailAuth/EmailAuth.type.ts';
+import { useEmailAuth } from '@/home/components/SignupContents/EmailAuth/useEmailAuth.ts';
 
 import { StyledSignupContentContainer, StyledSignupContentTitle } from '../SignupContents.style';
 
@@ -12,27 +11,16 @@ import {
   StyledPlainButtonContainer,
   StyledEmailAuthParagraph,
   StyledTimerSuffix,
+  StyledErrorText,
 } from './EmailAuth.style';
 
-interface EmailAuthProps {
-  email: string;
-  onConfirm: () => void;
-}
-
 export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
-  const [authed, setAuthed] = useState(true); // Todo: 인증 기능 구현 완료시 false로 변경
-  const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(8 * 60);
+  const { authed, isTimerEnd, error, leftTime, emailSending, sendAuthenticationMail, onClickNext } =
+    useEmailAuth({ email, onConfirm });
 
   const leftTimeToString = () => {
     const targetTime = addSeconds(new Date(0), leftTime);
     return format(targetTime, 'mm:ss');
-  };
-
-  const sendAuthenticationMail = () => {
-    setAuthed(false);
-    resetTimer();
-
-    // Todo: 여기에 인증 메일 전송하는 코드 작성하면 됨.
   };
 
   return (
@@ -46,16 +34,17 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
           <SimpleTextField
             value={email}
             disabled
-            suffix={<StyledTimerSuffix>{leftTimeToString()}</StyledTimerSuffix>}
+            suffix={authed && <StyledTimerSuffix>{leftTimeToString()}</StyledTimerSuffix>}
           />
         </div>
+        {error && <StyledErrorText>{error}</StyledErrorText>}
       </div>
       <BoxButton
         rounding={8}
         size="large"
         variant="filled"
-        onClick={onConfirm}
-        disabled={isTimerEnd || !authed}
+        onClick={onClickNext}
+        disabled={isTimerEnd || !authed || emailSending}
       >
         다음
       </BoxButton>
@@ -64,6 +53,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
           size="medium"
           isPointed={false}
           isWarned={false}
+          disabled={emailSending}
           onClick={sendAuthenticationMail}
         >
           인증 메일 재전송

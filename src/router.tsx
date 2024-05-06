@@ -76,6 +76,11 @@ const ChangePassword = lazy(() =>
     default: ChangePassword,
   }))
 );
+const Withdraw = lazy(() =>
+  import('./home/pages/Withdraw/Withdraw').then(({ Withdraw }) => ({
+    default: Withdraw,
+  }))
+);
 
 export const Router = () => {
   const [state, setState] = useState({
@@ -115,6 +120,7 @@ export const Router = () => {
           <Route path="/mypage" element={<Mypage />}>
             <Route path="changePassword" element={<ChangePassword />} />
           </Route>
+          <Route path="/withdraw" element={<Withdraw />}></Route>
           <Route path="/drawer" element={<DrawerLayout />}>
             <Route index element={<Navigate to="rankings" replace />}></Route>
             <Route path="services/:serviceId" element={<ServiceDetail />} />
