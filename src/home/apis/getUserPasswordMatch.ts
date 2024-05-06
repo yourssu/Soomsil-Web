@@ -14,13 +14,13 @@ export const getUserPasswordMatch = async (props: getPasswordProps) => {
   const { password } = props;
 
   try {
-    const res = await authClient.get('/auth/verification/password', {
+    const res = await authClient.get<SessionTokenType>('/auth/verification/password', {
       params: { password },
       headers: api.headers,
     });
 
     if (res.status === 200) {
-      const data: GetPasswordResponse = { match: true, sessionToken: res.data as SessionTokenType };
+      const data: GetPasswordResponse = { match: true, sessionToken: res.data };
       return data;
     }
   } catch (error: unknown) {

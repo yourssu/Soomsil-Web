@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
-
 import { BoxButton } from '@yourssu/design-system-react';
-import { useNavigate } from 'react-router-dom';
 
+import useNewPasswordForm from '@/home/components/ChangePasswordContents/NewPasswordForm/useNewPasswordForm';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
-import { sessionTokenType } from '@/home/types/GetPassword.type';
-import { api } from '@/service/TokenService';
+import { SessionTokenType } from '@/home/types/GetPassword.type';
 
 import {
   StyledInputContainer,
@@ -17,56 +14,21 @@ import {
 } from './NewPasswordForm.style';
 
 interface NewPasswordFormProps {
-  sessionToken: sessionTokenType;
+  sessionToken: SessionTokenType;
 }
 
 export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
-  const [newPassword, setNewPassword] = useState('');
-  const [newPasswordCheck, setNewPasswordCheck] = useState('');
-  const [isNewPasswordError, setIsNewPasswordError] = useState(false);
-  const [isNewPasswordCheckError, setIsNewPasswordCheckError] = useState(false);
-  const [isFirstRender, setIsFirstRender] = useState(true);
-  const [validationAttempted, setValidationAttempted] = useState(false);
-  const navigate = useNavigate();
-
-  const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
-
-  const handleNewPasswordChange = (password: string) => {
-    setNewPassword(password);
-    if (password.length >= 8) {
-      setIsFirstRender(false);
-      setIsNewPasswordError(!regexp.test(password));
-    } else {
-      setIsNewPasswordError(true);
-    }
-  };
-
-  const handleSubmit = () => {
-    //api 연결 후 삭제
-    console.log(sessionToken);
-    setValidationAttempted(true);
-    const isValid = regexp.test(newPassword);
-    if (isValid && newPassword === newPasswordCheck) {
-      const accessToken = api.getAccessToken();
-      if (!accessToken) {
-        alert('로그인이 필요합니다.');
-        navigate('/Login');
-        return;
-      }
-      setIsNewPasswordCheckError(false);
-    }
-
-    if (!isValid) setIsNewPasswordError(true);
-    if (newPassword !== newPasswordCheck) setIsNewPasswordCheckError(true);
-  };
-
-  useEffect(() => {
-    if (newPassword.length < 8) {
-      setIsNewPasswordCheckError(false);
-      setNewPasswordCheck('');
-      setValidationAttempted(false);
-    }
-  }, [newPassword]);
+  const {
+    newPassword,
+    newPasswordCheck,
+    isNewPasswordError,
+    isNewPasswordCheckError,
+    isFirstRender,
+    validationAttempted,
+    setNewPasswordCheck,
+    handleNewPasswordChange,
+    handleSubmit,
+  } = useNewPasswordForm(sessionToken);
 
   return (
     <StyledBoxContainer>
