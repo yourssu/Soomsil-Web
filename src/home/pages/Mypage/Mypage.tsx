@@ -1,9 +1,6 @@
-import { useLocation } from 'react-router-dom';
-
 import Logo from '@/assets/soomsil_v2_logo.svg';
 import { MyMenuList } from '@/home/components/MyMenuList/MyMenuList';
 import { UserInformationCard } from '@/home/components/UserInformationCard/UserInformationCard';
-import { ChangePassword } from '@/home/pages/ChangePassword/ChangePassword';
 
 import {
   StyledContainer,
@@ -14,12 +11,6 @@ import {
 } from './MyPage.style';
 
 export const Mypage = () => {
-  const location = useLocation();
-
-  if (location.pathname === '/mypage/changePassword') {
-    return <ChangePassword />;
-  }
-
   return (
     <StyledContainer>
       <StyledHeader />
