@@ -17,7 +17,7 @@ export const useCurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
-  const checkCurrentPassword = async (currentPassword: string) => {
+  const checkCurrentPassword = async () => {
     const accessToken = api.getAccessToken();
     if (!accessToken) {
       alert('로그인이 필요합니다.');

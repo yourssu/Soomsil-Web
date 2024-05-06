@@ -39,7 +39,7 @@ export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
           rounding={8}
           size="large"
           variant="filled"
-          onClick={() => checkCurrentPassword(currentPassword)}
+          onClick={checkCurrentPassword}
           disabled={currentPassword.length === 0}
         >
           다음

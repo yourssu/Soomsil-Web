@@ -29,7 +29,7 @@ export const StyledBoxContainer = styled.section`
 
 export const StyledInputTitle = styled.div`
   ${({ theme }) => theme.typo.subtitle3};
-  color: #505458;
+  ${({ theme }) => theme.color.buttonNormal};
   padding: 11px 4px 3px 4px;
 `;
 
@@ -49,17 +49,17 @@ export const StyledInputAnimation = styled.article`
     visibility 0s 0.5s,
     opacity 0.5s ease,
     max-height 0.5s ease;
-  visibility: hidden; // 요소를 숨깁니다.
-  opacity: 0; // 요소를 투명하게 만듭니다.
-  max-height: 0; // 요소의 최대 높이를 0으로 설정하여 요소를 숨깁니다.
-  overflow: hidden; // 초과 내용을 숨깁니다.
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
 
   &.active {
     margin-top: 1rem;
-    visibility: visible; // 요소를 보이게 만듭니다.
-    opacity: 1; // 요소를 불투명하게 만듭니다.
-    max-height: 150px; // 요소의 최대 높이를 증가시켜 요소를 보이게 합니다.
-    transition-delay: 0s; // 활성화 상태일 때는 지연 없이 즉시 전환을 시작합니다.
+    visibility: visible;
+    opacity: 1;
+    max-height: 150px;
+    transition-delay: 0s;
   }
 `;
 

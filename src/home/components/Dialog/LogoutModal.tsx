@@ -46,7 +46,7 @@ export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
                   size="large"
                   rounding={4}
                   width="100%"
-                  onClick={() => handleLogout()}
+                  onClick={handleLogout}
                 >
                   로그아웃
                 </BoxButton>
