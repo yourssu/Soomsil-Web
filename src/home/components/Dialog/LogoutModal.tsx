@@ -23,7 +23,6 @@ export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    sessionStorage.removeItem('accessExpiredIn');
     api.logout();
     alert('로그아웃 되었습니다.');
     navigate('/');

@@ -1,9 +1,4 @@
-export interface ErrorResponse {
-  timestamp: string;
-  status: number;
-  error: string;
-  path: string;
-}
+import { AuthErrorData } from '@/home/types/Auth.type.ts';
 
 export interface SessionTokenType {
   sessionToken: string;
@@ -13,5 +8,5 @@ export interface SessionTokenType {
 export interface GetPasswordResponse {
   match: boolean;
   sessionToken?: SessionTokenType;
-  error?: ErrorResponse;
+  error?: AuthErrorData;
 }

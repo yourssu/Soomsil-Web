@@ -1,9 +1,6 @@
 import { authClient } from '@/apis';
-import {
-  ErrorResponse,
-  GetPasswordResponse,
-  SessionTokenType,
-} from '@/home/types/GetPassword.type';
+import { AuthErrorData } from '@/home/types/Auth.type';
+import { GetPasswordResponse, SessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
 interface getPasswordProps {
@@ -24,7 +21,7 @@ export const getUserPasswordMatch = async (props: getPasswordProps) => {
       return data;
     }
   } catch (error: unknown) {
-    const data: GetPasswordResponse = { match: false, error: error as ErrorResponse };
+    const data: GetPasswordResponse = { match: false, error: error as AuthErrorData };
     return data;
   }
 };
