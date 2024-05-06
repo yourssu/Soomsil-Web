@@ -1,12 +1,8 @@
-import { useState } from 'react';
-
 import { BoxButton } from '@yourssu/design-system-react';
-import { useNavigate } from 'react-router-dom';
 
-import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
+import { useCurrentPasswordForm } from '@/home/components/ChangePasswordContents/CurrentPasswordForm/useCurrentPasswordForm';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
-import { api } from '@/service/TokenService';
 
 import {
   StyledInputContainer,
@@ -22,43 +18,8 @@ interface CurrentPasswordFormProps {
 }
 
 export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
-  const { onConfirm, setSessionToken } = Props;
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [isError, setIsError] = useState(false);
-  const navigate = useNavigate();
-
-  const checkCurrentPassword = async (currentPassword: string) => {
-    const accessToken = api.getAccessToken();
-    if (!accessToken) {
-      alert('로그인이 필요합니다.');
-      navigate('/Login');
-      return;
-    }
-
-    const passwordMatchData = await getUserPasswordMatch({
-      password: currentPassword,
-    });
-
-    if (!passwordMatchData) {
-      navigate('/Login');
-      return;
-    }
-
-    if (!passwordMatchData.match) {
-      setIsError(true);
-      return;
-    }
-
-    setIsError(false);
-    setSessionToken(passwordMatchData.sessionToken as SessionTokenType);
-    onConfirm();
-  };
-
-  const handlePasswordChange = (password: string) => {
-    if (isError) setIsError(false);
-
-    setCurrentPassword(password);
-  };
+  const { currentPassword, isError, handlePasswordChange, checkCurrentPassword } =
+    useCurrentPasswordForm(Props);
 
   return (
     <StyledBoxContainer>

@@ -1,6 +1,6 @@
 import { BoxButton } from '@yourssu/design-system-react';
 
-import useNewPasswordForm from '@/home/components/ChangePasswordContents/NewPasswordForm/useNewPasswordForm';
+import { useNewPasswordForm } from '@/home/components/ChangePasswordContents/NewPasswordForm/useNewPasswordForm';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
 

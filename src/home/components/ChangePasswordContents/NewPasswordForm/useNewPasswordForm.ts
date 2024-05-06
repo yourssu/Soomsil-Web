@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
-const useNewPasswordForm = (sessionToken: SessionTokenType) => {
+export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setNewPasswordCheck] = useState('');
   const [isNewPasswordError, setIsNewPasswordError] = useState(false);
@@ -64,5 +64,3 @@ const useNewPasswordForm = (sessionToken: SessionTokenType) => {
     handleSubmit,
   };
 };
-
-export default useNewPasswordForm;
