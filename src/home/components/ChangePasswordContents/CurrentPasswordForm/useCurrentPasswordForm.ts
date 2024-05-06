@@ -4,22 +4,24 @@ import { useNavigate } from 'react-router-dom';
 
 import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
-import { api } from '@/service/TokenService';
+import { useIsLoggedIn } from '@/hooks/useIsLoggedIn';
 
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
   setSessionToken: ({ sessionToken }: SessionTokenType) => void;
 }
 
-export const useCurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
-  const { onConfirm, setSessionToken } = Props;
+export const useCurrentPasswordForm = ({
+  onConfirm,
+  setSessionToken,
+}: CurrentPasswordFormProps) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
+  const isLoggedIn = useIsLoggedIn();
 
   const checkCurrentPassword = async () => {
-    const accessToken = api.getAccessToken();
-    if (!accessToken) {
+    if (!isLoggedIn) {
       alert('로그인이 필요합니다.');
       navigate('/Login');
       return;
