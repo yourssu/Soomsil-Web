@@ -2,7 +2,7 @@ import { soomsilClient } from '@/apis';
 
 import { ImageListResponse } from '../types/image.type';
 
-export const uploadImages = async (fileList: File[]) => {
+export const postImages = async (fileList: File[]) => {
   const formData = new FormData();
 
   for (let i = 0; i < fileList.length; i++) {
