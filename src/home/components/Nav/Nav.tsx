@@ -28,14 +28,12 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
   const handleProfileClick = () => {
     setIsProfileClicked((prev) => !prev);
   };
-<<<<<<< HEAD
   //Todo: 로그아웃 기능 추가
   // const handleLogout = () => {
   //   sessionStorage.removeItem('accessExpiredIn');
   //   api.logout();
   //   return;
   // };
-=======
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -50,7 +48,6 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
     };
   }, []);
 
->>>>>>> origin/develop
   return (
     <StyledContainer>
       {isLoggedIn ? (

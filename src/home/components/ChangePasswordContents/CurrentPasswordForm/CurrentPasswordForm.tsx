@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { BoxButton } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
-import { getPassword } from '@/home/apis/getUserPasswordMatch';
+import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
 import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
-import { sessionTokenType } from '@/home/types/GetPassword.type';
+import { SessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
 import {
@@ -18,7 +18,7 @@ import {
 
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
-  setSessionToken: ({ sessionToken }: sessionTokenType) => void;
+  setSessionToken: ({ sessionToken }: SessionTokenType) => void;
 }
 
 export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
@@ -27,23 +27,31 @@ export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
   const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
-  const checkCurrentPassword = (currentPassword: string) => {
+  const checkCurrentPassword = async (currentPassword: string) => {
     const accessToken = api.getAccessToken();
     if (!accessToken) {
       alert('로그인이 필요합니다.');
-      navigate('/');
+      navigate('/Login');
+      return;
     }
 
-    getPassword({ password: currentPassword, accessToken }).then((res) => {
-      if (!res) navigate('/Login');
-      if (res?.match) {
-        setIsError(false);
-        setSessionToken(res.sessionToken as sessionTokenType);
-        onConfirm();
-      } else {
-        setIsError(true);
-      }
+    const passwordMatchData = await getUserPasswordMatch({
+      password: currentPassword,
     });
+
+    if (!passwordMatchData) {
+      navigate('/Login');
+      return;
+    }
+
+    if (!passwordMatchData.match) {
+      setIsError(true);
+      return;
+    }
+
+    setIsError(false);
+    setSessionToken(passwordMatchData.sessionToken as SessionTokenType);
+    onConfirm();
   };
 
   const handlePasswordChange = (password: string) => {
