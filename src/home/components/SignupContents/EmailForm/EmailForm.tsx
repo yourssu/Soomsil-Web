@@ -1,6 +1,5 @@
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 
-import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
 import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm.ts';
 
@@ -17,6 +16,8 @@ import {
   StyledPlainButtonWrapper,
   StyledTextFieldLabel,
 } from './EmailForm.style';
+
+const EMAIL_DOMAIN = '@soongsil.ac.kr';
 
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
   const { email, emailSending, emailError, onEmailSubmit, onChange } = useEmailForm({ onConfirm });
