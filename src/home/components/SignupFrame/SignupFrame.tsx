@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Logo from '@/assets/soomsil_v2_logo.svg';
 
@@ -13,11 +13,11 @@ interface SignupFrameProps {
 }
 
 export const SignupFrame = ({ children }: SignupFrameProps) => {
-  const navigate = useNavigate();
-
   return (
     <StyledSignupFrame>
-      <StyledSignupFrameLogo src={Logo} onClick={() => navigate('/')} />
+      <Link to={'/'}>
+        <StyledSignupFrameLogo src={Logo} />
+      </Link>
       <StyledSignupFrameContentContainer>{children}</StyledSignupFrameContentContainer>
     </StyledSignupFrame>
   );

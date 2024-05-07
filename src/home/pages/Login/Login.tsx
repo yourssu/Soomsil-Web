@@ -27,11 +27,11 @@ export const Login = () => {
 
   const { showBoundary } = useErrorBoundary();
   const { refetch } = useGetUserData();
-  const getFullEmail = useFullEmail(email);
   const navigate = useNavigate();
+  const fullEmail = useFullEmail(email);
 
   const handleLoginClick = async () => {
-    const { data, error } = await postAuthSignIn({ email: getFullEmail(), password });
+    const { data, error } = await postAuthSignIn({ email: fullEmail, password });
 
     if (data) {
       api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);

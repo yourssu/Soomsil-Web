@@ -9,7 +9,8 @@ export const useRedirectLoggedInEffect = () => {
   const isLoggedIn = useIsLoggedIn();
 
   useEffect(() => {
-    if (!isLoggedIn) return;
-    navigate('/');
+    if (isLoggedIn) {
+      navigate('/');
+    }
   }, [isLoggedIn, navigate]);
 };

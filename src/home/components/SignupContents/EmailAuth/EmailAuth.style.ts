@@ -23,3 +23,8 @@ export const StyledTimerSuffix = styled.span`
   ${({ theme }) => theme.typo.body1};
   color: ${({ theme }) => theme.color.textWarned};
 `;
+
+export const StyledErrorText = styled.span`
+  ${({ theme }) => theme.typo.body3};
+  color: ${({ theme }) => theme.color.textWarned};
+`;

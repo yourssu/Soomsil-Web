@@ -1,9 +1,8 @@
-import { useState } from 'react';
-
 import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
 
 import { EMAIL_DOMAIN } from '@/constants/email.constant';
-import { useFullEmail } from '@/hooks/useFullEmail';
+import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
+import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm.ts';
 
 import {
   StyledSignupButtonText,
@@ -19,21 +18,8 @@ import {
   StyledTextFieldLabel,
 } from './EmailForm.style';
 
-interface EmailFormProps {
-  onConfirm: (email: string) => void;
-}
-
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
-  const [email, setEmail] = useState('');
-  const getFullEmail = useFullEmail(email);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const onEmailSubmit = () => {
-    onConfirm(getFullEmail());
-  };
+  const { email, emailSending, emailError, onEmailSubmit, onChange } = useEmailForm({ onConfirm });
 
   return (
     <StyledSignupContentContainer>
@@ -44,6 +30,8 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           <SimpleTextField
             value={email}
             onChange={onChange}
+            isNegative={!!emailError}
+            helperLabel={emailError}
             placeholder="ppushoong"
             suffix={<StyledEmailSuffix>{EMAIL_DOMAIN}</StyledEmailSuffix>}
             autoFocus
@@ -60,7 +48,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           size="large"
           variant="filled"
           rounding={8}
-          disabled={email === ''}
+          disabled={email === '' || emailSending}
           onClick={onEmailSubmit}
         >
           <StyledSignupButtonText>인증 메일 받기</StyledSignupButtonText>
