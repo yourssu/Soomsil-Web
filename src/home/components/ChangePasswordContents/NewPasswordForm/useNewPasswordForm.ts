@@ -27,7 +27,10 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
   };
 
   const handleSubmit = () => {
-    console.log(sessionToken); // For debugging
+    if (sessionToken === null) {
+      return;
+    }
+
     setValidationAttempted(true);
     const isValid = regexp.test(newPassword);
     if (isValid && newPassword === newPasswordCheck) {

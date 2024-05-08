@@ -29,8 +29,8 @@ export const StyledBoxContainer = styled.section`
 `;
 
 export const StyledInputTitle = styled.div`
+  color: ${({ theme }) => theme.color.buttonNormal};
   ${({ theme }) => theme.typo.subtitle3};
-  color: #505458;
   padding: 11px 4px 3px 4px;
 `;
 
@@ -54,7 +54,7 @@ export const StyledErrorMessageContainer = styled.section`
   display: flex;
   flex-direction: column;
   ${({ theme }) => theme.typo.caption1};
-  color: #ff5252;
+  color: ${({ theme }) => theme.color.textWarned};
 `;
 
 export const StyledLogoLink = styled(Link)`

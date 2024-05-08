@@ -10,7 +10,6 @@ export const StyledChangePasswordFrame = styled.div`
   align-items: center;
   gap: 24px;
 
-  //실수..
   margin-bottom: 101px;
 `;
 

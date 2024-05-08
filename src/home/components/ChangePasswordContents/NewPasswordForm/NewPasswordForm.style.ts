@@ -72,7 +72,7 @@ export const StyledErrorMessageContainer = styled.section`
   display: flex;
   flex-direction: column;
   ${({ theme }) => theme.typo.caption1};
-  color: #ff5252;
+  color: ${({ theme }) => theme.color.textWarned};
 `;
 
 export const StyledLogo = styled.img`
