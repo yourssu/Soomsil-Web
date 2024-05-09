@@ -1,4 +1,3 @@
-import { BoxButton } from '@yourssu/design-system-react';
 import { FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +14,7 @@ import {
   StyledTextButtonContainer,
   StyledTextContainer,
   StyledButtonContainer,
+  StyledBoxButton,
 } from './FallbackComponent.style';
 
 interface FallbackComponentProps extends FallbackProps {
@@ -58,25 +58,12 @@ export const FallbackComponent = ({
           </StyledSubText>
         </StyledTextContainer>
         <StyledButtonContainer>
-          <BoxButton
-            width="134px"
-            size="large"
-            variant="line"
-            rounding={8}
-            onClick={() => handleClick('HOME')}
-          >
+          <StyledBoxButton variant="line" onClick={() => handleClick('HOME')}>
             숭실 홈으로
-          </BoxButton>
-          <Spacing size={12} direction="horizontal" />
-          <BoxButton
-            width="134px"
-            size="large"
-            variant="filled"
-            rounding={8}
-            onClick={() => handleClick('PREVIOUS')}
-          >
+          </StyledBoxButton>
+          <StyledBoxButton variant="filled" onClick={() => handleClick('PREVIOUS')}>
             이전 페이지
-          </BoxButton>
+          </StyledBoxButton>
         </StyledButtonContainer>
       </StyledTextButtonContainer>
       <img src={ppussungError} alt="error" />

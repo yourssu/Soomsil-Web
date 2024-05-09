@@ -25,6 +25,22 @@ export const StyledTextContainer = styled.div`
 
 export const StyledButtonContainer = styled.div`
   display: flex;
+  gap: 0.75rem;
+`;
+
+interface StyledBoxButtonProps {
+  variant: 'line' | 'filled';
+}
+
+export const StyledBoxButton = styled.button<StyledBoxButtonProps>`
+  ${(props) => props.theme.typo.button0};
+  color: ${(props) => (props.variant === 'filled' ? '#FFF' : '#5865f2')};
+  width: 8.375rem;
+  height: 3rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--logoLightBlue, #5865f2);
+  background: ${(props) =>
+    props.variant === 'filled' ? 'var(--logoLightBlue, #5865f2)' : 'transparent'};
 `;
 
 export const StyledBoldText = styled.text`
