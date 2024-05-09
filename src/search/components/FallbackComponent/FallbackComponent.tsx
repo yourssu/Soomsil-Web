@@ -3,7 +3,10 @@ import { FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
 
 import { Spacing } from '@/components/Spacing/Spacing';
+import { NoResultError } from '@/search/apis/getSearch';
 import ppussungError from '@/search/assets/ppussungError.svg';
+import { NAVIGATION_OPTIONS } from '@/search/constant';
+import { CustomErrorCode } from '@/search/constant/customError';
 
 import {
   StyledBoldText,
@@ -16,6 +19,7 @@ import {
 
 interface FallbackComponentProps extends FallbackProps {
   children: React.ReactNode;
+  error: NoResultError;
 }
 
 export const FallbackComponent = ({
@@ -25,21 +29,21 @@ export const FallbackComponent = ({
 }: FallbackComponentProps) => {
   const navigate = useNavigate();
 
-  const handleClick = (option: 'home' | 'previous') => {
+  const handleClick = (option: keyof typeof NAVIGATION_OPTIONS) => {
     resetErrorBoundary();
 
     switch (option) {
-      case 'home':
+      case 'HOME':
         navigate('/');
         break;
-      case 'previous':
+      case 'PREVIOUS':
         navigate(0);
         break;
       default:
     }
   };
 
-  if (error?.message === '검색결과가 없습니다.') {
+  if (error?.statusCode === CustomErrorCode.NoResult) {
     return <>{children}</>;
   }
 
@@ -59,7 +63,7 @@ export const FallbackComponent = ({
             size="large"
             variant="line"
             rounding={8}
-            onClick={() => handleClick('home')}
+            onClick={() => handleClick('HOME')}
           >
             숭실 홈으로
           </BoxButton>
@@ -69,7 +73,7 @@ export const FallbackComponent = ({
             size="large"
             variant="filled"
             rounding={8}
-            onClick={() => handleClick('previous')}
+            onClick={() => handleClick('PREVIOUS')}
           >
             이전 페이지
           </BoxButton>
