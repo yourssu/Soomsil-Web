@@ -1,9 +1,6 @@
-import { Suspense } from 'react';
-
 import { ErrorBoundary } from 'react-error-boundary';
 import { useSearchParams } from 'react-router-dom';
 
-import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
 import { FallbackComponent } from '@/search/components/FallbackComponent/FallbackComponent';
 import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
@@ -37,9 +34,7 @@ export const Search = () => {
               fallbackRender={() => <Spacing direction="vertical" size={21} />}
               resetKeys={[query]}
             >
-              <Suspense fallback={<Spacing direction="vertical" size={21} />}>
-                <TotalCount />
-              </Suspense>
+              <TotalCount />
             </ErrorBoundary>
             <Spacing direction="vertical" size={20} />
             <StyledFlexGapContainer>
@@ -52,9 +47,7 @@ export const Search = () => {
                   )}
                   resetKeys={[query]}
                 >
-                  <Suspense fallback={<Loading />}>
-                    <ResultList />
-                  </Suspense>
+                  <ResultList />
                 </ErrorBoundary>
               </StyledResultListItemsWrap>
               <RealTimeKeyword></RealTimeKeyword>
