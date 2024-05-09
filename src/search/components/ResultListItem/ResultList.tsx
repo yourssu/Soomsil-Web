@@ -1,5 +1,8 @@
+import { Suspense } from 'react';
+
 import { useSearchParams } from 'react-router-dom';
 
+import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
 import { useGetSearch } from '@/search/hooks/useGetSearch';
 import { useScrollObserve } from '@/search/hooks/useScrollObserve';
@@ -17,25 +20,18 @@ export const ResultList = () => {
   const { lastElementRef } = useScrollObserve({ isPending, fetchNextPage, hasNextPage });
 
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       {data?.pages.map((page) => {
         return page.resultList.map((item, itemIndex) => {
-          if (page.resultList.length === itemIndex + 1) {
-            return (
-              <div key={item.id}>
-                <ResultListItem {...item} ref={lastElementRef}></ResultListItem>
-                <Spacing direction="vertical" size={8} />
-              </div>
-            );
-          }
+          const isLastItem = page.resultList.length === itemIndex + 1;
           return (
             <div key={item.id}>
-              <ResultListItem {...item}></ResultListItem>
+              <ResultListItem {...item} ref={isLastItem ? lastElementRef : null}></ResultListItem>
               <Spacing direction="vertical" size={8} />
             </div>
           );
         });
       })}
-    </>
+    </Suspense>
   );
 };
