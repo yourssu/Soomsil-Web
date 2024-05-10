@@ -4,10 +4,12 @@ import { BoxButton } from '@yourssu/design-system-react';
 import { useErrorBoundary } from 'react-error-boundary';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
 import soomsil from '@/assets/soomsil.svg';
 import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
 import { useGetUserData } from '@/home/hooks/useGetUserData';
+import { LogInState } from '@/home/recoil/LogInState';
 import { api } from '@/service/TokenService';
 
 import {
@@ -31,6 +33,7 @@ import {
 } from './Login.style';
 
 export const Login = () => {
+  const setIsLoggedIn = useSetRecoilState(LogInState);
   const { showBoundary } = useErrorBoundary();
 
   const { register, control } = useForm();
@@ -59,6 +62,7 @@ export const Login = () => {
     if (data) {
       api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
       api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
+      setIsLoggedIn(true);
       refetch();
       navigate('/');
     } else if (error) {
