@@ -21,7 +21,7 @@ export const StyledBoxContainer = styled.section`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  padding: 22px 24px 22px 24px;
+  padding: 22px 24px;
   width: 480px;
   top: 342px;
   left: 720px;
