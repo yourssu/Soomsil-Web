@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
+import { LogInState } from '@/home/recoil/LogInState';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
-import { useIsLoggedIn } from '@/hooks/useIsLoggedIn';
 
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
@@ -17,8 +18,8 @@ export const useCurrentPasswordForm = ({
 }: CurrentPasswordFormProps) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [isError, setIsError] = useState(false);
+  const isLoggedIn = useRecoilValue(LogInState);
   const navigate = useNavigate();
-  const isLoggedIn = useIsLoggedIn();
 
   const checkCurrentPassword = async () => {
     if (!isLoggedIn) {
