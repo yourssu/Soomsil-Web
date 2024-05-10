@@ -18,6 +18,7 @@ export const StyledBottomButtonContainer = styled.div`
 
 export const StyledBottomButtonWrapper = styled.div`
   ${({ theme }) => theme.typo.button3};
+  color: ${({ theme }) => theme.color.textTertiary};
 `;
 
 export const StyledButtonButtonSeparator = styled.div`
