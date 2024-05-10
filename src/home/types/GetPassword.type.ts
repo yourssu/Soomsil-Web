@@ -1,4 +1,6 @@
-import { AuthErrorData } from '@/home/types/Auth.type.ts';
+import { AxiosError } from 'axios';
+
+import { AuthErrorData } from '@/home/types/Auth.type';
 
 export interface SessionTokenType {
   sessionToken: string;
@@ -6,7 +8,6 @@ export interface SessionTokenType {
 }
 
 export interface GetPasswordResponse {
-  match: boolean;
-  sessionToken?: SessionTokenType;
-  error?: AuthErrorData;
+  data?: SessionTokenType;
+  error?: AxiosError<AuthErrorData>;
 }

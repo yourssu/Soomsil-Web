@@ -28,23 +28,15 @@ export const useCurrentPasswordForm = ({
       return;
     }
 
-    const passwordMatchData = await getUserPasswordMatch({
+    const { error, data } = await getUserPasswordMatch({
       password: currentPassword,
     });
 
-    if (!passwordMatchData) {
-      navigate('/Login');
-      return;
-    }
-
-    if (!passwordMatchData.match) {
-      setIsError(true);
-      return;
-    }
-
-    setIsError(false);
-    setSessionToken(passwordMatchData.sessionToken as SessionTokenType);
-    onConfirm();
+    if (data) {
+      setIsError(false);
+      setSessionToken(data as SessionTokenType);
+      onConfirm();
+    } else if (error) setIsError(true);
   };
 
   const handlePasswordChange = (password: string) => {
