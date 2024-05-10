@@ -5,6 +5,9 @@ class TokenService {
 
   setAccessToken(token: string, expireTime: number) {
     this.cookie.set('accessToken', token, { path: '/', expires: new Date(expireTime) });
+
+    const event = new CustomEvent('accessTokenUpdated', { detail: { token } });
+    window.dispatchEvent(event);
   }
   setRefreshToken(token: string, expireTime: number) {
     this.cookie.set('refreshToken', token, { path: '/', expires: new Date(expireTime) });

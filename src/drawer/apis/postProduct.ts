@@ -10,7 +10,7 @@ const renameImageKeys = (image: ImageResult) => {
   };
 };
 
-export const registerProduct = async (product: RegisterFormValues, images: ImageResult[]) => {
+export const postProduct = async (product: RegisterFormValues, images: ImageResult[]) => {
   const [thumbnailImage, ...introductionImages] = images;
 
   const response = await soomsilClient.post('/v2/drawer', {

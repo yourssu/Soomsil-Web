@@ -20,6 +20,7 @@ import {
 interface NavProps {
   isLoggedIn: boolean;
 }
+
 export const Nav = ({ isLoggedIn }: NavProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
