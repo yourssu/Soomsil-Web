@@ -15,6 +15,8 @@ import {
   StyledButtonText,
   StyledLeft,
   StyledListItem,
+  StyledDoneText,
+  StyledDoneButtonText,
 } from './Withdraw.style';
 
 export const Withdraw = () => {
@@ -46,7 +48,7 @@ export const Withdraw = () => {
       <img onClick={handleGoToHome} src={Logo} alt={'Logo-image'} width={180} height={38} />
       <StyledWithdrawContainer>
         {draw ? (
-          <Withdrawn />
+          <Withdrawn handleGoToHome={handleGoToHome} />
         ) : (
           <>
             <StyledTitleText>계정 탈퇴</StyledTitleText>
@@ -82,6 +84,19 @@ export const Withdraw = () => {
   );
 };
 
-const Withdrawn = () => {
-  return <p>계정 탈퇴가 완료되었습니다.</p>;
+const Withdrawn = ({ handleGoToHome }: { handleGoToHome: () => void }) => {
+  return (
+    <>
+      <StyledDoneText>계정 탈퇴가 완료되었습니다</StyledDoneText>
+      <BoxButton
+        style={{ width: 432, height: 48 }}
+        rounding={8}
+        size="large"
+        variant="filled"
+        onClick={handleGoToHome}
+      >
+        <StyledDoneButtonText>숨쉴 홈으로 이동</StyledDoneButtonText>
+      </BoxButton>
+    </>
+  );
 };
