@@ -35,7 +35,7 @@ const onRejected = async (error: AxiosError) => {
   if (originalConfig && error.response?.status === 401 && data?.error === 'Auth-002') {
     try {
       await refreshToken();
-      return soomsilClient({
+      return soomsilClient.request({
         ...originalConfig,
         headers: {
           Authorization: `Bearer ${api.getAccessToken()}`,
