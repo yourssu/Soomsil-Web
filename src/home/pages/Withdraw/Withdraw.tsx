@@ -4,6 +4,7 @@ import { BoxButton, CheckBox } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/soomsil_v2_logo.svg';
+import { postWithdraw } from '@/home/apis/postWithdraw';
 
 import {
   StyledWrapper,
@@ -24,8 +25,15 @@ export const Withdraw = () => {
     setAgreed((prevAgreed) => !prevAgreed);
   };
 
-  const handleWithdrawAgree = () => {
-    setDraw(true);
+  const handleWithdrawAgree = async () => {
+    if (agreed) {
+      const { success, error } = await postWithdraw();
+      if (success) {
+        setDraw((prevDraw) => !prevDraw);
+      } else if (error) {
+        alert(`탈퇴 처리에 실패했습니다: ${error.message}`);
+      }
+    }
   };
 
   return (
