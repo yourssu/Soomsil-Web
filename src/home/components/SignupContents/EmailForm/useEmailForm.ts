@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
+import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { postAuthVerificationEmail } from '@/home/apis/authVerification.ts';
 import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
-
-const EMAIL_DOMAIN = '@soongsil.ac.kr';
 
 export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
   const [email, setEmail] = useState('');
