@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { BoxButton, PlainButton } from '@yourssu/design-system-react';
 import { useErrorBoundary } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
 import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
 import { LoginInput } from '@/home/components/LoginInput/LoginInput';
 import { StyledSignupContentTitle } from '@/home/components/SignupContents/SignupContents.style';
 import { SignupFrame } from '@/home/components/SignupFrame/SignupFrame';
 import { useGetUserData } from '@/home/hooks/useGetUserData';
+import { LogInState } from '@/home/recoil/LogInState';
 import { useFullEmail } from '@/hooks/useFullEmail';
 import { useRedirectLoggedInEffect } from '@/hooks/useRedirectLoggedInEffect';
 import { api } from '@/service/TokenService';
@@ -24,7 +26,7 @@ export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [failedLogin, setFailedLogin] = useState(false);
-
+  const setIsLoggedIn = useSetRecoilState(LogInState);
   const { showBoundary } = useErrorBoundary();
   const { refetch } = useGetUserData();
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ export const Login = () => {
     if (data) {
       api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
       api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
+      setIsLoggedIn(true);
       refetch();
       navigate('/');
       return;
