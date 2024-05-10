@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { BoxButton, CheckBox } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
@@ -18,8 +18,13 @@ import {
 } from './Withdraw.style';
 
 export const Withdraw = () => {
+  const navigate = useNavigate();
   const [agreed, setAgreed] = useState(false);
   const [draw, setDraw] = useState(false);
+
+  const handleGoToHome = () => {
+    navigate('/');
+  };
 
   const handleCheckAgree = () => {
     setAgreed((prevAgreed) => !prevAgreed);
@@ -38,7 +43,7 @@ export const Withdraw = () => {
 
   return (
     <StyledWrapper>
-      <img src={Logo} alt={'Logo-image'} width={180} height={38} />
+      <img onClick={handleGoToHome} src={Logo} alt={'Logo-image'} width={180} height={38} />
       <StyledWithdrawContainer>
         {draw ? (
           <Withdrawn />
@@ -78,14 +83,5 @@ export const Withdraw = () => {
 };
 
 const Withdrawn = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/');
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [navigate]);
-
   return <p>계정 탈퇴가 완료되었습니다.</p>;
 };
