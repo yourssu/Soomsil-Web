@@ -22,6 +22,11 @@ export interface PostAuthVerificationEmailResponse {
   error?: AxiosError<AuthErrorData>;
 }
 
+export interface PostWithdrawResponse {
+  success: boolean;
+  error?: AxiosError<AuthErrorData>;
+}
+
 export interface GetAuthVerificationCheckData {
   isVerified: boolean;
 }
