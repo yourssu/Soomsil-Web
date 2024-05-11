@@ -2,7 +2,7 @@ import { FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
 
 import { Spacing } from '@/components/Spacing/Spacing';
-import { NoResultError } from '@/search/apis/getSearch';
+import { CustomErrorType } from '@/search/apis/getSearch';
 import ppussungError from '@/search/assets/ppussungError.svg';
 import { NAVIGATION_OPTIONS } from '@/search/constant';
 import { CustomErrorCode } from '@/search/constant/customError';
@@ -19,7 +19,7 @@ import {
 
 interface FallbackComponentProps extends FallbackProps {
   children: React.ReactNode;
-  error: NoResultError;
+  error: CustomErrorType;
 }
 
 export const FallbackComponent = ({

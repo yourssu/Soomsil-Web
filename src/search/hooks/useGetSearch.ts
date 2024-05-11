@@ -1,13 +1,13 @@
 import { InfiniteData, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
-import { getSearch } from '../apis/getSearch';
+import { getSearch, CustomErrorType } from '../apis/getSearch';
 import { GetSearchProps } from '../types/GetSearch.type';
 import { SearchResponse } from '../types/ResultListItem.type';
 
 export const useGetSearch = ({ query }: GetSearchProps) => {
   return useSuspenseInfiniteQuery<
     SearchResponse,
-    Error,
+    CustomErrorType,
     InfiniteData<SearchResponse>,
     string[],
     number
@@ -23,7 +23,7 @@ export const useGetSearch = ({ query }: GetSearchProps) => {
       return allPages.length;
     },
     retryDelay: (_, error) => {
-      if (error.message === '검색결과가 없습니다.') {
+      if (error.statusCode === 1000) {
         return 0;
       }
 

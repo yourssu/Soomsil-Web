@@ -4,15 +4,20 @@ import { CustomErrorCode } from '../constant/customError';
 import { GetSearchProps } from '../types/GetSearch.type';
 import { SearchResponse } from '../types/ResultListItem.type';
 
-export class NoResultError extends Error {
+export interface CustomErrorType extends Error {
   statusCode: number;
-
-  constructor(statusCode: number, message?: string) {
-    super(message);
-    this.name = 'NoResultError';
-    this.statusCode = statusCode;
-  }
 }
+
+export const CustomError = (statusCode: number, message: string): CustomErrorType => {
+  const error = {
+    __proto__: Error,
+    name: 'NoResultError',
+    message,
+    statusCode,
+  };
+
+  return error;
+};
 
 export const getSearch = async ({ query, page }: GetSearchProps) => {
   const response = await searchClient
@@ -24,7 +29,7 @@ export const getSearch = async ({ query, page }: GetSearchProps) => {
     })
     .then((response) => {
       if (response.data.totalCount === 0) {
-        throw new NoResultError(CustomErrorCode.NoResult, '검색결과가 없습니다.');
+        throw CustomError(CustomErrorCode.NoResult, '검색결과가 없습니다.');
       }
       return response;
     });
