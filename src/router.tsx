@@ -71,6 +71,11 @@ const Provider = lazy(() =>
     default: Provider,
   }))
 );
+const ChangePassword = lazy(() =>
+  import('./home/pages/ChangePassword/ChangePassword').then(({ ChangePassword }) => ({
+    default: ChangePassword,
+  }))
+);
 const Withdraw = lazy(() =>
   import('./home/pages/Withdraw/Withdraw').then(({ Withdraw }) => ({
     default: Withdraw,
@@ -112,6 +117,7 @@ export const Router = () => {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/withdraw" element={<Withdraw />}></Route>
           <Route path="/drawer" element={<DrawerLayout />}>

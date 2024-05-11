@@ -29,6 +29,12 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
   const handleProfileClick = () => {
     setIsProfileClicked((prev) => !prev);
   };
+  //Todo: 로그아웃 기능 추가
+  // const handleLogout = () => {
+  //   sessionStorage.removeItem('accessExpiredIn');
+  //   api.logout();
+  //   return;
+  // };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
