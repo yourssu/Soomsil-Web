@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Spacing } from '@/components/Spacing/Spacing';
 import { FallbackComponent } from '@/search/components/FallbackComponent/FallbackComponent';
 import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
-import { ResultList } from '@/search/components/ResultListItem/ResultList';
+import { ResultList } from '@/search/components/ResultList/ResultList';
 import { SearchBar } from '@/search/components/SearchBar/SearchBar';
 import { TotalCount } from '@/search/components/TotalCount/TotalCount';
 
