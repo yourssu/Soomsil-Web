@@ -7,6 +7,7 @@ import {
   StyledHeader,
   StyledInnerContainer,
   StyledSoomsilLogo,
+  StyledLogoContainer,
 } from './MyPage.style';
 
 export const Mypage = () => {
@@ -14,7 +15,9 @@ export const Mypage = () => {
     <StyledContainer>
       <StyledHeader />
       <StyledInnerContainer>
-        <StyledSoomsilLogo src={Logo} alt="soomsil" />
+        <StyledLogoContainer to="/">
+          <StyledSoomsilLogo src={Logo} alt="soomsil" />
+        </StyledLogoContainer>
         <UserInformationCard />
         <MyMenuList />
       </StyledInnerContainer>

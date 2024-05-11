@@ -1,17 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { registerProduct } from '@/drawer/apis/registerProduct';
-import { uploadImages } from '@/drawer/apis/uploadImages';
-
+import { postImages } from '../apis/postImages';
+import { postProduct } from '../apis/postProduct';
 import { RegisterFormValues } from '../types/form.type';
 
-export const usePostRegisterProduct = () => {
+export const usePostProduct = () => {
   return useMutation({
     mutationFn: async (data: RegisterFormValues) => {
       const imageList = [...data.thumbnailImage, ...data.introductionImages] as File[];
-      const images = await uploadImages(imageList);
+      const images = await postImages(imageList);
 
-      const response = await registerProduct(data, images);
+      const response = await postProduct(data, images);
       return response;
     },
   });
