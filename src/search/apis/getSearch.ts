@@ -8,10 +8,10 @@ export interface CustomErrorType extends Error {
   statusCode: number;
 }
 
-export const CustomError = (statusCode: number, message: string): CustomErrorType => {
+export const CustomError = (statusCode: number, message: string, name: string): CustomErrorType => {
   const error = {
     __proto__: Error,
-    name: 'NoResultError',
+    name,
     message,
     statusCode,
   };
@@ -29,7 +29,7 @@ export const getSearch = async ({ query, page }: GetSearchProps) => {
     })
     .then((response) => {
       if (response.data.totalCount === 0) {
-        throw CustomError(CustomErrorCode.NoResult, '검색결과가 없습니다.');
+        throw CustomError(CustomErrorCode.NoResult, '검색결과가 없습니다.', 'NoResultError');
       }
       return response;
     });
