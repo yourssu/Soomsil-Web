@@ -37,7 +37,7 @@ export const FallbackComponent = ({
         navigate('/');
         break;
       case 'PREVIOUS':
-        navigate(0);
+        navigate(-1);
         break;
       default:
     }
