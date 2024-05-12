@@ -7,6 +7,9 @@ import {
   IcStarLine,
   IconContext,
   IcStarFilled,
+  useToast,
+  ToastDuration,
+  Toast,
 } from '@yourssu/design-system-react';
 import { useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
@@ -66,6 +69,12 @@ export const ServiceDetail = () => {
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
+  const { showToast, isShowToast } = useToast();
+  const toastProps = {
+    children: 'URL이 복사되었습니다',
+    duration: 'short' as ToastDuration,
+  };
+
   const handleCarouselClick = (event: React.MouseEvent) => {
     const target = event.target as HTMLInputElement;
     const scrollAmount = 450;
@@ -94,8 +103,7 @@ export const ServiceDetail = () => {
 
   const handleClickShare = () => {
     navigator.clipboard.writeText(window.location.href);
-    // TODO: 임시
-    alert('url이 복사되었습니다!');
+    showToast(toastProps.duration);
   };
 
   return (
@@ -214,6 +222,7 @@ export const ServiceDetail = () => {
 
         <MoreProductSection providerName={product.providerName} providerId={product.providerId} />
       </StyledLowerSection>
+      {isShowToast && <Toast {...toastProps} />}
     </StyledServiceDetailContainer>
   );
 };
