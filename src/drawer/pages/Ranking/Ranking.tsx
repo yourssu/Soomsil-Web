@@ -3,8 +3,6 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
-import drawerMainImage1 from '@/drawer/assets/drawer_main_image1.png';
-import drawerMainImage2 from '@/drawer/assets/drawer_main_image2.png';
 import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
@@ -81,8 +79,14 @@ export const Ranking = () => {
                 ))}
           </StyledCardContainer>
         </div>
-        <StyledImage src={drawerMainImage1} alt="drawer main image1" />
-        <StyledImage src={drawerMainImage2} alt="drawer main image2" />
+        <StyledImage
+          src="https://yourssu-post-attachments-stg.s3.ap-northeast-2.amazonaws.com/soomsil.jpeg"
+          alt="drawer main image1"
+        />
+        <StyledImage
+          src="https://yourssu-post-attachments-stg.s3.ap-northeast-2.amazonaws.com/animalssu.jpeg"
+          alt="drawer main image2"
+        />
         <div>
           <StyledBetweenContainer>
             <StyledTextContainer>

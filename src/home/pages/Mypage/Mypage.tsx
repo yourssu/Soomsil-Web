@@ -1,4 +1,4 @@
-import Logo from '@/assets/soomsil_v2_logo.svg';
+import Logo from '@/assets/soomsil_logo.svg';
 import { MyMenuList } from '@/home/components/MyMenuList/MyMenuList';
 import { UserInformationCard } from '@/home/components/UserInformationCard/UserInformationCard';
 

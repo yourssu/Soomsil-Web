@@ -42,6 +42,7 @@ export const StyledImage = styled.img`
   width: auto;
   height: 22.125rem;
   border-radius: 0.5rem;
+  object-fit: cover;
 `;
 
 export const StyledTitle = styled.span`
