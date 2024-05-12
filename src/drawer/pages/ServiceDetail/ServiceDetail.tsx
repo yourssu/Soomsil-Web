@@ -90,14 +90,14 @@ export const ServiceDetail = () => {
   const addBookmarkMutation = useMutation({
     mutationFn: postBookmarked,
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['productDetail'] });
+      queryClient.invalidateQueries({ queryKey: ['productDetail', product.productNo] });
     },
   });
 
   const deleteBookmarkMutation = useMutation({
     mutationFn: deleteBookmarked,
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['productDetail'] });
+      queryClient.invalidateQueries({ queryKey: ['productDetail', product.productNo] });
     },
   });
 
@@ -220,7 +220,7 @@ export const ServiceDetail = () => {
           </StyledDescriptionPart>
         </StyledDescriptionSection>
 
-        <MoreProductSection providerName={product.providerName} providerId={product.providerId} />
+        {/* <MoreProductSection providerName={product.providerName} providerId={product.providerId} /> */}
       </StyledLowerSection>
       {isShowToast && <Toast {...toastProps} />}
     </StyledServiceDetailContainer>
