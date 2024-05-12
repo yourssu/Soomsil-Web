@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { IcSearchLine, IconContext } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
-import SoomsilLogo from '@/assets/soomsil_v2_logo.svg';
+import SoomsilLogo from '@/assets/soomsil_logo.svg';
 
 import {
+  StyledContainer,
   StyledSearchBar,
   StyledSearchBarContainer,
-  StyledContainer,
   StyledSearchBox,
   StyledSoomsilLogo,
   StyledSubmitButton,
