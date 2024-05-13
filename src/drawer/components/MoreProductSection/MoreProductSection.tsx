@@ -21,33 +21,30 @@ export const MoreProductSection = ({
 
   const navigate = useNavigate();
 
+  if (data.length === 0) return;
   return (
-    <>
-      {data.length > 0 && (
-        <StyledMoreProductSection>
-          <StyledContainer>
-            {providerName}의 서비스 더보기
-            <StyledArrowButton
-              $backgroundImage={IcRightArrow}
-              type="button"
-              onClick={() => {
-                navigate(`/drawer/${providerId}`);
-              }}
-            />
-          </StyledContainer>
-          {data.map(({ productTitle, count, productNo, mainImage }) => (
-            <SmallDrawerCard
-              key={productNo}
-              link={`/drawer/services/${productNo}`}
-              title={productTitle}
-              body={providerName}
-              bookmarkCount={count}
-              isBookmarked={true}
-              smallImgSrc={mainImage}
-            />
-          ))}
-        </StyledMoreProductSection>
-      )}
-    </>
+    <StyledMoreProductSection>
+      <StyledContainer>
+        {providerName}의 서비스 더보기
+        <StyledArrowButton
+          $backgroundImage={IcRightArrow}
+          type="button"
+          onClick={() => {
+            navigate(`/drawer/${providerId}`);
+          }}
+        />
+      </StyledContainer>
+      {data.map(({ productTitle, count, productNo, mainImage }) => (
+        <SmallDrawerCard
+          key={productNo}
+          link={`/drawer/services/${productNo}`}
+          title={productTitle}
+          body={providerName}
+          bookmarkCount={count}
+          isBookmarked={true}
+          smallImgSrc={mainImage}
+        />
+      ))}
+    </StyledMoreProductSection>
   );
 };
