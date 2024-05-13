@@ -33,13 +33,11 @@ export const Withdraw = () => {
   };
 
   const handleWithdrawAgree = async () => {
-    if (agreed) {
-      const { success, error } = await postWithdraw();
-      if (success) {
-        setDraw((prevDraw) => !prevDraw);
-      } else if (error) {
-        alert(`탈퇴 처리에 실패했습니다: ${error.message}`);
-      }
+    const { success, error } = await postWithdraw();
+    if (success) {
+      setDraw((prevDraw) => !prevDraw);
+    } else if (error) {
+      alert(`탈퇴 처리에 실패했습니다: ${error.message}`);
     }
   };
 
