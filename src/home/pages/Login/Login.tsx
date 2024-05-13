@@ -1,12 +1,17 @@
 import { useState } from 'react';
 
-import { BoxButton, PlainButton } from '@yourssu/design-system-react';
+import {
+  BoxButton,
+  PasswordTextField,
+  PlainButton,
+  SuffixTextField,
+} from '@yourssu/design-system-react';
 import { useErrorBoundary } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
+import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
-import { LoginInput } from '@/home/components/LoginInput/LoginInput';
 import { StyledSignupContentTitle } from '@/home/components/SignupContents/SignupContents.style';
 import { SignupFrame } from '@/home/components/SignupFrame/SignupFrame';
 import { useGetUserData } from '@/home/hooks/useGetUserData';
@@ -62,21 +67,23 @@ export const Login = () => {
     <SignupFrame>
       <StyledLoginContainer>
         <StyledSignupContentTitle>로그인</StyledSignupContentTitle>
-        <LoginInput
-          title="학교 메일"
-          helperLabel=""
-          placeholder="이메일"
-          onChange={(value) => setEmail(value)}
+        <SuffixTextField
+          fieldLabel="학교 메일"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="ppushoong"
           isNegative={failedLogin}
+          suffix={EMAIL_DOMAIN}
         />
-        <LoginInput
-          hiddenField
-          title="비밀번호"
+        <PasswordTextField
+          fieldLabel="비밀번호"
           helperLabel={
-            '학교 메일 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.'
+            failedLogin
+              ? '학교 메일 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.'
+              : ''
           }
-          placeholder="비밀번호"
-          onChange={(value) => setPassword(value)}
+          placeholder="영문숫자포함8글자"
+          onChange={(e) => setPassword(e.target.value)}
           isNegative={failedLogin}
         />
 
