@@ -1,7 +1,6 @@
-import { BoxButton } from '@yourssu/design-system-react';
+import { BoxButton, PasswordTextField } from '@yourssu/design-system-react';
 
 import { useCurrentPasswordForm } from '@/home/components/ChangePasswordContents/CurrentPasswordForm/useCurrentPasswordForm';
-import { PasswordInput } from '@/home/components/ChangePasswordContents/PasswordInput/PasswordInput';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
 
 import {
@@ -26,12 +25,13 @@ export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
       <StyledTitle>비밀번호 변경</StyledTitle>
       <StyledInputContainer>
         <StyledInputTitle>현재 비밀번호를 입력 해주세요.</StyledInputTitle>
-        <PasswordInput
+        <PasswordTextField
           placeholder="비밀번호를 입력해주세요."
           value={currentPassword}
-          onChangeHandler={handlePasswordChange}
-          isError={isError}
-          errorMessage="비밀번호가 일치하지 않습니다."
+          onChange={(e) => handlePasswordChange(e.target.value)}
+          isNegative={isError}
+          helperLabel={isError ? '비밀번호가 일치하지 않습니다.' : ''}
+          isMarked={true}
         />
       </StyledInputContainer>
       <StyledButtonContainer>
