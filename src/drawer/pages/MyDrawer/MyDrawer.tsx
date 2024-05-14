@@ -16,8 +16,10 @@ export type TabType = 'STAR' | 'MYDRAWER';
 
 export const MyDrawer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { data: bookmarkedData } = useGetBookmarked({ responseType: 'WEB', page: 0 });
-  const { data: myProductData } = useGetMyRegistered({ responseType: 'WEB', page: 0 });
+
+  const { data: bookmarkedData } = useGetBookmarked({ responseType: 'WEB' });
+  const { data: myProductData } = useGetMyRegistered({ responseType: 'WEB' });
+
   const initialTab = searchParams.get('tab');
 
   const [currentTab, setCurrentTab] = useState<TabType>(
@@ -55,10 +57,10 @@ export const MyDrawer = () => {
         />
       </StyledTabWrapper>
       <Spacing direction={'vertical'} size={14} />
-      {drawerData.length > 0 ? (
+      {drawerData.pages.length > 0 ? (
         <>
           <StyledDescription>{TAB_DESCRIPTION[currentTab]}</StyledDescription>
-          <CardLayout data={drawerData} type={currentTab} />
+          <CardLayout data={drawerData.pages.flatMap((page) => page)} type={currentTab} />
         </>
       ) : (
         <EmptyScreen type={currentTab} />
