@@ -34,7 +34,7 @@ export const MoreProductSection = ({
           }}
         />
       </StyledContainer>
-      {data.map(({ productTitle, count, productNo, mainImage }) => (
+      {data.slice(0, 5).map(({ productTitle, count, productNo, mainImage }) => (
         <SmallDrawerCard
           key={productNo}
           link={`/drawer/services/${productNo}`}
