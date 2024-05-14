@@ -101,8 +101,8 @@ export const ServiceDetail = () => {
     },
   });
 
-  const handleClickShare = () => {
-    navigator.clipboard.writeText(window.location.href);
+  const handleClickShare = async () => {
+    await navigator.clipboard.writeText(window.location.href);
     showToast(toastProps.duration);
   };
 
