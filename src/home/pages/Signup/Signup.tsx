@@ -16,7 +16,7 @@ type SignupFunnelStepsType =
   | '회원가입완료';
 
 export const Signup = () => {
-  const [Funnel, setStep] = useFunnel<SignupFunnelStepsType>('이메일인증');
+  const [Funnel, setStep] = useFunnel<SignupFunnelStepsType>('약관동의');
   const [email, setEmail] = useState('');
 
   return (

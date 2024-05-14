@@ -1,4 +1,4 @@
-import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
+import { BoxButton, PlainButton, SuffixTextField } from '@yourssu/design-system-react';
 
 import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
@@ -13,7 +13,6 @@ import {
 import {
   StyledButtonsContainer,
   StyledEmailFieldWrapper,
-  StyledEmailSuffix,
   StyledPlainButtonWrapper,
   StyledTextFieldLabel,
 } from './EmailForm.style';
@@ -27,13 +26,13 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
       <div>
         <StyledTextFieldLabel>숭실대학교 메일을 입력해주세요.</StyledTextFieldLabel>
         <StyledEmailFieldWrapper>
-          <SimpleTextField
+          <SuffixTextField
             value={email}
             onChange={onChange}
             isNegative={!!emailError}
             helperLabel={emailError}
             placeholder="ppushoong"
-            suffix={<StyledEmailSuffix>{EMAIL_DOMAIN}</StyledEmailSuffix>}
+            suffix={EMAIL_DOMAIN}
             autoFocus
           />
         </StyledEmailFieldWrapper>
