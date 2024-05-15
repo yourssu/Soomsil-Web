@@ -116,51 +116,6 @@ export const StyledDescriptionSection = styled.div`
   position: relative;
 `;
 
-export const StyledCarousel = styled.div`
-  display: flex;
-  gap: 10px;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-interface StyledCarouselButtonProps {
-  $backgroundImage: string;
-  $left?: string;
-  $right?: string;
-}
-
-export const StyledCarouselButton = styled.input<StyledCarouselButtonProps>`
-  background-image: url(${(props) => props.$backgroundImage});
-  background-color: transparent;
-
-  width: 3rem;
-  height: 3rem;
-
-  position: absolute;
-  top: 120px;
-  left: ${(props) => props.$left && props.$left};
-  right: ${(props) => props.$right && props.$right};
-
-  border: none;
-  border-radius: 24px;
-  cursor: pointer;
-`;
-
-export const StyledProductImage = styled.img`
-  flex-shrink: 0;
-  width: 440px;
-  height: 296px;
-  border-radius: 0.5rem;
-  margin: 0 auto;
-  object-fit: cover;
-`;
-
 export const StyledDescriptionPart = styled.div`
   display: grid;
   gap: 0.875rem;

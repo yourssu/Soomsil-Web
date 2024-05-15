@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   BoxButton,
@@ -16,9 +14,8 @@ import { useTheme } from 'styled-components';
 
 import { deleteBookmarked } from '@/drawer/apis/deleteBookmarked';
 import { postBookmarked } from '@/drawer/apis/postBookmarked';
-import carouselLeftButton from '@/drawer/assets/carousel_left_button.svg';
-import carouselRightButton from '@/drawer/assets/carousel_right_button.svg';
-import { MoreProductSection } from '@/drawer/components/MoreProductSection/MoreProductSection';
+import { Carousel } from '@/drawer/components/ServiceDetailContents/Carousel/Carousel';
+import { MoreProductSection } from '@/drawer/components/ServiceDetailContents/MoreProductSection/MoreProductSection';
 import { CategoryObj } from '@/drawer/constants/category.constant';
 import { useGetProductDetail } from '@/drawer/hooks/useGetProductDetail';
 
@@ -38,10 +35,7 @@ import {
   StyledDescription,
   StyledDescriptionPart,
   StyledDescriptionSection,
-  StyledProductImage,
-  StyledCarousel,
   StyledSubtitle,
-  StyledCarouselButton,
   StyledLowerSection,
 } from './ServiceDetail.style';
 
@@ -58,24 +52,10 @@ export const ServiceDetail = () => {
 
   const theme = useTheme();
 
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-
   const { showToast, isShowToast } = useToast();
   const toastProps = {
     children: 'URL이 복사되었습니다',
     duration: 'short' as ToastDuration,
-  };
-
-  const handleCarouselClick = (event: React.MouseEvent) => {
-    const target = event.target as HTMLInputElement;
-    const scrollAmount = 450;
-
-    if (scrollRef.current) {
-      const x = scrollRef.current!.scrollLeft;
-      const scrollDirection = target.name === 'left' ? -scrollAmount : scrollAmount;
-
-      scrollRef.current.scrollTo(x + scrollDirection, 0);
-    }
   };
 
   const addBookmarkMutation = useMutation({
@@ -167,29 +147,7 @@ export const ServiceDetail = () => {
       </StyledBackgroundImageContainer>
       <StyledLowerSection>
         <StyledDescriptionSection>
-          <StyledCarousel ref={scrollRef}>
-            {product.introductionImage.length > 1 && (
-              <>
-                <StyledCarouselButton
-                  $backgroundImage={carouselLeftButton}
-                  $left={'-24px'}
-                  type="button"
-                  name="left"
-                  onClick={handleCarouselClick}
-                />
-                <StyledCarouselButton
-                  $backgroundImage={carouselRightButton}
-                  $right={'-24px'}
-                  type="button"
-                  name="right"
-                  onClick={handleCarouselClick}
-                />
-              </>
-            )}
-            {product.introductionImage.map((imageSrc) => (
-              <StyledProductImage src={imageSrc} key={imageSrc} />
-            ))}
-          </StyledCarousel>
+          <Carousel introductionImage={product.introductionImage} />
           <StyledDescriptionPart>
             <StyledSubtitle>{`추천`}</StyledSubtitle>
             <StyledDescription>
