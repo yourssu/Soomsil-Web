@@ -6,7 +6,6 @@ import {
   IconContext,
   IcStarFilled,
   useToast,
-  ToastDuration,
   Toast,
 } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
@@ -36,8 +35,8 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
   const { showToast, isShowToast } = useToast();
   const toastProps = {
     children: 'URL이 복사되었습니다',
-    duration: 'short' as ToastDuration,
-  };
+    duration: 'short',
+  } as const;
 
   const addBookmarkMutation = useMutation({
     mutationFn: postBookmarked,
