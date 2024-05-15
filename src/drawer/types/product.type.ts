@@ -55,3 +55,8 @@ export interface GetProductByProviderProps {
   page?: number;
   category?: string;
 }
+
+export interface ProviderProductResponses {
+  providerName: string;
+  products: ProductResult[];
+}
