@@ -14,7 +14,7 @@ import { useTheme } from 'styled-components';
 
 import { deleteBookmarked } from '@/drawer/apis/deleteBookmarked';
 import { postBookmarked } from '@/drawer/apis/postBookmarked';
-import { Carousel } from '@/drawer/components/ServiceDetailContents/Carousel/Carousel';
+import { Description } from '@/drawer/components/ServiceDetailContents/Description/Description';
 import { MoreProductSection } from '@/drawer/components/ServiceDetailContents/MoreProductSection/MoreProductSection';
 import { CategoryObj } from '@/drawer/constants/category.constant';
 import { useGetProductDetail } from '@/drawer/hooks/useGetProductDetail';
@@ -32,10 +32,6 @@ import {
   StyledServiceInfoContainer,
   StyledServiceTitleText,
   StyledThumbnailImage,
-  StyledDescription,
-  StyledDescriptionPart,
-  StyledDescriptionSection,
-  StyledSubtitle,
   StyledLowerSection,
 } from './ServiceDetail.style';
 
@@ -146,29 +142,7 @@ export const ServiceDetail = () => {
         </StyledServiceActionContainer>
       </StyledBackgroundImageContainer>
       <StyledLowerSection>
-        <StyledDescriptionSection>
-          <Carousel introductionImage={product.introductionImage} />
-          <StyledDescriptionPart>
-            <StyledSubtitle>{`추천`}</StyledSubtitle>
-            <StyledDescription>
-              {product.count}+
-              <IconContext.Provider value={{ size: '15px', color: '#FDD655' }}>
-                <IcStarFilled />
-              </IconContext.Provider>
-            </StyledDescription>
-          </StyledDescriptionPart>
-
-          <StyledDescriptionPart>
-            <StyledSubtitle>{`서비스 소개`}</StyledSubtitle>
-            <StyledDescription>{product.productContent}</StyledDescription>
-          </StyledDescriptionPart>
-
-          <StyledDescriptionPart>
-            <StyledSubtitle>{`저작권`}</StyledSubtitle>
-            <StyledDescription>{product.providerName}</StyledDescription>
-          </StyledDescriptionPart>
-        </StyledDescriptionSection>
-
+        <Description product={product} />
         {/* <MoreProductSection providerName={product.providerName} providerId={product.providerId} /> */}
       </StyledLowerSection>
       {isShowToast && <Toast {...toastProps} />}
