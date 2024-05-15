@@ -1,10 +1,10 @@
-import Logo from '@/assets/soomsil_v2_logo.svg';
+import Logo from '@/assets/soomsil_logo.svg';
 
 import {
   StyledChangePasswordFrame,
-  StyledLogo,
   StyledContainer,
   StyledLink,
+  StyledLogo,
 } from './ChangePasswordFrame.style';
 
 interface ChangePasswordFrameProps {

@@ -1,7 +1,7 @@
 import { IcPersoncircleLine, IcSearchLine, IconContext } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
 
-import soomsil from '@/assets/soomsil_v2_logo.svg';
+import soomsil from '@/assets/soomsil_logo.svg';
 import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 
 import {

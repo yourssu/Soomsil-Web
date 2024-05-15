@@ -3,17 +3,17 @@ import { useEffect, useState } from 'react';
 import { BoxButton, CheckBox } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
-import Logo from '@/assets/soomsil_v2_logo.svg';
+import Logo from '@/assets/soomsil_logo.svg';
 
 import {
-  StyledWrapper,
-  StyledWithdrawContainer,
-  StyledTitleText,
-  StyledSubTitleText,
-  StyledText,
   StyledButtonText,
   StyledLeft,
   StyledListItem,
+  StyledSubTitleText,
+  StyledText,
+  StyledTitleText,
+  StyledWithdrawContainer,
+  StyledWrapper,
 } from './Withdraw.style';
 
 export const Withdraw = () => {

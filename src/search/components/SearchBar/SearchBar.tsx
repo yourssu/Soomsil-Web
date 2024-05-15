@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import logo from '@/assets/soomsil_v2_logo.svg';
+import logo from '@/assets/soomsil_logo.svg';
 
 import { StyledLogo, StyledSearchBar, StyledSearchBoxWrap } from './SearchBar.style';
 import { SearchBox } from './SearchBox';
