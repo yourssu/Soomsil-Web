@@ -19,6 +19,7 @@ import { postBookmarked } from '@/drawer/apis/postBookmarked';
 import carouselLeftButton from '@/drawer/assets/carousel_left_button.svg';
 import carouselRightButton from '@/drawer/assets/carousel_right_button.svg';
 import { MoreProductSection } from '@/drawer/components/MoreProductSection/MoreProductSection';
+import { CategoryObj } from '@/drawer/constants/category.constant';
 import { useGetProductDetail } from '@/drawer/hooks/useGetProductDetail';
 
 import {
@@ -43,16 +44,6 @@ import {
   StyledCarouselButton,
   StyledLowerSection,
 } from './ServiceDetail.style';
-
-const Category = {
-  CAMPUS: '교내생활',
-  HOBBY: '취미',
-  HEALTH: '건강',
-  IT: 'IT',
-  KNOWLEDGE: '지식',
-  LIFESTYLE: '라이프스타일',
-  ETC: '기타',
-};
 
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
@@ -114,7 +105,7 @@ export const ServiceDetail = () => {
         <StyledServiceInfoContainer>
           <StyledThumbnailImage src={product.thumbnail} />
           <StyledCategoryContainer>
-            <StyledCategoryText>{Category[product.category]}</StyledCategoryText>
+            <StyledCategoryText>{CategoryObj[product.category]}</StyledCategoryText>
             <StyledCategoryHintText>카테고리</StyledCategoryHintText>
           </StyledCategoryContainer>
         </StyledServiceInfoContainer>
