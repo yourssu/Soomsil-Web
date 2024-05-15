@@ -30,11 +30,11 @@ export const Provider = () => {
       <StyledProviderContainer $isSmallDesktop={isSmallDesktop}>
         {isSmallDesktop && <CategoryDropdownMenu />}
         <div>
-          <StyledProviderName>{providerId}</StyledProviderName>
+          <StyledProviderName>{data.providerName}</StyledProviderName>
           <StyledDescription>개발자의 서비스를 확인해보세요.</StyledDescription>
         </div>
-        {data.length > 0 ? (
-          <CardLayout data={data} type={'PROVIDER'} />
+        {data.products.length > 0 ? (
+          <CardLayout data={data.products} type={'PROVIDER'} />
         ) : (
           <EmptyScreen type={'PROVIDER'} />
         )}
