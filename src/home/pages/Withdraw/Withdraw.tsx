@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/soomsil_v2_logo.svg';
 import { postWithdraw } from '@/home/apis/postWithdraw';
+import { WithdrawSuccess } from '@/home/components/WithdrawSuccess/WithdrawSuccess';
 
 import {
   StyledWrapper,
@@ -15,8 +16,6 @@ import {
   StyledButtonText,
   StyledLeft,
   StyledListItem,
-  StyledDoneText,
-  StyledDoneButtonText,
 } from './Withdraw.style';
 
 export const Withdraw = () => {
@@ -51,10 +50,10 @@ export const Withdraw = () => {
 
   return (
     <StyledWrapper>
-      <img onClick={handleGoToHome} src={Logo} alt={'Logo-image'} width={180} height={38} />
+      <img onClick={handleGoToHome} src={Logo} alt="Logo-image" width={180} height={38} />
       <StyledWithdrawContainer>
         {draw ? (
-          <Withdrawn handleGoToHome={handleGoToHome} />
+          <WithdrawSuccess onConfirm={handleGoToHome} />
         ) : (
           <>
             <StyledTitleText>계정 탈퇴</StyledTitleText>
@@ -87,22 +86,5 @@ export const Withdraw = () => {
         )}
       </StyledWithdrawContainer>
     </StyledWrapper>
-  );
-};
-
-const Withdrawn = ({ handleGoToHome }: { handleGoToHome: () => void }) => {
-  return (
-    <>
-      <StyledDoneText>계정 탈퇴가 완료되었습니다</StyledDoneText>
-      <BoxButton
-        style={{ width: 432, height: 48 }}
-        rounding={8}
-        size="large"
-        variant="filled"
-        onClick={handleGoToHome}
-      >
-        <StyledDoneButtonText>숨쉴 홈으로 이동</StyledDoneButtonText>
-      </BoxButton>
-    </>
   );
 };

@@ -52,13 +52,3 @@ export const StyledText = styled.ul`
 export const StyledListItem = styled.li`
   margin-bottom: 10px;
 `;
-
-export const StyledDoneText = styled.p`
-  ${({ theme }) => theme.typo.subtitle2};
-  color: ${({ theme }) => theme.color.textSecondary};
-  text-align: center;
-`;
-
-export const StyledDoneButtonText = styled.div`
-  ${({ theme }) => theme.typo.button0};
-`;
