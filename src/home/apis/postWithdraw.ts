@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 
 import { authClient } from '@/apis';
 import { PostWithdrawResponse, AuthErrorData } from '@/home/types/Auth.type';
@@ -15,7 +15,8 @@ export const postWithdraw = async (): Promise<PostWithdrawResponse> => {
     );
     api.logout();
     return { success: true };
-  } catch (error: unknown) {
-    return { success: false, error: error as AxiosError<AuthErrorData> };
+  } catch (error) {
+    if (isAxiosError<AuthErrorData>(error)) return { success: false, error };
+    return Promise.reject(error);
   }
 };
