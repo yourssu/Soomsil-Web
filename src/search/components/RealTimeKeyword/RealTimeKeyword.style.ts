@@ -1,61 +1,50 @@
+import { ListItem } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  position: relative;
   padding: 1.25rem;
-  max-width: 25rem;
-  min-width: 25rem;
+  width: 25rem;
   height: 38.7rem;
-  gap: 0.625rem;
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
   background: ${({ theme }) => theme.color.bgNormal};
 `;
 
-export const StyledHeader = styled.div`
-  display: flex;
-  position: relative;
+export const StyledTitleContainer = styled.div`
   padding: 0.5rem;
+  margin-bottom: 0.75rem;
 `;
 
-export const StyledHeaderTextSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5rem;
-`;
-
-export const StyledHeaderTitle = styled.span`
+export const StyledTitle = styled.div`
+  margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.color.textPrimary};
-
-  ${({ theme }) => theme.typo.subtitle1};
+  ${({ theme }) => theme.typo.subtitle3};
 `;
 
-export const StyledHeaderTime = styled.span`
+export const StyledUpdateDate = styled.div`
   color: ${({ theme }) => theme.color.textTertiary};
-
-  ${({ theme }) => theme.typo.body2}
+  ${({ theme }) => theme.typo.body3}
 `;
 
-export const StyledHeaderImageSection = styled.img`
-  width: 12.6875rem;
-  height: 8.5rem;
-
-  position: absolute;
-  right: -1.25rem;
-  top: -3.125rem;
+export const StyledList = styled.div`
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-auto-flow: column;
+  grid-column-gap: 0.5rem;
 `;
 
-export const StyledListItemText = styled.p`
+export const StyledListItem = styled(ListItem)`
+  padding: 0.625rem 0.75rem;
+`;
+
+export const StyledListItemKeyword = styled.p`
   color: ${({ theme }) => theme.color.textPrimary};
+  ${({ theme }) => theme.typo.body1};
 
-  /* PC & Android/body18 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 interface StyledListItemRankingProp {
@@ -72,7 +61,11 @@ export const StyledListItemRanking = styled.span<StyledListItemRankingProp>`
   margin-right: 1rem;
 `;
 
-export const StyledList = styled.div`
-  display: flex;
-  flex-direction: column;
+export const StyledImage = styled.img`
+  width: 12.6875rem;
+  height: 8.5rem;
+
+  position: absolute;
+  right: 0;
+  top: -3.125rem;
 `;

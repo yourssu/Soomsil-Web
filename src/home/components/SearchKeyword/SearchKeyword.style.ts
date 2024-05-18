@@ -6,13 +6,12 @@ interface StyledRankProps {
 }
 
 export const StyledContainer = styled.div`
-  width: 32.5rem;
   position: relative;
-  padding: 0.9375rem;
-
+  padding: 1rem;
+  width: 32.5rem;
+  height: auto;
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
-
   background: ${({ theme }) => theme.color.bgNormal};
 `;
 
@@ -23,19 +22,16 @@ export const StyledTitleContainer = styled.div`
 
 export const StyledTitle = styled.div`
   margin-bottom: 0.5rem;
-
   color: ${({ theme }) => theme.color.textPrimary};
   ${({ theme }) => theme.typo.subtitle3};
 `;
 
 export const StyledUpdateDate = styled.div`
-  height: 0.875rem;
-
   color: ${({ theme }) => theme.color.textTertiary};
   ${({ theme }) => theme.typo.caption2}
 `;
 
-export const StyledListContainer = styled.div`
+export const StyledList = styled.div`
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: 1fr 1fr;
@@ -44,11 +40,10 @@ export const StyledListContainer = styled.div`
 `;
 
 export const StyledListItem = styled(ListItem)`
-  min-height: 2.9375rem;
   padding: 0.625rem 0.75rem;
 `;
 
-export const StyledRank = styled.span<StyledRankProps>`
+export const StyledListItemRanking = styled.span<StyledRankProps>`
   color: ${(props) => (props.$rank < 4 ? '#8A2AC5' : props.theme.color.textTertiary)};
 
   // YDS 지정이 되어 있지 않아 임시로 작업했습니다.
@@ -61,7 +56,6 @@ export const StyledRank = styled.span<StyledRankProps>`
 
 export const StyledListItemKeyword = styled.div`
   width: 7.375rem;
-  height: 1.6875rem;
 
   color: ${({ theme }) => theme.color.textPrimary};
   ${({ theme }) => theme.typo.body1};
