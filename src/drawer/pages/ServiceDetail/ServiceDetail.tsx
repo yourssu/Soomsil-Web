@@ -21,7 +21,7 @@ import {
 
 export const ServiceDetail = () => {
   const { serviceId } = useParams();
-  const { product } = useGetProductDetail(Number(serviceId));
+  const { data: product } = useGetProductDetail(Number(serviceId));
 
   return (
     <StyledServiceDetailContainer>
