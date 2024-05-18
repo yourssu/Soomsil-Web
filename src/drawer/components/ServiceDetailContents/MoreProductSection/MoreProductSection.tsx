@@ -21,7 +21,7 @@ export const MoreProductSection = ({
 
   const navigate = useNavigate();
 
-  if (data.length === 0) return;
+  if (data.length === 0) return null;
   return (
     <StyledMoreProductSection>
       <StyledContainer>
