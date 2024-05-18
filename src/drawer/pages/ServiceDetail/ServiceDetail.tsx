@@ -39,7 +39,7 @@ export const ServiceDetail = () => {
       </StyledBackgroundImageContainer>
       <StyledLowerSection>
         <Description product={product} />
-        {/* <MoreProductSection providerName={product.providerName} providerId={product.providerId} /> */}
+        <MoreProductSection providerId={product.providerId} />
       </StyledLowerSection>
     </StyledServiceDetailContainer>
   );

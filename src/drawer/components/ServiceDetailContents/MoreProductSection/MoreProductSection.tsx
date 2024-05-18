@@ -10,18 +10,14 @@ import {
   StyledMoreProductSection,
 } from './MoreProductSection.style';
 
-export const MoreProductSection = ({
-  providerName,
-  providerId,
-}: {
-  providerName: string;
-  providerId: string;
-}) => {
-  const { data } = useGetProductByProvider({ providerId });
+export const MoreProductSection = ({ providerId }: { providerId: string }) => {
+  const {
+    data: { providerName, products },
+  } = useGetProductByProvider({ providerId });
 
   const navigate = useNavigate();
 
-  if (data.products.length === 0) return null;
+  if (products.length === 0) return null;
   return (
     <StyledMoreProductSection>
       <StyledContainer>
@@ -34,14 +30,14 @@ export const MoreProductSection = ({
           }}
         />
       </StyledContainer>
-      {data.products.slice(0, 5).map(({ productTitle, count, productNo, mainImage }) => (
+      {products.slice(0, 5).map(({ productTitle, count, productNo, mainImage, isBookmarked }) => (
         <SmallDrawerCard
           key={productNo}
           link={`/drawer/services/${productNo}`}
           title={productTitle}
           body={providerName}
           bookmarkCount={count}
-          isBookmarked={true}
+          isBookmarked={isBookmarked}
           smallImgSrc={mainImage}
         />
       ))}
