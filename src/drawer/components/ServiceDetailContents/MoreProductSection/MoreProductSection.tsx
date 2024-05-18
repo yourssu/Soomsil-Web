@@ -21,7 +21,7 @@ export const MoreProductSection = ({
 
   const navigate = useNavigate();
 
-  if (data.length === 0) return null;
+  if (data.products.length === 0) return null;
   return (
     <StyledMoreProductSection>
       <StyledContainer>
@@ -34,7 +34,7 @@ export const MoreProductSection = ({
           }}
         />
       </StyledContainer>
-      {data.slice(0, 5).map(({ productTitle, count, productNo, mainImage }) => (
+      {data.products.slice(0, 5).map(({ productTitle, count, productNo, mainImage }) => (
         <SmallDrawerCard
           key={productNo}
           link={`/drawer/services/${productNo}`}

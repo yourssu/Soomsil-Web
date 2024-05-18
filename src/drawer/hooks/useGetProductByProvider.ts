@@ -20,6 +20,5 @@ export const useGetProductByProvider = ({
       return getProductByProvider({ providerId, page, category: selectedCategory });
     },
     retry: false,
-    select: (data) => data.productList,
   });
 };
