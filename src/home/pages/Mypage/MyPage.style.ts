@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Background from '@/assets/home/background.png';
@@ -18,6 +19,10 @@ export const StyledHeader = styled.div`
   background-image: url(${Background});
   background-size: cover;
   background-position: center -18.75rem;
+`;
+
+export const StyledLogoContainer = styled(Link)`
+  display: flex;
 `;
 
 export const StyledSoomsilLogo = styled.img`

@@ -21,6 +21,7 @@ class TokenService {
     this.cookie.remove('accessToken', { path: '/' });
     this.cookie.remove('refreshToken', { path: '/' });
   }
+
   get headers() {
     if (this.getAccessToken())
       return {

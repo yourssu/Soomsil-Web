@@ -14,10 +14,10 @@ export const MoreProductSection = ({
 
   return (
     <>
-      {isSuccess && data.length > 0 && (
+      {isSuccess && data && (
         <StyledMoreProductSection>
           {providerName}의 서비스 더보기
-          {data.map(({ productTitle, count, productNo, mainImage }) => (
+          {data.products.map(({ productTitle, count, productNo, mainImage }) => (
             <SmallDrawerCard
               key={productNo}
               link={`/drawer/services/${productNo}`}

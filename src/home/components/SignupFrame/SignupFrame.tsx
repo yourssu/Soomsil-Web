@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import Logo from '@/assets/soomsil_v2_logo.svg';
+import Logo from '@/assets/soomsil_logo.svg';
 
 import {
   StyledSignupFrame,

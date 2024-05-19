@@ -12,6 +12,7 @@ export const StyledSignupFrame = styled.div`
 
 export const StyledSignupFrameLogo = styled.img`
   width: 180px;
+  cursor: pointer;
 `;
 
 export const StyledSignupFrameContentContainer = styled.div`

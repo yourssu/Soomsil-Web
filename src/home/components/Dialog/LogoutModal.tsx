@@ -1,7 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { BoxButton } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 
 import PpussungIcon from '@/assets/home/ppussung.svg';
+import { api } from '@/service/TokenService';
 
 import {
   StyledButtonContainer,
@@ -18,6 +20,14 @@ interface LogoutModalProps {
 }
 
 export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    api.logout();
+    alert('로그아웃 되었습니다.');
+    navigate('/');
+  };
+
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
@@ -30,7 +40,13 @@ export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
           <StyledButtonContainer>
             <Dialog.Close asChild>
               <div>
-                <BoxButton variant="filled" size="large" rounding={4} width="100%">
+                <BoxButton
+                  variant="filled"
+                  size="large"
+                  rounding={4}
+                  width="100%"
+                  onClick={handleLogout}
+                >
                   로그아웃
                 </BoxButton>
               </div>
