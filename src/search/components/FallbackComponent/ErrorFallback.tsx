@@ -2,10 +2,8 @@ import { FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
 
 import { Spacing } from '@/components/Spacing/Spacing';
-import { CustomErrorType } from '@/search/apis/getSearch';
 import ppussungError from '@/search/assets/ppussungError.svg';
 import { NAVIGATION_OPTIONS } from '@/search/constant';
-import { CustomErrorCode } from '@/search/constant/customError';
 
 import {
   StyledBoldText,
@@ -15,18 +13,9 @@ import {
   StyledTextContainer,
   StyledButtonContainer,
   StyledBoxButton,
-} from './FallbackComponent.style';
+} from './ErrorFallback.style';
 
-interface FallbackComponentProps extends FallbackProps {
-  children: React.ReactNode;
-  error: CustomErrorType;
-}
-
-export const FallbackComponent = ({
-  error,
-  resetErrorBoundary,
-  children,
-}: FallbackComponentProps) => {
+export const ErrorFallback = ({ resetErrorBoundary }: FallbackProps) => {
   const navigate = useNavigate();
 
   const handleClick = (option: keyof typeof NAVIGATION_OPTIONS) => {
@@ -43,10 +32,6 @@ export const FallbackComponent = ({
     }
   };
 
-  if (error?.statusCode === CustomErrorCode.NoResult) {
-    return <>{children}</>;
-  }
-
   return (
     <StyledContainer>
       <StyledTextButtonContainer>
@@ -59,7 +44,7 @@ export const FallbackComponent = ({
         </StyledTextContainer>
         <StyledButtonContainer>
           <StyledBoxButton variant="line" onClick={() => handleClick('HOME')}>
-            숭실 홈으로
+            숨쉴 홈으로
           </StyledBoxButton>
           <StyledBoxButton variant="filled" onClick={() => handleClick('PREVIOUS')}>
             이전 페이지
