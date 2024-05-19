@@ -1,13 +1,13 @@
 import { InfiniteData, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
-import { getSearch, CustomErrorType } from '../apis/getSearch';
+import { getSearch } from '../apis/getSearch';
 import { GetSearchProps } from '../types/GetSearch.type';
 import { SearchResponse } from '../types/ResultListItem.type';
 
 export const useGetSearch = ({ query }: GetSearchProps) => {
   return useSuspenseInfiniteQuery<
     SearchResponse,
-    CustomErrorType,
+    Error,
     InfiniteData<SearchResponse>,
     string[],
     number
