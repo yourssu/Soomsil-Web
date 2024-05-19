@@ -11,7 +11,7 @@ export const WithdrawSuccess = ({ onConfirm }: WithdrawSuccessProps) => {
     <>
       <StyledDoneText>계정 탈퇴가 완료되었습니다</StyledDoneText>
       <BoxButton
-        style={{ width: 432, height: 48 }}
+        style={{ width: 432 }}
         rounding={8}
         size="large"
         variant="filled"
