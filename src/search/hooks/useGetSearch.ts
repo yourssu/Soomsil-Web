@@ -22,11 +22,7 @@ export const useGetSearch = ({ query }: GetSearchProps) => {
 
       return allPages.length;
     },
-    retryDelay: (_, error) => {
-      if (error.statusCode === 1000) {
-        return 0;
-      }
-
+    retryDelay: () => {
       return 1000;
     },
     staleTime: 1000 * 60 * 5,
