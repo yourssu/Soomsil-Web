@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { BoxButton, CheckBox } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/soomsil_logo.svg';
+import { postWithdraw } from '@/home/apis/postWithdraw';
+import { WithdrawSuccess } from '@/home/components/WithdrawSuccess/WithdrawSuccess';
 
 import {
   StyledButtonText,
@@ -17,23 +19,41 @@ import {
 } from './Withdraw.style';
 
 export const Withdraw = () => {
+  const navigate = useNavigate();
   const [agreed, setAgreed] = useState(false);
   const [draw, setDraw] = useState(false);
+
+  const handleGoToHome = () => {
+    navigate('/');
+  };
 
   const handleCheckAgree = () => {
     setAgreed((prevAgreed) => !prevAgreed);
   };
 
-  const handleWithdrawAgree = () => {
-    setDraw(true);
+  const handleWithdrawAgree = async () => {
+    try {
+      const { success, error } = await postWithdraw();
+      if (success) {
+        setDraw((prevDraw) => !prevDraw);
+      } else if (error) {
+        alert(`탈퇴 처리에 실패했습니다: ${error.message}`);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(`탈퇴 처리 중 오류가 발생했습니다: ${error.message}`);
+      } else {
+        alert(`알 수 없는 오류가 발생했습니다`);
+      }
+    }
   };
 
   return (
     <StyledWrapper>
-      <img src={Logo} alt={'Logo-image'} width={180} height={38} />
+      <img onClick={handleGoToHome} src={Logo} alt="Logo-image" width={180} height={38} />
       <StyledWithdrawContainer>
         {draw ? (
-          <Withdrawn />
+          <WithdrawSuccess onConfirm={handleGoToHome} />
         ) : (
           <>
             <StyledTitleText>계정 탈퇴</StyledTitleText>
@@ -67,17 +87,4 @@ export const Withdraw = () => {
       </StyledWithdrawContainer>
     </StyledWrapper>
   );
-};
-
-const Withdrawn = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/');
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [navigate]);
-
-  return <p>계정 탈퇴가 완료되었습니다.</p>;
 };
