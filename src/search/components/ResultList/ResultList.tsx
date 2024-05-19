@@ -6,6 +6,9 @@ import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
 import { useGetSearch } from '@/search/hooks/useGetSearch';
 import { useScrollObserve } from '@/search/hooks/useScrollObserve';
+import { NoResult } from '@/search/pages/NoResult/NoResult';
+
+import NoResultFallback from '../FallbackComponent/NoResultFallback';
 
 import { ResultListItem } from './ResultListItem';
 
@@ -20,18 +23,20 @@ export const ResultList = () => {
   const { lastElementRef } = useScrollObserve({ isPending, fetchNextPage, hasNextPage });
 
   return (
-    <Suspense fallback={<Loading />}>
-      {data?.pages.map((page) => {
-        return page.resultList.map((item, itemIndex) => {
-          const isLastItem = page.resultList.length === itemIndex + 1;
-          return (
-            <div key={item.id}>
-              <ResultListItem {...item} ref={isLastItem ? lastElementRef : null}></ResultListItem>
-              <Spacing direction="vertical" size={8} />
-            </div>
-          );
-        });
-      })}
-    </Suspense>
+    <NoResultFallback results={data?.pages[0].resultList} fallback={<NoResult />}>
+      <Suspense fallback={<Loading />}>
+        {data?.pages.map((page) => {
+          return page.resultList.map((item, itemIndex) => {
+            const isLastItem = page.resultList.length === itemIndex + 1;
+            return (
+              <div key={item.id}>
+                <ResultListItem {...item} ref={isLastItem ? lastElementRef : null}></ResultListItem>
+                <Spacing direction="vertical" size={8} />
+              </div>
+            );
+          });
+        })}
+      </Suspense>
+    </NoResultFallback>
   );
 };

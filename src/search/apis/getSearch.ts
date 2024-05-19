@@ -1,6 +1,5 @@
 import { searchClient } from '@/apis';
 
-import { CustomErrorCode } from '../constant/customError';
 import { GetSearchProps } from '../types/GetSearch.type';
 import { SearchResponse } from '../types/ResultListItem.type';
 
@@ -28,9 +27,6 @@ export const getSearch = async ({ query, page }: GetSearchProps) => {
       },
     })
     .then((response) => {
-      if (response.data.totalCount === 0) {
-        throw CustomError(CustomErrorCode.NoResult, '검색결과가 없습니다.', 'NoResultError');
-      }
       return response;
     });
 

@@ -2,13 +2,11 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { useSearchParams } from 'react-router-dom';
 
 import { Spacing } from '@/components/Spacing/Spacing';
-import { FallbackComponent } from '@/search/components/FallbackComponent/FallbackComponent';
+import { ErrorFallback } from '@/search/components/FallbackComponent/ErrorFallback';
 import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
 import { ResultList } from '@/search/components/ResultList/ResultList';
 import { SearchBar } from '@/search/components/SearchBar/SearchBar';
 import { TotalCount } from '@/search/components/TotalCount/TotalCount';
-
-import { NoResult } from '../NoResult/NoResult';
 
 import {
   StyledResultContent,
@@ -40,11 +38,7 @@ export const Search = () => {
             <StyledFlexGapContainer>
               <StyledResultListItemsWrap>
                 <ErrorBoundary
-                  fallbackRender={(fallbackProps) => (
-                    <FallbackComponent {...fallbackProps}>
-                      <NoResult />
-                    </FallbackComponent>
-                  )}
+                  fallbackRender={(fallbackProps) => <ErrorFallback {...fallbackProps} />}
                   resetKeys={[query]}
                 >
                   <ResultList />
