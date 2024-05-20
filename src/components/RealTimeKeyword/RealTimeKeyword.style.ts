@@ -100,7 +100,7 @@ export const StyledImage = styled.img<StyledImageProps>`
   top: ${(prop: StyledImageProps) => prop.imageTop};
 `;
 
-export type RealTimeKeywordProps = StyledContainerProps &
+export type RealTimeKeywordStyleProps = StyledContainerProps &
   StyledTitleContainerProps &
   StyledUpdateDateProps &
   StyledListProps &

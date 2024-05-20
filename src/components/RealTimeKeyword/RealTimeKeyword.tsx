@@ -14,28 +14,79 @@ import {
   StyledListItemRanking,
   StyledListItemKeyword,
   StyledListItem,
-  RealTimeKeywordProps,
+  RealTimeKeywordStyleProps,
 } from '@/components/RealTimeKeyword/RealTimeKeyword.style.ts';
 import { useGetRealTimeKeyword } from '@/search/hooks/useGetRealTimeKeyword.ts';
 import { formatDateTime } from '@/utils/formatDateTime.ts';
 
-export const RealTimeKeyword = (props: RealTimeKeywordProps) => {
+type VariantType = 'home' | 'search';
+
+const variantStyles: { [key in VariantType]: RealTimeKeywordStyleProps } = {
+  home: {
+    containerPadding: '1rem',
+    containerWidth: '32.5rem',
+    containerHeight: 'auto',
+    titleContainerPadding: '0.3125rem 0.5rem',
+    titleContainerMarginBottom: '0.5rem',
+    updateDateTypo: 'caption2',
+    columnCount: 2,
+    keywordWidth: '7.375rem',
+    imageWidth: '10.3125rem',
+    imageHeight: '6.875rem',
+    imageTop: '-1.125rem',
+    imageRight: '0.9375rem',
+  },
+  search: {
+    containerPadding: '1.25rem',
+    containerWidth: '25rem',
+    containerHeight: '38.7rem',
+    titleContainerPadding: '0.5rem',
+    titleContainerMarginBottom: '0.75rem',
+    updateDateTypo: 'body3',
+    columnCount: 1,
+    keywordWidth: 'auto',
+    imageWidth: '12.6875rem',
+    imageHeight: '8.5rem',
+    imageTop: '-3.125rem',
+    imageRight: '0',
+  },
+};
+
+interface RealTimeKeywordProps {
+  variant: VariantType;
+}
+
+export const RealTimeKeyword = ({ variant }: RealTimeKeywordProps) => {
   const { data } = useGetRealTimeKeyword();
+  const {
+    containerPadding,
+    containerWidth,
+    containerHeight,
+    titleContainerPadding,
+    titleContainerMarginBottom,
+    updateDateTypo,
+    columnCount,
+    keywordWidth,
+    imageWidth,
+    imageHeight,
+    imageTop,
+    imageRight,
+  } = variantStyles[variant];
 
   return (
     <StyledContainer
-      containerPadding={props.containerPadding}
-      containerWidth={props.containerWidth}
-      containerHeight={props.containerHeight}
+      containerPadding={containerPadding}
+      containerWidth={containerWidth}
+      containerHeight={containerHeight}
     >
       <Suspense
         fallback={
-          <StyledUpdateDate updateDateTypo={props.updateDateTypo}>연결 중입니다.</StyledUpdateDate>
+          <StyledUpdateDate updateDateTypo={updateDateTypo}>연결 중입니다.</StyledUpdateDate>
         }
       >
         <StyledTitleContainer
-          titleContainerPadding={props.titleContainerPadding}
-          titleContainerMarginBottom={props.titleContainerMarginBottom}
+          titleContainerPadding={titleContainerPadding}
+          titleContainerMarginBottom={titleContainerMarginBottom}
         >
           <StyledTitle>
             숨쉬듯이
@@ -43,18 +94,18 @@ export const RealTimeKeyword = (props: RealTimeKeywordProps) => {
             검색한 키워드
           </StyledTitle>
           <StyledUpdateDate
-            updateDateTypo={props.updateDateTypo}
+            updateDateTypo={updateDateTypo}
           >{`${formatDateTime(data.basedTime)} 기준`}</StyledUpdateDate>
         </StyledTitleContainer>
         <StyledImage
-          imageHeight={props.imageHeight}
-          imageWidth={props.imageWidth}
-          imageRight={props.imageRight}
-          imageTop={props.imageTop}
+          imageHeight={imageHeight}
+          imageWidth={imageWidth}
+          imageRight={imageRight}
+          imageTop={imageTop}
           src={RealTimeKeywordImage}
           alt="뿌슝이"
         />
-        <StyledList columnCount={props.columnCount}>
+        <StyledList columnCount={columnCount}>
           {data.queries.map((value, index) => (
             <Link key={value.query} to={`/search?query=${value.query}`}>
               <StyledListItem
@@ -72,7 +123,7 @@ export const RealTimeKeyword = (props: RealTimeKeywordProps) => {
                   </IconContext.Provider>
                 }
                 children={
-                  <StyledListItemKeyword keywordWidth={props.keywordWidth}>
+                  <StyledListItemKeyword keywordWidth={keywordWidth}>
                     {value.query}
                   </StyledListItemKeyword>
                 }
