@@ -122,12 +122,11 @@ export const RealTimeKeyword = ({ variant }: RealTimeKeywordProps) => {
                     <IcSearchLine />
                   </IconContext.Provider>
                 }
-                children={
-                  <StyledListItemKeyword keywordWidth={keywordWidth}>
-                    {value.query}
-                  </StyledListItemKeyword>
-                }
-              />
+              >
+                <StyledListItemKeyword keywordWidth={keywordWidth}>
+                  {value.query}
+                </StyledListItemKeyword>
+              </StyledListItem>
             </Link>
           ))}
         </StyledList>
