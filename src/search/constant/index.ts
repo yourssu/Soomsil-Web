@@ -35,3 +35,8 @@ export const SEARCH_BOX_RADIAL_GRADIENT: Record<string, Record<SearchSize, strin
 };
 
 export const RESULT_LIST_ITEM_THUMNAIL_LENGTH = 5;
+
+export const NAVIGATION_OPTIONS = {
+  HOME: 'home',
+  PREVIOUS: 'previous',
+};

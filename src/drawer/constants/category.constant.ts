@@ -10,3 +10,8 @@ export const CategoryList: CategoryInfo[] = [
   { category: 'LIFESTYLE', title: '라이프스타일', subcategories: '(소셜 네트워킹, 미디어, 일상)' },
   { category: 'ETC', title: '기타' },
 ];
+
+export const CategoryObj = CategoryList.reduce((acc: Record<string, string>, curr) => {
+  if (curr.category) acc[curr.category] = curr.title;
+  return acc;
+}, {});
