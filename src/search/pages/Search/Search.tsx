@@ -1,16 +1,10 @@
-import { Suspense } from 'react';
-
 import { ErrorBoundary } from 'react-error-boundary';
 import { useSearchParams } from 'react-router-dom';
 
-import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
-import {
-  ResultListFallbackComponent,
-  TotalFallbackComponent,
-} from '@/search/components/FallbackComponent/FallbackComponent';
+import { ErrorFallback } from '@/search/components/FallbackComponent/ErrorFallback';
 import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
-import { ResultListItems } from '@/search/components/ResultListItem/ResultListItems';
+import { ResultList } from '@/search/components/ResultList/ResultList';
 import { SearchBar } from '@/search/components/SearchBar/SearchBar';
 import { TotalCount } from '@/search/components/TotalCount/TotalCount';
 
@@ -35,25 +29,19 @@ export const Search = () => {
         <StyledResultContentWrap>
           <StyledResultContent>
             <ErrorBoundary
-              fallbackRender={(fallbackProps) => <TotalFallbackComponent {...fallbackProps} />}
+              fallbackRender={() => <Spacing direction="vertical" size={21} />}
               resetKeys={[query]}
             >
-              <Suspense fallback={<Spacing direction="vertical" size={21} />}>
-                <TotalCount />
-              </Suspense>
+              <TotalCount />
             </ErrorBoundary>
             <Spacing direction="vertical" size={20} />
             <StyledFlexGapContainer>
               <StyledResultListItemsWrap>
                 <ErrorBoundary
-                  fallbackRender={(fallbackProps) => (
-                    <ResultListFallbackComponent {...fallbackProps} />
-                  )}
+                  fallbackRender={(fallbackProps) => <ErrorFallback {...fallbackProps} />}
                   resetKeys={[query]}
                 >
-                  <Suspense fallback={<Loading />}>
-                    <ResultListItems />
-                  </Suspense>
+                  <ResultList />
                 </ErrorBoundary>
               </StyledResultListItemsWrap>
               <RealTimeKeyword></RealTimeKeyword>
