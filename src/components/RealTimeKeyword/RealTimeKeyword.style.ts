@@ -6,6 +6,7 @@ interface StyledContainerProps {
   $containerWidth: string;
   $containerHeight: string;
 }
+
 export const StyledContainer = styled.div<StyledContainerProps>`
   position: relative;
   padding: ${({ $containerPadding }) => $containerPadding};
