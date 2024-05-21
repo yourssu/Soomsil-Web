@@ -63,11 +63,7 @@ interface StyledRankProps {
 
 export const StyledListItemRanking = styled.span<StyledRankProps>`
   color: ${({ $rank }) => ($rank < 4 ? '#8a2ac5' : '#8E9398')};
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%;
+  ${({ theme }) => theme.typo.subtitle4};
 `;
 
 interface StyledListItemKeywordProps {
