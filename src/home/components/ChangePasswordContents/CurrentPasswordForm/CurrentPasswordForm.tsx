@@ -16,9 +16,9 @@ interface CurrentPasswordFormProps {
   setSessionToken: ({ sessionToken }: SessionTokenType) => void;
 }
 
-export const CurrentPasswordForm = (Props: CurrentPasswordFormProps) => {
+export const CurrentPasswordForm = (props: CurrentPasswordFormProps) => {
   const { currentPassword, isError, handlePasswordChange, checkCurrentPassword } =
-    useCurrentPasswordForm(Props);
+    useCurrentPasswordForm(props);
 
   return (
     <StyledBoxContainer>
