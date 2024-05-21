@@ -4,9 +4,10 @@ import { useSearchParams } from 'react-router-dom';
 
 import { Loading } from '@/components/Loading/Loading';
 import { Spacing } from '@/components/Spacing/Spacing';
+import { useScrollObserve } from '@/hooks/useScrollObserve';
 import { useGetSearch } from '@/search/hooks/useGetSearch';
-import { useScrollObserve } from '@/search/hooks/useScrollObserve';
 import { NoResult } from '@/search/pages/NoResult/NoResult';
+import { SearchResponse } from '@/search/types/ResultListItem.type';
 
 import NoResultFallback from '../FallbackComponent/NoResultFallback';
 
@@ -20,7 +21,11 @@ export const ResultList = () => {
     query: query || '',
   });
 
-  const { lastElementRef } = useScrollObserve({ isPending, fetchNextPage, hasNextPage });
+  const { lastElementRef } = useScrollObserve<SearchResponse>({
+    isPending,
+    fetchNextPage,
+    hasNextPage,
+  });
 
   return (
     <NoResultFallback results={data?.pages[0].resultList} fallback={<NoResult />}>
