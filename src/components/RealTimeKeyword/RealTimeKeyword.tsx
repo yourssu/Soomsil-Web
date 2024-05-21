@@ -23,32 +23,32 @@ type VariantType = 'home' | 'search';
 
 const variantStyles: { [key in VariantType]: RealTimeKeywordStyleProps } = {
   home: {
-    containerPadding: '1rem',
-    containerWidth: '32.5rem',
-    containerHeight: 'auto',
-    titleContainerPadding: '0.3125rem 0.5rem',
-    titleContainerMarginBottom: '0.5rem',
-    updateDateTypo: 'caption2',
-    columnCount: 2,
-    keywordWidth: '7.375rem',
-    imageWidth: '10.3125rem',
-    imageHeight: '6.875rem',
-    imageTop: '-1.125rem',
-    imageRight: '0.9375rem',
+    $containerPadding: '1rem',
+    $containerWidth: '32.5rem',
+    $containerHeight: 'auto',
+    $titleContainerPadding: '0.3125rem 0.5rem',
+    $titleContainerMarginBottom: '0.5rem',
+    $updateDateTypo: 'caption2',
+    $columnCount: 2,
+    $keywordWidth: '7.375rem',
+    $imageWidth: '10.3125rem',
+    $imageHeight: '6.875rem',
+    $imageTop: '-1.125rem',
+    $imageRight: '0.9375rem',
   },
   search: {
-    containerPadding: '1.25rem',
-    containerWidth: '25rem',
-    containerHeight: '38.7rem',
-    titleContainerPadding: '0.5rem',
-    titleContainerMarginBottom: '0.75rem',
-    updateDateTypo: 'body3',
-    columnCount: 1,
-    keywordWidth: 'auto',
-    imageWidth: '12.6875rem',
-    imageHeight: '8.5rem',
-    imageTop: '-3.125rem',
-    imageRight: '0',
+    $containerPadding: '1.25rem',
+    $containerWidth: '25rem',
+    $containerHeight: '38.7rem',
+    $titleContainerPadding: '0.5rem',
+    $titleContainerMarginBottom: '0.75rem',
+    $updateDateTypo: 'body3',
+    $columnCount: 1,
+    $keywordWidth: 'auto',
+    $imageWidth: '12.6875rem',
+    $imageHeight: '8.5rem',
+    $imageTop: '-3.125rem',
+    $imageRight: '0',
   },
 };
 
@@ -59,34 +59,34 @@ interface RealTimeKeywordProps {
 export const RealTimeKeyword = ({ variant }: RealTimeKeywordProps) => {
   const { data } = useGetRealTimeKeyword();
   const {
-    containerPadding,
-    containerWidth,
-    containerHeight,
-    titleContainerPadding,
-    titleContainerMarginBottom,
-    updateDateTypo,
-    columnCount,
-    keywordWidth,
-    imageWidth,
-    imageHeight,
-    imageTop,
-    imageRight,
+    $containerPadding,
+    $containerWidth,
+    $containerHeight,
+    $titleContainerPadding,
+    $titleContainerMarginBottom,
+    $updateDateTypo,
+    $columnCount,
+    $keywordWidth,
+    $imageWidth,
+    $imageHeight,
+    $imageTop,
+    $imageRight,
   } = variantStyles[variant];
 
   return (
     <StyledContainer
-      containerPadding={containerPadding}
-      containerWidth={containerWidth}
-      containerHeight={containerHeight}
+      $containerPadding={$containerPadding}
+      $containerWidth={$containerWidth}
+      $containerHeight={$containerHeight}
     >
       <Suspense
         fallback={
-          <StyledUpdateDate updateDateTypo={updateDateTypo}>연결 중입니다.</StyledUpdateDate>
+          <StyledUpdateDate $updateDateTypo={$updateDateTypo}>연결 중입니다.</StyledUpdateDate>
         }
       >
         <StyledTitleContainer
-          titleContainerPadding={titleContainerPadding}
-          titleContainerMarginBottom={titleContainerMarginBottom}
+          $titleContainerPadding={$titleContainerPadding}
+          $titleContainerMarginBottom={$titleContainerMarginBottom}
         >
           <StyledTitle>
             숨쉬듯이
@@ -94,18 +94,18 @@ export const RealTimeKeyword = ({ variant }: RealTimeKeywordProps) => {
             검색한 키워드
           </StyledTitle>
           <StyledUpdateDate
-            updateDateTypo={updateDateTypo}
+            $updateDateTypo={$updateDateTypo}
           >{`${formatDateTime(data.basedTime)} 기준`}</StyledUpdateDate>
         </StyledTitleContainer>
         <StyledImage
-          imageHeight={imageHeight}
-          imageWidth={imageWidth}
-          imageRight={imageRight}
-          imageTop={imageTop}
+          $imageHeight={$imageHeight}
+          $imageWidth={$imageWidth}
+          $imageRight={$imageRight}
+          $imageTop={$imageTop}
           src={RealTimeKeywordImage}
           alt="뿌슝이"
         />
-        <StyledList columnCount={columnCount}>
+        <StyledList $columnCount={$columnCount}>
           {data.queries.map((value, index) => (
             <Link key={value.query} to={`/search?query=${value.query}`}>
               <StyledListItem
@@ -123,7 +123,7 @@ export const RealTimeKeyword = ({ variant }: RealTimeKeywordProps) => {
                   </IconContext.Provider>
                 }
               >
-                <StyledListItemKeyword keywordWidth={keywordWidth}>
+                <StyledListItemKeyword $keywordWidth={$keywordWidth}>
                   {value.query}
                 </StyledListItemKeyword>
               </StyledListItem>

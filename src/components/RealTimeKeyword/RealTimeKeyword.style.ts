@@ -2,28 +2,28 @@ import { ListItem, Typo } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
 interface StyledContainerProps {
-  containerPadding: string;
-  containerWidth: string;
-  containerHeight: string;
+  $containerPadding: string;
+  $containerWidth: string;
+  $containerHeight: string;
 }
 export const StyledContainer = styled.div<StyledContainerProps>`
   position: relative;
-  padding: ${(prop: StyledContainerProps) => prop.containerPadding};
-  width: ${(prop: StyledContainerProps) => prop.containerWidth};
-  height: ${(prop: StyledContainerProps) => prop.containerHeight};
+  padding: ${({ $containerPadding }) => $containerPadding};
+  width: ${({ $containerWidth }) => $containerWidth};
+  height: ${({ $containerHeight }) => $containerHeight};
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
   background: ${({ theme }) => theme.color.bgNormal};
 `;
 
 interface StyledTitleContainerProps {
-  titleContainerPadding: string;
-  titleContainerMarginBottom: string;
+  $titleContainerPadding: string;
+  $titleContainerMarginBottom: string;
 }
 
 export const StyledTitleContainer = styled.div<StyledTitleContainerProps>`
-  padding: ${(prop: StyledTitleContainerProps) => prop.titleContainerPadding};
-  margin-bottom: ${(prop: StyledTitleContainerProps) => prop.titleContainerMarginBottom};
+  padding: ${({ $titleContainerPadding }) => $titleContainerPadding};
+  margin-bottom: ${({ $titleContainerMarginBottom }) => $titleContainerMarginBottom};
 `;
 
 export const StyledTitle = styled.div`
@@ -33,22 +33,22 @@ export const StyledTitle = styled.div`
 `;
 
 interface StyledUpdateDateProps {
-  updateDateTypo: Typo;
+  $updateDateTypo: Typo;
 }
 
 export const StyledUpdateDate = styled.div<StyledUpdateDateProps>`
   color: ${({ theme }) => theme.color.textTertiary};
-  ${({ theme, updateDateTypo }) => theme.typo[updateDateTypo]};
+  ${({ theme, $updateDateTypo }) => theme.typo[$updateDateTypo]};
 `;
 
 interface StyledListProps {
-  columnCount: number;
+  $columnCount: number;
 }
 
 export const StyledList = styled.div<StyledListProps>`
   display: grid;
-  grid-template-rows: ${(props) => `repeat(${10 / props.columnCount}, 1fr)`};
-  grid-template-columns: ${(props) => `repeat(${props.columnCount}, 1fr)`};
+  grid-template-rows: ${({ $columnCount }) => `repeat(${10 / $columnCount}, 1fr)`};
+  grid-template-columns: ${({ $columnCount }) => `repeat(${$columnCount}, 1fr)`};
   grid-auto-flow: column;
   grid-column-gap: 0.5rem;
 `;
@@ -62,7 +62,7 @@ interface StyledRankProps {
 }
 
 export const StyledListItemRanking = styled.span<StyledRankProps>`
-  color: ${(prop) => (prop.$rank < 4 ? '#8a2ac5' : '#8E9398')};
+  color: ${({ $rank }) => ($rank < 4 ? '#8a2ac5' : '#8E9398')};
   font-family: 'Spoqa Han Sans Neo';
   font-size: 1.125rem;
   font-style: normal;
@@ -71,11 +71,11 @@ export const StyledListItemRanking = styled.span<StyledRankProps>`
 `;
 
 interface StyledListItemKeywordProps {
-  keywordWidth: string;
+  $keywordWidth: string;
 }
 
 export const StyledListItemKeyword = styled.p<StyledListItemKeywordProps>`
-  width: ${(prop: StyledListItemKeywordProps) => prop.keywordWidth};
+  width: ${({ $keywordWidth }) => $keywordWidth};
   color: ${({ theme }) => theme.color.textPrimary};
   ${({ theme }) => theme.typo.body1};
 
@@ -85,19 +85,19 @@ export const StyledListItemKeyword = styled.p<StyledListItemKeywordProps>`
 `;
 
 interface StyledImageProps {
-  imageWidth: string;
-  imageHeight: string;
-  imageTop: string;
-  imageRight: string;
+  $imageWidth: string;
+  $imageHeight: string;
+  $imageTop: string;
+  $imageRight: string;
 }
 
 export const StyledImage = styled.img<StyledImageProps>`
-  width: ${(prop: StyledImageProps) => prop.imageWidth};
-  height: ${(prop: StyledImageProps) => prop.imageHeight};
+  width: ${({ $imageWidth }) => $imageWidth};
+  height: ${({ $imageHeight }) => $imageHeight};
 
   position: absolute;
-  right: ${(prop: StyledImageProps) => prop.imageRight};
-  top: ${(prop: StyledImageProps) => prop.imageTop};
+  right: ${({ $imageRight }) => $imageRight};
+  top: ${({ $imageTop }) => $imageTop};
 `;
 
 export type RealTimeKeywordStyleProps = StyledContainerProps &
