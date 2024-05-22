@@ -31,7 +31,6 @@ export const CurrentPasswordForm = (props: CurrentPasswordFormProps) => {
           onChange={(e) => handlePasswordChange(e.target.value)}
           isNegative={isError}
           helperLabel={isError ? '비밀번호가 일치하지 않습니다.' : ''}
-          isMarked={true}
         />
       </StyledInputContainer>
       <StyledButtonContainer>
