@@ -25,6 +25,7 @@ export const Provider = () => {
     providerId: String(providerId),
   });
   const providerName = data.pages[0].providerName;
+  const isEmpty = data.pages[0].products.length === 0;
 
   const { lastElementRef } = useScrollObserve<ProviderProductResponses>({
     isPending,
@@ -41,18 +42,14 @@ export const Provider = () => {
           <StyledProviderName>{providerName}</StyledProviderName>
           <StyledDescription>개발자의 서비스를 확인해보세요.</StyledDescription>
         </div>
-        {data.pages.map((page, index) => {
-          if (page.products.length === 0) {
-            return <EmptyScreen key={'empty'} type={'PROVIDER'} />;
-          }
-
-          return (
-            <div key={providerName + index}>
-              <CardLayout data={page.products} type={'PROVIDER'} />
-              <div ref={lastElementRef} />
-            </div>
-          );
-        })}
+        {isEmpty ? (
+          <EmptyScreen type={'PROVIDER'} />
+        ) : (
+          <>
+            <CardLayout data={data.pages.flatMap((page) => page.products)} type={'PROVIDER'} />
+            <div ref={lastElementRef} />
+          </>
+        )}
       </StyledProviderContainer>
     </StyledContainer>
   );
