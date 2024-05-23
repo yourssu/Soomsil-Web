@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
+import { UserState } from '@/home/recoil/UserState';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
@@ -13,6 +15,8 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [validationAttempted, setValidationAttempted] = useState(false);
   const navigate = useNavigate();
+
+  const currentUser = useRecoilValue(UserState);
 
   const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
 
@@ -27,16 +31,14 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
   };
 
   const handleSubmit = () => {
-    if (sessionToken === null) {
-      return;
-    }
+    if (sessionToken === null) navigate('/Login');
+    if (!currentUser) navigate('/Login');
 
     setValidationAttempted(true);
     const isValid = regexp.test(newPassword);
     if (isValid && newPassword === newPasswordCheck) {
       const accessToken = api.getAccessToken();
       if (!accessToken) {
-        alert('로그인이 필요합니다.');
         navigate('/Login');
         return;
       }
