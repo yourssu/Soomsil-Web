@@ -41,7 +41,6 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
         fieldLabel="사용할 비밀번호를 입력해주세요."
         helperLabel="숫자와 영문자 조합으로 8자 이상 입력해주세요"
         placeholder="비밀번호"
-        isMarked={true}
         isNegative={!isPasswordValid && passwordValidOnce.current}
         onChange={(e) => {
           if (isPasswordValid) passwordValidOnce.current = true;
