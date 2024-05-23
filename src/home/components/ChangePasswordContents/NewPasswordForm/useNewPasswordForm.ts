@@ -7,6 +7,7 @@ import { postChangePassword } from '@/home/apis/postChangePassword';
 import { LogInState } from '@/home/recoil/LogInState';
 import { UserState } from '@/home/recoil/UserState';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { api } from '@/service/TokenService';
 
 export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
   const [newPassword, setNewPassword] = useState('');
@@ -41,20 +42,24 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
 
     setValidationAttempted(true);
     const isValid = regexp.test(newPassword);
-    if (isValid && newPassword === newPasswordCheck) setIsNewPasswordCheckError(false);
-
     if (!isValid) setIsNewPasswordError(true);
-    if (newPassword !== newPasswordCheck) {
-      const { error } = await postChangePassword({
+    if (newPassword !== newPasswordCheck) setIsNewPasswordCheckError(true);
+
+    if (isValid && newPassword === newPasswordCheck) {
+      const { data, error } = await postChangePassword({
         email: currentUser.email,
-        sessionToken,
-        newPassword,
+        newPassword: newPassword,
+        sessionToken: sessionToken,
       });
       if (error) {
         navigate('/Login');
         return;
       }
-      navigate('/');
+      if (data) {
+        api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
+        api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
+        navigate('/myPage');
+      }
     }
   };
 

@@ -37,8 +37,6 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
   // };
 
   useEffect(() => {
-    console.log(isLoggedIn);
-    console.log(currentUser);
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setIsProfileClicked(false);

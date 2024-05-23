@@ -7,8 +7,8 @@ import { SessionTokenType } from '../types/GetPassword.type';
 
 interface changePasswordProps {
   email: string;
-  sessionToken: SessionTokenType;
   newPassword: string;
+  sessionToken: SessionTokenType;
 }
 
 export const postChangePassword = async (props: changePasswordProps): Promise<PostAuthResponse> => {
@@ -16,9 +16,9 @@ export const postChangePassword = async (props: changePasswordProps): Promise<Po
 
   try {
     const res = await authClient.post('/auth/change-password', {
-      email,
-      newPassword,
-      sessionToken,
+      email: email,
+      newPassword: newPassword,
+      sessionToken: sessionToken.sessionToken,
     });
     return { data: res.data };
   } catch (error) {
