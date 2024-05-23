@@ -1,4 +1,4 @@
-import { BoxButton, PlainButton, SimpleTextField } from '@yourssu/design-system-react';
+import { BoxButton, PlainButton, SuffixTextField } from '@yourssu/design-system-react';
 import { addSeconds, format } from 'date-fns';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ import { StyledSignupContentContainer, StyledSignupContentTitle } from '../Signu
 import {
   StyledPlainButtonContainer,
   StyledEmailAuthParagraph,
-  StyledTimerSuffix,
   StyledErrorText,
 } from './EmailAuth.style';
 
@@ -31,10 +30,12 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
           {'입력한 메일로\n인증 메일이 발송되었습니다.\n\n메일 내에 있는 인증 버튼을 클릭해주세요.'}
         </StyledEmailAuthParagraph>
         <div>
-          <SimpleTextField
+          <SuffixTextField
             value={email}
             disabled
-            suffix={authed && <StyledTimerSuffix>{leftTimeToString()}</StyledTimerSuffix>}
+            suffix={authed ? leftTimeToString() : ''}
+            // 추후 스타일 적용 필요
+            // suffix={authed && <StyledTimerSuffix>{leftTimeToString()}</StyledTimerSuffix>}
           />
         </div>
         {error && <StyledErrorText>{error}</StyledErrorText>}
