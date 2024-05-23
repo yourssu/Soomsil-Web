@@ -32,18 +32,19 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
 
   const handleNewPasswordChange = (password: string) => {
     setNewPassword(password);
-    if (previousPassword === password) {
-      setIsNewPasswordError(true);
-      setErrorMessage('현재 비밀번호와 다른 비밀번호를 입력해주세요.');
-      return;
-    }
     setErrorMessage('');
+    setIsNewPasswordError(false);
+
     if (password.length >= 8) {
       setIsFirstRender(false);
+      if (previousPassword === password) {
+        setIsNewPasswordError(true);
+        setErrorMessage('현재 비밀번호와 다른 비밀번호를 입력해주세요.');
+        return;
+      }
       setIsNewPasswordError(!regexp.test(password));
       setErrorMessage('숫자와 영문자 조합으로 8자 이상 입력해주세요.');
-    } else {
-      setIsNewPasswordError(true);
+      return;
     }
   };
 
@@ -75,7 +76,7 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
         navigate('/myPage');
       }
     }
-    navigate('/Login');
+    setIsNewPasswordCheckError(true);
   };
 
   useEffect(() => {
