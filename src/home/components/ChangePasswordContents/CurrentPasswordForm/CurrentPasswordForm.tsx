@@ -14,6 +14,7 @@ import {
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
   setSessionToken: ({ sessionToken }: SessionTokenType) => void;
+  setPreviousPassword: (password: string) => void;
 }
 
 export const CurrentPasswordForm = (props: CurrentPasswordFormProps) => {

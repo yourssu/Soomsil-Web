@@ -14,9 +14,10 @@ import {
 
 interface NewPasswordFormProps {
   sessionToken: SessionTokenType;
+  previousPassword: string;
 }
 
-export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
+export const NewPasswordForm = (props: NewPasswordFormProps) => {
   const {
     newPassword,
     newPasswordCheck,
@@ -24,10 +25,11 @@ export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
     isNewPasswordCheckError,
     isFirstRender,
     validationAttempted,
+    errorMessage,
     setNewPasswordCheck,
     handleNewPasswordChange,
     handleSubmit,
-  } = useNewPasswordForm(sessionToken);
+  } = useNewPasswordForm(props);
 
   const isNewPasswordFieldNegative = !isFirstRender && isNewPasswordError;
   const isRepeatPasswordFieldNegative = isNewPasswordCheckError && validationAttempted;
@@ -42,9 +44,7 @@ export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
           value={newPassword}
           onChange={(e) => handleNewPasswordChange(e.target.value)}
           isNegative={isNewPasswordFieldNegative}
-          helperLabel={
-            isNewPasswordFieldNegative ? '숫자와 영문자 조합으로 8자 이상 입력해주세요.' : ''
-          }
+          helperLabel={isNewPasswordFieldNegative ? errorMessage : ''}
         />
         <StyledInputAnimation
           className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}

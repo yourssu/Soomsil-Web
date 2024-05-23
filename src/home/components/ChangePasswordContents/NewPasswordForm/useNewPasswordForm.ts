@@ -9,15 +9,22 @@ import { UserState } from '@/home/recoil/UserState';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
 import { api } from '@/service/TokenService';
 
-export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
+interface NewPasswordFormProps {
+  sessionToken: SessionTokenType;
+  previousPassword: string;
+}
+
+export const useNewPasswordForm = (props: NewPasswordFormProps) => {
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setNewPasswordCheck] = useState('');
   const [isNewPasswordError, setIsNewPasswordError] = useState(false);
   const [isNewPasswordCheckError, setIsNewPasswordCheckError] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [validationAttempted, setValidationAttempted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
 
+  const { sessionToken, previousPassword } = props;
   const isLoggedIn = useRecoilValue(LogInState);
   const currentUser = useRecoilValue(UserState);
 
@@ -25,9 +32,16 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
 
   const handleNewPasswordChange = (password: string) => {
     setNewPassword(password);
+    if (previousPassword === password) {
+      setIsNewPasswordError(true);
+      setErrorMessage('현재 비밀번호와 다른 비밀번호를 입력해주세요.');
+      return;
+    }
+    setErrorMessage('');
     if (password.length >= 8) {
       setIsFirstRender(false);
       setIsNewPasswordError(!regexp.test(password));
+      setErrorMessage('숫자와 영문자 조합으로 8자 이상 입력해주세요.');
     } else {
       setIsNewPasswordError(true);
     }
@@ -61,6 +75,7 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
         navigate('/myPage');
       }
     }
+    navigate('/Login');
   };
 
   useEffect(() => {
@@ -78,6 +93,7 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
     isNewPasswordCheckError,
     isFirstRender,
     validationAttempted,
+    errorMessage,
     setNewPasswordCheck,
     handleNewPasswordChange,
     handleSubmit,
