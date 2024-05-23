@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import { postChangePassword } from '@/home/apis/postChangePassword';
+import { LogInState } from '@/home/recoil/LogInState';
 import { UserState } from '@/home/recoil/UserState';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
-import { api } from '@/service/TokenService';
 
 export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
   const [newPassword, setNewPassword] = useState('');
@@ -16,6 +17,7 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
   const [validationAttempted, setValidationAttempted] = useState(false);
   const navigate = useNavigate();
 
+  const isLoggedIn = useRecoilValue(LogInState);
   const currentUser = useRecoilValue(UserState);
 
   const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
@@ -30,23 +32,30 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (!isLoggedIn || !currentUser) {
+      navigate('/Login');
+      return;
+    }
     if (sessionToken === null) navigate('/Login');
-    if (!currentUser) navigate('/Login');
 
     setValidationAttempted(true);
     const isValid = regexp.test(newPassword);
-    if (isValid && newPassword === newPasswordCheck) {
-      const accessToken = api.getAccessToken();
-      if (!accessToken) {
+    if (isValid && newPassword === newPasswordCheck) setIsNewPasswordCheckError(false);
+
+    if (!isValid) setIsNewPasswordError(true);
+    if (newPassword !== newPasswordCheck) {
+      const { error } = await postChangePassword({
+        email: currentUser.email,
+        sessionToken,
+        newPassword,
+      });
+      if (error) {
         navigate('/Login');
         return;
       }
-      setIsNewPasswordCheckError(false);
+      navigate('/');
     }
-
-    if (!isValid) setIsNewPasswordError(true);
-    if (newPassword !== newPasswordCheck) setIsNewPasswordCheckError(true);
   };
 
   useEffect(() => {
