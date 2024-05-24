@@ -11,9 +11,8 @@ import {
 } from './MoreProductSection.style';
 
 export const MoreProductSection = ({ providerId }: { providerId: string }) => {
-  const {
-    data: { providerName, products },
-  } = useGetProductByProvider({ providerId });
+  const { data } = useGetProductByProvider({ providerId });
+  const { providerName, products } = data.pages[0];
 
   const navigate = useNavigate();
 
