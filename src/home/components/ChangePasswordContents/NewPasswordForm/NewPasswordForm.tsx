@@ -24,7 +24,6 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
     isNewPasswordError,
     isNewPasswordCheckError,
     isFirstRender,
-    validationAttempted,
     errorMessage,
     setNewPasswordCheck,
     handleNewPasswordChange,
@@ -32,7 +31,6 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
   } = useNewPasswordForm(props);
 
   const isNewPasswordFieldNegative = !isFirstRender && isNewPasswordError;
-  const isRepeatPasswordFieldNegative = isNewPasswordCheckError && validationAttempted;
 
   return (
     <StyledBoxContainer>
@@ -53,8 +51,8 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
           <PasswordTextField
             value={newPasswordCheck}
             onChange={(e) => setNewPasswordCheck(e.target.value)}
-            isNegative={isRepeatPasswordFieldNegative}
-            helperLabel={isRepeatPasswordFieldNegative ? '비밀번호가 일치하지 않습니다.' : ''}
+            isNegative={isNewPasswordCheckError}
+            helperLabel={isNewPasswordCheckError ? '비밀번호가 일치하지 않습니다.' : ''}
           />
         </StyledInputAnimation>
       </StyledInputContainer>

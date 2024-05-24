@@ -15,12 +15,11 @@ interface NewPasswordFormProps {
 }
 
 export const useNewPasswordForm = (props: NewPasswordFormProps) => {
-  const [newPassword, setNewPassword] = useState('');
-  const [newPasswordCheck, setNewPasswordCheck] = useState('');
-  const [isNewPasswordError, setIsNewPasswordError] = useState(false);
-  const [isNewPasswordCheckError, setIsNewPasswordCheckError] = useState(false);
-  const [isFirstRender, setIsFirstRender] = useState(true);
-  const [validationAttempted, setValidationAttempted] = useState(false);
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [newPasswordCheck, setNewPasswordCheck] = useState<string>('');
+  const [isNewPasswordError, setIsNewPasswordError] = useState<boolean>(false);
+  const [isNewPasswordCheckError, setIsNewPasswordCheckError] = useState<boolean>(false);
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
 
@@ -32,20 +31,21 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
 
   const handleNewPasswordChange = (password: string) => {
     setNewPassword(password);
-    setErrorMessage('');
-    setIsNewPasswordError(false);
 
-    if (password.length >= 8) {
-      setIsFirstRender(false);
-      if (previousPassword === password) {
-        setIsNewPasswordError(true);
-        setErrorMessage('현재 비밀번호와 다른 비밀번호를 입력해주세요.');
-        return;
-      }
-      setIsNewPasswordError(!regexp.test(password));
-      setErrorMessage('숫자와 영문자 조합으로 8자 이상 입력해주세요.');
+    if (password.length < 8) {
+      setIsNewPasswordError(true);
       return;
     }
+
+    setIsFirstRender(false);
+    if (previousPassword === password) {
+      setIsNewPasswordError(true);
+      setErrorMessage('현재 비밀번호와 다른 비밀번호를 입력해주세요.');
+      return;
+    }
+
+    setIsNewPasswordError(!regexp.test(password));
+    setErrorMessage('숫자와 영문자 조합으로 8자 이상 입력해주세요.');
   };
 
   const handleSubmit = async () => {
@@ -53,14 +53,8 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
       navigate('/Login');
       return;
     }
-    if (sessionToken === null) navigate('/Login');
 
-    setValidationAttempted(true);
-    const isValid = regexp.test(newPassword);
-    if (!isValid) setIsNewPasswordError(true);
-    if (newPassword !== newPasswordCheck) setIsNewPasswordCheckError(true);
-
-    if (isValid && newPassword === newPasswordCheck) {
+    if (newPassword === newPasswordCheck) {
       const { data, error } = await postChangePassword({
         email: currentUser.email,
         newPassword: newPassword,
@@ -80,12 +74,9 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
   };
 
   useEffect(() => {
-    if (newPassword.length < 8) {
-      setIsNewPasswordCheckError(false);
-      setNewPasswordCheck('');
-      setValidationAttempted(false);
-    }
-  }, [newPassword]);
+    setNewPasswordCheck('');
+    setIsNewPasswordCheckError(false);
+  }, [isNewPasswordError]);
 
   return {
     newPassword,
@@ -93,7 +84,6 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
     isNewPasswordError,
     isNewPasswordCheckError,
     isFirstRender,
-    validationAttempted,
     errorMessage,
     setNewPasswordCheck,
     handleNewPasswordChange,
