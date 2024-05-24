@@ -34,6 +34,7 @@ export const MyMenuList = () => {
             <StyledListItem onClick={() => navigate('/changePassword')}>
               비밀번호 변경
             </StyledListItem>
+            <StyledListItem onClick={() => navigate('/withdraw')}>계정탈퇴</StyledListItem>
             <StyledListItem onClick={() => setIsOpenModal(true)}>로그아웃</StyledListItem>
           </StyledMenuContainer>
           <StyledMenuContainer>
