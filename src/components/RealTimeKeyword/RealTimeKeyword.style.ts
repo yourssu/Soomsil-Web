@@ -57,6 +57,12 @@ export const StyledList = styled.div<StyledListProps>`
 
 export const StyledListItem = styled(ListItem)`
   padding: 0.625rem 0.75rem;
+  min-height: auto;
+
+  .right-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
 `;
 
 interface StyledRankProps {

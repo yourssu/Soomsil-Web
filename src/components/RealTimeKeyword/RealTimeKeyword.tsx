@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { IcSearchLine, IconContext } from '@yourssu/design-system-react';
+import { IcSearchLine } from '@yourssu/design-system-react';
 import { Link } from 'react-router-dom';
 
 import RealTimeKeywordImage from '@/assets/realTimeKeyword.webp';
@@ -79,15 +79,7 @@ export const RealTimeKeyword = ({ variant }: RealTimeKeywordProps) => {
                 leftIcon={
                   <StyledListItemRanking $rank={index + 1}>{index + 1}</StyledListItemRanking>
                 }
-                rightIcon={
-                  <IconContext.Provider
-                    value={{
-                      color: '#8A2AC5',
-                    }}
-                  >
-                    <IcSearchLine />
-                  </IconContext.Provider>
-                }
+                rightIcon={<IcSearchLine color="#8A2AC5" width="1.25rem" />}
               >
                 <StyledListItemKeyword $keywordWidth={$keywordWidth}>
                   {value.query}
