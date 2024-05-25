@@ -29,6 +29,7 @@ export const StyledTitleContainer = styled.div<StyledTitleContainerProps>`
 
 export const StyledTitle = styled.div`
   margin-bottom: 0.5rem;
+  white-space: pre-wrap;
   color: ${({ theme }) => theme.color.textPrimary};
   ${({ theme }) => theme.typo.subtitle3};
 `;

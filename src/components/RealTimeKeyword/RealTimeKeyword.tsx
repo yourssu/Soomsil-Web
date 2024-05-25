@@ -58,11 +58,7 @@ export const RealTimeKeyword = ({ variant }: RealTimeKeywordProps) => {
           $titleContainerPadding={$titleContainerPadding}
           $titleContainerMarginBottom={$titleContainerMarginBottom}
         >
-          <StyledTitle>
-            숨쉬듯이
-            <br />
-            검색한 키워드
-          </StyledTitle>
+          <StyledTitle>{'숨쉬듯이\n검색한 키워드'}</StyledTitle>
           <StyledUpdateDate
             $updateDateTypo={$updateDateTypo}
           >{`${formatDateTime(data.basedTime)} 기준`}</StyledUpdateDate>
