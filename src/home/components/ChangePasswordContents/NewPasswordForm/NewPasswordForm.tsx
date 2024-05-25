@@ -45,7 +45,6 @@ export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
           helperLabel={
             isNewPasswordFieldNegative ? '숫자와 영문자 조합으로 8자 이상 입력해주세요.' : ''
           }
-          isMarked={true}
         />
         <StyledInputAnimation
           className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
@@ -56,7 +55,6 @@ export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
             onChange={(e) => setNewPasswordCheck(e.target.value)}
             isNegative={isRepeatPasswordFieldNegative}
             helperLabel={isRepeatPasswordFieldNegative ? '비밀번호가 일치하지 않습니다.' : ''}
-            isMarked={true}
           />
         </StyledInputAnimation>
       </StyledInputContainer>

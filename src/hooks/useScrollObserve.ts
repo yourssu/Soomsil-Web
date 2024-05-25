@@ -6,21 +6,19 @@ import {
   InfiniteQueryObserverResult,
 } from '@tanstack/react-query';
 
-import { SearchResponse } from '../types/ResultListItem.type';
-
-interface useScrollObserveParams {
+interface useScrollObserveParams<TData> {
   isPending: boolean;
   hasNextPage: boolean;
   fetchNextPage: (
     options?: FetchNextPageOptions
-  ) => Promise<InfiniteQueryObserverResult<InfiniteData<SearchResponse, unknown>, Error>>;
+  ) => Promise<InfiniteQueryObserverResult<InfiniteData<TData, unknown>, Error>>;
 }
 
-export const useScrollObserve = ({
+export const useScrollObserve = <TData>({
   isPending,
   hasNextPage,
   fetchNextPage,
-}: useScrollObserveParams) => {
+}: useScrollObserveParams<TData>) => {
   const observer = useRef<IntersectionObserver>();
 
   const lastElementRef = useCallback(

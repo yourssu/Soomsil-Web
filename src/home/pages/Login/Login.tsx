@@ -85,7 +85,6 @@ export const Login = () => {
           placeholder="영문숫자포함8글자"
           onChange={(e) => setPassword(e.target.value)}
           isNegative={failedLogin}
-          isMarked={true}
         />
 
         <BoxButton size="large" rounding={8} variant="filled" onClick={handleLoginClick}>
