@@ -66,13 +66,11 @@ export const StarRanking = () => {
           </StyledBetweenContainer>
           <StyledCardContainer>
             {rankings &&
-              rankings.pages.map((page, pageIndex) =>
-                page.map((product, productIndex) => {
-                  const isLastProduct =
-                    pageIndex === rankings.pages.length - 1 && productIndex === page.length - 1;
-                  const renderBigDrawerCard = (
+              rankings.pages.flat().map((product, productIndex, flatArray) => {
+                const isLastProduct = productIndex === flatArray.length - 1;
+                return (
+                  <div key={product.productNo}>
                     <BigDrawerCard
-                      key={product.productNo}
                       link={`/drawer/services/${product.productNo}`}
                       title={product.productTitle}
                       body={product.productSubTitle}
@@ -81,16 +79,10 @@ export const StarRanking = () => {
                       bigImgSrc={product.introductionImage[0]}
                       smallImgSrc={product.mainImage}
                     />
-                  );
-                  return isLastProduct ? (
-                    <div key={product.productNo} ref={lastElementRef}>
-                      {renderBigDrawerCard}
-                    </div>
-                  ) : (
-                    renderBigDrawerCard
-                  );
-                })
-              )}
+                    {isLastProduct && <div ref={lastElementRef} />}
+                  </div>
+                );
+              })}
           </StyledCardContainer>
         </div>
       </StyledRankingContainer>
