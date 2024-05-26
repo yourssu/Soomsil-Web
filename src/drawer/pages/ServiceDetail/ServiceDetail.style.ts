@@ -78,104 +78,10 @@ export const StyledCategoryHintText = styled.span`
   color: ${({ theme }) => theme.color.textTertiary};
 `;
 
-export const StyledServiceActionContainer = styled.div`
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-`;
-
-export const StyledIconButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
-
-interface StyledIconLabelTextProps {
-  $color: string;
-}
-
-export const StyledIconLabelText = styled.span<StyledIconLabelTextProps>`
-  /* TODO: 추후 폰트 변경 필요 */
-  ${({ theme }) => theme.typo.button4}
-  color: ${(props) => props.$color};
-`;
-
 export const StyledLowerSection = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
 
-  padding: 0 1rem;
-`;
-
-export const StyledDescriptionSection = styled.div`
-  display: grid;
-  gap: 2rem;
-  width: 52.5rem;
-  height: fit-content;
-  position: relative;
-`;
-
-export const StyledCarousel = styled.div`
-  display: flex;
-  gap: 10px;
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-interface StyledCarouselButtonProps {
-  $backgroundImage: string;
-  $left?: string;
-  $right?: string;
-}
-
-export const StyledCarouselButton = styled.input<StyledCarouselButtonProps>`
-  background-image: url(${(props) => props.$backgroundImage});
-  background-color: transparent;
-
-  width: 3rem;
-  height: 3rem;
-
-  position: absolute;
-  top: 120px;
-  left: ${(props) => props.$left && props.$left};
-  right: ${(props) => props.$right && props.$right};
-
-  border: none;
-  border-radius: 24px;
-  cursor: pointer;
-`;
-
-export const StyledProductImage = styled.img`
-  flex-shrink: 0;
-  width: 440px;
-  height: 296px;
-  border-radius: 0.5rem;
-  margin: 0 auto;
-  object-fit: cover;
-`;
-
-export const StyledDescriptionPart = styled.div`
-  display: grid;
-  gap: 0.875rem;
-`;
-
-export const StyledSubtitle = styled.p`
-  ${({ theme }) => theme.typo.subtitle1};
-  color: ${({ theme }) => theme.color.textPrimary};
-`;
-
-export const StyledDescription = styled.p`
-  ${({ theme }) => theme.typo.body2};
-  color: ${({ theme }) => theme.color.textSecondary};
-
-  display: flex;
-  align-items: center;
   padding: 0 1rem;
 `;

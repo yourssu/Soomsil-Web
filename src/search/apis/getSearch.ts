@@ -12,9 +12,6 @@ export const getSearch = async ({ query, page }: GetSearchProps) => {
       },
     })
     .then((response) => {
-      if (response.data.totalCount === 0) {
-        throw new Error('검색결과가 없습니다.');
-      }
       return response;
     });
 

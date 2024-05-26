@@ -6,7 +6,9 @@ import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { EmptyScreen } from '@/drawer/components/EmptyScreen/EmptyScreen';
 import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
 import { useGetProductByProvider } from '@/drawer/hooks/useGetProductByProvider';
+import { ProviderProductResponses } from '@/drawer/types/product.type';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useScrollObserve } from '@/hooks/useScrollObserve';
 
 import {
   StyledDescription,
@@ -19,9 +21,16 @@ export const Provider = () => {
   const isSmallDesktop = useMediaQuery(SMALL_DESKTOP_MEDIA_QUERY);
 
   const { providerId } = useParams();
-
-  const { data } = useGetProductByProvider({
+  const { data, isPending, fetchNextPage, hasNextPage } = useGetProductByProvider({
     providerId: String(providerId),
+  });
+  const providerName = data.pages[0].providerName;
+  const isEmpty = data.pages[0].products.length === 0;
+
+  const { lastElementRef } = useScrollObserve<ProviderProductResponses>({
+    isPending,
+    fetchNextPage,
+    hasNextPage,
   });
 
   return (
@@ -30,13 +39,16 @@ export const Provider = () => {
       <StyledProviderContainer $isSmallDesktop={isSmallDesktop}>
         {isSmallDesktop && <CategoryDropdownMenu />}
         <div>
-          <StyledProviderName>{providerId}</StyledProviderName>
+          <StyledProviderName>{providerName}</StyledProviderName>
           <StyledDescription>개발자의 서비스를 확인해보세요.</StyledDescription>
         </div>
-        {data.length > 0 ? (
-          <CardLayout data={data} type={'PROVIDER'} />
-        ) : (
+        {isEmpty ? (
           <EmptyScreen type={'PROVIDER'} />
+        ) : (
+          <>
+            <CardLayout data={data.pages.flatMap((page) => page.products)} type={'PROVIDER'} />
+            <div ref={lastElementRef} />
+          </>
         )}
       </StyledProviderContainer>
     </StyledContainer>

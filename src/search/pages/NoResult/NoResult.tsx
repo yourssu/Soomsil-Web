@@ -34,7 +34,7 @@ const ADD_SECTION_DATA: AddSectionData[] = [
   },
   {
     linkText: '숨쉴위키에서 편집하기',
-    linkTextDescription: '이미 알고 있는 내용이라면 숨실위키에 내용을 추가해주세요',
+    linkTextDescription: '이미 알고 있는 내용이라면 숨쉴위키에 내용을 추가해주세요',
     href: `https://wiki.soomsil.de/wiki/index.php?title={query}&action=edit`,
   },
 ];
