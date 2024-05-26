@@ -57,13 +57,13 @@ export const MyDrawer = () => {
         />
       </StyledTabWrapper>
       <Spacing direction={'vertical'} size={14} />
-      {drawerData.pages.length > 0 ? (
+      {drawerData.pages[0].length === 0 ? (
+        <EmptyScreen type={currentTab} />
+      ) : (
         <>
           <StyledDescription>{TAB_DESCRIPTION[currentTab]}</StyledDescription>
           <CardLayout data={drawerData.pages.flatMap((page) => page)} type={currentTab} />
         </>
-      ) : (
-        <EmptyScreen type={currentTab} />
       )}
     </StyledContainer>
   );
