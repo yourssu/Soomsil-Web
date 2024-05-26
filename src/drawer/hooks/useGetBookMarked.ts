@@ -1,10 +1,12 @@
 import { InfiniteData, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { getBookmarked } from '../apis/getBookMarked';
-import { RankingRequestParams } from '../types/RankingRequestParams.type';
+import { ProductRequestParams } from '../types/ProductRequestParams.type';
 import { ProductResponses, ProductResult } from '../types/product.type';
 
-export const useGetBookmarked = ({ responseType }: RankingRequestParams) => {
+type ProductRequestParamsWithoutPage = Omit<ProductRequestParams, 'page'>;
+
+export const useGetBookmarked = ({ responseType }: ProductRequestParamsWithoutPage) => {
   return useSuspenseInfiniteQuery<
     ProductResponses[],
     Error,

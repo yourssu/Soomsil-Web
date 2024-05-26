@@ -1,9 +1,12 @@
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { getRanking } from '../apis/getRanking';
-import { RankingRequestParams } from '../types/RankingRequestParams.type';
+import { ProductRequestParams } from '../types/ProductRequestParams.type';
 import { ProductResponses, ProductResult } from '../types/product.type';
-export const useGetStarRank = ({ responseType, category }: RankingRequestParams) => {
+
+type ProductRequestParamsWithoutPage = Omit<ProductRequestParams, 'page'>;
+
+export const useGetStarRank = ({ responseType, category }: ProductRequestParamsWithoutPage) => {
   return useInfiniteQuery<
     ProductResponses[],
     Error,
