@@ -1,3 +1,5 @@
+import { useCallback, useRef } from 'react';
+
 import { useRecoilValue } from 'recoil';
 
 import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu/CategoryDropdownMenu';
@@ -20,11 +22,33 @@ import {
 
 export const NewRelease = () => {
   const selectedCategory = useRecoilValue(CategoryState);
-  const { data: newReleases } = useGetNewRelease({
+  const {
+    data: newReleases,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetNewRelease({
     responseType: 'WEB',
     category: selectedCategory,
-    page: 0,
   });
+
+  const observer = useRef<IntersectionObserver>();
+
+  const lastElementRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (isLoading) return;
+
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasNextPage]
+  );
+
   const isSmallDesktop = useMediaQuery(SMALL_DESKTOP_MEDIA_QUERY);
 
   return (
@@ -41,18 +65,23 @@ export const NewRelease = () => {
           </StyledBetweenContainer>
           <StyledCardContainer>
             {newReleases &&
-              newReleases.map((product) => (
-                <BigDrawerCard
-                  key={product.productNo}
-                  link={`/drawer/services/${product.productNo}`}
-                  title={product.productTitle}
-                  body={product.productSubTitle}
-                  bookmarkCount={product.count}
-                  isBookmarked={product.isBookmarked}
-                  bigImgSrc={product.introductionImage[0]}
-                  smallImgSrc={product.mainImage}
-                />
-              ))}
+              newReleases.pages.flat().map((product, productIndex, flatArray) => {
+                const isLastProduct = productIndex === flatArray.length - 1;
+                return (
+                  <div key={product.productNo}>
+                    <BigDrawerCard
+                      link={`/drawer/services/${product.productNo}`}
+                      title={product.productTitle}
+                      body={product.productSubTitle}
+                      bookmarkCount={product.count}
+                      isBookmarked={product.isBookmarked}
+                      bigImgSrc={product.introductionImage[0]}
+                      smallImgSrc={product.mainImage}
+                    />
+                    {isLastProduct && <div ref={lastElementRef} />}
+                  </div>
+                );
+              })}
           </StyledCardContainer>
         </div>
       </StyledRankingContainer>
