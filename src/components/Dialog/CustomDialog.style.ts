@@ -25,10 +25,7 @@ export const StyledDialogContent = styled(Dialog.Content)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: ${Z_INDEX.dialog};
 
-  min-width: fit-content;
-  width: 20rem;
-  min-height: 10.75rem;
-  height: fit-content;
+  padding: 1.5rem;
+  z-index: ${Z_INDEX.dialog};
 `;
