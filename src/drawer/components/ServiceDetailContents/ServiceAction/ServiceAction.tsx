@@ -8,11 +8,15 @@ import {
   useToast,
   Toast,
 } from '@yourssu/design-system-react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useTheme } from 'styled-components';
 
 import { deleteBookmarked } from '@/drawer/apis/deleteBookmarked';
 import { postBookmarked } from '@/drawer/apis/postBookmarked';
+import { LoginDialog } from '@/drawer/components/Dialog/LoginDialog/LoginDialog';
 import { ProductDetailResult } from '@/drawer/types/product.type';
+import { LogInState } from '@/home/recoil/LogInState';
+import { DialogState } from '@/recoil/DialogState';
 
 import {
   StyledIconButtonContainer,
@@ -27,6 +31,9 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
     { url: product.googlePlayUrl, text: 'Google play로 다운로드' },
     { url: product.githubUrl, text: 'GitHub' },
   ];
+
+  const isLoggedIn = useRecoilValue(LogInState);
+  const setDialog = useSetRecoilState(DialogState);
 
   const theme = useTheme();
 
@@ -55,6 +62,16 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
   const handleClickShare = async () => {
     await navigator.clipboard.writeText(window.location.href);
     showToast(toastProps.duration);
+  };
+
+  const handleClickStar = () => {
+    if (!isLoggedIn) {
+      setDialog({ open: true, children: <LoginDialog /> });
+      return;
+    }
+
+    if (product.isBookmarked) deleteBookmarkMutation.mutate(product.productBookmarkKey);
+    else addBookmarkMutation.mutate(product.productBookmarkKey);
   };
 
   return (
@@ -98,17 +115,10 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
               value={{
                 color: theme.color.pointYellow,
                 size: '1.5rem',
+                onClick: handleClickStar,
               }}
             >
-              {product.isBookmarked ? (
-                <IcStarFilled
-                  onClick={() => deleteBookmarkMutation.mutate(product.productBookmarkKey)}
-                />
-              ) : (
-                <IcStarLine
-                  onClick={() => addBookmarkMutation.mutate(product.productBookmarkKey)}
-                />
-              )}
+              {product.isBookmarked ? <IcStarFilled /> : <IcStarLine />}
             </IconContext.Provider>
           </button>
           <StyledIconLabelText $color={theme.color.pointYellow}>Recommend</StyledIconLabelText>
