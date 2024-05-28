@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
+import { CustomDialog } from './components/Dialog/CustomDialog';
 import { Router } from './router';
 
 export const App = () => {
@@ -10,6 +11,7 @@ export const App = () => {
         <BrowserRouter>
           <Router />
         </BrowserRouter>
+        <CustomDialog />
       </RecoilRoot>
     </>
   );
