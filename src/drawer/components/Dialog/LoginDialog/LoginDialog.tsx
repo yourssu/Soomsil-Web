@@ -2,7 +2,7 @@ import { DialogClose } from '@radix-ui/react-dialog';
 import { BoxButton } from '@yourssu/design-system-react';
 import { useSetRecoilState } from 'recoil';
 
-import Ppussung from '@/assets/home/defaultProfile.png';
+import Ppussung from '@/assets/defaultProfile.png';
 import { ProfileSvg } from '@/components/ProfileSvg/ProfileSVG';
 import { DialogState } from '@/recoil/DialogState';
 

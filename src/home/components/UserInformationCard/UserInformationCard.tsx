@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { BoxButton, IcSettingLine, SimpleTextField } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
 
-import Ppussung from '@/assets/home/defaultProfile.png';
+import Ppussung from '@/assets/defaultProfile.png';
 import { ProfileSvg } from '@/components/ProfileSvg/ProfileSVG';
 
 import {
