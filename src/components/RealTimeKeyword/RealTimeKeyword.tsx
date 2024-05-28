@@ -18,6 +18,7 @@ import {
   StyledListItemRanking,
   StyledListItemKeyword,
   StyledListItem,
+  StyledListItemText,
 } from '@/components/RealTimeKeyword/RealTimeKeyword.style.ts';
 import { useGetRealTimeKeyword } from '@/search/hooks/useGetRealTimeKeyword.ts';
 import { formatDateTime } from '@/utils/formatDateTime.ts';
@@ -74,16 +75,14 @@ export const RealTimeKeyword = ({ variant }: RealTimeKeywordProps) => {
         <StyledList $columnCount={$columnCount}>
           {data.queries.map((value, index) => (
             <Link key={value.query} to={`/search?query=${value.query}`}>
-              <StyledListItem
-                key={value.query}
-                leftIcon={
+              <StyledListItem>
+                <StyledListItemText>
                   <StyledListItemRanking $rank={index + 1}>{index + 1}</StyledListItemRanking>
-                }
-                rightIcon={<IcSearchLine color="#8A2AC5" width="1.25rem" />}
-              >
-                <StyledListItemKeyword $keywordWidth={$keywordWidth}>
-                  {value.query}
-                </StyledListItemKeyword>
+                  <StyledListItemKeyword $keywordWidth={$keywordWidth}>
+                    {value.query}
+                  </StyledListItemKeyword>
+                </StyledListItemText>
+                <IcSearchLine color="#423FCC" width="1.25rem" height="1.25rem" />
               </StyledListItem>
             </Link>
           ))}

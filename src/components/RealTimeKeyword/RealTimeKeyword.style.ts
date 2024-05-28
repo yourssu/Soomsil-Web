@@ -1,4 +1,4 @@
-import { ListItem, Typo } from '@yourssu/design-system-react';
+import { Typo } from '@yourssu/design-system-react';
 import styled from 'styled-components';
 
 interface StyledContainerProps {
@@ -55,14 +55,22 @@ export const StyledList = styled.div<StyledListProps>`
   grid-column-gap: 0.5rem;
 `;
 
-export const StyledListItem = styled(ListItem)`
+export const StyledListItem = styled.div`
+  display: flex;
   padding: 0.625rem 0.75rem;
-  min-height: auto;
-
-  .right-icon {
-    height: 1.25rem;
-    width: 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  background: ${({ theme }) => theme.color.bgNormal};
+  &:hover {
+    background: ${({ theme }) => theme.color.bgRecomment};
   }
+`;
+
+export const StyledListItemText = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 
 interface StyledRankProps {
@@ -70,8 +78,9 @@ interface StyledRankProps {
 }
 
 export const StyledListItemRanking = styled.span<StyledRankProps>`
-  color: ${({ $rank }) => ($rank < 4 ? '#8a2ac5' : '#8E9398')};
+  color: ${({ $rank, theme }) => ($rank < 4 ? '#423FCC' : theme.color.textTertiary)};
   ${({ theme }) => theme.typo.subtitle4};
+  width: 1.5rem;
 `;
 
 interface StyledListItemKeywordProps {
