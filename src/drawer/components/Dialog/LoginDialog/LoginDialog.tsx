@@ -3,7 +3,7 @@ import { BoxButton } from '@yourssu/design-system-react';
 import { useSetRecoilState } from 'recoil';
 
 import Ppussung from '@/assets/home/defaultProfile.png';
-import { ProfileSvg } from '@/home/components/UserInformationCard/ProfileSVG';
+import { ProfileSvg } from '@/components/ProfileSvg/ProfileSVG';
 import { DialogState } from '@/recoil/DialogState';
 
 import { StyledContainer, StyledButtonContainer, StyledTitle } from './LoginDialog.style';

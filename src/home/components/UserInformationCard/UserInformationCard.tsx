@@ -4,7 +4,7 @@ import { BoxButton, IcSettingLine, SimpleTextField } from '@yourssu/design-syste
 import { useTheme } from 'styled-components';
 
 import Ppussung from '@/assets/home/defaultProfile.png';
-import { ProfileSvg } from '@/home/components/UserInformationCard/ProfileSVG';
+import { ProfileSvg } from '@/components/ProfileSvg/ProfileSVG';
 
 import {
   StyledButtonContainer,
