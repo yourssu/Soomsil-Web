@@ -22,11 +22,11 @@ export const Header = () => {
 
   const theme = useTheme();
 
-  const handleClick = (e) => {
+  const handleClick = (event: React.MouseEvent) => {
     if (isLoggedIn) return;
 
     setDialog({ open: true, type: 'login' });
-    e.preventDefault();
+    event.preventDefault();
   };
 
   return (
