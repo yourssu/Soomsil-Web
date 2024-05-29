@@ -1,5 +1,6 @@
 import { DialogClose } from '@radix-ui/react-dialog';
 import { BoxButton } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 
 import Ppussung from '@/assets/defaultProfile.png';
@@ -11,9 +12,11 @@ import { StyledContainer, StyledButtonContainer, StyledTitle } from './LoginDial
 export const LoginDialog = () => {
   const setDialog = useSetRecoilState(DialogState);
 
+  const navigate = useNavigate();
+
   const handleClick = () => {
     setDialog(null);
-    window.location.replace('/login');
+    navigate('/login');
   };
 
   return (

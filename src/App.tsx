@@ -10,8 +10,8 @@ export const App = () => {
       <RecoilRoot>
         <BrowserRouter>
           <Router />
+          <CustomDialog />
         </BrowserRouter>
-        <CustomDialog />
       </RecoilRoot>
     </>
   );
