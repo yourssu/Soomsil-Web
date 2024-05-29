@@ -55,7 +55,7 @@ export const StyledList = styled.div<StyledListProps>`
   grid-column-gap: 0.5rem;
 `;
 
-export const StyledListItem = styled.div`
+export const StyledListItem = styled.li`
   display: flex;
   padding: 0.625rem 0.75rem;
   justify-content: space-between;
