@@ -1,6 +1,6 @@
-export type DialogType = 'login' | 'logout' | 'service_remove';
+import { DIALOG } from '@/constants/dialog.constant';
 
 export interface DialogData {
   open: boolean;
-  type: DialogType;
+  type: keyof typeof DIALOG;
 }
