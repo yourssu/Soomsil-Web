@@ -13,7 +13,6 @@ import { useTheme } from 'styled-components';
 
 import { deleteBookmarked } from '@/drawer/apis/deleteBookmarked';
 import { postBookmarked } from '@/drawer/apis/postBookmarked';
-import { LoginDialog } from '@/drawer/components/Dialog/LoginDialog/LoginDialog';
 import { ProductDetailResult } from '@/drawer/types/product.type';
 import { LogInState } from '@/home/recoil/LogInState';
 import { DialogState } from '@/recoil/DialogState';
@@ -66,7 +65,7 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
 
   const handleClickStar = () => {
     if (!isLoggedIn) {
-      setDialog({ open: true, children: <LoginDialog /> });
+      setDialog({ open: true, type: 'login' });
       return;
     }
 

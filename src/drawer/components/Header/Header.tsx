@@ -7,8 +7,6 @@ import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 import { LogInState } from '@/home/recoil/LogInState';
 import { DialogState } from '@/recoil/DialogState';
 
-import { LoginDialog } from '../Dialog/LoginDialog/LoginDialog';
-
 import {
   StyledHeader,
   StyledHeaderLogo,
@@ -27,7 +25,7 @@ export const Header = () => {
   const handleClick = (e) => {
     if (isLoggedIn) return;
 
-    setDialog({ open: true, children: <LoginDialog /> });
+    setDialog({ open: true, type: 'login' });
     e.preventDefault();
   };
 

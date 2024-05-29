@@ -1,6 +1,6 @@
-import React from 'react';
+export type DialogType = 'login' | 'logout' | 'service_remove';
 
 export interface DialogData {
   open: boolean;
-  children: React.ReactNode;
+  type: DialogType;
 }
