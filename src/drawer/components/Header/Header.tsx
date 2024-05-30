@@ -1,4 +1,4 @@
-import { IcPersoncircleLine, IcSearchLine, IconContext } from '@yourssu/design-system-react';
+import { IcSearchLine } from '@yourssu/design-system-react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useTheme } from 'styled-components';
 
@@ -14,6 +14,7 @@ import {
   StyledHeaderSearchInput,
   StyledHeaderTab,
   StyledHeaderTabs,
+  StyledProfileIconButton,
 } from './Header.style';
 
 export const Header = () => {
@@ -46,25 +47,9 @@ export const Header = () => {
       <FlexGrowItem proportion={1} />
       <StyledHeaderSearchContainer>
         <StyledHeaderSearchInput type="text" />
-        <IconContext.Provider
-          value={{
-            color: theme.color.buttonNormalPressed,
-            size: '1.125rem',
-          }}
-        >
-          <IcSearchLine />
-        </IconContext.Provider>
+        <IcSearchLine color={theme.color.buttonNormalPressed} size="1.25rem" />
       </StyledHeaderSearchContainer>
-      <button style={{ marginLeft: '1rem' }}>
-        <IconContext.Provider
-          value={{
-            color: theme.color.textPointed,
-            size: '2rem',
-          }}
-        >
-          <IcPersoncircleLine />
-        </IconContext.Provider>
-      </button>
+      <StyledProfileIconButton color={theme.color.textPointed} size="2rem" />
     </StyledHeader>
   );
 };
