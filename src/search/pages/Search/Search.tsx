@@ -1,9 +1,9 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import { useSearchParams } from 'react-router-dom';
 
+import { RealTimeKeyword } from '@/components/RealTimeKeyword/RealTimeKeyword';
 import { Spacing } from '@/components/Spacing/Spacing';
 import { ErrorFallback } from '@/search/components/FallbackComponent/ErrorFallback';
-import { RealTimeKeyword } from '@/search/components/RealTimeKeyword/RealTimeKeyword';
 import { ResultList } from '@/search/components/ResultList/ResultList';
 import { SearchBar } from '@/search/components/SearchBar/SearchBar';
 import { TotalCount } from '@/search/components/TotalCount/TotalCount';
@@ -44,7 +44,7 @@ export const Search = () => {
                   <ResultList />
                 </ErrorBoundary>
               </StyledResultListItemsWrap>
-              <RealTimeKeyword></RealTimeKeyword>
+              <RealTimeKeyword variant="search" />
             </StyledFlexGapContainer>
           </StyledResultContent>
         </StyledResultContentWrap>

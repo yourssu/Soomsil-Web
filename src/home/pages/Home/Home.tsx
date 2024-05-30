@@ -1,10 +1,10 @@
 import { useRecoilValue } from 'recoil';
 
+import { RealTimeKeyword } from '@/components/RealTimeKeyword/RealTimeKeyword.tsx';
 import { DrawerRanking } from '@/home/components/DrawerRanking/DrawerRanking';
 import { Header } from '@/home/components/Header/Header';
 import { Nav } from '@/home/components/Nav/Nav';
 import { Notification } from '@/home/components/Notification/Notification';
-import { SearchKeyword } from '@/home/components/SearchKeyword/SearchKeyword';
 import { SocialNetworkService } from '@/home/components/SocialNetworkService/SocialNetworkService';
 import { LogInState } from '@/home/recoil/LogInState';
 
@@ -25,7 +25,7 @@ export const Home = () => {
         <Notification />
         <StyledComponentInnerContainer>
           <DrawerRanking />
-          <SearchKeyword />
+          <RealTimeKeyword variant="home" />
           <SocialNetworkService />
         </StyledComponentInnerContainer>
       </StyledComponentContainer>
