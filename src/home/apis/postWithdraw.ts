@@ -13,7 +13,6 @@ export const postWithdraw = async (): Promise<PostWithdrawResponse> => {
         headers: api.headers,
       }
     );
-    api.logout();
     return { success: true };
   } catch (error) {
     if (isAxiosError<AuthErrorData>(error)) return { success: false, error };
