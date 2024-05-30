@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledContainer = styled.nav`
@@ -26,29 +26,7 @@ export const StyledColDivider = styled.div`
   color: ${({ theme }) => theme.baseColor.logoViolet};
 `;
 
-export const StyledNonLoginText = styled(NavLink)`
+export const StyledNonLoginText = styled(Link)`
   ${({ theme }) => theme.typo.body1};
   color: ${({ theme }) => theme.baseColor.logoViolet};
-`;
-
-export const StyledDropDownName = styled.div`
-  ${({ theme }) => theme.typo.body1};
-  color: ${({ theme }) => theme.color.textPrimary};
-`;
-
-export const StyledDropDownEmail = styled.div`
-  ${({ theme }) => theme.typo.caption1};
-  color: ${({ theme }) => theme.color.textDisabled};
-`;
-
-export const StyledDropDownMyPage = styled(NavLink)`
-  ${({ theme }) => theme.typo.body2};
-  color: ${({ theme }) => theme.color.textPrimary};
-  padding-top: 1.25rem;
-`;
-
-export const StyledDropDownLogout = styled.div`
-  ${({ theme }) => theme.typo.body2};
-  padding-top: 0.75rem;
-  cursor: pointer;
 `;
