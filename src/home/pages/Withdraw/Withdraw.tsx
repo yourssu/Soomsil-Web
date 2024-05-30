@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '@/assets/soomsil_logo.svg';
 import { postWithdraw } from '@/home/apis/postWithdraw';
 import { WithdrawSuccess } from '@/home/components/WithdrawSuccess/WithdrawSuccess';
+import { useResetUserInfo } from '@/hooks/useResetUserInfo';
 
 import {
   StyledButtonText,
@@ -22,6 +23,7 @@ export const Withdraw = () => {
   const navigate = useNavigate();
   const [agreed, setAgreed] = useState(false);
   const [draw, setDraw] = useState(false);
+  const resetUserInfo = useResetUserInfo();
 
   const handleGoToHome = () => {
     navigate('/');
@@ -36,6 +38,7 @@ export const Withdraw = () => {
       const { success, error } = await postWithdraw();
       if (success) {
         setDraw((prevDraw) => !prevDraw);
+        resetUserInfo();
       } else if (error) {
         alert(`탈퇴 처리에 실패했습니다: ${error.message}`);
       }
