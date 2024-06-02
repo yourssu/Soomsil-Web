@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getAnnouncement } from '@/home/apis/getAnnouncement';
 
 export const useGetAnnouncement = () => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['announcement'],
     queryFn: () => {
       return getAnnouncement();

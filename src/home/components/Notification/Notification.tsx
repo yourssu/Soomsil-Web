@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react';
+import { Suspense, useRef, useState } from 'react';
 
 import { IcNoticeLine } from '@yourssu/design-system-react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { useGetAnnouncement } from '@/home/hooks/useGetAnnouncement';
 import { useInterval } from '@/hooks/useInterval';
@@ -13,8 +14,8 @@ import {
   StyledNotificationContainer,
 } from './Notification.style';
 
-export const Notification = () => {
-  const { data, isLoading, isError, error } = useGetAnnouncement();
+const NotificationContent = () => {
+  const { data } = useGetAnnouncement();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [activeTransition, setActiveTransition] = useState(true);
   const slideRef = useRef<HTMLDivElement>(null);
@@ -56,29 +57,39 @@ export const Notification = () => {
   }
 
   return (
+    <StyledNotificationContainer>
+      {announcements.length === 0 ? (
+        <StyledNotification>공지사항이 없습니다.</StyledNotification>
+      ) : (
+        <StyledNotificationArray
+          ref={slideRef}
+          $length={notificationArray.length}
+          $currentIndex={currentIndex}
+          $active={activeTransition}
+        >
+          {notificationArray.map((item) => (
+            <StyledNotification key={item.id}>{item.notification}</StyledNotification>
+          ))}
+        </StyledNotificationArray>
+      )}
+    </StyledNotificationContainer>
+  );
+};
+
+export const Notification = () => {
+  return (
     <StyledContainer>
       <StyledInnerContainer>
         <IcNoticeLine size="2.25rem" />
-        <StyledNotificationContainer>
-          {isLoading ? (
-            <StyledNotification>로딩중...</StyledNotification>
-          ) : isError ? (
+        <ErrorBoundary
+          fallbackRender={({ error }) => (
             <StyledNotification>Error: {error.message}</StyledNotification>
-          ) : announcements.length === 0 ? (
-            <StyledNotification>공지사항이 없습니다.</StyledNotification>
-          ) : (
-            <StyledNotificationArray
-              ref={slideRef}
-              $length={notificationArray.length}
-              $currentIndex={currentIndex}
-              $active={activeTransition}
-            >
-              {notificationArray.map((item) => (
-                <StyledNotification key={item.id}>{item.notification}</StyledNotification>
-              ))}
-            </StyledNotificationArray>
           )}
-        </StyledNotificationContainer>
+        >
+          <Suspense fallback={<StyledNotification>로딩중...</StyledNotification>}>
+            <NotificationContent />
+          </Suspense>
+        </ErrorBoundary>
       </StyledInnerContainer>
     </StyledContainer>
   );
