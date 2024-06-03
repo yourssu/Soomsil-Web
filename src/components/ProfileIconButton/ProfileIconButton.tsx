@@ -23,7 +23,7 @@ export const ProfileIconButton = ({ color, size, ...props }: ProfileIconButtonPr
   };
 
   return (
-    <StyledIconButton onClick={handleClickProfile} {...props}>
+    <StyledIconButton {...props} onClick={handleClickProfile}>
       <ProfileDropdownMenu
         open={openDropdown}
         onOpenChange={setOpenDropdown}
