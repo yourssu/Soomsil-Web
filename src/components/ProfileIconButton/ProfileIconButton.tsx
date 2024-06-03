@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
 import { IcPersoncircleLine } from '@yourssu/design-system-react';
-import { useRecoilValue } from 'recoil';
 
-import { UserState } from '@/home/recoil/UserState';
+import { useGetUserData } from '@/home/hooks/useGetUserData';
 
 import { ProfileDropdownMenu } from '../ProfileDropdownMenu/ProfileDropdownMenu';
 
@@ -15,8 +14,8 @@ interface ProfileIconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 }
 
 export const ProfileIconButton = ({ color, size, ...props }: ProfileIconButtonProps) => {
-  const currentUser = useRecoilValue(UserState);
   const [openDropdown, setOpenDropdown] = useState(false);
+  const { data: currentUser } = useGetUserData();
 
   const handleClickProfile = () => {
     setOpenDropdown((prev) => !prev);
@@ -24,16 +23,18 @@ export const ProfileIconButton = ({ color, size, ...props }: ProfileIconButtonPr
 
   return (
     <StyledIconButton {...props} onClick={handleClickProfile}>
-      <ProfileDropdownMenu
-        open={openDropdown}
-        onOpenChange={setOpenDropdown}
-        nickname={currentUser!.nickName}
-        email={currentUser!.email}
-      >
-        <ProfileDropdownMenu.Trigger asChild>
-          <IcPersoncircleLine color={color} size={size} />
-        </ProfileDropdownMenu.Trigger>
-      </ProfileDropdownMenu>
+      {currentUser && (
+        <ProfileDropdownMenu
+          open={openDropdown}
+          onOpenChange={setOpenDropdown}
+          nickname={currentUser.nickName}
+          email={currentUser.email}
+        >
+          <ProfileDropdownMenu.Trigger asChild>
+            <IcPersoncircleLine color={color} size={size} />
+          </ProfileDropdownMenu.Trigger>
+        </ProfileDropdownMenu>
+      )}
     </StyledIconButton>
   );
 };
