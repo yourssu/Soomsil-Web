@@ -86,10 +86,10 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
 };
 
 const CardSetting = React.forwardRef<HTMLButtonElement, CardSettingProps>(
-  ({ onClick, ...props }, forwardRef) => {
+  ({ onClick, ...props }, ref) => {
     const theme = useTheme();
     return (
-      <StyledSettingIconContainer ref={forwardRef} {...props} onClick={onClick}>
+      <StyledSettingIconContainer ref={ref} {...props} onClick={onClick}>
         <IcDotsVerticalLine color={theme.color.buttonNormal} size="36px" />
       </StyledSettingIconContainer>
     );
