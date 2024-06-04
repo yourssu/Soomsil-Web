@@ -44,15 +44,8 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
     duration: 'short',
   } as const;
 
-  const addBookmarkMutation = useMutation({
-    mutationFn: postBookmarked,
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['productDetail', product.productNo] });
-    },
-  });
-
-  const deleteBookmarkMutation = useMutation({
-    mutationFn: deleteBookmarked,
+  const bookmarkMutation = useMutation({
+    mutationFn: product.isBookmarked ? deleteBookmarked : postBookmarked,
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['productDetail', product.productNo] });
     },
@@ -69,8 +62,7 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
       return;
     }
 
-    if (product.isBookmarked) deleteBookmarkMutation.mutate(product.productBookmarkKey);
-    else addBookmarkMutation.mutate(product.productBookmarkKey);
+    bookmarkMutation.mutate(product.productBookmarkKey);
   };
 
   return (
