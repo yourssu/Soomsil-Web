@@ -26,40 +26,40 @@ soomsilClient.interceptors.request.use((config) => {
   return config;
 });
 
-const onFulfilled = (response: AxiosResponse) => response;
+soomsilClient.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  async (error: AxiosError) => {
+    const originalConfig = error.config;
+    const data = error.response?.data as AuthErrorData;
 
-const onRejectedSoomsil = async (error: AxiosError) => {
-  const originalConfig = error.config;
-  const data = error.response?.data as AuthErrorData;
+    if (originalConfig && error.response?.status === 401 && data?.error === 'Auth-002') {
+      try {
+        const response = await refreshToken();
 
-  if (originalConfig && error.response?.status === 401 && data?.error === 'Auth-002') {
-    try {
-      const response = await refreshToken();
+        if (response.error) return;
 
-      if (response.error) return;
-
-      return soomsilClient.request({
-        ...originalConfig,
-      });
-    } catch (error) {
-      return Promise.reject(error);
+        return soomsilClient.request({
+          ...originalConfig,
+        });
+      } catch (error) {
+        return Promise.reject(error);
+      }
     }
+    return Promise.reject(error);
   }
-  return Promise.reject(error);
-};
+);
 
-soomsilClient.interceptors.response.use(onFulfilled, onRejectedSoomsil);
+authClient.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  async (error: AxiosError) => {
+    const originalConfig = error.config;
 
-const onRejectedAuth = async (error: AxiosError) => {
-  const originalConfig = error.config;
+    if (error.response?.status === 401 && originalConfig?.url === '/auth/refresh') {
+      api.logout();
+      sessionStorage.removeItem('user');
+      window.location.reload();
+    }
 
-  if (error.response?.status === 401 && originalConfig?.url === '/auth/refresh') {
-    api.logout();
-    sessionStorage.removeItem('user');
-    window.location.reload();
+    return Promise.reject(error);
   }
-
-  return Promise.reject(error);
-};
-
-authClient.interceptors.response.use(onFulfilled, onRejectedAuth);
+);
