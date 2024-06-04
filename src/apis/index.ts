@@ -28,18 +28,18 @@ soomsilClient.interceptors.request.use((config) => {
 
 const onFulfilled = (response: AxiosResponse) => response;
 
-const onRejected = async (error: AxiosError) => {
+const onRejectedSoomsil = async (error: AxiosError) => {
   const originalConfig = error.config;
   const data = error.response?.data as AuthErrorData;
 
   if (originalConfig && error.response?.status === 401 && data?.error === 'Auth-002') {
     try {
-      await refreshToken();
+      const response = await refreshToken();
+
+      if (response.error) return;
+
       return soomsilClient.request({
         ...originalConfig,
-        headers: {
-          Authorization: `Bearer ${api.getAccessToken()}`,
-        },
       });
     } catch (error) {
       return Promise.reject(error);
@@ -48,4 +48,18 @@ const onRejected = async (error: AxiosError) => {
   return Promise.reject(error);
 };
 
-soomsilClient.interceptors.response.use(onFulfilled, onRejected);
+soomsilClient.interceptors.response.use(onFulfilled, onRejectedSoomsil);
+
+const onRejectedAuth = async (error: AxiosError) => {
+  const originalConfig = error.config;
+
+  if (error.response?.status === 401 && originalConfig?.url === '/auth/refresh') {
+    api.logout();
+    sessionStorage.removeItem('user');
+    window.location.reload();
+  }
+
+  return Promise.reject(error);
+};
+
+authClient.interceptors.response.use(onFulfilled, onRejectedAuth);
