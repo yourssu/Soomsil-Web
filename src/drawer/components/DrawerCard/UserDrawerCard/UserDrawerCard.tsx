@@ -13,6 +13,10 @@ import {
   StyledServiceTextContainer,
 } from './UserDrawerCard.style';
 
+interface UserDrawerCardProps extends DrawerCardProps {
+  productNo: number;
+}
+
 export const UserDrawerCard = ({
   link,
   bigImgSrc,
@@ -21,7 +25,8 @@ export const UserDrawerCard = ({
   body,
   bookmarkCount,
   isBookmarked,
-}: DrawerCardProps) => {
+  productNo,
+}: UserDrawerCardProps) => {
   const [isCardSettingClicked, setIsCardSettingClicked] = useState(false);
   const [openRemoveModal, setOpenRemoveModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -81,7 +86,11 @@ export const UserDrawerCard = ({
           </StyledServiceTextContainer>
         </Dropdown>
       )}
-      <ServiceRemoveModal open={openRemoveModal} onOpenChange={setOpenRemoveModal} />
+      <ServiceRemoveModal
+        open={openRemoveModal}
+        productNo={productNo}
+        onOpenChange={setOpenRemoveModal}
+      />
     </StyledCardContainer>
   );
 };

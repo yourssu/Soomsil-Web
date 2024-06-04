@@ -1,8 +1,10 @@
 import * as Dialog from '@radix-ui/react-dialog';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { BoxButton, IcXLine, IconContext } from '@yourssu/design-system-react';
 import { useTheme } from 'styled-components';
 
 import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
+import { deleteProduct } from '@/drawer/apis/deleteProduct';
 
 import {
   StyledDialogContent,
@@ -13,11 +15,21 @@ import {
 
 interface ServiceRemoveModalProps {
   open: boolean;
+  productNo: number;
   onOpenChange: (open: boolean) => void;
 }
 
-export const ServiceRemoveModal = ({ open, onOpenChange }: ServiceRemoveModalProps) => {
+export const ServiceRemoveModal = ({ open, productNo, onOpenChange }: ServiceRemoveModalProps) => {
   const theme = useTheme();
+  const queryClient = useQueryClient();
+
+  const deleteProductMutation = useMutation({
+    mutationFn: deleteProduct,
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['myRegistered', 'WEB'] });
+      queryClient.invalidateQueries({ queryKey: ['bookmarked', 'WEB'] });
+    },
+  });
 
   return (
     <Dialog.Root modal={true} open={open} onOpenChange={onOpenChange}>
@@ -30,7 +42,13 @@ export const ServiceRemoveModal = ({ open, onOpenChange }: ServiceRemoveModalPro
 
           <Dialog.Close asChild>
             <div>
-              <BoxButton size="medium" rounding={4} variant="filled" width="15.375rem">
+              <BoxButton
+                size="medium"
+                rounding={4}
+                variant="filled"
+                width="15.375rem"
+                onClick={() => deleteProductMutation.mutate(productNo)}
+              >
                 확인
               </BoxButton>
             </div>
