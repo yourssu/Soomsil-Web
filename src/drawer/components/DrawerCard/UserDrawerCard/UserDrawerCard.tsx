@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { useSetRecoilState } from 'recoil';
-
 import { Card } from '@/components/Card/Card';
 import { Dropdown } from '@/components/Dropdown/Dropdown';
-import { DialogState } from '@/recoil/DialogState';
 
+import { ServiceRemoveModal } from '../../Dialog/ServiceRemoveModal';
 import { DrawerCardProps } from '../DrawerCard.type';
 
 import {
@@ -25,9 +23,8 @@ export const UserDrawerCard = ({
   isBookmarked,
 }: DrawerCardProps) => {
   const [isCardSettingClicked, setIsCardSettingClicked] = useState(false);
-
+  const [openRemoveModal, setOpenRemoveModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const setDialog = useSetRecoilState(DialogState);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -49,7 +46,7 @@ export const UserDrawerCard = ({
 
   const handleClickRemoveButton = () => {
     setIsCardSettingClicked(false);
-    setDialog({ open: true, type: 'service_remove' });
+    setOpenRemoveModal(true);
   };
 
   return (
@@ -84,6 +81,7 @@ export const UserDrawerCard = ({
           </StyledServiceTextContainer>
         </Dropdown>
       )}
+      <ServiceRemoveModal open={openRemoveModal} onOpenChange={setOpenRemoveModal} />
     </StyledCardContainer>
   );
 };
