@@ -1,4 +1,7 @@
+import { useState } from 'react';
+
 import { IcPersoncircleLine, IcSearchLine, IconContext } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import soomsil from '@/assets/soomsil_logo.svg';
@@ -15,6 +18,12 @@ import {
 
 export const Header = () => {
   const theme = useTheme();
+  const [searchValue, setSearchValue] = useState<string | undefined>('');
+  const navigate = useNavigate();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
 
   return (
     <StyledHeader>
@@ -28,7 +37,16 @@ export const Header = () => {
       </StyledHeaderTabs>
       <FlexGrowItem proportion={1} />
       <StyledHeaderSearchContainer>
-        <StyledHeaderSearchInput type="text" />
+        <StyledHeaderSearchInput
+          type="text"
+          value={searchValue}
+          onChange={handleInputChange}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') {
+              navigate(`/drawer/search?keyword=${searchValue}`);
+            }
+          }}
+        />
         <IconContext.Provider
           value={{
             color: theme.color.buttonNormalPressed,
