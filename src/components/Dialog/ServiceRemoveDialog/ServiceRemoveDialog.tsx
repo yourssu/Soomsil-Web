@@ -1,7 +1,10 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { BoxButton, IcXLine } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import { useTheme } from 'styled-components';
+
+import { DialogState } from '@/recoil/DialogState';
 
 import {
   StyledDialogDescription,
@@ -12,11 +15,13 @@ import {
 
 export const ServiceRemoveDialog = () => {
   const theme = useTheme();
+  const setDialog = useSetRecoilState(DialogState);
 
   const navigate = useNavigate();
 
   const handleClick = () => {
     // TODO: 삭제 이벤트 연결
+    setDialog(null);
     navigate('/myDrawer?tab=MYDRAWER');
   };
 
