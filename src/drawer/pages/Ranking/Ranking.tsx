@@ -30,12 +30,10 @@ export const Ranking = () => {
   const { data: newReleases } = useGetNewRelease({
     responseType: 'WEB',
     category: selectedCategory,
-    page: 0,
   });
   const { data: rankings } = useGetStarRank({
     responseType: 'WEB',
     category: selectedCategory,
-    page: 0,
   });
   const isSmallDesktop = useMediaQuery(SMALL_DESKTOP_MEDIA_QUERY);
 
@@ -63,7 +61,7 @@ export const Ranking = () => {
           </StyledBetweenContainer>
           <StyledCardContainer>
             {rankings &&
-              rankings
+              rankings.pages[0]
                 .slice(0, 3)
                 .map((product) => (
                   <BigDrawerCard
@@ -102,7 +100,7 @@ export const Ranking = () => {
           </StyledBetweenContainer>
           <StyledCardContainer>
             {newReleases &&
-              newReleases
+              newReleases.pages[0]
                 .slice(0, 3)
                 .map((product) => (
                   <BigDrawerCard

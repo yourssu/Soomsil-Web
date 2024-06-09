@@ -4,9 +4,8 @@ import { useRecoilValue } from 'recoil';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 
 import { getProductByProvider } from '../apis/getProductByProvider';
+import { PRODUCTS_PER_PAGE } from '../constants/page.constant';
 import { ProviderProductResponses } from '../types/product.type';
-
-const PRODUCTS_PER_PAGE = 21;
 
 export const useGetProductByProvider = ({ providerId }: { providerId: string }) => {
   const selectedCategory = useRecoilValue(CategoryState);
