@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 
 import { IcNoticeLine } from '@yourssu/design-system-react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -30,23 +30,24 @@ const NotificationContent = () => {
 
   useInterval(() => setCurrentIndex((prev) => prev + 1), 5000);
 
-  const InfiniteSlideHandler = (nextIndex: number) => {
-    setTimeout(() => {
-      if (slideRef.current) {
-        setActiveTransition(false);
-      }
-      setCurrentIndex(nextIndex);
+  useEffect(() => {
+    const handleInfiniteSlide = (nextIndex: number) => {
       setTimeout(() => {
         if (slideRef.current) {
-          setActiveTransition(true);
+          setActiveTransition(false);
         }
-      }, 100);
-    }, 500);
-  };
-
-  if (currentIndex === notificationArray.length - 1) {
-    InfiniteSlideHandler(0);
-  }
+        setCurrentIndex(nextIndex);
+        setTimeout(() => {
+          if (slideRef.current) {
+            setActiveTransition(true);
+          }
+        }, 100);
+      }, 500);
+    };
+    if (currentIndex === notificationArray.length - 1) {
+      handleInfiniteSlide(0);
+    }
+  }, [currentIndex, notificationArray.length]);
 
   return (
     <StyledNotificationContainer>
