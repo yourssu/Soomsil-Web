@@ -22,7 +22,7 @@ export const Header = () => {
 
   const theme = useTheme();
 
-  const handleClick = (event: React.MouseEvent) => {
+  const handleClickAuthTab = (event: React.MouseEvent) => {
     if (isLoggedIn) return;
 
     setDialog({ open: true, type: 'login' });
@@ -36,10 +36,10 @@ export const Header = () => {
       </StyledHeaderLogo>
       <StyledHeaderTabs>
         <StyledHeaderTab to="rankings">랭킹</StyledHeaderTab>
-        <StyledHeaderTab to="register" onClick={handleClick}>
+        <StyledHeaderTab to="register" onClick={handleClickAuthTab}>
           서비스 등록
         </StyledHeaderTab>
-        <StyledHeaderTab to="myDrawers" onClick={handleClick}>
+        <StyledHeaderTab to="myDrawers" onClick={handleClickAuthTab}>
           내 서랍장
         </StyledHeaderTab>
       </StyledHeaderTabs>
