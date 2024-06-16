@@ -19,18 +19,17 @@ interface NewPasswordFormProps {
 
 export const NewPasswordForm = (props: NewPasswordFormProps) => {
   const {
-    newPassword,
-    newPasswordCheck,
-    isNewPasswordError,
-    isNewPasswordCheckError,
     isFirstRender,
-    errorMessage,
-    setNewPasswordCheck,
-    handleNewPasswordChange,
+    register,
     handleSubmit,
+    passwordValidate,
+    errors,
+    passwordCheckValidate,
+    onSubmit,
   } = useNewPasswordForm(props);
 
-  const isNewPasswordFieldNegative = !isFirstRender && isNewPasswordError;
+  const isInvalidPassword = !isFirstRender && !!errors.newPassword;
+  const isValidPassword = !isFirstRender && !errors.newPassword;
 
   return (
     <StyledBoxContainer>
@@ -39,20 +38,20 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
         <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>
         <PasswordTextField
           placeholder="숫자와 영문자 조합으로 8자 이상 입력해주세요."
-          value={newPassword}
-          onChange={(e) => handleNewPasswordChange(e.target.value)}
-          isNegative={isNewPasswordFieldNegative}
-          helperLabel={isNewPasswordFieldNegative ? errorMessage : ''}
+          {...register('newPassword', {
+            validate: passwordValidate,
+          })}
+          isNegative={isInvalidPassword}
+          helperLabel={isInvalidPassword ? (errors.newPassword?.message as string) : ''}
         />
-        <StyledInputAnimation
-          className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
-        >
+        <StyledInputAnimation className={isValidPassword ? 'active' : ''}>
           <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
           <PasswordTextField
-            value={newPasswordCheck}
-            onChange={(e) => setNewPasswordCheck(e.target.value)}
-            isNegative={isNewPasswordCheckError}
-            helperLabel={isNewPasswordCheckError ? '비밀번호가 일치하지 않습니다.' : ''}
+            {...register('newPasswordCheck', {
+              validate: passwordCheckValidate,
+            })}
+            isNegative={!!errors.newPasswordCheck}
+            helperLabel={errors.newPasswordCheck?.message as string | undefined}
           />
         </StyledInputAnimation>
       </StyledInputContainer>
@@ -61,8 +60,8 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
           rounding={8}
           size="large"
           variant="filled"
-          onClick={handleSubmit}
-          disabled={isFirstRender || isNewPasswordError}
+          onClick={handleSubmit(onSubmit)}
+          disabled={!isValidPassword}
         >
           변경하기
         </BoxButton>

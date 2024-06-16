@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -15,78 +16,84 @@ interface NewPasswordFormProps {
 }
 
 export const useNewPasswordForm = (props: NewPasswordFormProps) => {
-  const [newPassword, setNewPassword] = useState<string>('');
-  const [newPasswordCheck, setNewPasswordCheck] = useState<string>('');
-  const [isNewPasswordError, setIsNewPasswordError] = useState<boolean>(false);
-  const [isNewPasswordCheckError, setIsNewPasswordCheckError] = useState<boolean>(false);
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
+
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  const newPassword = watch('newPassword');
+
+  useEffect(() => {
+    if (!newPassword) {
+      setIsFirstRender(true);
+    }
+
+    if (newPassword?.length >= 8) setIsFirstRender(false);
+    else setIsFirstRender(true);
+  }, [newPassword]);
 
   const { sessionToken, previousPassword } = props;
   const isLoggedIn = useRecoilValue(LogInState);
   const currentUser = useRecoilValue(UserState);
 
-  const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
-
-  const handleNewPasswordChange = (password: string) => {
-    setNewPassword(password);
-
-    if (password.length < 8) {
-      setIsNewPasswordError(true);
-      return;
+  const passwordValidate = (newPassword: string) => {
+    if (newPassword === previousPassword) {
+      return '현재 비밀번호와 다른 비밀번호를 입력해주세요.';
     }
 
-    setIsFirstRender(false);
-    if (previousPassword === password) {
-      setIsNewPasswordError(true);
-      setErrorMessage('현재 비밀번호와 다른 비밀번호를 입력해주세요.');
-      return;
+    const regexp = /^(?=.*[a-zA-Z])(?=.*[0-9]).*$/;
+
+    if (!regexp.test(newPassword)) {
+      return '숫자와 영문자 조합으로 8자 이상 입력해주세요.';
     }
 
-    setIsNewPasswordError(!regexp.test(password));
-    setErrorMessage('숫자와 영문자 조합으로 8자 이상 입력해주세요.');
+    return true;
   };
 
-  const handleSubmit = async () => {
+  const passwordCheckValidate = (newPasswordCheck: string) => {
+    if (newPasswordCheck === newPassword) return true;
+
+    return '비밀번호가 일치하지 않습니다.';
+  };
+
+  const onSubmit = async () => {
     if (!isLoggedIn || !currentUser) {
       navigate('/Login');
       return;
     }
 
-    if (newPassword === newPasswordCheck) {
-      const { data, error } = await postChangePassword({
-        email: currentUser.email,
-        newPassword: newPassword,
-        sessionToken: sessionToken,
-      });
-      if (error) {
-        navigate('/Login');
-        return;
-      }
-      if (data) {
-        api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
-        api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
-        navigate('/myPage');
-      }
+    const { data, error } = await postChangePassword({
+      email: currentUser.email,
+      newPassword: newPassword,
+      sessionToken: sessionToken,
+    });
+    if (error) {
+      navigate('/Login');
+      return;
     }
-    setIsNewPasswordCheckError(true);
-  };
 
-  useEffect(() => {
-    setNewPasswordCheck('');
-    setIsNewPasswordCheckError(false);
-  }, [isNewPasswordError]);
+    if (data) {
+      api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
+      api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
+      navigate('/myPage');
+    }
+  };
 
   return {
     newPassword,
-    newPasswordCheck,
-    isNewPasswordError,
-    isNewPasswordCheckError,
     isFirstRender,
-    errorMessage,
-    setNewPasswordCheck,
-    handleNewPasswordChange,
+    register,
     handleSubmit,
+    onSubmit,
+    passwordValidate,
+    errors,
+    passwordCheckValidate,
   };
 };
