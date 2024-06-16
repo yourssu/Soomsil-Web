@@ -5,8 +5,7 @@ import { getAnnouncement } from '@/home/apis/getAnnouncement';
 export const useGetAnnouncement = () => {
   return useSuspenseQuery({
     queryKey: ['announcement'],
-    queryFn: () => {
-      return getAnnouncement();
-    },
+    queryFn: getAnnouncement,
+    select: (data) => data.announcementList,
   });
 };

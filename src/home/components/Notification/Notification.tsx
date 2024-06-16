@@ -15,12 +15,10 @@ import {
 } from './Notification.style';
 
 const NotificationContent = () => {
-  const { data } = useGetAnnouncement();
+  const { data: announcements } = useGetAnnouncement();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [activeTransition, setActiveTransition] = useState(true);
   const slideRef = useRef<HTMLDivElement>(null);
-
-  const announcements = data?.announcementList ?? [];
 
   const notificationArray =
     announcements.length > 0
@@ -53,7 +51,7 @@ const NotificationContent = () => {
   }
 
   if (currentIndex === 0) {
-    InfiniteSlideHandler(announcements.length);
+    InfiniteSlideHandler(announcements?.length);
   }
 
   return (
