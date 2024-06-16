@@ -16,18 +16,16 @@ import {
 
 const NotificationContent = () => {
   const { data: announcements } = useGetAnnouncement();
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [activeTransition, setActiveTransition] = useState(true);
   const slideRef = useRef<HTMLDivElement>(null);
 
   const notificationArray =
     announcements.length > 0
-      ? [announcements[announcements.length - 1], ...announcements, announcements[0]].map(
-          (announcement, index) => ({
-            id: index + 1,
-            notification: announcement.title,
-          })
-        )
+      ? [...announcements, announcements[0]].map((announcement, index) => ({
+          id: index + 1,
+          notification: announcement.title,
+        }))
       : [];
 
   useInterval(() => setCurrentIndex((prev) => prev + 1), 5000);
@@ -47,11 +45,7 @@ const NotificationContent = () => {
   };
 
   if (currentIndex === notificationArray.length - 1) {
-    InfiniteSlideHandler(1);
-  }
-
-  if (currentIndex === 0) {
-    InfiniteSlideHandler(announcements?.length);
+    InfiniteSlideHandler(0);
   }
 
   return (
