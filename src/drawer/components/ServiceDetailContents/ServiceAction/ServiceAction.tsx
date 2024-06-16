@@ -56,13 +56,12 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
     showToast(toastProps.duration);
   };
 
-  const handleClickStar = () => {
-    if (!isLoggedIn) {
-      setDialog({ open: true, type: 'login' });
+  const handleClickBookmark = () => {
+    if (isLoggedIn) {
+      bookmarkMutation.mutate(product.productBookmarkKey);
       return;
     }
-
-    bookmarkMutation.mutate(product.productBookmarkKey);
+    setDialog({ open: true, type: 'login' });
   };
 
   return (
@@ -106,7 +105,7 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
               value={{
                 color: theme.color.pointYellow,
                 size: '1.5rem',
-                onClick: handleClickStar,
+                onClick: handleClickBookmark,
               }}
             >
               {product.isBookmarked ? <IcStarFilled /> : <IcStarLine />}
