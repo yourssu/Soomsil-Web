@@ -1,7 +1,9 @@
-import { useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 
 import { IcNoticeLine } from '@yourssu/design-system-react';
+import { ErrorBoundary } from 'react-error-boundary';
 
+import { useGetAnnouncement } from '@/home/hooks/useGetAnnouncement';
 import { useInterval } from '@/hooks/useInterval';
 
 import {
@@ -12,65 +14,75 @@ import {
   StyledNotificationContainer,
 } from './Notification.style';
 
-const Dummy = [
-  '그거 아시나요?? 지금은 2월이라는 거? 당연함 2월임',
-  '안녕하세요~~ 공지입니다.',
-  '가나다라마바사아자차카타파하갸냐댜랴먀뱌샤야쟈챠캬탸퍄햐거너더러머버서어저처커터퍼허겨녀뎌려며벼셔여져쳐켜텨펴혀',
-  '이거슨 테스트여',
-];
-
-// TODO: 추후 공지사항 API 연결 확인 필요
-export const Notification = () => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+const NotificationContent = () => {
+  const { data: announcements } = useGetAnnouncement();
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [activeTransition, setActiveTransition] = useState(true);
   const slideRef = useRef<HTMLDivElement>(null);
-  const notificationArray = [Dummy[Dummy.length - 1], ...Dummy, Dummy[0]].map(
-    (notification, index) => ({
-      id: index + 1,
-      notification,
-    })
-  );
+
+  const notificationArray =
+    announcements.length > 0
+      ? [...announcements, announcements[0]].map((announcement, index) => ({
+          id: index + 1,
+          notification: announcement.title,
+        }))
+      : [];
 
   useInterval(() => setCurrentIndex((prev) => prev + 1), 5000);
 
-  const InfiniteSlideHandler = (nextIndex: number) => {
-    setTimeout(() => {
-      if (slideRef.current) {
-        setActiveTransition(false);
-      }
-      setCurrentIndex(nextIndex);
+  useEffect(() => {
+    const handleInfiniteSlide = (nextIndex: number) => {
       setTimeout(() => {
         if (slideRef.current) {
-          setActiveTransition(true);
+          setActiveTransition(false);
         }
-      }, 100);
-    }, 500);
-  };
+        setCurrentIndex(nextIndex);
+        setTimeout(() => {
+          if (slideRef.current) {
+            setActiveTransition(true);
+          }
+        }, 100);
+      }, 500);
+    };
+    if (currentIndex === notificationArray.length - 1) {
+      handleInfiniteSlide(0);
+    }
+  }, [currentIndex, notificationArray.length]);
 
-  if (currentIndex === notificationArray.length - 1) {
-    InfiniteSlideHandler(1);
-  }
+  return (
+    <StyledNotificationContainer>
+      {announcements.length === 0 ? (
+        <StyledNotification>공지사항이 없습니다.</StyledNotification>
+      ) : (
+        <StyledNotificationArray
+          ref={slideRef}
+          $length={notificationArray.length}
+          $currentIndex={currentIndex}
+          $active={activeTransition}
+        >
+          {notificationArray.map((item) => (
+            <StyledNotification key={item.id}>{item.notification}</StyledNotification>
+          ))}
+        </StyledNotificationArray>
+      )}
+    </StyledNotificationContainer>
+  );
+};
 
-  if (currentIndex === 0) {
-    InfiniteSlideHandler(Dummy.length);
-  }
-
+export const Notification = () => {
   return (
     <StyledContainer>
       <StyledInnerContainer>
         <IcNoticeLine size="2.25rem" />
-        <StyledNotificationContainer>
-          <StyledNotificationArray
-            ref={slideRef}
-            $length={notificationArray.length}
-            $currentIndex={currentIndex}
-            $active={activeTransition}
-          >
-            {notificationArray.map((item) => (
-              <StyledNotification key={item.id}>{item.notification}</StyledNotification>
-            ))}
-          </StyledNotificationArray>
-        </StyledNotificationContainer>
+        <ErrorBoundary
+          fallbackRender={({ error }) => (
+            <StyledNotification>Error: {error.message}</StyledNotification>
+          )}
+        >
+          <Suspense fallback={<StyledNotification>로딩중...</StyledNotification>}>
+            <NotificationContent />
+          </Suspense>
+        </ErrorBoundary>
       </StyledInnerContainer>
     </StyledContainer>
   );
