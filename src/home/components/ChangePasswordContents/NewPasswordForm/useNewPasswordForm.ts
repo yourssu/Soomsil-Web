@@ -4,11 +4,10 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import { postChangePassword } from '@/home/apis/postChangePassword';
+import { usePostChangePassword } from '@/home/hooks/usePostChangePassword';
 import { LogInState } from '@/home/recoil/LogInState';
 import { UserState } from '@/home/recoil/UserState';
 import { NewPasswordFormProps } from '@/home/types/password.type';
-import { api } from '@/service/TokenService';
 
 export const useNewPasswordForm = (props: NewPasswordFormProps) => {
   const { sessionToken, previousPassword } = props;
@@ -27,6 +26,7 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
   const isLoggedIn = useRecoilValue(LogInState);
   const currentUser = useRecoilValue(UserState);
   const navigate = useNavigate();
+  const postChangePassword = usePostChangePassword();
 
   const newPassword = watch('newPassword');
 
@@ -50,25 +50,6 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
     return true;
   };
 
-  const changePasswordApi = async (email: string) => {
-    const { data, error } = await postChangePassword({
-      email: email,
-      newPassword: newPassword,
-      sessionToken: sessionToken,
-    });
-
-    if (error) {
-      navigate('/Login');
-      return;
-    }
-
-    if (data) {
-      api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
-      api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
-      navigate('/myPage');
-    }
-  };
-
   const onSubmit = async () => {
     const newPasswordCheck = getValues('newPasswordCheck');
 
@@ -85,7 +66,11 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
       return;
     }
 
-    await changePasswordApi(currentUser.email);
+    postChangePassword.mutate({
+      email: currentUser.email,
+      newPassword,
+      sessionToken,
+    });
   };
 
   return {

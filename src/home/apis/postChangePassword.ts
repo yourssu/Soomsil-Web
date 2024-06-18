@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { authClient } from '@/apis';
 import { SessionTokenType } from '@/home/types/password.type';
 
-import { AuthErrorData, PostAuthResponse } from '../types/Auth.type';
+import { AuthErrorData, PostAuthSignInData } from '../types/Auth.type';
 
 interface changePasswordProps {
   email: string;
@@ -11,7 +11,9 @@ interface changePasswordProps {
   sessionToken: SessionTokenType;
 }
 
-export const postChangePassword = async (props: changePasswordProps): Promise<PostAuthResponse> => {
+export const postChangePassword = async (
+  props: changePasswordProps
+): Promise<PostAuthSignInData> => {
   const { email, sessionToken, newPassword } = props;
 
   try {
@@ -20,8 +22,8 @@ export const postChangePassword = async (props: changePasswordProps): Promise<Po
       newPassword: newPassword,
       sessionToken: sessionToken.sessionToken,
     });
-    return { data: res.data };
+    return res.data;
   } catch (error) {
-    return { error: error as AxiosError<AuthErrorData> };
+    throw error as AxiosError<AuthErrorData>;
   }
 };
