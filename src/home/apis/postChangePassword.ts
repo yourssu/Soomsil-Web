@@ -1,9 +1,9 @@
 import { AxiosError } from 'axios';
 
 import { authClient } from '@/apis';
+import { SessionTokenType } from '@/home/types/password.type';
 
 import { AuthErrorData, PostAuthResponse } from '../types/Auth.type';
-import { SessionTokenType } from '../types/GetPassword.type';
 
 interface changePasswordProps {
   email: string;

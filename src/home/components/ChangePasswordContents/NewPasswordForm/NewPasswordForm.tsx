@@ -1,7 +1,7 @@
 import { BoxButton, PasswordTextField } from '@yourssu/design-system-react';
 
 import { useNewPasswordForm } from '@/home/components/ChangePasswordContents/NewPasswordForm/useNewPasswordForm';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { NewPasswordFormProps } from '@/home/types/password.type';
 
 import {
   StyledInputContainer,
@@ -12,21 +12,8 @@ import {
   StyledInputAnimation,
 } from './NewPasswordForm.style';
 
-interface NewPasswordFormProps {
-  sessionToken: SessionTokenType;
-  previousPassword: string;
-}
-
 export const NewPasswordForm = (props: NewPasswordFormProps) => {
-  const {
-    isFirstRender,
-    register,
-    handleSubmit,
-    passwordValidate,
-    errors,
-    passwordCheckValidate,
-    onSubmit,
-  } = useNewPasswordForm(props);
+  const { isFirstRender, register, passwordValidate, errors, onSubmit } = useNewPasswordForm(props);
 
   const isInvalidPassword = !isFirstRender && !!errors.newPassword;
   const isValidPassword = !isFirstRender && !errors.newPassword;
@@ -47,9 +34,7 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
         <StyledInputAnimation className={isValidPassword ? 'active' : ''}>
           <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
           <PasswordTextField
-            {...register('newPasswordCheck', {
-              validate: passwordCheckValidate,
-            })}
+            {...register('newPasswordCheck')}
             isNegative={!!errors.newPasswordCheck}
             helperLabel={errors.newPasswordCheck?.message as string | undefined}
           />
@@ -60,7 +45,7 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
           rounding={8}
           size="large"
           variant="filled"
-          onClick={handleSubmit(onSubmit)}
+          onClick={onSubmit}
           disabled={!isValidPassword}
         >
           변경하기

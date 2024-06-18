@@ -7,73 +7,56 @@ import { useRecoilValue } from 'recoil';
 import { postChangePassword } from '@/home/apis/postChangePassword';
 import { LogInState } from '@/home/recoil/LogInState';
 import { UserState } from '@/home/recoil/UserState';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { NewPasswordFormProps } from '@/home/types/password.type';
 import { api } from '@/service/TokenService';
 
-interface NewPasswordFormProps {
-  sessionToken: SessionTokenType;
-  previousPassword: string;
-}
-
 export const useNewPasswordForm = (props: NewPasswordFormProps) => {
+  const { sessionToken, previousPassword } = props;
   const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
-  const navigate = useNavigate();
-
   const {
     register,
     watch,
-    handleSubmit,
     formState: { errors },
+    getValues,
+    setValue,
+    setError,
   } = useForm({
     mode: 'onChange',
   });
 
+  const isLoggedIn = useRecoilValue(LogInState);
+  const currentUser = useRecoilValue(UserState);
+  const navigate = useNavigate();
+
   const newPassword = watch('newPassword');
 
   useEffect(() => {
-    if (!newPassword) {
-      setIsFirstRender(true);
-    }
-
-    if (newPassword?.length >= 8) setIsFirstRender(false);
-    else setIsFirstRender(true);
+    setIsFirstRender(!newPassword || newPassword.length < 8);
   }, [newPassword]);
-
-  const { sessionToken, previousPassword } = props;
-  const isLoggedIn = useRecoilValue(LogInState);
-  const currentUser = useRecoilValue(UserState);
 
   const passwordValidate = (newPassword: string) => {
     if (newPassword === previousPassword) {
+      setValue('newPasswordCheck', '');
       return '현재 비밀번호와 다른 비밀번호를 입력해주세요.';
     }
 
     const regexp = /^(?=.*[a-zA-Z])(?=.*[0-9]).*$/;
 
     if (!regexp.test(newPassword)) {
+      setValue('newPasswordCheck', '');
       return '숫자와 영문자 조합으로 8자 이상 입력해주세요.';
     }
 
     return true;
   };
 
-  const passwordCheckValidate = (newPasswordCheck: string) => {
-    if (newPasswordCheck === newPassword) return true;
-
-    return '비밀번호가 일치하지 않습니다.';
-  };
-
-  const onSubmit = async () => {
-    if (!isLoggedIn || !currentUser) {
-      navigate('/Login');
-      return;
-    }
-
+  const changePasswordApi = async (email: string) => {
     const { data, error } = await postChangePassword({
-      email: currentUser.email,
+      email: email,
       newPassword: newPassword,
       sessionToken: sessionToken,
     });
+
     if (error) {
       navigate('/Login');
       return;
@@ -86,14 +69,31 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
     }
   };
 
+  const onSubmit = async () => {
+    const newPasswordCheck = getValues('newPasswordCheck');
+
+    if (newPassword !== newPasswordCheck) {
+      setError('newPasswordCheck', {
+        type: 'manual',
+        message: '비밀번호가 일치하지 않습니다.',
+      });
+      return;
+    }
+
+    if (!isLoggedIn || !currentUser) {
+      navigate('/Login');
+      return;
+    }
+
+    await changePasswordApi(currentUser.email);
+  };
+
   return {
     newPassword,
     isFirstRender,
     register,
-    handleSubmit,
     onSubmit,
     passwordValidate,
     errors,
-    passwordCheckValidate,
   };
 };
