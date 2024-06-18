@@ -24,6 +24,22 @@ import {
   StyledRightContainer,
 } from './Register.style';
 
+declare global {
+  interface Window {
+    Android: {
+      getAccessToken: () => void;
+    };
+    webkit: {
+      messageHandlers: {
+        ios: {
+          postMessage: (message: string) => void;
+        };
+      };
+    };
+    setAccessToken: (token: string) => void;
+  }
+}
+
 export const Register = () => {
   const methods = useForm<RegisterFormValues>({ defaultValues: registerFormDefaultValue });
 
@@ -52,7 +68,7 @@ export const Register = () => {
     };
 
     window.setAccessToken = (accessToken: string) => {
-      api.setAccessToken(accessToken);
+      api.setAccessToken(accessToken, Date.now() + 5 * 60 * 1000);
     };
 
     getAccessTokenFromNative();
