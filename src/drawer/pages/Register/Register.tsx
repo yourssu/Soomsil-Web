@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
-import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Loading } from '@/components/Loading/Loading';
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
@@ -15,6 +15,7 @@ import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
 import { registerFormDefaultValue } from '@/drawer/constants/registerFormDefaultValue.constant';
 import { usePostProduct } from '@/drawer/hooks/usePostProduct';
 import { RegisterFormValues } from '@/drawer/types/form.type';
+import { api } from '@/service/TokenService';
 
 import {
   StyledContainer,
@@ -40,6 +41,22 @@ export const Register = () => {
       registerProductMutation.mutate(data);
     }
   };
+
+  useEffect(() => {
+    const getAccessTokenFromNative = () => {
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios) {
+        window.webkit.messageHandlers.ios.postMessage('getAccessToken');
+      } else if (window.Android && window.Android.getAccessToken) {
+        window.Android.getAccessToken();
+      }
+    };
+
+    window.setAccessToken = (accessToken: string) => {
+      api.setAccessToken(accessToken);
+    };
+
+    getAccessTokenFromNative();
+  }, []);
 
   useEffect(() => {
     if (methods.formState.errors) {
