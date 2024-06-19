@@ -81,6 +81,11 @@ const Withdraw = lazy(() =>
     default: Withdraw,
   }))
 );
+const ResetPassword = lazy(() =>
+  import('./home/pages/ResetPassword/ResetPassword').then(({ ResetPassword }) => ({
+    default: ResetPassword,
+  }))
+);
 
 export const Router = () => {
   const [state, setState] = useState({
@@ -117,6 +122,7 @@ export const Router = () => {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/changePassword" element={<ChangePassword />} />
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/withdraw" element={<Withdraw />}></Route>
