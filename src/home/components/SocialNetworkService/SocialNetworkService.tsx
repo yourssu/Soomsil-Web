@@ -4,7 +4,7 @@ import BlogIcon from '@/assets/home/blog.svg';
 import BrunchIcon from '@/assets/home/brunch.svg';
 import InstagramIcon from '@/assets/home/instagram.svg';
 import PpussungIcon from '@/assets/home/ppussung.svg';
-import { useQuickLink } from '@/home/hooks/useQuickLink';
+import { QuickLink } from '@/home/components/QuickLink/QuickLink.tsx';
 
 import { StyledIcon, StyledIconContainer, StyledLine } from './SocialNetworkService.style';
 
@@ -19,19 +19,14 @@ const ICON_LIST = [
 ];
 
 export const SocialNetworkService = () => {
-  const { getQuickLink } = useQuickLink();
-
   return (
     <>
       <StyledIconContainer>
         {ICON_LIST.map((icon, index) => (
           <React.Fragment key={icon.icon}>
-            {getQuickLink({
-              icon,
-              order: String(index + 1),
-              logging: index == 2,
-              children: <StyledIcon to={icon.link} $image={icon.icon} />,
-            })}
+            <QuickLink icon={icon} order={String(index + 1)} logging={index == 2}>
+              <StyledIcon to={icon.link} $image={icon.icon} />
+            </QuickLink>
             {ICON_LIST.length !== index + 1 && <StyledLine />}
           </React.Fragment>
         ))}
