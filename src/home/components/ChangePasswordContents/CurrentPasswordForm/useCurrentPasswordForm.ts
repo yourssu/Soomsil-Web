@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
+import { useGetUserPasswordMatch } from '@/home/hooks/useGetUserPasswordMatch';
 import { LogInState } from '@/home/recoil/LogInState';
 import { SessionTokenType } from '@/home/types/GetPassword.type';
 
@@ -17,36 +17,40 @@ export const useCurrentPasswordForm = ({
   setSessionToken,
 }: CurrentPasswordFormProps) => {
   const [currentPassword, setCurrentPassword] = useState('');
-  const [isError, setIsError] = useState(false);
+  const [isPasswordError, setIsPasswordError] = useState(false);
   const isLoggedIn = useRecoilValue(LogInState);
+  const { data, isError, refetch } = useGetUserPasswordMatch(currentPassword);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data) {
+      setSessionToken(data);
+      onConfirm();
+      return;
+    }
+
+    if (isError) {
+      setIsPasswordError(true);
+    }
+  }, [data, isError]);
 
   const checkCurrentPassword = async () => {
     if (!isLoggedIn) {
-      alert('로그인이 필요합니다.');
       navigate('/Login');
       return;
     }
 
-    const { error, data } = await getUserPasswordMatch({
-      password: currentPassword,
-    });
-
-    if (data) {
-      setIsError(false);
-      setSessionToken(data as SessionTokenType);
-      onConfirm();
-    } else if (error) setIsError(true);
+    await refetch();
   };
 
   const handlePasswordChange = (password: string) => {
-    if (isError) setIsError(false);
+    if (isPasswordError) setIsPasswordError(false);
     setCurrentPassword(password);
   };
 
   return {
     currentPassword,
-    isError,
+    isPasswordError,
     handlePasswordChange,
     checkCurrentPassword,
   };

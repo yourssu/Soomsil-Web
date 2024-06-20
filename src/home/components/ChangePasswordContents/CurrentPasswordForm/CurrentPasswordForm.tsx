@@ -17,7 +17,7 @@ interface CurrentPasswordFormProps {
 }
 
 export const CurrentPasswordForm = (props: CurrentPasswordFormProps) => {
-  const { currentPassword, isError, handlePasswordChange, checkCurrentPassword } =
+  const { currentPassword, isPasswordError, handlePasswordChange, checkCurrentPassword } =
     useCurrentPasswordForm(props);
 
   return (
@@ -29,8 +29,8 @@ export const CurrentPasswordForm = (props: CurrentPasswordFormProps) => {
           placeholder="비밀번호를 입력해주세요."
           value={currentPassword}
           onChange={(e) => handlePasswordChange(e.target.value)}
-          isNegative={isError}
-          helperLabel={isError ? '비밀번호가 일치하지 않습니다.' : ''}
+          isNegative={isPasswordError}
+          helperLabel={isPasswordError ? '비밀번호가 일치하지 않습니다.' : ''}
         />
       </StyledInputContainer>
       <StyledButtonContainer>
