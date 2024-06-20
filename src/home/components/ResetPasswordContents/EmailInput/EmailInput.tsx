@@ -2,29 +2,31 @@ import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { BoxButton, SuffixTextField } from '@yourssu/design-system-react';
 import { StyledEmailContainer, StyledSubTitleText, StyledTitleText } from './EmailInput.style';
 import { useState } from 'react';
+
 interface EmailInputProps {
-  onConfirm: () => void;
+  email: string;
+  onConfirm: (email: string) => void;
 }
-export const EmailInput = ({ onConfirm }: EmailInputProps) => {
-  const [email, setEmail] = useState('');
+
+export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
+  const [localEmail, setLocalEmail] = useState(email);
   const [emailError, setEmailError] = useState(false);
   const [emailSending, setEmailSending] = useState(false);
 
   const handleChange = (value: string) => {
-    setEmail(value);
-    if (emailError) {
-      setEmailError(false);
-    }
+    setLocalEmail(value);
+    setEmailError(false);
   };
 
-  const handleEmailSubmit = () => {
-    if (!email) {
+  const handleEmailSubmit = async () => {
+    if (!localEmail) {
       setEmailError(true);
       return;
     }
+
     setEmailSending(true);
-    onConfirm();
   };
+
   return (
     <>
       <StyledTitleText>비밀번호 찾기</StyledTitleText>
@@ -38,7 +40,7 @@ export const EmailInput = ({ onConfirm }: EmailInputProps) => {
           fieldLabel="학교 이메일"
           placeholder="ppushoong"
           suffix={EMAIL_DOMAIN}
-          value={email}
+          value={localEmail}
           onChange={(e) => handleChange(e.target.value)}
           isNegative={emailError}
           helperLabel={emailError ? '존재하지 않는 이메일입니다.' : ''}

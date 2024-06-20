@@ -15,12 +15,15 @@ type ResetPasswordFunnelStepsType =
 export const ResetPassword = () => {
   const [Funnel, setStep] = useFunnel<ResetPasswordFunnelStepsType>('이메일입력');
   const [email, setEmail] = useState('');
+
   return (
     <ResetPasswordFrame>
       <Funnel>
         <Funnel.Step name="이메일입력">
           <EmailInput
-            onConfirm={() => {
+            email={email}
+            onConfirm={(updatedEmail: string) => {
+              setEmail(updatedEmail);
               setStep('이메일인증');
             }}
           />
@@ -28,6 +31,7 @@ export const ResetPassword = () => {
 
         <Funnel.Step name="이메일인증">
           <EmailVerification
+            email={email}
             onConfirm={() => {
               setStep('비밀번호재설정');
             }}

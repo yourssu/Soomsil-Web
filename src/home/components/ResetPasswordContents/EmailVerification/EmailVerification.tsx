@@ -6,13 +6,13 @@ import {
   StyledTitleText,
 } from './EmailVerification.style';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
-import { useState } from 'react';
 
 interface EmailVerificationProps {
+  email: string;
   onConfirm: () => void;
 }
-export const EmailVerification = ({ onConfirm }: EmailVerificationProps) => {
-  const [emailVerified, setEmailVerified] = useState(true);
+
+export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) => {
   const { leftTime, resetTimer } = useSecondTimer(480);
 
   const handleTimer = (seconds: number) => {
@@ -20,6 +20,7 @@ export const EmailVerification = ({ onConfirm }: EmailVerificationProps) => {
     const secs = seconds % 60;
     return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
+  console.log(email);
 
   return (
     <>
@@ -35,7 +36,6 @@ export const EmailVerification = ({ onConfirm }: EmailVerificationProps) => {
         size="large"
         variant="filled"
         rounding={8}
-        disabled={!emailVerified}
         onClick={onConfirm}
       >
         비밀번호 재설정하기
