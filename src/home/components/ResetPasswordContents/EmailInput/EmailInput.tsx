@@ -2,6 +2,8 @@ import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { BoxButton, SuffixTextField } from '@yourssu/design-system-react';
 import { StyledEmailContainer, StyledSubTitleText, StyledTitleText } from './EmailInput.style';
 import { useState } from 'react';
+import { postAuthVerificationEmail } from '@/home/apis/authVerification';
+import { useFullEmail } from '@/hooks/useFullEmail';
 
 interface EmailInputProps {
   email: string;
@@ -12,6 +14,7 @@ export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
   const [localEmail, setLocalEmail] = useState(email);
   const [emailError, setEmailError] = useState(false);
   const [emailSending, setEmailSending] = useState(false);
+  const fullEmail = useFullEmail(localEmail);
 
   const handleChange = (value: string) => {
     setLocalEmail(value);
@@ -25,6 +28,22 @@ export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
     }
 
     setEmailSending(true);
+
+    try {
+      const response = await postAuthVerificationEmail({
+        email: fullEmail,
+        verificationType: 'PASSWORD',
+      });
+      if (response.error) {
+        setEmailError(true);
+      } else {
+        onConfirm(localEmail);
+      }
+    } catch (error) {
+      setEmailError(true);
+    } finally {
+      setEmailSending(false);
+    }
   };
 
   return (
