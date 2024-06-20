@@ -12,5 +12,6 @@ export const useGetUserData = () => {
     queryKey: ['userData'],
     queryFn: getUserData,
     enabled: isLoggedIn,
+    staleTime: Infinity,
   });
 };
