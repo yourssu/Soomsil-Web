@@ -1,4 +1,4 @@
-export interface RankingRequestParams {
+export interface ProductRequestParams {
   responseType: string;
   category?: string;
   page: number;

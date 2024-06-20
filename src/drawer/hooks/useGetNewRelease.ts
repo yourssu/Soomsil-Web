@@ -1,19 +1,31 @@
-import { useQuery } from '@tanstack/react-query';
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { getNewRelease } from '@/drawer/apis/getNewRelease';
 
-import { RankingRequestParams } from '../types/RankingRequestParams.type';
+import { PRODUCTS_PER_PAGE } from '../constants/page.constant';
+import { ProductRequestParams } from '../types/ProductRequestParams.type';
+import { ProductResponses, ProductResult } from '../types/product.type';
 
-export const useGetNewRelease = ({ responseType, category, page }: RankingRequestParams) => {
-  return useQuery({
-    queryKey: ['newReleases', { responseType, category, page }],
-    queryFn: () => {
-      return getNewRelease({
+type ProductRequestParamsWithoutPage = Omit<ProductRequestParams, 'page'>;
+
+export const useGetNewRelease = ({ responseType, category }: ProductRequestParamsWithoutPage) => {
+  return useInfiniteQuery<
+    ProductResponses[],
+    Error,
+    InfiniteData<ProductResult[], number>,
+    string[],
+    number
+  >({
+    queryKey: ['newReleases', responseType, category ?? ''],
+    queryFn: ({ pageParam }) =>
+      getNewRelease({
         responseType,
         category,
-        page,
-      });
+        page: pageParam,
+      }).then((data) => data.productList) as Promise<ProductResponses[]>,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length === PRODUCTS_PER_PAGE ? allPages.length : undefined;
     },
-    select: (data) => data.productList,
   });
 };
