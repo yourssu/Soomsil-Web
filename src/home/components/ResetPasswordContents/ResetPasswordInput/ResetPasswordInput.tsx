@@ -5,15 +5,20 @@ import {
   StyledTitleText,
 } from './ResetPasswordInput.style';
 import { useState } from 'react';
+import { STORAGE_KEYS } from '@/constants/storage.constant';
+import { postChangePassword } from '@/home/apis/postChangePassword';
+import { useFullEmail } from '@/hooks/useFullEmail';
 
 interface ResetPasswordProps {
+  email: string;
   onConfirm: () => void;
 }
 
-export const ResetPasswordInput = ({ onConfirm }: ResetPasswordProps) => {
+export const ResetPasswordInput = ({ email, onConfirm }: ResetPasswordProps) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isConfirmPasswordNegative, setIsConfirmPasswordNegative] = useState(false);
+  const fullEmail = useFullEmail(email);
 
   const handlePasswordChange = (value: string) => {
     setPassword(value);
@@ -25,11 +30,31 @@ export const ResetPasswordInput = ({ onConfirm }: ResetPasswordProps) => {
     setIsConfirmPasswordNegative(false);
   };
 
-  const handleConfirmClick = () => {
+  const handleConfirmClick = async () => {
     if (password !== confirmPassword) {
       setIsConfirmPasswordNegative(true);
-    } else {
+      return;
+    }
+
+    const sessionToken = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
+    const sessionTokenExpiresAt = sessionStorage.getItem(
+      STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN_EXPIRED_IN
+    );
+
+    if (!sessionToken || !sessionTokenExpiresAt) {
+      setIsConfirmPasswordNegative(true);
+      return;
+    }
+
+    try {
+      await postChangePassword({
+        email: fullEmail,
+        sessionToken: { sessionToken, sessionTokenExpiresAt },
+        newPassword: password,
+      });
       onConfirm();
+    } catch (error) {
+      console.error('비밀번호 변경 오류:', error);
     }
   };
 

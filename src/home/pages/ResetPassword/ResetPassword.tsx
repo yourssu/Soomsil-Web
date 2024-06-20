@@ -40,6 +40,7 @@ export const ResetPassword = () => {
 
         <Funnel.Step name="비밀번호재설정">
           <ResetPasswordInput
+            email={email}
             onConfirm={() => {
               setStep('비밀번호재설정완료');
             }}
