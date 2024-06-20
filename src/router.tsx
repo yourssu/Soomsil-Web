@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Fallback } from '@/components/Fallback/Fallback';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
+import { usePrivateRoute } from '@/hooks/usePrivateRoute';
 
 const Search = lazy(() =>
   import('./search/pages/Search/Search').then(({ Search }) => ({
@@ -101,6 +102,8 @@ export const Router = () => {
     };
   }, []);
 
+  const { PrivateRoute } = usePrivateRoute();
+
   return (
     <ErrorBoundary fallbackRender={(fallbackProps) => <Fallback {...fallbackProps} />}>
       <Suspense
@@ -116,9 +119,12 @@ export const Router = () => {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/changePassword" element={<ChangePassword />} />
-          <Route path="/mypage" element={<Mypage />}></Route>
+          <Route path="/Signup" element={<Signup />}></Route>
+          <Route path="/Mypage" element={<Mypage />}></Route>
+          <Route
+            path="/changePassword"
+            element={<PrivateRoute element={<ChangePassword />} />}
+          ></Route>
           <Route path="/withdraw" element={<Withdraw />}></Route>
           <Route path="/drawer" element={<DrawerLayout />}>
             <Route index element={<Navigate to="rankings" replace />}></Route>

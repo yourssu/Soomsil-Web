@@ -36,7 +36,6 @@ export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
     if (isValid && newPassword === newPasswordCheck) {
       const accessToken = api.getAccessToken();
       if (!accessToken) {
-        alert('로그인이 필요합니다.');
         navigate('/Login');
         return;
       }

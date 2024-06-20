@@ -16,31 +16,31 @@ export const useCurrentPasswordForm = ({
   onConfirm,
   setSessionToken,
 }: CurrentPasswordFormProps) => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [isPasswordError, setIsPasswordError] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState<string>('');
+  const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
   const isLoggedIn = useRecoilValue(LogInState);
   const { data, isError, refetch } = useGetUserPasswordMatch(currentPassword);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (data) {
-      setSessionToken(data);
-      onConfirm();
+    if (isError) {
+      setIsPasswordError(true);
       return;
     }
 
-    if (isError) {
-      setIsPasswordError(true);
+    if (data) {
+      setSessionToken(data);
+      onConfirm();
     }
-  }, [data, isError]);
+  }, [data, isError, setSessionToken, onConfirm]);
 
-  const checkCurrentPassword = async () => {
+  const checkCurrentPassword = () => {
     if (!isLoggedIn) {
       navigate('/Login');
       return;
     }
 
-    await refetch();
+    refetch();
   };
 
   const handlePasswordChange = (password: string) => {
