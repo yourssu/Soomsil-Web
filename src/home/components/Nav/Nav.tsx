@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import Profile from '@/assets/home/profile.svg';
 import { Dropdown } from '@/components/Dropdown/Dropdown';
+import { LogInState } from '@/home/recoil/LogInState';
 import { UserState } from '@/home/recoil/UserState';
+import { api } from '@/service/TokenService';
 
 import {
   StyledContainer,
@@ -26,15 +28,19 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const currentUser = useRecoilValue(UserState);
 
+  const setUserState = useSetRecoilState(UserState);
+  const setLogInState = useSetRecoilState(LogInState);
+
   const handleProfileClick = () => {
     setIsProfileClicked((prev) => !prev);
   };
-  //Todo: 로그아웃 기능 추가
-  // const handleLogout = () => {
-  //   sessionStorage.removeItem('accessExpiredIn');
-  //   api.logout();
-  //   return;
-  // };
+
+  const handleLogout = () => {
+    api.logout();
+    setUserState(null);
+    setLogInState(false);
+    return;
+  };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -59,8 +65,7 @@ export const Nav = ({ isLoggedIn }: NavProps) => {
               <StyledDropDownName>{currentUser.nickName}</StyledDropDownName>
               <StyledDropDownEmail>{currentUser.email}</StyledDropDownEmail>
               <StyledDropDownMyPage to="/mypage">마이페이지</StyledDropDownMyPage>
-              {/* TODO: 로그아웃 기능 구현 */}
-              <StyledDropDownLogout>로그아웃</StyledDropDownLogout>
+              <StyledDropDownLogout onClick={handleLogout}>로그아웃</StyledDropDownLogout>
             </Dropdown>
           )}
         </div>
