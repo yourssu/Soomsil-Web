@@ -102,8 +102,12 @@ export const Login = () => {
             </StyledBottomButtonWrapper>
           </PlainButton>
           <StyledButtonButtonSeparator>|</StyledButtonButtonSeparator>
-          {/* 비밀번호 찾기 route 완성되면 navigate 기능 추가 */}
-          <PlainButton size="medium" isPointed={false} isWarned={false}>
+          <PlainButton
+            size="medium"
+            isPointed={false}
+            isWarned={false}
+            onClick={() => navigate('/resetpassword')}
+          >
             <StyledBottomButtonWrapper>비밀번호 찾기</StyledBottomButtonWrapper>
           </PlainButton>
           <StyledButtonButtonSeparator>|</StyledButtonButtonSeparator>
