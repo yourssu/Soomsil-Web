@@ -1,45 +1,18 @@
 import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { BoxButton, SuffixTextField } from '@yourssu/design-system-react';
 import { StyledEmailContainer, StyledSubTitleText, StyledTitleText } from './EmailInput.style';
-import { postAuthVerificationEmail } from '@/home/apis/authVerification';
-import { useFullEmail } from '@/hooks/useFullEmail';
-import { useForm } from 'react-hook-form';
+import { useEmailInput } from './useEmailInputForm';
 
 interface EmailInputProps {
   email: string;
   onConfirm: (email: string) => void;
 }
 
-interface FormData {
-  email: string;
-}
-
 export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isSubmitting },
-    setError,
-  } = useForm<FormData>({
-    defaultValues: { email },
+  const { register, handleSubmit, errors, isSubmitting, handleOnSubmit } = useEmailInput({
+    email,
+    onConfirm,
   });
-
-  const localEmail = watch('email');
-  const fullEmail = useFullEmail(localEmail);
-
-  const handleOnSubmit = async (data: FormData) => {
-    const response = await postAuthVerificationEmail({
-      email: fullEmail,
-      verificationType: 'PASSWORD',
-    });
-
-    if (response.error) {
-      setError('email', { type: 'manual', message: '존재하지 않는 이메일입니다.' });
-    } else {
-      onConfirm(data.email);
-    }
-  };
 
   return (
     <>
