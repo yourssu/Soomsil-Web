@@ -68,7 +68,7 @@ export const Register = () => {
     };
 
     window.setAccessToken = (accessToken: string) => {
-      api.setAccessToken(accessToken, Date.now() + 5 * 60 * 1000);
+      api.setAccessToken(accessToken, Date.now() + 60 * 60 * 1000);
     };
 
     getAccessTokenFromNative();
