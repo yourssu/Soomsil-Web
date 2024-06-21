@@ -24,6 +24,7 @@ import {
   StyledBottomButtonContainer,
   StyledBottomButtonWrapper,
   StyledButtonButtonSeparator,
+  StyledLink,
   StyledLoginContainer,
 } from './Login.style';
 
@@ -36,6 +37,7 @@ export const Login = () => {
   const { refetch } = useGetUserData();
   const navigate = useNavigate();
   const fullEmail = useFullEmail(email);
+  const MAIL_SEARCH_URL = 'https://gw.ssu.ac.kr/o365Userlogin.aspx';
 
   const handleLoginClick = async () => {
     const { data, error } = await postAuthSignIn({ email: fullEmail, password });
@@ -92,9 +94,12 @@ export const Login = () => {
         </BoxButton>
 
         <StyledBottomButtonContainer>
-          {/* TODO: 학교 메일 찾기 route 완성되면 navigate 기능 추가 */}
           <PlainButton size="medium" isPointed={false} isWarned={false}>
-            <StyledBottomButtonWrapper>학교 메일 찾기</StyledBottomButtonWrapper>
+            <StyledBottomButtonWrapper>
+              <StyledLink href={MAIL_SEARCH_URL} target="_blank" rel="noopener noreferrer">
+                학교 메일 찾기
+              </StyledLink>
+            </StyledBottomButtonWrapper>
           </PlainButton>
           <StyledButtonButtonSeparator>|</StyledButtonButtonSeparator>
           {/* 비밀번호 찾기 route 완성되면 navigate 기능 추가 */}
