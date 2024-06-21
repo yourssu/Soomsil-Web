@@ -28,4 +28,7 @@ export const StyledButtonButtonSeparator = styled.div`
 export const StyledLink = styled.a`
   ${({ theme }) => theme.typo.button3};
   color: inherit;
+  &:visited {
+    color: inherit;
+  }
 `;
