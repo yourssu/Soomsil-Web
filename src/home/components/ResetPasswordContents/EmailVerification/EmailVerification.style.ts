@@ -12,6 +12,7 @@ export const StyledSubTitleText = styled.p`
 export const StyledButtonText = styled.p`
   ${({ theme }) => theme.typo.button3}
   text-align: center;
+  cursor: pointer;
 `;
 
 export const StyledEmailContainer = styled.div`
