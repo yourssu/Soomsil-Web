@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { Loading } from '@/components/Loading/Loading';
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
@@ -42,6 +43,7 @@ declare global {
 
 export const Register = () => {
   const methods = useForm<RegisterFormValues>({ defaultValues: registerFormDefaultValue });
+  const navigate = useNavigate();
 
   const [linkExist, setLinkExist] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
@@ -54,7 +56,11 @@ export const Register = () => {
 
   const handleSubmit: SubmitHandler<RegisterFormValues> = (data) => {
     if (isChecked) {
-      registerProductMutation.mutate(data);
+      registerProductMutation.mutate(data, {
+        onSuccess: () => {
+          navigate('/drawer/myDrawers');
+        },
+      });
     }
   };
 
