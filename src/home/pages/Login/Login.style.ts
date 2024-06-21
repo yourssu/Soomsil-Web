@@ -27,6 +27,5 @@ export const StyledButtonButtonSeparator = styled.div`
 
 export const StyledLink = styled.a`
   ${({ theme }) => theme.typo.button3};
-  pointer-events: none;
   color: inherit;
 `;
