@@ -1,10 +1,5 @@
-import { BoxButton } from '@yourssu/design-system-react';
-import {
-  StyledButtonText,
-  StyledSubTitleText,
-  StyledTimer,
-  StyledTitleText,
-} from './EmailVerification.style';
+import { BoxButton, PlainButton } from '@yourssu/design-system-react';
+import { StyledSubTitleText, StyledTimer, StyledTitleText } from './EmailVerification.style';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 import { getAuthVerificationCheck, postAuthVerificationEmail } from '@/home/apis/authVerification';
 import { useFullEmail } from '@/hooks/useFullEmail';
@@ -79,7 +74,9 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
         새로운 비밀번호를 재설정해주세요.
       </StyledSubTitleText>
       <StyledTimer>{handleTimer(leftTime)}</StyledTimer>
-      <StyledButtonText onClick={handleResendEmail}>인증 메일 재전송</StyledButtonText>
+      <PlainButton size="medium" isPointed={false} isWarned={false} onClick={handleResendEmail}>
+        인증 메일 재전송
+      </PlainButton>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <BoxButton
         style={{ width: '100%' }}
