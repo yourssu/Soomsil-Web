@@ -1,48 +1,43 @@
 import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { BoxButton, SuffixTextField } from '@yourssu/design-system-react';
 import { StyledEmailContainer, StyledSubTitleText, StyledTitleText } from './EmailInput.style';
-import { useState } from 'react';
 import { postAuthVerificationEmail } from '@/home/apis/authVerification';
 import { useFullEmail } from '@/hooks/useFullEmail';
+import { useForm } from 'react-hook-form';
 
 interface EmailInputProps {
   email: string;
   onConfirm: (email: string) => void;
 }
 
+interface FormData {
+  email: string;
+}
+
 export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
-  const [localEmail, setLocalEmail] = useState(email);
-  const [emailError, setEmailError] = useState(false);
-  const [emailSending, setEmailSending] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+    setError,
+  } = useForm<FormData>({
+    defaultValues: { email },
+  });
+
+  const localEmail = watch('email');
   const fullEmail = useFullEmail(localEmail);
 
-  const handleChange = (value: string) => {
-    setLocalEmail(value);
-    setEmailError(false);
-  };
+  const handleOnSubmit = async (data: FormData) => {
+    const response = await postAuthVerificationEmail({
+      email: fullEmail,
+      verificationType: 'PASSWORD',
+    });
 
-  const handleEmailSubmit = async () => {
-    if (!localEmail) {
-      setEmailError(true);
-      return;
-    }
-
-    setEmailSending(true);
-
-    try {
-      const response = await postAuthVerificationEmail({
-        email: fullEmail,
-        verificationType: 'PASSWORD',
-      });
-      if (response.error) {
-        setEmailError(true);
-      } else {
-        onConfirm(localEmail);
-      }
-    } catch (error) {
-      setEmailError(true);
-    } finally {
-      setEmailSending(false);
+    if (response.error) {
+      setError('email', { type: 'manual', message: '존재하지 않는 이메일입니다.' });
+    } else {
+      onConfirm(data.email);
     }
   };
 
@@ -59,10 +54,9 @@ export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
           fieldLabel="학교 이메일"
           placeholder="ppushoong"
           suffix={EMAIL_DOMAIN}
-          value={localEmail}
-          onChange={(e) => handleChange(e.target.value)}
-          isNegative={emailError}
-          helperLabel={emailError ? '존재하지 않는 이메일입니다.' : ''}
+          {...register('email')}
+          isNegative={errors.email ? true : false}
+          helperLabel={errors.email ? errors.email.message : ''}
         />
       </StyledEmailContainer>
       <BoxButton
@@ -70,8 +64,8 @@ export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
         size="large"
         variant="filled"
         rounding={8}
-        onClick={handleEmailSubmit}
-        disabled={emailSending}
+        onClick={handleSubmit(handleOnSubmit)}
+        disabled={isSubmitting}
       >
         재설정 메일 보내기
       </BoxButton>

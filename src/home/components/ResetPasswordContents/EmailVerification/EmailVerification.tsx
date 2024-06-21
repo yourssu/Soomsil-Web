@@ -3,18 +3,31 @@ import { StyledSubTitleText, StyledTimer, StyledTitleText } from './EmailVerific
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 import { getAuthVerificationCheck, postAuthVerificationEmail } from '@/home/apis/authVerification';
 import { useFullEmail } from '@/hooks/useFullEmail';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { STORAGE_KEYS } from '@/constants/storage.constant';
+import { useForm } from 'react-hook-form';
 
 interface EmailVerificationProps {
   email: string;
   onConfirm: () => void;
 }
 
+interface FormData {
+  email: string;
+}
+
 export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) => {
+  const {
+    handleSubmit,
+    formState: { errors },
+    setError,
+    clearErrors,
+  } = useForm<FormData>({
+    defaultValues: { email },
+  });
+
   const { leftTime, resetTimer } = useSecondTimer(480);
   const fullEmail = useFullEmail(email);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
@@ -29,20 +42,29 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
       onConfirm();
     } else {
       if (!isInitialCheck) {
-        setError('이메일 인증을 완료해주세요.');
+        setError('email', { type: 'manual', message: '이메일 인증을 완료해주세요.' });
       }
       if (error) {
-        console.error('인증 실패:', error);
+        setError('email', { type: 'manual', message: '이메일을 다시 확인해주세요.' });
       }
     }
   };
 
-  const handleVerification = () => {
+  const handleVerification = async () => {
     const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
-    if (!session) {
+    const sessionExpiresAt = sessionStorage.getItem(
+      STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN_EXPIRED_IN
+    );
+
+    if (!session || !sessionExpiresAt) {
+      setError('email', {
+        type: 'manual',
+        message: '세션이 없습니다. 인증 메일을 다시 요청해주세요.',
+      });
       return;
     }
-    verifyEmailSession(session);
+    await verifyEmailSession(session);
+    clearErrors('email');
   };
 
   const handleTimer = (seconds: number) => {
@@ -60,9 +82,7 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
     });
 
     if (response.error) {
-      console.error('이메일 전송 중 오류 발생');
-    } else {
-      console.log('인증 메일 재전송 완료');
+      setError('email', { type: 'manual', message: '이메일을 다시 확인해주세요.' });
     }
   };
 
@@ -77,13 +97,13 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
       <PlainButton size="medium" isPointed={false} isWarned={false} onClick={handleResendEmail}>
         인증 메일 재전송
       </PlainButton>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
       <BoxButton
         style={{ width: '100%' }}
         size="large"
         variant="filled"
         rounding={8}
-        onClick={handleVerification}
+        onClick={handleSubmit(handleVerification)}
       >
         비밀번호 재설정하기
       </BoxButton>
