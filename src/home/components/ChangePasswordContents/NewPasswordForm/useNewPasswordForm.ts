@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import { useGetUserData } from '@/home/hooks/useGetUserData';
 import { usePostChangePassword } from '@/home/hooks/usePostChangePassword';
 import { LogInState } from '@/home/recoil/LogInState';
-import { UserState } from '@/home/recoil/UserState';
 import { NewPasswordFormProps } from '@/home/types/password.type';
 
 export const useNewPasswordForm = (props: NewPasswordFormProps) => {
@@ -25,7 +25,7 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
   });
 
   const isLoggedIn = useRecoilValue(LogInState);
-  const currentUser = useRecoilValue(UserState);
+  const { data: currentUser } = useGetUserData();
   const navigate = useNavigate();
   const postChangePassword = usePostChangePassword();
 
