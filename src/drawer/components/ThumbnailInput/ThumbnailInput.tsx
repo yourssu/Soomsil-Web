@@ -67,7 +67,7 @@ export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
       <input
         id="inputFile"
         type="file"
-        accept="image/*"
+        accept=".jpg, .jpeg, .png, .gif"
         onChange={(event) => {
           handleChangeImg(event);
           onChange(event);

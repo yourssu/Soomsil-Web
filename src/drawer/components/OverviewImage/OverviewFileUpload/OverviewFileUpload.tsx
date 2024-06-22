@@ -30,7 +30,7 @@ export const OverviewFileUpload = ({
       <input
         id={`overviewFile${index}`}
         type="file"
-        accept="image/*"
+        accept=".jpg, .jpeg, .png, .gif"
         style={{ display: 'none' }}
         onChange={(e) => handleInputChange(e, index)}
       />
