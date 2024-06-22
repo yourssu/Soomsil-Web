@@ -24,6 +24,7 @@ export const CardLayout = ({ data, type }: CardLayoutProps) => {
             isBookmarked={product.isBookmarked}
             bigImgSrc={product.introductionImage[0]}
             smallImgSrc={product.mainImage}
+            productNo={product.productNo}
           />
         ) : (
           <BigDrawerCard
