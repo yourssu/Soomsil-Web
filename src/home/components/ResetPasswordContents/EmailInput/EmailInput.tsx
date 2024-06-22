@@ -40,7 +40,7 @@ export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
         onClick={handleSubmit(handleOnSubmit)}
         disabled={isSubmitting}
       >
-        재설정 메일 보내기
+        {isSubmitting ? '잠시만 기다려주세요...' : '재설정 메일 보내기'}
       </BoxButton>
     </>
   );
