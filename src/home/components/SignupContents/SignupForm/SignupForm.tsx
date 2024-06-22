@@ -2,6 +2,7 @@ import { BoxButton, PasswordTextField, SimpleTextField } from '@yourssu/design-s
 
 import { SignupFormProps } from '@/home/components/SignupContents/SignupForm/SignUpForm.type.ts';
 import { useSignUpForm } from '@/home/components/SignupContents/SignupForm/useSignUpForm.ts';
+import { usePreventDuplicateClick } from '@/hooks/usePreventDuplicateClick.ts';
 import { useSignupFormValidation } from '@/hooks/useSignupFormValidator.ts';
 
 import {
@@ -18,6 +19,8 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
 
   const { nicknameValidOnce, passwordValidOnce, isFormValid, isNicknameValid, isPasswordValid } =
     useSignupFormValidation(nickname, password);
+
+  const { disabled, handleClick } = usePreventDuplicateClick();
 
   return (
     <StyledSignupContentContainer>
@@ -39,7 +42,7 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
       />
       <PasswordTextField
         fieldLabel="사용할 비밀번호를 입력해주세요."
-        helperLabel="숫자와 영문자 조합으로 8자 이상 입력해주세요"
+        helperLabel="숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요"
         placeholder="비밀번호"
         isNegative={!isPasswordValid && passwordValidOnce.current}
         onChange={(e) => {
@@ -51,8 +54,8 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
         rounding={8}
         size="large"
         variant="filled"
-        onClick={onFormConfirm}
-        disabled={!isFormValid}
+        onClick={() => handleClick(onFormConfirm)}
+        disabled={!isFormValid || disabled}
       >
         <StyledSignupButtonText>회원가입</StyledSignupButtonText>
       </BoxButton>

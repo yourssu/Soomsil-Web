@@ -1,17 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 import { Card } from '@/components/Card/Card';
-import { Dropdown } from '@/components/Dropdown/Dropdown';
 
 import { ServiceRemoveModal } from '../../Dialog/ServiceRemoveModal';
+import { CardSettingDropdownMenu } from '../CardSettingDropdownMenu/CardSettingDropdownMenu';
 import { DrawerCardProps } from '../DrawerCard.type';
 
-import {
-  StyledCardContainer,
-  StyledServiceModify,
-  StyledServiceText,
-  StyledServiceTextContainer,
-} from './UserDrawerCard.style';
+import { StyledCardContainer } from './UserDrawerCard.style';
 
 interface UserDrawerCardProps extends DrawerCardProps {
   productNo: number;
@@ -29,27 +24,14 @@ export const UserDrawerCard = ({
 }: UserDrawerCardProps) => {
   const [isCardSettingClicked, setIsCardSettingClicked] = useState(false);
   const [openRemoveModal, setOpenRemoveModal] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsCardSettingClicked(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const handleClickSetting = () => {
+  const handleClickSetting = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
     setIsCardSettingClicked((prev) => !prev);
   };
 
-  const handleClickRemoveButton = () => {
+  const handleClickRemoveButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setIsCardSettingClicked(false);
     setOpenRemoveModal(true);
   };
@@ -65,27 +47,16 @@ export const UserDrawerCard = ({
           bookmarkCount={bookmarkCount}
           isBookmarked={isBookmarked}
         />
-        <Card.Setting
-          onClick={(event) => {
-            event.stopPropagation();
-            handleClickSetting();
-          }}
-        />
+        <CardSettingDropdownMenu
+          open={isCardSettingClicked}
+          onOpenChange={setIsCardSettingClicked}
+          onClickRemoveButton={handleClickRemoveButton}
+        >
+          <CardSettingDropdownMenu.Trigger asChild>
+            <Card.Setting onClick={handleClickSetting} />
+          </CardSettingDropdownMenu.Trigger>
+        </CardSettingDropdownMenu>
       </Card>
-      {isCardSettingClicked && (
-        <Dropdown padding="1rem" bottom="-4.5rem" right="0" ref={dropdownRef}>
-          <StyledServiceTextContainer
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
-          >
-            <StyledServiceModify to="/drawer/register">서비스 수정</StyledServiceModify>
-            <button type="button" onClick={handleClickRemoveButton}>
-              <StyledServiceText>서비스 삭제</StyledServiceText>
-            </button>
-          </StyledServiceTextContainer>
-        </Dropdown>
-      )}
       <ServiceRemoveModal
         open={openRemoveModal}
         productNo={productNo}
