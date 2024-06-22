@@ -1,12 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { BoxButton } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
 
 import PpussungIcon from '@/assets/home/ppussung.svg';
-import { LogInState } from '@/home/recoil/LogInState';
-import { UserState } from '@/home/recoil/UserState';
-import { api } from '@/service/TokenService';
+import { useResetUserInfo } from '@/hooks/useResetUserInfo';
 
 import {
   StyledButtonContainer,
@@ -23,15 +20,11 @@ interface LogoutModalProps {
 }
 
 export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
+  const resetUserInfo = useResetUserInfo();
   const navigate = useNavigate();
 
-  const setUserState = useSetRecoilState(UserState);
-  const setLogInState = useSetRecoilState(LogInState);
-
   const handleLogout = () => {
-    api.logout();
-    setUserState(null);
-    setLogInState(false);
+    resetUserInfo();
     alert('로그아웃 되었습니다.');
     navigate('/');
   };
