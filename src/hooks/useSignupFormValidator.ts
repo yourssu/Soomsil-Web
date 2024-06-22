@@ -1,19 +1,28 @@
 import { useMemo, useRef } from 'react';
 
+import { hasNumberAndEnglishWithSymbols, hasNumberOrEnglishOrHangulOrSpace } from '@yourssu/utils';
+
 export const useSignupFormValidation = (nickname: string, password: string) => {
   const nicknameValidOnce = useRef(false);
   const passwordValidOnce = useRef(false);
 
-  const hasOnlyNumberAndEnglish = (value: string) => /^[a-zA-Z0-9]*$/.test(value);
-  const hasOnlyNumberEnglishAndHangul = (value: string) =>
-    /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/.test(value);
+  function isBlank(value: string): boolean {
+    return /^\s*$/.test(value);
+  }
 
   const isNicknameValid = useMemo(() => {
-    return nickname.length >= 2 && nickname.length <= 12 && hasOnlyNumberEnglishAndHangul(nickname);
+    return (
+      nickname.length >= 2 &&
+      nickname.length <= 12 &&
+      hasNumberOrEnglishOrHangulOrSpace(nickname) &&
+      !isBlank(nickname)
+    );
   }, [nickname]);
 
   const isPasswordValid = useMemo(() => {
-    return password.length >= 8 && hasOnlyNumberAndEnglish(password);
+    return (
+      password.length >= 8 && password.length <= 100 && hasNumberAndEnglishWithSymbols(password)
+    );
   }, [password]);
 
   return {
