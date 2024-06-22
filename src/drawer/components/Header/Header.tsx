@@ -1,8 +1,11 @@
 import { IcPersoncircleLine, IcSearchLine, IconContext } from '@yourssu/design-system-react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useTheme } from 'styled-components';
 
 import soomsil from '@/assets/soomsil_logo.svg';
 import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
+import { LogInState } from '@/home/recoil/LogInState';
+import { DialogState } from '@/recoil/DialogState';
 
 import {
   StyledHeader,
@@ -14,7 +17,17 @@ import {
 } from './Header.style';
 
 export const Header = () => {
+  const isLoggedIn = useRecoilValue(LogInState);
+  const setDialog = useSetRecoilState(DialogState);
+
   const theme = useTheme();
+
+  const handleClickAuthTab = (event: React.MouseEvent) => {
+    if (isLoggedIn) return;
+
+    setDialog({ open: true, type: 'login' });
+    event.preventDefault();
+  };
 
   return (
     <StyledHeader>
@@ -23,8 +36,12 @@ export const Header = () => {
       </StyledHeaderLogo>
       <StyledHeaderTabs>
         <StyledHeaderTab to="rankings">랭킹</StyledHeaderTab>
-        <StyledHeaderTab to="register">서비스 등록</StyledHeaderTab>
-        <StyledHeaderTab to="myDrawers">내 서랍장</StyledHeaderTab>
+        <StyledHeaderTab to="register" onClick={handleClickAuthTab}>
+          서비스 등록
+        </StyledHeaderTab>
+        <StyledHeaderTab to="myDrawers" onClick={handleClickAuthTab}>
+          내 서랍장
+        </StyledHeaderTab>
       </StyledHeaderTabs>
       <FlexGrowItem proportion={1} />
       <StyledHeaderSearchContainer>
