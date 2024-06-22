@@ -8,9 +8,16 @@ export const useSignupFormValidation = ({ nickname, password }: SignupFormStates
   const nicknameValidOnce = useRef(false);
   const passwordValidOnce = useRef(false);
 
+  function isBlank(value: string): boolean {
+    return /^\s*$/.test(value);
+  }
+
   const isNicknameValid = useMemo(() => {
     return (
-      nickname.length >= 2 && nickname.length <= 12 && hasNumberOrEnglishOrHangulOrSpace(nickname)
+      nickname.length >= 2 &&
+      nickname.length <= 12 &&
+      hasNumberOrEnglishOrHangulOrSpace(nickname) &&
+      !isBlank(nickname)
     );
   }, [nickname]);
 
