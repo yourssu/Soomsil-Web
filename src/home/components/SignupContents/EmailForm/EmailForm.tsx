@@ -52,7 +52,9 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           disabled={email === '' || disabled}
           onClick={() => handleClick(onEmailSubmit)}
         >
-          <StyledSignupButtonText>인증 메일 받기</StyledSignupButtonText>
+          <StyledSignupButtonText>
+            {disabled ? '잠시만 기다려주세요...' : '인증 메일 받기'}
+          </StyledSignupButtonText>
         </BoxButton>
       </StyledButtonsContainer>
     </StyledSignupContentContainer>
