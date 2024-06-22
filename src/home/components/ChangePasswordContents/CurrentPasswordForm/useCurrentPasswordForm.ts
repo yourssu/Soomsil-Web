@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 
 import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
 import { LogInState } from '@/home/recoil/LogInState';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { SessionTokenType } from '@/home/types/password.type';
 
 interface CurrentPasswordFormProps {
   onConfirm: () => void;

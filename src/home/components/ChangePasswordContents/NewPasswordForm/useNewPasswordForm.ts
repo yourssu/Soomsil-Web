@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import { hasNumberAndEnglishWithSymbols } from '@yourssu/utils';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -40,17 +41,13 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
       return '현재 비밀번호와 다른 비밀번호를 입력해주세요.';
     }
 
-    const regexp = /^(?=.*[a-zA-Z])(?=.*[0-9]).*$/;
+    if (hasNumberAndEnglishWithSymbols(newPassword) && newPassword.length <= 100) return true;
 
-    if (!regexp.test(newPassword)) {
-      setValue('newPasswordCheck', '');
-      return '숫자와 영문자 조합으로 8자 이상 입력해주세요.';
-    }
-
-    return true;
+    setValue('newPasswordCheck', '');
+    return '숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요.';
   };
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     const newPasswordCheck = getValues('newPasswordCheck');
 
     if (newPassword !== newPasswordCheck) {

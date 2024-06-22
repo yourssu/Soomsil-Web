@@ -24,7 +24,7 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
       <StyledInputContainer>
         <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>
         <PasswordTextField
-          placeholder="숫자와 영문자 조합으로 8자 이상 입력해주세요."
+          placeholder="숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요"
           {...register('newPassword', {
             validate: passwordValidate,
           })}
