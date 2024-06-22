@@ -84,7 +84,7 @@ export const CommunityTerm = () => {
         </ul>
       </StyledTermParagraph>
 
-      <strong>본 이용규칙은 2024년 2월 27일부터 시행됩니다.</strong>
+      <StyledTermParagraph>본 이용규칙은 2024년 2월 27일부터 시행됩니다.</StyledTermParagraph>
     </StyledTermContentContainer>
   );
 };
