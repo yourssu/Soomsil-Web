@@ -8,7 +8,7 @@ export const StyledProfileDropdownContent = styled(DropdownMenu.Content)`
   flex-direction: column;
   align-items: flex-start;
 
-  width: 11.25rem;
+  width: fit-content;
   padding: 1rem 0.75rem;
   gap: 1rem;
   z-index: ${Z_INDEX.dropdown};
