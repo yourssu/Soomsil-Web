@@ -24,8 +24,11 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@yourssu/logging-system-react':
-        specifier: ^1.0.0
-        version: 1.0.0(axios@1.6.8)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        specifier: ^1.1.0
+        version: 1.1.0(axios@1.6.8)(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@yourssu/utils':
+        specifier: ^0.2.1
+        version: 0.2.1
       axios:
         specifier: ^1.6.2
         version: 1.6.8
@@ -950,13 +953,14 @@ packages:
       react-dom: ^18.2.0
       styled-components: ^6.0.7
 
-  '@yourssu/logging-system-react@1.0.0':
-    resolution: {integrity: sha512-DXu7ZiamqbNT78DnEac3sjJEEc7yQ30KtbHBl3MY/Y0CW3EybAEkwaun0EagPaI3UXbD0LGwUYsO/rJjYp5m4w==}
+  '@yourssu/logging-system-react@1.1.0':
+    resolution: {integrity: sha512-LhhIW4w4/UvnHK2kJv6JAm++g6zr8t84OqANqdWA8X0JCe4qGUC1zfVBtuhlaI31bouHLGzi1j0iVjTpPaWD+A==}
     peerDependencies:
       axios: ^1.6.4
-      react: ^18.2.0
-      react-dom: ^18.2.0
       react-router-dom: ^6.21.3
+
+  '@yourssu/utils@0.2.1':
+    resolution: {integrity: sha512-zxeHQNasbOyw2bNVoCpU0+pVSs3FXaC7CggPYOUT6ujLyKBhPMsJRo5kNWJN3HEc/r9GgN3AeUtoD5h9+AniGA==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3297,12 +3301,12 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       styled-components: 6.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
-  '@yourssu/logging-system-react@1.0.0(axios@1.6.8)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@yourssu/logging-system-react@1.1.0(axios@1.6.8)(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       axios: 1.6.8
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
       react-router-dom: 6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
+  '@yourssu/utils@0.2.1': {}
 
   acorn-jsx@5.3.2(acorn@8.11.3):
     dependencies:

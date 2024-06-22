@@ -1,3 +1,8 @@
+export interface Announcement {
+  id: number;
+  title: string;
+}
+
 export interface AnnouncementResponse {
-  // TODO: 추후 API 관련 타입 정의 필요
+  announcementList: Announcement[];
 }
