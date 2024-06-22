@@ -8,7 +8,7 @@ interface EmailVerificationProps {
 }
 
 export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) => {
-  const { handleSubmit, leftTime, handleTimer, handleVerification, handleResendEmail, error } =
+  const { leftTime, handleTimer, handleVerification, handleResendEmail, error, isResending } =
     useEmailVerification({ email, onConfirm });
 
   return (
@@ -19,7 +19,13 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
         새로운 비밀번호를 재설정해주세요.
       </StyledSubTitleText>
       <StyledTimer>{handleTimer(leftTime)}</StyledTimer>
-      <PlainButton size="medium" isPointed={false} isWarned={false} onClick={handleResendEmail}>
+      <PlainButton
+        size="medium"
+        isPointed={false}
+        isWarned={false}
+        onClick={handleResendEmail}
+        disabled={isResending}
+      >
         인증 메일 재전송
       </PlainButton>
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -28,7 +34,8 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
         size="large"
         variant="filled"
         rounding={8}
-        onClick={handleSubmit(handleVerification)}
+        onClick={handleVerification}
+        disabled={isResending}
       >
         비밀번호 재설정하기
       </BoxButton>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 import { getAuthVerificationCheck, postAuthVerificationEmail } from '@/home/apis/authVerification';
 import { useFullEmail } from '@/hooks/useFullEmail';
@@ -10,18 +9,11 @@ interface UseEmailVerificationProps {
   onConfirm: () => void;
 }
 
-interface FormData {
-  email: string;
-}
-
 export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationProps) => {
-  const { handleSubmit } = useForm<FormData>({
-    defaultValues: { email },
-  });
-
   const { leftTime, resetTimer } = useSecondTimer(480);
   const fullEmail = useFullEmail(email);
   const [error, setError] = useState<string | null>(null);
+  const [isResending, setIsResending] = useState(false);
 
   useEffect(() => {
     const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
@@ -65,6 +57,7 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
   };
 
   const handleResendEmail = async () => {
+    setIsResending(true);
     resetTimer();
 
     const response = await postAuthVerificationEmail({
@@ -75,14 +68,15 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
     if (response.error) {
       setError('이메일을 다시 확인해주세요.');
     }
+    setIsResending(false);
   };
 
   return {
-    handleSubmit,
     leftTime,
     handleTimer,
     handleVerification,
     handleResendEmail,
     error,
+    isResending,
   };
 };
