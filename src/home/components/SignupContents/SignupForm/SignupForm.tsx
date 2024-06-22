@@ -14,7 +14,6 @@ import {
 } from '../SignupContents.style';
 
 import { useSignupFormConfirm } from './useSignupFormConfirm';
-import { useSignupFormValidation } from './useSignupFormValidation';
 
 export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
   const { register, handleSubmit, setValue, watch, formState } = useForm<SignupFormStates>({
