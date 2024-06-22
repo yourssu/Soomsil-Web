@@ -1,4 +1,4 @@
-import { RouteProps, Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { LogInState } from '@/home/recoil/LogInState';
@@ -12,14 +12,14 @@ export const usePrivateRoute = () => {
   const setLogInState = useSetRecoilState(LogInState);
   const setUserState = useSetRecoilState(UserState);
 
-  const PrivateRoute = ({ element }: RouteProps): React.ReactNode => {
+  const PrivateRoute = (): React.ReactNode => {
     if (!isLoggedIn || !accessToken) {
       api.logout();
       setUserState(null);
       setLogInState(false);
       return <Navigate to="/login" />;
     }
-    return element;
+    return <Outlet />;
   };
 
   return { PrivateRoute };

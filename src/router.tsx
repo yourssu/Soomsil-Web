@@ -120,12 +120,11 @@ export const Router = () => {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/Signup" element={<Signup />}></Route>
-          <Route path="/Mypage" element={<Mypage />}></Route>
-          <Route
-            path="/changePassword"
-            element={<PrivateRoute element={<ChangePassword />} />}
-          ></Route>
-          <Route path="/withdraw" element={<Withdraw />}></Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/Mypage" element={<Mypage />}></Route>
+            <Route path="/changePassword" element={<ChangePassword />}></Route>
+            <Route path="/withdraw" element={<Withdraw />}></Route>
+          </Route>
           <Route path="/drawer" element={<DrawerLayout />}>
             <Route index element={<Navigate to="rankings" replace />}></Route>
             <Route path="services/:serviceId" element={<ServiceDetail />} />
