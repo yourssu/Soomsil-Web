@@ -39,7 +39,7 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
       />
       <PasswordTextField
         fieldLabel="사용할 비밀번호를 입력해주세요."
-        helperLabel="숫자와 영문자 조합으로 8자 이상 입력해주세요"
+        helperLabel="숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요"
         placeholder="비밀번호"
         isNegative={!isPasswordValid && passwordValidOnce.current}
         onChange={(e) => {

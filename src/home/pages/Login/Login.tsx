@@ -6,19 +6,14 @@ import {
   PlainButton,
   SuffixTextField,
 } from '@yourssu/design-system-react';
-import { useErrorBoundary } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
 
 import { EMAIL_DOMAIN } from '@/constants/email.constant';
-import { postAuthSignIn } from '@/home/apis/postAuthSignIn';
 import { StyledSignupContentTitle } from '@/home/components/SignupContents/SignupContents.style';
 import { SignupFrame } from '@/home/components/SignupFrame/SignupFrame';
-import { useGetUserData } from '@/home/hooks/useGetUserData';
-import { LogInState } from '@/home/recoil/LogInState';
+import { usePostLogin } from '@/home/hooks/usePostLogin';
 import { useFullEmail } from '@/hooks/useFullEmail';
 import { useRedirectLoggedInEffect } from '@/hooks/useRedirectLoggedInEffect';
-import { api } from '@/service/TokenService';
 
 import {
   StyledBottomButtonContainer,
@@ -30,34 +25,20 @@ import {
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [failedLogin, setFailedLogin] = useState(false);
-  const setIsLoggedIn = useSetRecoilState(LogInState);
-  const { showBoundary } = useErrorBoundary();
-  const { refetch } = useGetUserData();
+
   const navigate = useNavigate();
   const fullEmail = useFullEmail(email);
+  const loginMutation = usePostLogin();
 
-  const handleLoginClick = async () => {
-    const { data, error } = await postAuthSignIn({ email: fullEmail, password });
-
-    if (data) {
-      api.setAccessToken(data.accessToken, data.accessTokenExpiredIn);
-      api.setRefreshToken(data.refreshToken, data.refreshTokenExpiredIn);
-      setIsLoggedIn(true);
-      refetch();
-      navigate('/');
-      return;
-    }
-
-    if (error?.response?.status == 401) {
-      setFailedLogin(true);
-      return;
-    }
-
-    if (error?.response?.status != 400) {
-      showBoundary(error);
-      return;
-    }
+  const handleClickLogin = () => {
+    loginMutation.mutate(
+      { email: fullEmail, password },
+      {
+        onSuccess: () => {
+          navigate('/');
+        },
+      }
+    );
   };
 
   // 로그인 상태에서는 홈으로 리다이렉트
@@ -72,22 +53,28 @@ export const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="ppushoong"
-          isNegative={failedLogin}
+          isNegative={loginMutation.isError}
           suffix={EMAIL_DOMAIN}
         />
         <PasswordTextField
           fieldLabel="비밀번호"
           helperLabel={
-            failedLogin
+            loginMutation.isError
               ? '학교 메일 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.'
               : ''
           }
           placeholder="영문숫자포함8글자"
           onChange={(e) => setPassword(e.target.value)}
-          isNegative={failedLogin}
+          isNegative={loginMutation.isError}
         />
 
-        <BoxButton size="large" rounding={8} variant="filled" onClick={handleLoginClick}>
+        <BoxButton
+          size="large"
+          rounding={8}
+          variant="filled"
+          onClick={handleClickLogin}
+          disabled={loginMutation.isPending}
+        >
           로그인
         </BoxButton>
 
