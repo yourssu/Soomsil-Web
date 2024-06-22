@@ -2,7 +2,9 @@ import { useMemo, useRef } from 'react';
 
 import { hasNumberAndEnglishWithSymbols, hasNumberOrEnglishOrHangulOrSpace } from '@yourssu/utils';
 
-export const useSignupFormValidation = (nickname: string, password: string) => {
+import { SignupFormStates } from './SignUpForm.type';
+
+export const useSignupFormValidation = ({ nickname, password }: SignupFormStates) => {
   const nicknameValidOnce = useRef(false);
   const passwordValidOnce = useRef(false);
 
