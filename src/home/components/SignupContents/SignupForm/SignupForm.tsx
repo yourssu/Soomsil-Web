@@ -2,6 +2,7 @@ import { BoxButton, PasswordTextField, SimpleTextField } from '@yourssu/design-s
 
 import { SignupFormProps } from '@/home/components/SignupContents/SignupForm/SignUpForm.type.ts';
 import { useSignUpForm } from '@/home/components/SignupContents/SignupForm/useSignUpForm.ts';
+import { usePreventDuplicateClick } from '@/hooks/usePreventDuplicateClick.ts';
 import { useSignupFormValidation } from '@/hooks/useSignupFormValidator.ts';
 
 import {
@@ -18,6 +19,8 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
 
   const { nicknameValidOnce, passwordValidOnce, isFormValid, isNicknameValid, isPasswordValid } =
     useSignupFormValidation(nickname, password);
+
+  const { disabled, handleClick } = usePreventDuplicateClick();
 
   return (
     <StyledSignupContentContainer>
@@ -51,8 +54,8 @@ export const SignupForm = ({ email, onConfirm }: SignupFormProps) => {
         rounding={8}
         size="large"
         variant="filled"
-        onClick={onFormConfirm}
-        disabled={!isFormValid}
+        onClick={() => handleClick(onFormConfirm)}
+        disabled={!isFormValid || disabled}
       >
         <StyledSignupButtonText>회원가입</StyledSignupButtonText>
       </BoxButton>

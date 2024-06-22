@@ -3,6 +3,7 @@ import { BoxButton, PlainButton, SuffixTextField } from '@yourssu/design-system-
 import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
 import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm.ts';
+import { usePreventDuplicateClick } from '@/hooks/usePreventDuplicateClick.ts';
 
 import {
   StyledSignupButtonText,
@@ -18,7 +19,8 @@ import {
 } from './EmailForm.style';
 
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
-  const { email, emailSending, emailError, onEmailSubmit, onChange } = useEmailForm({ onConfirm });
+  const { email, emailError, onEmailSubmit, onChange } = useEmailForm({ onConfirm });
+  const { disabled, handleClick } = usePreventDuplicateClick();
 
   return (
     <StyledSignupContentContainer>
@@ -47,8 +49,8 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           size="large"
           variant="filled"
           rounding={8}
-          disabled={email === '' || emailSending}
-          onClick={onEmailSubmit}
+          disabled={email === '' || disabled}
+          onClick={() => handleClick(onEmailSubmit)}
         >
           <StyledSignupButtonText>인증 메일 받기</StyledSignupButtonText>
         </BoxButton>
