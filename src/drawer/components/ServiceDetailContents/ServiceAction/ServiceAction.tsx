@@ -46,7 +46,7 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
 
   const bookmarkMutation = useMutation({
     mutationFn: product.isBookmarked ? deleteBookmarked : postBookmarked,
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['productDetail', product.productNo] });
     },
   });

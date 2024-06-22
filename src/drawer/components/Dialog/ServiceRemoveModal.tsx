@@ -25,7 +25,7 @@ export const ServiceRemoveModal = ({ open, productNo, onOpenChange }: ServiceRem
 
   const deleteProductMutation = useMutation({
     mutationFn: deleteProduct,
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['myRegistered', 'WEB'] });
       queryClient.invalidateQueries({ queryKey: ['bookmarked', 'WEB'] });
     },
