@@ -4,6 +4,7 @@ import { postChangePassword } from '@/home/apis/postChangePassword';
 import { useFullEmail } from '@/hooks/useFullEmail';
 import { AxiosError } from 'axios';
 import { AuthErrorData } from '@/home/types/Auth.type';
+import { hasNumberAndEnglishWithSymbols } from '@yourssu/utils';
 
 interface UseResetPasswordInputProps {
   email: string;
@@ -25,10 +26,24 @@ export const useResetPasswordInput = ({ email, onConfirm }: UseResetPasswordInpu
   } = useForm<FormData>();
 
   const fullEmail = useFullEmail(email);
+  const password = watch('password', '');
+  const confirmPassword = watch('confirmPassword', '');
+
+  const passwordValidate = (password: string) => {
+    if (hasNumberAndEnglishWithSymbols(password) && password.length >= 8 && password.length <= 100)
+      return true;
+    return '숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요.';
+  };
 
   const handleOnSubmit = async (data: FormData) => {
     if (data.password !== data.confirmPassword) {
       setError('confirmPassword', { type: 'manual', message: '비밀번호가 일치하지 않습니다.' });
+      return;
+    }
+
+    const passwordError = passwordValidate(data.password);
+    if (passwordError !== true) {
+      setError('password', { type: 'manual', message: passwordError });
       return;
     }
 
@@ -55,7 +70,6 @@ export const useResetPasswordInput = ({ email, onConfirm }: UseResetPasswordInpu
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         const serverError = error.response?.data as AuthErrorData;
-        console.log(serverError);
         const errorMessage =
           serverError?.error === 'Auth-007'
             ? '비밀번호를 변경할 수 없습니다. 이전 비밀번호와 다르게 설정해주세요.'
@@ -69,9 +83,6 @@ export const useResetPasswordInput = ({ email, onConfirm }: UseResetPasswordInpu
       }
     }
   };
-
-  const password = watch('password', '');
-  const confirmPassword = watch('confirmPassword', '');
 
   return {
     register,
