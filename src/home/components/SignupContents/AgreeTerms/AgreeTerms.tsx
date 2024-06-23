@@ -170,6 +170,7 @@ export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
         })}
       </StyledDetailTermList>
       <BoxButton
+        type="button"
         size="large"
         rounding={8}
         variant="filled"

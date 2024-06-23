@@ -13,7 +13,7 @@ export const SignupEnd = () => {
     <StyledSignupContentContainer>
       <StyledSignupContentTitle>회원가입이 완료되었습니다</StyledSignupContentTitle>
       <StyledLinkWrapper to="/login">
-        <BoxButton rounding={8} size="large" variant="filled">
+        <BoxButton type="button" rounding={8} size="large" variant="filled">
           <StyledSignupButtonText>로그인 페이지로 이동</StyledSignupButtonText>
         </BoxButton>
       </StyledLinkWrapper>
