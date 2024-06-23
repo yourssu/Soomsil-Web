@@ -41,6 +41,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
         {error && <StyledErrorText>{error}</StyledErrorText>}
       </div>
       <BoxButton
+        type="button"
         rounding={8}
         size="large"
         variant="filled"
@@ -51,6 +52,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
       </BoxButton>
       <StyledPlainButtonContainer>
         <PlainButton
+          type="button"
           size="medium"
           isPointed={false}
           isWarned={false}
@@ -61,7 +63,7 @@ export const EmailAuth = ({ email, onConfirm }: EmailAuthProps) => {
         </PlainButton>
         <span>|</span>
         <Link to="https://outlook.office.com/mail/" target="_blank" rel="noopener noreferrer">
-          <PlainButton size="medium" isPointed={false} isWarned={false}>
+          <PlainButton type="button" size="medium" isPointed={false} isWarned={false}>
             학교 메일 열기
           </PlainButton>
         </Link>
