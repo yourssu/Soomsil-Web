@@ -7,6 +7,7 @@ import {
 } from './CardSettingDropdownMenu.style';
 
 interface CardSettingDropdownMenuProps {
+  productNo: number;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onClickRemoveButton: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -14,6 +15,7 @@ interface CardSettingDropdownMenuProps {
 }
 
 export const CardSettingDropdownMenu = ({
+  productNo,
   open,
   onOpenChange,
   onClickRemoveButton,
@@ -25,7 +27,10 @@ export const CardSettingDropdownMenu = ({
       <DropdownMenu.Portal>
         <StyledSettingDropdownContent align="end">
           <StyledSettingDropdownItem asChild>
-            <Link to="/drawer/register" onClick={(event) => event.stopPropagation()}>
+            <Link
+              to={`/drawer/services/${productNo}/edit`}
+              onClick={(event) => event.stopPropagation()}
+            >
               서비스 수정
             </Link>
           </StyledSettingDropdownItem>

@@ -17,17 +17,22 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   description: string;
   validate?: (value: string) => boolean;
   name: string;
+  defaultValue?: string;
 }
 
-export const Input = ({ title, description, validate, name, required, ...props }: InputProps) => {
-  const { register, formState, getValues } = useFormContext();
+export const Input = ({
+  title,
+  description,
+  validate,
+  name,
+  required,
+  defaultValue = '',
+  ...props
+}: InputProps) => {
+  const { register, formState, getValues, watch } = useFormContext();
 
-  const [inputValue, setInputValue] = useState('');
+  const inputValue = watch(name, defaultValue);
   const [isWarned, setIsWarned] = useState(false);
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
 
   const checkValid = useMemo(() => {
     if (validate && validate(inputValue) && inputValue.length > 0) {
@@ -44,9 +49,8 @@ export const Input = ({ title, description, validate, name, required, ...props }
   }, [inputValue, props.maxLength, validate]);
 
   useEffect(() => {
-    const value = getValues(name);
-    if (formState.isSubmitted && !value && required) setIsWarned(true);
-  }, [formState, getValues, name, required]);
+    if (formState.isSubmitted && !inputValue && required) setIsWarned(true);
+  }, [formState, inputValue, name, required]);
 
   return (
     <StyledContainer>
@@ -64,13 +68,10 @@ export const Input = ({ title, description, validate, name, required, ...props }
               const { appStoreUrl, githubUrl, googlePlayUrl, webpageUrl } = getValues();
               if (appStoreUrl || githubUrl || googlePlayUrl || webpageUrl)
                 if (value === '') return true;
-
               return validate ? !validate(value) : true;
             },
           })}
           id={title}
-          value={inputValue}
-          onChange={handleInputChange}
           $isWarned={isWarned}
           $hasText={inputValue.length > 0}
           {...props}
