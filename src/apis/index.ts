@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-import { refreshToken } from '@/home/apis/postRefreshToken';
+import { postRefreshToken } from '@/home/apis/postRefreshToken';
 import { AuthErrorData } from '@/home/types/Auth.type';
 import { api } from '@/service/TokenService';
 
@@ -34,32 +34,22 @@ soomsilClient.interceptors.response.use(
 
     if (originalConfig && error.response?.status === 401 && data?.error === 'Auth-002') {
       try {
-        const response = await refreshToken();
+        const { accessToken, accessTokenExpiredIn, refreshToken, refreshTokenExpiredIn } =
+          await postRefreshToken();
 
-        if (response.error) return;
+        api.setAccessToken(accessToken, accessTokenExpiredIn);
+        api.setRefreshToken(refreshToken, refreshTokenExpiredIn);
 
         return soomsilClient.request({
           ...originalConfig,
         });
       } catch (error) {
+        api.logout();
+        sessionStorage.removeItem('user');
+        window.location.reload();
         return Promise.reject(error);
       }
     }
-    return Promise.reject(error);
-  }
-);
-
-authClient.interceptors.response.use(
-  (response: AxiosResponse) => response,
-  async (error: AxiosError) => {
-    const originalConfig = error.config;
-
-    if (error.response?.status === 401 && originalConfig?.url === '/auth/refresh') {
-      api.logout();
-      sessionStorage.removeItem('user');
-      window.location.reload();
-    }
-
     return Promise.reject(error);
   }
 );
