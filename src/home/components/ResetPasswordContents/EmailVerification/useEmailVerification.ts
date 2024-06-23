@@ -27,13 +27,8 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
     if (data?.isVerified) {
       setError(null);
       onConfirm();
-    } else {
-      if (!isInitialCheck) {
-        setError('이메일 인증을 완료해주세요.');
-      }
-      if (error) {
-        setError('이메일을 다시 확인해주세요.');
-      }
+    } else if (!isInitialCheck || error) {
+      setError('이메일 인증을 완료해주세요.');
     }
   };
 
@@ -44,7 +39,7 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
     );
 
     if (!session || !sessionExpiresAt) {
-      setError('세션이 없습니다. 인증 메일을 다시 요청해주세요.');
+      setError('이메일 인증을 완료해주세요.');
       return;
     }
     await verifyEmailSession(session);
@@ -66,7 +61,7 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
     });
 
     if (response.error) {
-      setError('이메일을 다시 확인해주세요.');
+      setError('이메일 인증을 완료해주세요.');
     }
     setIsResending(false);
   };

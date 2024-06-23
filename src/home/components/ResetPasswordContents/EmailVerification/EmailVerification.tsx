@@ -1,5 +1,10 @@
 import { BoxButton, PlainButton } from '@yourssu/design-system-react';
-import { StyledSubTitleText, StyledTimer, StyledTitleText } from './EmailVerification.style';
+import {
+  StyledErrorMessage,
+  StyledSubTitleText,
+  StyledTimer,
+  StyledTitleText,
+} from './EmailVerification.style';
 import { useEmailVerification } from './useEmailVerification';
 
 interface EmailVerificationProps {
@@ -28,7 +33,7 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
       >
         인증 메일 재전송
       </PlainButton>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
       <BoxButton
         style={{ width: '100%' }}
         size="large"

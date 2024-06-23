@@ -18,5 +18,10 @@ export const StyledEmailContainer = styled.div`
 
 export const StyledTimer = styled.span`
   ${({ theme }) => theme.typo.subtitle3}
-  color: red
+  color: ${({ theme }) => theme.color.textWarned};
+`;
+
+export const StyledErrorMessage = styled.p`
+  ${({ theme }) => theme.typo.subtitle5}
+  color: ${({ theme }) => theme.color.textWarned};
 `;
