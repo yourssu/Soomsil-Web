@@ -11,6 +11,7 @@ type ChangePasswordFunnelStepsType = '현재비밀번호입력' | '새비밀번�
 export const ChangePassword = () => {
   const [Funnel, setStep] = useFunnel<ChangePasswordFunnelStepsType>('현재비밀번호입력');
   const [sessionToken, setSessionToken] = useState<SessionTokenType | null>(null);
+  const [previousPassword, setPreviousPassword] = useState<string>('');
 
   return (
     <ChangePasswordFrame>
@@ -19,10 +20,14 @@ export const ChangePassword = () => {
           <CurrentPasswordForm
             onConfirm={() => setStep('새비밀번호입력')}
             setSessionToken={setSessionToken}
+            setPreviousPassword={setPreviousPassword}
           />
         </Funnel.Step>
         <Funnel.Step name="새비밀번호입력">
-          <NewPasswordForm sessionToken={sessionToken as SessionTokenType} />
+          <NewPasswordForm
+            sessionToken={sessionToken as SessionTokenType}
+            previousPassword={previousPassword}
+          />
         </Funnel.Step>
       </Funnel>
     </ChangePasswordFrame>

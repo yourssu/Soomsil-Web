@@ -15,13 +15,6 @@ export const Nav = () => {
   const isLoggedIn = useRecoilValue(LogInState);
   const theme = useTheme();
 
-  // Todo: 로그아웃 기능 추가 (ProfileDropdownMenu)
-  // const handleLogout = () => {
-  //   sessionStorage.removeItem('accessExpiredIn');
-  //   api.logout();
-  //   return;
-  // };
-
   return (
     <StyledContainer>
       {isLoggedIn ? (
