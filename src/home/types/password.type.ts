@@ -11,3 +11,8 @@ export interface GetPasswordResponse {
   data?: SessionTokenType;
   error?: AxiosError<AuthErrorData>;
 }
+
+export interface NewPasswordFormProps {
+  sessionToken: SessionTokenType;
+  previousPassword: string;
+}

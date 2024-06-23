@@ -4,6 +4,8 @@ import { IcPlusLine, IconContext } from '@yourssu/design-system-react';
 import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 
+import { ALLOWED_IMAGE_TYPE } from '@/drawer/constants/image.constant';
+
 import {
   StyledThumbnailContainer,
   StyledThumbnailDescription,
@@ -30,10 +32,10 @@ export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
   const handleChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files !== null) {
       const file = event.target.files[0];
-      if (file && file.type.substring(0, 5) === 'image') {
+      if (file && ALLOWED_IMAGE_TYPE.includes(file.type)) {
         setPostImg(file);
       } else {
-        alert('이미지 파일을 첨부해주세요.');
+        alert('이미지 포맷은 jpg, jpeg, png, gif 중 하나여야 합니다.');
         setValue(name, null);
         setPostImg(null);
       }
@@ -67,7 +69,7 @@ export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
       <input
         id="inputFile"
         type="file"
-        accept="image/*"
+        accept=".jpg, .jpeg, .png, .gif"
         onChange={(event) => {
           handleChangeImg(event);
           onChange(event);

@@ -1,5 +1,10 @@
+
+import { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import { IcSearchLine } from '@yourssu/design-system-react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+
 import { useTheme } from 'styled-components';
 
 import soomsil from '@/assets/soomsil_logo.svg';
@@ -22,6 +27,12 @@ export const Header = () => {
   const setDialog = useSetRecoilState(DialogState);
 
   const theme = useTheme();
+  const [searchValue, setSearchValue] = useState<string | undefined>('');
+  const navigate = useNavigate();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
 
   const handleClickAuthTab = (event: React.MouseEvent) => {
     if (isLoggedIn) return;
@@ -46,7 +57,16 @@ export const Header = () => {
       </StyledHeaderTabs>
       <FlexGrowItem proportion={1} />
       <StyledHeaderSearchContainer>
-        <StyledHeaderSearchInput type="text" />
+        <StyledHeaderSearchInput
+          type="text"
+          value={searchValue}
+          onChange={handleInputChange}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') {
+              navigate(`/drawer/search?keyword=${searchValue}`);
+            }
+          }}
+        />
         <IcSearchLine color={theme.color.buttonNormalPressed} size="1.25rem" />
       </StyledHeaderSearchContainer>
       <StyledProfileIconButton color={theme.color.textPointed} size="2rem" />

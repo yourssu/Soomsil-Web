@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 
 import { authClient } from '@/apis';
 import { AuthErrorData } from '@/home/types/Auth.type';
-import { GetPasswordResponse } from '@/home/types/GetPassword.type';
+import { GetPasswordResponse } from '@/home/types/password.type';
 import { api } from '@/service/TokenService';
 
 interface getPasswordProps {
