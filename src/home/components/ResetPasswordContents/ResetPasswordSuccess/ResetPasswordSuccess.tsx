@@ -10,7 +10,7 @@ export const ResetPasswordSuccess = () => {
         <br />
         보안을 위해 재로그인해주세요.
       </StyledSubTitleText>
-      <StyledLink to="/">
+      <StyledLink to="/login">
         <BoxButton style={{ width: '100%' }} size="large" variant="filled" rounding={8}>
           로그인 하기
         </BoxButton>
