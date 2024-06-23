@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { LogClick } from '@yourssu/logging-system-react';
-import { useRecoilValue } from 'recoil';
 
-import { UserState } from '@/home/recoil/UserState';
+import { useGetUserData } from '@/home/hooks/useGetUserData.ts';
 
 interface QuickLinkProps {
   icon: { icon: string; link: string };
@@ -13,7 +12,7 @@ interface QuickLinkProps {
 }
 
 export const QuickLink = ({ icon, order, logging, children }: QuickLinkProps) => {
-  const currentUser = useRecoilValue(UserState);
+  const { data: currentUser } = useGetUserData();
   const userId = currentUser?.email || '';
 
   if (logging) {
