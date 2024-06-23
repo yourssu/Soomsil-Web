@@ -64,15 +64,17 @@ export const Ranking = () => {
             {rankings &&
               rankings.pages[0].slice(0, 3).map((product) => (
                 <DetectClick key={product.productNo} product={product}>
-                  <BigDrawerCard
-                    link={`/drawer/services/${product.productNo}`}
-                    title={product.productTitle}
-                    body={product.productSubTitle}
-                    bookmarkCount={product.count}
-                    isBookmarked={product.isBookmarked}
-                    bigImgSrc={product.introductionImage[0]}
-                    smallImgSrc={product.mainImage}
-                  />
+                  <div>
+                    <BigDrawerCard
+                      link={`/drawer/services/${product.productNo}`}
+                      title={product.productTitle}
+                      body={product.productSubTitle}
+                      bookmarkCount={product.count}
+                      isBookmarked={product.isBookmarked}
+                      bigImgSrc={product.introductionImage[0]}
+                      smallImgSrc={product.mainImage}
+                    />
+                  </div>
                 </DetectClick>
               ))}
           </StyledCardContainer>
@@ -102,16 +104,18 @@ export const Ranking = () => {
             {newReleases &&
               newReleases.pages[0].slice(0, 3).map((product) => (
                 <DetectClick key={product.productNo} product={product}>
-                  <BigDrawerCard
-                    key={product.productNo}
-                    link={`/drawer/services/${product.productNo}`}
-                    title={product.productTitle}
-                    body={product.productSubTitle}
-                    bookmarkCount={product.count}
-                    isBookmarked={product.isBookmarked}
-                    bigImgSrc={product.introductionImage[0]}
-                    smallImgSrc={product.mainImage}
-                  />
+                  <div>
+                    <BigDrawerCard
+                      key={product.productNo}
+                      link={`/drawer/services/${product.productNo}`}
+                      title={product.productTitle}
+                      body={product.productSubTitle}
+                      bookmarkCount={product.count}
+                      isBookmarked={product.isBookmarked}
+                      bigImgSrc={product.introductionImage[0]}
+                      smallImgSrc={product.mainImage}
+                    />
+                  </div>
                 </DetectClick>
               ))}
           </StyledCardContainer>
