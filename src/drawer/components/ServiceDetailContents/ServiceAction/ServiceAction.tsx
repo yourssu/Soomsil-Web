@@ -8,11 +8,14 @@ import {
   useToast,
   Toast,
 } from '@yourssu/design-system-react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useTheme } from 'styled-components';
 
 import { deleteBookmarked } from '@/drawer/apis/deleteBookmarked';
 import { postBookmarked } from '@/drawer/apis/postBookmarked';
 import { ProductDetailResult } from '@/drawer/types/product.type';
+import { LogInState } from '@/home/recoil/LogInState';
+import { DialogState } from '@/recoil/DialogState';
 
 import {
   StyledIconButtonContainer,
@@ -28,6 +31,9 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
     { url: product.githubUrl, text: 'GitHub' },
   ];
 
+  const isLoggedIn = useRecoilValue(LogInState);
+  const setDialog = useSetRecoilState(DialogState);
+
   const theme = useTheme();
 
   const queryClient = useQueryClient();
@@ -38,16 +44,9 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
     duration: 'short',
   } as const;
 
-  const addBookmarkMutation = useMutation({
-    mutationFn: postBookmarked,
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['productDetail', product.productNo] });
-    },
-  });
-
-  const deleteBookmarkMutation = useMutation({
-    mutationFn: deleteBookmarked,
-    onSettled: () => {
+  const bookmarkMutation = useMutation({
+    mutationFn: product.isBookmarked ? deleteBookmarked : postBookmarked,
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['productDetail', product.productNo] });
     },
   });
@@ -55,6 +54,14 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
   const handleClickShare = async () => {
     await navigator.clipboard.writeText(window.location.href);
     showToast(toastProps.duration);
+  };
+
+  const handleClickBookmark = () => {
+    if (isLoggedIn) {
+      bookmarkMutation.mutate(product.productBookmarkKey);
+      return;
+    }
+    setDialog({ open: true, type: 'login' });
   };
 
   return (
@@ -98,17 +105,10 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
               value={{
                 color: theme.color.pointYellow,
                 size: '1.5rem',
+                onClick: handleClickBookmark,
               }}
             >
-              {product.isBookmarked ? (
-                <IcStarFilled
-                  onClick={() => deleteBookmarkMutation.mutate(product.productBookmarkKey)}
-                />
-              ) : (
-                <IcStarLine
-                  onClick={() => addBookmarkMutation.mutate(product.productBookmarkKey)}
-                />
-              )}
+              {product.isBookmarked ? <IcStarFilled /> : <IcStarLine />}
             </IconContext.Provider>
           </button>
           <StyledIconLabelText $color={theme.color.pointYellow}>Recommend</StyledIconLabelText>
