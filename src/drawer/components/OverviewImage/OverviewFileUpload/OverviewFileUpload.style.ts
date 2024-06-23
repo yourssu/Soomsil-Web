@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Z_INDEX } from '@/constants/zIndex.constant';
 
 export const StyledFileUploadLabel = styled.label`
+  cursor: pointer;
   position: absolute;
   padding: 0.48rem 1.56rem;
   border-radius: 0.5rem;
