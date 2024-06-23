@@ -19,7 +19,6 @@ export const DetectClick = ({ product, children }: DetectClickProps) => {
     userId: data?.email || '',
     version: 1,
     event: {
-      platform: 'web',
       name: 'drawerServiceClicked',
       screen: 'DrawerMain',
       params: {
@@ -29,13 +28,6 @@ export const DetectClick = ({ product, children }: DetectClickProps) => {
       },
     },
   };
-
-  // 확인용(삭제 예정)
-  // const handleTest = () => {
-  //   console.log(data?.email);
-  //   console.log(product.productTitle);
-  //   console.log(product.count);
-  // };
 
   return <LogClick params={detectClickParams}>{children}</LogClick>;
 };
