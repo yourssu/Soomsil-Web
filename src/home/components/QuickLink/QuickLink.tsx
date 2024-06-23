@@ -18,7 +18,6 @@ export const QuickLink = ({ icon, order, children }: QuickLinkProps) => {
     userId,
     version: 1,
     event: {
-      platform: 'web',
       name: 'quickLinkItemClicked',
       screen: 'Home',
       params: {
