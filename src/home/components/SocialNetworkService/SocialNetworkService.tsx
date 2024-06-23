@@ -24,7 +24,7 @@ export const SocialNetworkService = () => {
       <StyledIconContainer>
         {ICON_LIST.map((icon, index) => (
           <React.Fragment key={icon.icon}>
-            <QuickLink icon={icon} order={String(index + 1)} logging={index == 2}>
+            <QuickLink icon={icon} order={String(index + 1)}>
               <StyledIcon to={icon.link} $image={icon.icon} />
             </QuickLink>
             {ICON_LIST.length !== index + 1 && <StyledLine />}
