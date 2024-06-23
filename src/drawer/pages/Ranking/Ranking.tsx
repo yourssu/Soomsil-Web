@@ -9,6 +9,7 @@ import { DetectClick } from '@/drawer/components/DetectClick/DetectClick';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
 import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
+import { useGetDrawerBanner } from '@/drawer/hooks/useGetDrawerBanner';
 import { useGetNewRelease } from '@/drawer/hooks/useGetNewRelease';
 import { useGetStarRank } from '@/drawer/hooks/useGetStarRank';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
@@ -28,6 +29,9 @@ import {
 export const Ranking = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
+
+  const { data: bannerList } = useGetDrawerBanner();
+
   const { data: newReleases } = useGetNewRelease({
     responseType: 'WEB',
     category: selectedCategory,
@@ -78,14 +82,12 @@ export const Ranking = () => {
               ))}
           </StyledCardContainer>
         </div>
-        <StyledImage
-          src="https://yourssu-post-attachments-stg.s3.ap-northeast-2.amazonaws.com/soomsil.jpeg"
-          alt="drawer main image1"
-        />
-        <StyledImage
-          src="https://yourssu-post-attachments-stg.s3.ap-northeast-2.amazonaws.com/animalssu.jpeg"
-          alt="drawer main image2"
-        />
+        {bannerList &&
+          bannerList.slice(0, 2).map((banner) => (
+            <a href={banner.website} key={banner.id} target="_blank">
+              <StyledImage src={banner.image} alt={banner.name} />
+            </a>
+          ))}
         <div>
           <StyledBetweenContainer>
             <StyledTextContainer>
