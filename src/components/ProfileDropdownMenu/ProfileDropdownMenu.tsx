@@ -1,5 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useResetUserInfo } from '@/hooks/useResetUserInfo';
 
@@ -25,10 +25,13 @@ export const ProfileDropdownMenu = ({
   email,
   children,
 }: ProfileDropdownMenuProps) => {
+  const navigate = useNavigate();
   const resetUserInfo = useResetUserInfo();
+
   const handleLogout = () => {
     resetUserInfo();
-    return;
+    alert('로그아웃 되었습니다.');
+    navigate(0);
   };
 
   return (

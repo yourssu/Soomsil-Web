@@ -41,18 +41,21 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
       </div>
       <StyledButtonsContainer>
         <StyledPlainButtonWrapper>
-          <PlainButton size="medium" isPointed={false} isWarned={false}>
+          <PlainButton type="button" size="medium" isPointed={false} isWarned={false}>
             <StyledSignupButtonText>학교 메일 찾기</StyledSignupButtonText>
           </PlainButton>
         </StyledPlainButtonWrapper>
         <BoxButton
+          type="submit"
           size="large"
           variant="filled"
           rounding={8}
           disabled={email === '' || disabled}
           onClick={() => handleClick(onEmailSubmit)}
         >
-          <StyledSignupButtonText>인증 메일 받기</StyledSignupButtonText>
+          <StyledSignupButtonText>
+            {disabled ? '잠시만 기다려주세요...' : '인증 메일 받기'}
+          </StyledSignupButtonText>
         </BoxButton>
       </StyledButtonsContainer>
     </StyledSignupContentContainer>

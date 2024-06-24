@@ -8,6 +8,10 @@ import { DrawerCardProps } from '../DrawerCard.type';
 
 import { StyledCardContainer } from './UserDrawerCard.style';
 
+interface UserDrawerCardProps extends DrawerCardProps {
+  productNo: number;
+}
+
 export const UserDrawerCard = ({
   link,
   bigImgSrc,
@@ -16,7 +20,8 @@ export const UserDrawerCard = ({
   body,
   bookmarkCount,
   isBookmarked,
-}: DrawerCardProps) => {
+  productNo,
+}: UserDrawerCardProps) => {
   const [isCardSettingClicked, setIsCardSettingClicked] = useState(false);
   const [openRemoveModal, setOpenRemoveModal] = useState(false);
 
@@ -52,7 +57,11 @@ export const UserDrawerCard = ({
           </CardSettingDropdownMenu.Trigger>
         </CardSettingDropdownMenu>
       </Card>
-      <ServiceRemoveModal open={openRemoveModal} onOpenChange={setOpenRemoveModal} />
+      <ServiceRemoveModal
+        open={openRemoveModal}
+        productNo={productNo}
+        onOpenChange={setOpenRemoveModal}
+      />
     </StyledCardContainer>
   );
 };

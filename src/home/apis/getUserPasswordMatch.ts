@@ -1,5 +1,5 @@
 import { authClient } from '@/apis';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { SessionTokenType } from '@/home/types/password.type';
 import { api } from '@/service/TokenService';
 
 export const getUserPasswordMatch = async (password: string): Promise<SessionTokenType> => {

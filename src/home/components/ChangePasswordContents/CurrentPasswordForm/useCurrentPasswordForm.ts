@@ -6,16 +6,18 @@ import { useRecoilValue } from 'recoil';
 
 import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
 import { LogInState } from '@/home/recoil/LogInState';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { SessionTokenType } from '@/home/types/password.type';
 
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
   setSessionToken: ({ sessionToken }: SessionTokenType) => void;
+  setPreviousPassword: (password: string) => void;
 }
 
 export const useCurrentPasswordForm = ({
   onConfirm,
   setSessionToken,
+  setPreviousPassword,
 }: CurrentPasswordFormProps) => {
   const [currentPassword, setCurrentPassword] = useState<string>('');
   const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
@@ -26,6 +28,7 @@ export const useCurrentPasswordForm = ({
     mutationFn: getUserPasswordMatch,
     onSuccess: (data) => {
       setSessionToken(data);
+      setPreviousPassword(currentPassword);
       onConfirm();
     },
     onError: () => {

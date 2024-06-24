@@ -46,7 +46,7 @@ const agreeTermDatas: Record<AgreeTermNameType, AgreeTermData> = {
     detailTermContent: <ServiceTerm />,
   },
   '커뮤니티 이용규칙': {
-    required: false,
+    required: true,
     detailTermContent: <CommunityTerm />,
   },
   '개인정보 수집 및 이용 동의': {
@@ -170,6 +170,7 @@ export const AgreeTerms = ({ onConfirm }: AgreeTermsProps) => {
         })}
       </StyledDetailTermList>
       <BoxButton
+        type="button"
         size="large"
         rounding={8}
         variant="filled"

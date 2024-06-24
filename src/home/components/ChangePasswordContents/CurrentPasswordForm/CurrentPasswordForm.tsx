@@ -1,7 +1,7 @@
 import { BoxButton, PasswordTextField } from '@yourssu/design-system-react';
 
 import { useCurrentPasswordForm } from '@/home/components/ChangePasswordContents/CurrentPasswordForm/useCurrentPasswordForm';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { SessionTokenType } from '@/home/types/password.type';
 
 import {
   StyledInputContainer,
@@ -14,6 +14,7 @@ import {
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
   setSessionToken: ({ sessionToken }: SessionTokenType) => void;
+  setPreviousPassword: (password: string) => void;
 }
 
 export const CurrentPasswordForm = (props: CurrentPasswordFormProps) => {
