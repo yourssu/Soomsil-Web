@@ -47,6 +47,7 @@ export const ResetPasswordInput = ({ email, onConfirm }: ResetPasswordProps) => 
         />
       </StyledPasswordContainer>
       <BoxButton
+        type="submit"
         style={{ width: '100%' }}
         size="large"
         variant="filled"

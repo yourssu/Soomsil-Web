@@ -35,6 +35,7 @@ export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
         />
       </StyledEmailContainer>
       <BoxButton
+        type="submit"
         style={{ width: '100%' }}
         size="large"
         variant="filled"

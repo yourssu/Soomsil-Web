@@ -26,6 +26,7 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
       </StyledSubTitleText>
       <StyledTimer>{handleTimer(leftTime)}</StyledTimer>
       <PlainButton
+        type="button"
         size="medium"
         isPointed={false}
         isWarned={false}
@@ -36,6 +37,7 @@ export const EmailVerification = ({ email, onConfirm }: EmailVerificationProps) 
       </PlainButton>
       {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
       <BoxButton
+        type="button"
         style={{ width: '100%' }}
         size="large"
         variant="filled"
