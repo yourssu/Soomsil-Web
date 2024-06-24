@@ -1,69 +1,81 @@
 import { useState, useEffect } from 'react';
 
+import { hasNumberAndEnglishWithSymbols } from '@yourssu/utils';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
-import { SessionTokenType } from '@/home/types/GetPassword.type';
-import { api } from '@/service/TokenService';
+import { useGetUserData } from '@/home/hooks/useGetUserData';
+import { usePostChangePassword } from '@/home/hooks/usePostChangePassword';
+import { LogInState } from '@/home/recoil/LogInState';
+import { NewPasswordFormProps } from '@/home/types/password.type';
 
-export const useNewPasswordForm = (sessionToken: SessionTokenType) => {
-  const [newPassword, setNewPassword] = useState('');
-  const [newPasswordCheck, setNewPasswordCheck] = useState('');
-  const [isNewPasswordError, setIsNewPasswordError] = useState(false);
-  const [isNewPasswordCheckError, setIsNewPasswordCheckError] = useState(false);
-  const [isFirstRender, setIsFirstRender] = useState(true);
-  const [validationAttempted, setValidationAttempted] = useState(false);
+export const useNewPasswordForm = (props: NewPasswordFormProps) => {
+  const { sessionToken, previousPassword } = props;
+  const [isFirstRender, setIsFirstRender] = useState<boolean>(true);
+  const {
+    register,
+    watch,
+    formState: { errors },
+    getValues,
+    setValue,
+    setError,
+  } = useForm({
+    mode: 'onChange',
+  });
+
+  const isLoggedIn = useRecoilValue(LogInState);
+  const { data: currentUser } = useGetUserData();
   const navigate = useNavigate();
+  const postChangePassword = usePostChangePassword();
 
-  const regexp = new RegExp('^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$');
+  const newPassword = watch('newPassword');
 
-  const handleNewPasswordChange = (password: string) => {
-    setNewPassword(password);
-    if (password.length >= 8) {
-      setIsFirstRender(false);
-      setIsNewPasswordError(!regexp.test(password));
-    } else {
-      setIsNewPasswordError(true);
+  useEffect(() => {
+    setIsFirstRender(!newPassword || newPassword.length < 8);
+  }, [newPassword]);
+
+  const passwordValidate = (newPassword: string) => {
+    if (newPassword === previousPassword) {
+      setValue('newPasswordCheck', '');
+      return '현재 비밀번호와 다른 비밀번호를 입력해주세요.';
     }
+
+    if (hasNumberAndEnglishWithSymbols(newPassword) && newPassword.length <= 100) return true;
+
+    setValue('newPasswordCheck', '');
+    return '숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요.';
   };
 
-  const handleSubmit = () => {
-    if (sessionToken === null) {
+  const onSubmit = () => {
+    const newPasswordCheck = getValues('newPasswordCheck');
+
+    if (newPassword !== newPasswordCheck) {
+      setError('newPasswordCheck', {
+        type: 'manual',
+        message: '비밀번호가 일치하지 않습니다.',
+      });
       return;
     }
 
-    setValidationAttempted(true);
-    const isValid = regexp.test(newPassword);
-    if (isValid && newPassword === newPasswordCheck) {
-      const accessToken = api.getAccessToken();
-      if (!accessToken) {
-        alert('로그인이 필요합니다.');
-        navigate('/Login');
-        return;
-      }
-      setIsNewPasswordCheckError(false);
+    if (!isLoggedIn || !currentUser) {
+      navigate('/Login');
+      return;
     }
 
-    if (!isValid) setIsNewPasswordError(true);
-    if (newPassword !== newPasswordCheck) setIsNewPasswordCheckError(true);
+    postChangePassword.mutate({
+      email: currentUser.email,
+      newPassword,
+      sessionToken,
+    });
   };
-
-  useEffect(() => {
-    if (newPassword.length < 8) {
-      setIsNewPasswordCheckError(false);
-      setNewPasswordCheck('');
-      setValidationAttempted(false);
-    }
-  }, [newPassword]);
 
   return {
     newPassword,
-    newPasswordCheck,
-    isNewPasswordError,
-    isNewPasswordCheckError,
     isFirstRender,
-    validationAttempted,
-    setNewPasswordCheck,
-    handleNewPasswordChange,
-    handleSubmit,
+    register,
+    onSubmit,
+    passwordValidate,
+    errors,
   };
 };

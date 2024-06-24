@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { ProfileIconButton } from '@/components/ProfileIconButton/ProfileIconButton';
 import { Z_INDEX } from '@/constants/zIndex.constant';
 
 export const StyledHeader = styled.header`
@@ -67,4 +68,8 @@ export const StyledHeaderSearchInput = styled.input`
   border: none;
   outline: none;
   background-color: transparent;
+`;
+
+export const StyledProfileIconButton = styled(ProfileIconButton)`
+  margin-left: 1rem;
 `;

@@ -87,6 +87,12 @@ const ResetPassword = lazy(() =>
   }))
 );
 
+const DrawerSearch = lazy(() =>
+  import('./drawer/pages/DrawerSearch/DrawerSearch').then(({ DrawerSearch }) => ({
+    default: DrawerSearch,
+  }))
+);
+
 export const Router = () => {
   const [state, setState] = useState({
     isAnimating: false,
@@ -135,6 +141,7 @@ export const Router = () => {
             <Route path="/drawer/newRelease" element={<NewRelease />} />
             <Route path="/drawer/starRanking" element={<StarRanking />} />
             <Route path=":providerId" element={<Provider />} />
+            <Route path="/drawer/search" element={<DrawerSearch />} />
           </Route>
           <Route path="/search" element={<Search />} />
         </Routes>

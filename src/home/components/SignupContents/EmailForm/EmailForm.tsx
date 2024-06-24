@@ -3,6 +3,7 @@ import { BoxButton, PlainButton, SuffixTextField } from '@yourssu/design-system-
 import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
 import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm.ts';
+import { usePreventDuplicateClick } from '@/hooks/usePreventDuplicateClick.ts';
 
 import {
   StyledSignupButtonText,
@@ -18,7 +19,8 @@ import {
 } from './EmailForm.style';
 
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
-  const { email, emailSending, emailError, onEmailSubmit, onChange } = useEmailForm({ onConfirm });
+  const { email, emailError, onEmailSubmit, onChange } = useEmailForm({ onConfirm });
+  const { disabled, handleClick } = usePreventDuplicateClick();
 
   return (
     <StyledSignupContentContainer>
@@ -39,18 +41,21 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
       </div>
       <StyledButtonsContainer>
         <StyledPlainButtonWrapper>
-          <PlainButton size="medium" isPointed={false} isWarned={false}>
+          <PlainButton type="button" size="medium" isPointed={false} isWarned={false}>
             <StyledSignupButtonText>학교 메일 찾기</StyledSignupButtonText>
           </PlainButton>
         </StyledPlainButtonWrapper>
         <BoxButton
+          type="submit"
           size="large"
           variant="filled"
           rounding={8}
-          disabled={email === '' || emailSending}
-          onClick={onEmailSubmit}
+          disabled={email === '' || disabled}
+          onClick={() => handleClick(onEmailSubmit)}
         >
-          <StyledSignupButtonText>인증 메일 받기</StyledSignupButtonText>
+          <StyledSignupButtonText>
+            {disabled ? '잠시만 기다려주세요...' : '인증 메일 받기'}
+          </StyledSignupButtonText>
         </BoxButton>
       </StyledButtonsContainer>
     </StyledSignupContentContainer>

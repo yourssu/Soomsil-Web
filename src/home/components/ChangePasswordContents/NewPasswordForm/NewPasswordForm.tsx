@@ -1,7 +1,7 @@
 import { BoxButton, PasswordTextField } from '@yourssu/design-system-react';
 
 import { useNewPasswordForm } from '@/home/components/ChangePasswordContents/NewPasswordForm/useNewPasswordForm';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { NewPasswordFormProps } from '@/home/types/password.type';
 
 import {
   StyledInputContainer,
@@ -12,25 +12,11 @@ import {
   StyledInputAnimation,
 } from './NewPasswordForm.style';
 
-interface NewPasswordFormProps {
-  sessionToken: SessionTokenType;
-}
+export const NewPasswordForm = (props: NewPasswordFormProps) => {
+  const { isFirstRender, register, passwordValidate, errors, onSubmit } = useNewPasswordForm(props);
 
-export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
-  const {
-    newPassword,
-    newPasswordCheck,
-    isNewPasswordError,
-    isNewPasswordCheckError,
-    isFirstRender,
-    validationAttempted,
-    setNewPasswordCheck,
-    handleNewPasswordChange,
-    handleSubmit,
-  } = useNewPasswordForm(sessionToken);
-
-  const isNewPasswordFieldNegative = !isFirstRender && isNewPasswordError;
-  const isRepeatPasswordFieldNegative = isNewPasswordCheckError && validationAttempted;
+  const isInvalidPassword = !isFirstRender && !!errors.newPassword;
+  const isValidPassword = !isFirstRender && !errors.newPassword;
 
   return (
     <StyledBoxContainer>
@@ -38,23 +24,19 @@ export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
       <StyledInputContainer>
         <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>
         <PasswordTextField
-          placeholder="숫자와 영문자 조합으로 8자 이상 입력해주세요."
-          value={newPassword}
-          onChange={(e) => handleNewPasswordChange(e.target.value)}
-          isNegative={isNewPasswordFieldNegative}
-          helperLabel={
-            isNewPasswordFieldNegative ? '숫자와 영문자 조합으로 8자 이상 입력해주세요.' : ''
-          }
+          placeholder="숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요"
+          {...register('newPassword', {
+            validate: passwordValidate,
+          })}
+          isNegative={isInvalidPassword}
+          helperLabel={isInvalidPassword ? (errors.newPassword?.message as string) : ''}
         />
-        <StyledInputAnimation
-          className={!isNewPasswordError && newPassword.length >= 8 ? 'active' : ''}
-        >
+        <StyledInputAnimation className={isValidPassword ? 'active' : ''}>
           <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
           <PasswordTextField
-            value={newPasswordCheck}
-            onChange={(e) => setNewPasswordCheck(e.target.value)}
-            isNegative={isRepeatPasswordFieldNegative}
-            helperLabel={isRepeatPasswordFieldNegative ? '비밀번호가 일치하지 않습니다.' : ''}
+            {...register('newPasswordCheck')}
+            isNegative={!!errors.newPasswordCheck}
+            helperLabel={errors.newPasswordCheck?.message as string | undefined}
           />
         </StyledInputAnimation>
       </StyledInputContainer>
@@ -63,8 +45,8 @@ export const NewPasswordForm = ({ sessionToken }: NewPasswordFormProps) => {
           rounding={8}
           size="large"
           variant="filled"
-          onClick={handleSubmit}
-          disabled={isFirstRender || isNewPasswordError}
+          onClick={onSubmit}
+          disabled={!isValidPassword}
         >
           변경하기
         </BoxButton>

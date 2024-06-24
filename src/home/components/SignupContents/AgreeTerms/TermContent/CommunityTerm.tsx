@@ -51,8 +51,6 @@ export const CommunityTerm = () => {
 
       <StyledTermSectionHeading>신고 접수 시 이렇게 처리해요</StyledTermSectionHeading>
       <StyledTermParagraph>
-        즐거운 서비스 이용을 위해 아래와 같은 글과 댓글을 작성하는 것은 금지됩니다. 아래 예시에
-        해당한다고 판단되면 이용약관 제11조 제1항에 따라 서비스 이용을 제한할 수 있습니다.
         <ul>
           <li>
             - 유어슈는 대표 이메일(yourssu.com@gmail.com)을 통해 커뮤니티 이용규칙 위반 신고를
@@ -76,8 +74,6 @@ export const CommunityTerm = () => {
 
       <StyledTermSectionHeading>기타 주의사항</StyledTermSectionHeading>
       <StyledTermParagraph>
-        즐거운 서비스 이용을 위해 아래와 같은 글과 댓글을 작성하는 것은 금지됩니다. 아래 예시에
-        해당한다고 판단되면 이용약관 제11조 제1항에 따라 서비스 이용을 제한할 수 있습니다.
         <ul>
           <li>
             - 회원이 서비스 내에 작성한 글과 댓글은 해당 회원이 탈퇴한 후에도 보존됩니다. 보존되는
@@ -87,6 +83,8 @@ export const CommunityTerm = () => {
           <li>- 기타 문의 사항은 이메일로 문의 바랍니다. yourssu.com@gmail.com</li>
         </ul>
       </StyledTermParagraph>
+
+      <StyledTermParagraph>본 이용규칙은 2024년 2월 27일부터 시행됩니다.</StyledTermParagraph>
     </StyledTermContentContainer>
   );
 };
