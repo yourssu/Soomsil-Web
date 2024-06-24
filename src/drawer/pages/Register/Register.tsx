@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { Loading } from '@/components/Loading/Loading';
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
@@ -12,6 +13,7 @@ import { ThumbnailInput } from '@/drawer/components/ThumbnailInput/ThumbnailInpu
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
+import { registerFormDefaultValue } from '@/drawer/constants/registerFormDefaultValue.constant';
 import { usePostProduct } from '@/drawer/hooks/usePostProduct';
 import { RegisterFormValues } from '@/drawer/types/form.type';
 
@@ -23,7 +25,8 @@ import {
 } from './Register.style';
 
 export const Register = () => {
-  const methods = useForm<RegisterFormValues>();
+  const navigate = useNavigate();
+  const methods = useForm<RegisterFormValues>({ defaultValues: registerFormDefaultValue });
 
   const [linkExist, setLinkExist] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
@@ -49,6 +52,13 @@ export const Register = () => {
       }
     }
   }, [methods.formState]);
+
+  useEffect(() => {
+    if (registerProductMutation.isSuccess) {
+      alert('서비스가 등록되었습니다.');
+      navigate('/drawer/myDrawers?tab=MYDRAWER');
+    }
+  }, [registerProductMutation.isSuccess, navigate]);
 
   return (
     <FormProvider {...methods}>
@@ -127,7 +137,7 @@ export const Register = () => {
               width="8.125rem"
               disabled={registerProductMutation.isPending}
             >
-              서비스 등록
+              {registerProductMutation.isPending ? '등록 중...' : '서비스 등록'}
             </BoxButton>
           </StyledRightContainer>
         </form>
