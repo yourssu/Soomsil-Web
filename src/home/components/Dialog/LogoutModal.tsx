@@ -3,7 +3,7 @@ import { BoxButton } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 
 import PpussungIcon from '@/assets/home/ppussung.svg';
-import { api } from '@/service/TokenService';
+import { useResetUserInfo } from '@/hooks/useResetUserInfo';
 
 import {
   StyledButtonContainer,
@@ -21,9 +21,10 @@ interface LogoutModalProps {
 
 export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
   const navigate = useNavigate();
+  const resetUserInfo = useResetUserInfo();
 
   const handleLogout = () => {
-    api.logout();
+    resetUserInfo();
     alert('로그아웃 되었습니다.');
     navigate('/');
   };

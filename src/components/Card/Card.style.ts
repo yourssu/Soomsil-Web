@@ -42,7 +42,7 @@ export const StyledBookmarkContainer = styled.div`
   align-items: center;
 `;
 
-export const StyledSettingIconContainer = styled.div`
-  display: flex;
+export const StyledSettingIconContainer = styled.button`
+  display: inline-flex;
   align-items: center;
 `;

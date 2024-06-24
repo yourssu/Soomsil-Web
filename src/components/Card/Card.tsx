@@ -1,8 +1,10 @@
+import React from 'react';
+
 import {
-  IconContext,
+  IcDotsVerticalLine,
   IcStarFilled,
   IcStarLine,
-  IcDotsVerticalLine,
+  IconContext,
 } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from 'styled-components';
@@ -12,12 +14,12 @@ import SmallThumbnail from '@/assets/smallThumbnail.png';
 import { FlexGrowItem } from '@/components/FlexContainer/FlexContainer';
 
 import {
-  StyledContainer,
-  StyledText,
-  StyledTitle,
-  StyledThumbnail,
   StyledBookmarkContainer,
+  StyledContainer,
   StyledSettingIconContainer,
+  StyledText,
+  StyledThumbnail,
+  StyledTitle,
 } from './Card.style';
 import {
   CardContainerProps,
@@ -83,18 +85,16 @@ const CardContent = ({ title, body, bookmarkCount, isBookmarked }: CardContentPr
   );
 };
 
-const CardSetting = ({ onClick }: CardSettingProps) => {
-  const theme = useTheme();
-  return (
-    <StyledSettingIconContainer>
-      <IconContext.Provider
-        value={{ color: theme.color.buttonNormal, size: '36px', onClick: onClick }}
-      >
-        <IcDotsVerticalLine />
-      </IconContext.Provider>
-    </StyledSettingIconContainer>
-  );
-};
+const CardSetting = React.forwardRef<HTMLButtonElement, CardSettingProps>(
+  ({ onClick, ...props }, ref) => {
+    const theme = useTheme();
+    return (
+      <StyledSettingIconContainer ref={ref} {...props} onClick={onClick}>
+        <IcDotsVerticalLine color={theme.color.buttonNormal} size="36px" />
+      </StyledSettingIconContainer>
+    );
+  }
+);
 
 export const Card = Object.assign(CardContainer, {
   BigThumbnail: CardBigThumbnail,

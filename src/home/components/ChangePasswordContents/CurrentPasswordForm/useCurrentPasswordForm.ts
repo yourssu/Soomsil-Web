@@ -5,16 +5,18 @@ import { useRecoilValue } from 'recoil';
 
 import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
 import { LogInState } from '@/home/recoil/LogInState';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { SessionTokenType } from '@/home/types/password.type';
 
 interface CurrentPasswordFormProps {
   onConfirm: () => void;
   setSessionToken: ({ sessionToken }: SessionTokenType) => void;
+  setPreviousPassword: (password: string) => void;
 }
 
 export const useCurrentPasswordForm = ({
   onConfirm,
   setSessionToken,
+  setPreviousPassword,
 }: CurrentPasswordFormProps) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [isError, setIsError] = useState(false);
@@ -23,7 +25,6 @@ export const useCurrentPasswordForm = ({
 
   const checkCurrentPassword = async () => {
     if (!isLoggedIn) {
-      alert('로그인이 필요합니다.');
       navigate('/Login');
       return;
     }
@@ -35,6 +36,7 @@ export const useCurrentPasswordForm = ({
     if (data) {
       setIsError(false);
       setSessionToken(data as SessionTokenType);
+      setPreviousPassword(currentPassword);
       onConfirm();
     } else if (error) setIsError(true);
   };

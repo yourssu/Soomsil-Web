@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-import { refreshToken } from '@/home/apis/postRefreshToken';
+import { postRefreshToken } from '@/home/apis/postRefreshToken';
 import { AuthErrorData } from '@/home/types/Auth.type';
 import { api } from '@/service/TokenService';
 
@@ -26,26 +26,30 @@ soomsilClient.interceptors.request.use((config) => {
   return config;
 });
 
-const onFulfilled = (response: AxiosResponse) => response;
+soomsilClient.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  async (error: AxiosError) => {
+    const originalConfig = error.config;
+    const data = error.response?.data as AuthErrorData;
 
-const onRejected = async (error: AxiosError) => {
-  const originalConfig = error.config;
-  const data = error.response?.data as AuthErrorData;
+    if (originalConfig && error.response?.status === 401 && data?.error === 'Auth-002') {
+      try {
+        const { accessToken, accessTokenExpiredIn, refreshToken, refreshTokenExpiredIn } =
+          await postRefreshToken();
 
-  if (originalConfig && error.response?.status === 401 && data?.error === 'Auth-002') {
-    try {
-      await refreshToken();
-      return soomsilClient.request({
-        ...originalConfig,
-        headers: {
-          Authorization: `Bearer ${api.getAccessToken()}`,
-        },
-      });
-    } catch (error) {
-      return Promise.reject(error);
+        api.setAccessToken(accessToken, accessTokenExpiredIn);
+        api.setRefreshToken(refreshToken, refreshTokenExpiredIn);
+
+        return soomsilClient.request({
+          ...originalConfig,
+        });
+      } catch (error) {
+        api.logout();
+        sessionStorage.removeItem('user');
+        window.location.reload();
+        return Promise.reject(error);
+      }
     }
+    return Promise.reject(error);
   }
-  return Promise.reject(error);
-};
-
-soomsilClient.interceptors.response.use(onFulfilled, onRejected);
+);
