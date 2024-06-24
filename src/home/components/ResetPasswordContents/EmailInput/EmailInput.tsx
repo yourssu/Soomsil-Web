@@ -1,5 +1,7 @@
-import { EMAIL_DOMAIN } from '@/constants/email.constant';
 import { BoxButton, SuffixTextField } from '@yourssu/design-system-react';
+
+import { EMAIL_DOMAIN } from '@/constants/email.constant';
+
 import { StyledEmailContainer, StyledSubTitleText, StyledTitleText } from './EmailInput.style';
 import { useEmailInput } from './useEmailInputForm';
 

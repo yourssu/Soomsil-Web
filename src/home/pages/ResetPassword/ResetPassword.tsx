@@ -1,10 +1,11 @@
+import { useState } from 'react';
+
 import { EmailInput } from '@/home/components/ResetPasswordContents/EmailInput/EmailInput';
 import { EmailVerification } from '@/home/components/ResetPasswordContents/EmailVerification/EmailVerification';
 import { ResetPasswordFrame } from '@/home/components/ResetPasswordContents/ResetPasswordFrame/ResetPasswordFrame';
 import { ResetPasswordInput } from '@/home/components/ResetPasswordContents/ResetPasswordInput/ResetPasswordInput';
 import { ResetPasswordSuccess } from '@/home/components/ResetPasswordContents/ResetPasswordSuccess/ResetPasswordSuccess';
 import { useFunnel } from '@/hooks/useFunnel';
-import { useState } from 'react';
 
 type ResetPasswordFunnelStepsType =
   | '이메일입력'

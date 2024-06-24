@@ -1,5 +1,7 @@
-import Logo from '@/assets/soomsil_logo.svg';
 import { Link } from 'react-router-dom';
+
+import Logo from '@/assets/soomsil_logo.svg';
+
 import { StyledContainer, StyledLogo, StyledWrapper } from './ResetPasswordFrame.style';
 
 interface ResetPasswordFrameProps {

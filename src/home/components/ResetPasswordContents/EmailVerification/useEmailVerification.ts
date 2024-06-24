@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useSecondTimer } from '@/hooks/useSecondTimer';
-import { getAuthVerificationCheck, postAuthVerificationEmail } from '@/home/apis/authVerification';
+
 import { STORAGE_KEYS } from '@/constants/storage.constant';
+import { getAuthVerificationCheck, postAuthVerificationEmail } from '@/home/apis/authVerification';
 import { useParseFullEmail } from '@/hooks/useParseFullEmail';
+import { useSecondTimer } from '@/hooks/useSecondTimer';
 
 interface UseEmailVerificationProps {
   email: string;

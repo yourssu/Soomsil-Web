@@ -1,9 +1,10 @@
+import { hasNumberAndEnglishWithSymbols } from '@yourssu/utils';
+import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
+
 import { STORAGE_KEYS } from '@/constants/storage.constant';
 import { postChangePassword } from '@/home/apis/postChangePassword';
-import { AxiosError } from 'axios';
 import { AuthErrorData } from '@/home/types/Auth.type';
-import { hasNumberAndEnglishWithSymbols } from '@yourssu/utils';
 import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 interface UseResetPasswordInputProps {

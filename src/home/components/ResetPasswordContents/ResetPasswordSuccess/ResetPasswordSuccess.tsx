@@ -1,4 +1,5 @@
 import { BoxButton } from '@yourssu/design-system-react';
+
 import { StyledLink, StyledSubTitleText, StyledTitleText } from './ResetPasswordSuccess.style';
 
 export const ResetPasswordSuccess = () => {

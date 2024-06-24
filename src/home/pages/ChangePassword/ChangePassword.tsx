@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ChangePasswordFrame } from '@/home/components/ChangePasswordContents/ChangePasswordFrame/ChangePasswordFrame';
 import { CurrentPasswordForm } from '@/home/components/ChangePasswordContents/CurrentPasswordForm/CurrentPasswordForm';
 import { NewPasswordForm } from '@/home/components/ChangePasswordContents/NewPasswordForm/NewPasswordForm';
-import { SessionTokenType } from '@/home/types/GetPassword.type';
+import { SessionTokenType } from '@/home/types/password.type';
 import { useFunnel } from '@/hooks/useFunnel';
 
 type ChangePasswordFunnelStepsType = '현재비밀번호입력' | '새비밀번호입력';
