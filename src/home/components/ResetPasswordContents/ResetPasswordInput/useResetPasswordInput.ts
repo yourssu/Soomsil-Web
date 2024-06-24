@@ -75,7 +75,7 @@ export const useResetPasswordInput = ({ email, onConfirm }: UseResetPasswordInpu
           serverError?.error === 'Auth-007'
             ? '현재 비밀번호와 다른 비밀번호를 입력해주세요.'
             : serverError?.message || '비밀번호 변경 중 오류가 발생했습니다.';
-        setError('confirmPassword', { type: 'manual', message: errorMessage });
+        setError('password', { type: 'manual', message: errorMessage });
       } else {
         setError('confirmPassword', {
           type: 'manual',

@@ -30,6 +30,7 @@ export const ResetPasswordInput = ({ email, onConfirm }: ResetPasswordProps) => 
       <StyledPasswordContainer>
         <PasswordTextField
           {...register('password')}
+          isNegative={errors.password ? true : false}
           helperLabel={
             errors.password
               ? errors.password.message
@@ -42,7 +43,7 @@ export const ResetPasswordInput = ({ email, onConfirm }: ResetPasswordProps) => 
         <PasswordTextField
           {...register('confirmPassword')}
           isNegative={errors.confirmPassword ? true : false}
-          helperLabel={errors.confirmPassword ? errors.confirmPassword.message : ''}
+          helperLabel={errors.confirmPassword ? '비밀번호가 일치하지 않습니다.' : ''}
         />
       </StyledPasswordContainer>
       <BoxButton
