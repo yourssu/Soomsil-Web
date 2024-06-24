@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useFullEmail } from '@/hooks/useFullEmail';
 import { postAuthVerificationEmail } from '@/home/apis/authVerification';
+import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 interface EmailInputProps {
   email: string;
@@ -23,7 +23,8 @@ export const useEmailInput = ({ email, onConfirm }: EmailInputProps) => {
   });
 
   const localEmail = watch('email');
-  const fullEmail = useFullEmail(localEmail);
+  const parseFullEmail = useParseFullEmail();
+  const fullEmail = parseFullEmail(localEmail);
 
   const handleOnSubmit = async (data: FormData) => {
     const response = await postAuthVerificationEmail({

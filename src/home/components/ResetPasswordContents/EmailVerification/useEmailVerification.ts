@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 import { getAuthVerificationCheck, postAuthVerificationEmail } from '@/home/apis/authVerification';
-import { useFullEmail } from '@/hooks/useFullEmail';
 import { STORAGE_KEYS } from '@/constants/storage.constant';
+import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 interface UseEmailVerificationProps {
   email: string;
@@ -11,7 +11,9 @@ interface UseEmailVerificationProps {
 
 export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationProps) => {
   const { leftTime, resetTimer } = useSecondTimer(480);
-  const fullEmail = useFullEmail(email);
+  const parseFullEmail = useParseFullEmail();
+  const fullEmail = parseFullEmail(email);
+
   const [error, setError] = useState<string | null>(null);
   const [isResending, setIsResending] = useState(false);
 

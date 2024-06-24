@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { STORAGE_KEYS } from '@/constants/storage.constant';
 import { postChangePassword } from '@/home/apis/postChangePassword';
-import { useFullEmail } from '@/hooks/useFullEmail';
 import { AxiosError } from 'axios';
 import { AuthErrorData } from '@/home/types/Auth.type';
 import { hasNumberAndEnglishWithSymbols } from '@yourssu/utils';
+import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 interface UseResetPasswordInputProps {
   email: string;
@@ -24,8 +24,8 @@ export const useResetPasswordInput = ({ email, onConfirm }: UseResetPasswordInpu
     setError,
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
-
-  const fullEmail = useFullEmail(email);
+  const parseFullEmail = useParseFullEmail();
+  const fullEmail = parseFullEmail(email);
   const password = watch('password', '');
   const confirmPassword = watch('confirmPassword', '');
 
