@@ -19,10 +19,14 @@ import {
   StyledInformationWrap,
 } from './ResultListItem.style';
 
-export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>(
-  ({ title, link, content, date, thumbnail, favicon, source }, ref) => {
+interface ResultListItemProps
+  extends Pick<React.ComponentProps<'div'>, 'onClick'>,
+    ResultListItemResponse {}
+
+export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
+  ({ title, content, date, thumbnail, favicon, source, onClick }, ref) => {
     return (
-      <StyledResultListItem ref={ref}>
+      <StyledResultListItem ref={ref} onClick={onClick}>
         <StyledContentWrap $length={thumbnail.length}>
           <StyledInformationWrap>
             <StyledLinkImageWrap>
@@ -36,9 +40,7 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemResponse>
             <StyledDate>{date}</StyledDate>
           </StyledInformationWrap>
           <Spacing direction="vertical" size={12} />
-          <StyledTitle href={link} $length={thumbnail.length}>
-            {title}
-          </StyledTitle>
+          <StyledTitle $length={thumbnail.length}>{title}</StyledTitle>
           <Spacing direction="vertical" size={8} />
           <StyledContent $length={thumbnail.length}>{content}</StyledContent>
           {thumbnail.length >= 5 && (
