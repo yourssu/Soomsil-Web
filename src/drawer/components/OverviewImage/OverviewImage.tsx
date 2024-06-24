@@ -2,6 +2,8 @@ import { ChangeEvent, useState, useEffect, useRef } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 
+import { ALLOWED_IMAGE_TYPE } from '@/drawer/constants/image.constant';
+
 import { OverviewFileUpload } from './OverviewFileUpload/OverviewFileUpload';
 import {
   StyledImageUpload,
@@ -24,10 +26,10 @@ export const OverviewImage = () => {
   const handleFileChange = (file: File | undefined, index: number) => {
     setFiles((prevFiles) => {
       const newFiles = [...prevFiles];
-      if (file && file.type.substring(0, 5) === 'image') {
+      if (file && ALLOWED_IMAGE_TYPE.includes(file.type)) {
         newFiles[index] = file;
       } else {
-        alert('이미지 파일을 첨부해주세요.');
+        alert('이미지 포맷은 jpg, jpeg, png, gif 중 하나여야 합니다.');
       }
       return newFiles;
     });
