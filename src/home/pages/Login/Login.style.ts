@@ -24,3 +24,11 @@ export const StyledBottomButtonWrapper = styled.div`
 export const StyledButtonButtonSeparator = styled.div`
   color: ${({ theme }) => theme.color.textTertiary};
 `;
+
+export const StyledLink = styled.a`
+  ${({ theme }) => theme.typo.button3};
+  color: inherit;
+  &:visited {
+    color: inherit;
+  }
+`;

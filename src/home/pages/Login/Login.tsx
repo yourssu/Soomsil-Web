@@ -18,6 +18,7 @@ import {
   StyledBottomButtonContainer,
   StyledBottomButtonWrapper,
   StyledButtonButtonSeparator,
+  StyledLink,
   StyledLoginContainer,
 } from './Login.style';
 
@@ -28,6 +29,7 @@ interface LoginFormStates {
 
 export const Login = () => {
   const { register, handleSubmit } = useForm<LoginFormStates>();
+  const MAIL_SEARCH_URL = 'https://gw.ssu.ac.kr/o365Userlogin.aspx';
 
   const navigate = useNavigate();
   const parseFullEmail = useParseFullEmail();
@@ -77,13 +79,21 @@ export const Login = () => {
         </BoxButton>
 
         <StyledBottomButtonContainer>
-          {/* TODO: 학교 메일 찾기 route 완성되면 navigate 기능 추가 */}
           <PlainButton type="button" size="medium" isPointed={false} isWarned={false}>
-            <StyledBottomButtonWrapper>학교 메일 찾기</StyledBottomButtonWrapper>
+            <StyledBottomButtonWrapper>
+              <StyledLink href={MAIL_SEARCH_URL} target="_blank" rel="noopener noreferrer">
+                학교 메일 찾기
+              </StyledLink>
+            </StyledBottomButtonWrapper>
           </PlainButton>
           <StyledButtonButtonSeparator>|</StyledButtonButtonSeparator>
-          {/* 비밀번호 찾기 route 완성되면 navigate 기능 추가 */}
-          <PlainButton type="button" size="medium" isPointed={false} isWarned={false}>
+          <PlainButton
+            type="button"
+            size="medium"
+            isPointed={false}
+            isWarned={false}
+            onClick={() => navigate('/resetpassword')}
+          >
             <StyledBottomButtonWrapper>비밀번호 찾기</StyledBottomButtonWrapper>
           </PlainButton>
           <StyledButtonButtonSeparator>|</StyledButtonButtonSeparator>
