@@ -40,18 +40,15 @@ export const ServiceEdit = () => {
   };
 
   const handleSubmit: SubmitHandler<RegisterFormValues> = (data) => {
-    console.log(data);
     if (isChecked) {
-      registerProductMutation.mutate(data);
+      registerProductMutation.mutate(data, {
+        onSuccess: () => {
+          alert('서비스가 수정되었습니다.');
+          navigate(`/drawer/services/${serviceId}`);
+        },
+      });
     }
   };
-
-  useEffect(() => {
-    if (registerProductMutation.isSuccess) {
-      alert('서비스가 수정되었습니다.');
-      navigate(`/drawer/services/${serviceId}`);
-    }
-  }, [registerProductMutation.isSuccess, serviceId, navigate]);
 
   useLoadServiceDetailEffect({
     serviceId: Number(serviceId),

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 import { Loading } from '@/components/Loading/Loading';
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
@@ -25,7 +24,6 @@ import {
 } from './Register.style';
 
 export const Register = () => {
-  const navigate = useNavigate();
   const methods = useForm<RegisterFormValues>({ defaultValues: registerFormDefaultValue });
 
   const [linkExist, setLinkExist] = useState(true);
@@ -52,13 +50,6 @@ export const Register = () => {
       }
     }
   }, [methods.formState]);
-
-  useEffect(() => {
-    if (registerProductMutation.isSuccess) {
-      alert('서비스가 등록되었습니다.');
-      navigate('/drawer/myDrawers?tab=MYDRAWER');
-    }
-  }, [registerProductMutation.isSuccess, navigate]);
 
   return (
     <FormProvider {...methods}>
