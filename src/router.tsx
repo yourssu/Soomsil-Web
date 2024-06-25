@@ -135,8 +135,10 @@ export const Router = () => {
             <Route index element={<Navigate to="rankings" replace />}></Route>
             <Route path="services/:serviceId" element={<ServiceDetail />} />
             <Route path="rankings" element={<Ranking />} />
-            <Route path="register" element={<Register />} />
-            <Route path="myDrawers" element={<MyDrawer />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="register" element={<Register />} />
+              <Route path="myDrawers" element={<MyDrawer />} />
+            </Route>
             <Route path="/drawer/newRelease" element={<NewRelease />} />
             <Route path="/drawer/starRanking" element={<StarRanking />} />
             <Route path=":providerId" element={<Provider />} />
