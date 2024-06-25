@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { getDrawerBanner } from '../apis/getDrawerBanner';
 
 export const useGetDrawerBanner = () => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['drawerBanner'],
     queryFn: getDrawerBanner,
     staleTime: Infinity,
