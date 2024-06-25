@@ -12,7 +12,7 @@ interface FormData {
   email: string;
 }
 
-export const useEmailInput = ({ email, onConfirm }: EmailInputProps) => {
+export const useEmailInputForm = ({ email, onConfirm }: EmailInputProps) => {
   const {
     register,
     handleSubmit,
