@@ -1,16 +1,17 @@
-import { useState } from 'react';
+// TODO: 프로필 편집 관련 코드 임시 주석 처리
+// import { useState } from 'react';
 
-import { BoxButton, IcSettingLine, SimpleTextField } from '@yourssu/design-system-react';
-import { useTheme } from 'styled-components';
+// import { BoxButton, SimpleTextField, IcSettingLine } from '@yourssu/design-system-react';
+// import { useTheme } from 'styled-components';
 
 import { ProfileSvg } from '@/components/ProfileSvg/ProfileSVG';
 import { useGetUserData } from '@/home/hooks/useGetUserData';
 
 import {
-  StyledButtonContainer,
+  // StyledButtonContainer,
   StyledContainer,
   StyledInformationContainer,
-  StyledSettingButton,
+  // StyledSettingButton,
   StyledUserIconContainer,
   StyledUserMail,
   StyledUserNickname,
@@ -18,13 +19,13 @@ import {
 
 export const UserInformationCard = () => {
   const { data: currentUser } = useGetUserData();
-  const [activeEditMode, setAcitveEditMode] = useState(false);
-  const [nickname, setNickname] = useState<string>('');
-  const theme = useTheme();
+  // const [activeEditMode, setAcitveEditMode] = useState(false);
+  // const [nickname, setNickname] = useState<string>('');
+  // const theme = useTheme();
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(event.target.value);
-  };
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setNickname(event.target.value);
+  // };
 
   return (
     <StyledContainer>
@@ -33,11 +34,11 @@ export const UserInformationCard = () => {
           <StyledInformationContainer>
             <StyledUserIconContainer>
               <ProfileSvg imageUrl={currentUser.profileImage.midUrl} />
-              {activeEditMode && (
+              {/* {activeEditMode && (
                 <StyledSettingButton>
                   <IcSettingLine color={theme.color.buttonNormal} size="1rem" />
                 </StyledSettingButton>
-              )}
+              )} */}
             </StyledUserIconContainer>
             <StyledUserNickname>{currentUser.nickName}</StyledUserNickname>
             <StyledUserMail>{currentUser.email}</StyledUserMail>
