@@ -10,9 +10,10 @@ export const BigDrawerCard = ({
   body,
   bookmarkCount,
   isBookmarked,
+  onClick,
 }: DrawerCardProps) => {
   return (
-    <Card link={link}>
+    <Card link={link} onClick={onClick}>
       <Card.BigThumbnail imgSrc={bigImgSrc} />
       <Card.SmallThumbnail imgSrc={smallImgSrc} />
       <Card.Content
