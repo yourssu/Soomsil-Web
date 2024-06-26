@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 
+import { useColorTheme } from '@yourssu/design-system-react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
@@ -99,6 +100,12 @@ export const Router = () => {
     isAnimating: false,
     key: 0,
   });
+  const { PrivateRoute } = usePrivateRoute();
+  const { setTheme } = useColorTheme();
+
+  useEffect(() => {
+    setTheme('light');
+  }, [setTheme]);
 
   useEffect(() => {
     setState((prevState) => ({
@@ -112,8 +119,6 @@ export const Router = () => {
       }));
     };
   }, []);
-
-  const { PrivateRoute } = usePrivateRoute();
 
   return (
     <ErrorBoundary fallbackRender={(fallbackProps) => <Fallback {...fallbackProps} />}>
