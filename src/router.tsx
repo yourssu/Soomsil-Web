@@ -5,8 +5,8 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Fallback } from '@/components/Fallback/Fallback';
+import { PrivateRoute } from '@/components/PrivateRoute/PrivateRoute';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
-import { usePrivateRoute } from '@/hooks/usePrivateRoute';
 
 const Search = lazy(() =>
   import('./search/pages/Search/Search').then(({ Search }) => ({
@@ -100,7 +100,6 @@ export const Router = () => {
     isAnimating: false,
     key: 0,
   });
-  const { PrivateRoute } = usePrivateRoute();
   const { setTheme } = useColorTheme();
 
   useEffect(() => {
