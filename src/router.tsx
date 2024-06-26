@@ -82,6 +82,11 @@ const Withdraw = lazy(() =>
     default: Withdraw,
   }))
 );
+const ResetPassword = lazy(() =>
+  import('./home/pages/ResetPassword/ResetPassword').then(({ ResetPassword }) => ({
+    default: ResetPassword,
+  }))
+);
 
 const DrawerSearch = lazy(() =>
   import('./drawer/pages/DrawerSearch/DrawerSearch').then(({ DrawerSearch }) => ({
@@ -130,6 +135,7 @@ export const Router = () => {
             <Route path="/Mypage" element={<Mypage />}></Route>
             <Route path="/changePassword" element={<ChangePassword />}></Route>
             <Route path="/withdraw" element={<Withdraw />}></Route>
+            <Route path="/resetPassword" element={<ResetPassword />}></Route>
           </Route>
           <Route path="/drawer" element={<DrawerLayout />}>
             <Route index element={<Navigate to="rankings" replace />}></Route>
