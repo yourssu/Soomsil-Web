@@ -6,7 +6,6 @@ import { ResetPasswordFrame } from '@/home/components/ResetPasswordContents/Rese
 import { ResetPasswordInput } from '@/home/components/ResetPasswordContents/ResetPasswordInput/ResetPasswordInput';
 import { ResetPasswordSuccess } from '@/home/components/ResetPasswordContents/ResetPasswordSuccess/ResetPasswordSuccess';
 import { useFunnel } from '@/hooks/useFunnel';
-import { useRedirectLoggedInEffect } from '@/hooks/useRedirectLoggedInEffect';
 
 type ResetPasswordFunnelStepsType =
   | '이메일입력'
@@ -15,8 +14,6 @@ type ResetPasswordFunnelStepsType =
   | '비밀번호재설정완료';
 
 export const ResetPassword = () => {
-  useRedirectLoggedInEffect();
-
   const [Funnel, setStep] = useFunnel<ResetPasswordFunnelStepsType>('이메일입력');
   const [email, setEmail] = useState('');
 
