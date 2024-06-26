@@ -1,6 +1,10 @@
-import { BoxButton, PasswordTextField } from '@yourssu/design-system-react';
+import { useEffect } from 'react';
 
-import { useCurrentPasswordForm } from '@/home/components/ChangePasswordContents/CurrentPasswordForm/useCurrentPasswordForm';
+import { useMutation } from '@tanstack/react-query';
+import { BoxButton, PasswordTextField } from '@yourssu/design-system-react';
+import { useForm } from 'react-hook-form';
+
+import { getUserPasswordMatch } from '@/home/apis/getUserPasswordMatch';
 import { SessionTokenType } from '@/home/types/password.type';
 
 import {
@@ -18,29 +22,50 @@ interface CurrentPasswordFormProps {
 }
 
 export const CurrentPasswordForm = (props: CurrentPasswordFormProps) => {
-  const { currentPassword, isPasswordError, handlePasswordChange, checkCurrentPassword } =
-    useCurrentPasswordForm(props);
+  const { onConfirm, setSessionToken, setPreviousPassword } = props;
+  const { formState, register, watch, setError, clearErrors, handleSubmit } = useForm();
+
+  const currentPassword = watch('currentPassword');
+
+  useEffect(() => {
+    clearErrors();
+  }, [currentPassword, clearErrors]);
+
+  const passwordMatchMutation = useMutation({
+    mutationFn: getUserPasswordMatch,
+    onSuccess: (data) => {
+      setSessionToken(data);
+      setPreviousPassword(currentPassword);
+      onConfirm();
+    },
+    onError: () => {
+      setError('currentPassword', { message: '비밀번호가 일치하지 않습니다.' });
+    },
+  });
+
+  const handleOnSubmit = () => {
+    passwordMatchMutation.mutate(currentPassword);
+  };
 
   return (
-    <StyledBoxContainer>
+    <StyledBoxContainer onSubmit={handleSubmit(handleOnSubmit)}>
       <StyledTitle>비밀번호 변경</StyledTitle>
       <StyledInputContainer>
         <StyledInputTitle>현재 비밀번호를 입력 해주세요.</StyledInputTitle>
         <PasswordTextField
           placeholder="비밀번호를 입력해주세요."
-          value={currentPassword}
-          onChange={(e) => handlePasswordChange(e.target.value)}
-          isNegative={isPasswordError}
-          helperLabel={isPasswordError ? '비밀번호가 일치하지 않습니다.' : ''}
+          {...register('currentPassword')}
+          isNegative={!!formState.errors.currentPassword}
+          helperLabel={formState.errors.currentPassword?.message as string | undefined}
         />
       </StyledInputContainer>
       <StyledButtonContainer>
         <BoxButton
+          type="submit"
           rounding={8}
           size="large"
           variant="filled"
-          onClick={checkCurrentPassword}
-          disabled={currentPassword.length === 0}
+          disabled={!currentPassword || formState.isSubmitting}
         >
           다음
         </BoxButton>
