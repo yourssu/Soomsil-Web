@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 
 import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
+import { DetectClick } from '@/drawer/components/DetectClick/DetectClick';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
 import { GrayButton } from '@/drawer/components/GrayButton/GrayButton';
 import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
@@ -61,11 +62,9 @@ export const Ranking = () => {
           </StyledBetweenContainer>
           <StyledCardContainer>
             {rankings &&
-              rankings.pages[0]
-                .slice(0, 3)
-                .map((product) => (
+              rankings.pages[0].slice(0, 3).map((product) => (
+                <DetectClick key={product.productNo} product={product}>
                   <BigDrawerCard
-                    key={product.productNo}
                     link={`/drawer/services/${product.productNo}`}
                     title={product.productTitle}
                     body={product.productSubTitle}
@@ -73,8 +72,10 @@ export const Ranking = () => {
                     isBookmarked={product.isBookmarked}
                     bigImgSrc={product.introductionImage[0]}
                     smallImgSrc={product.mainImage}
+                    onClick={() => {}}
                   />
-                ))}
+                </DetectClick>
+              ))}
           </StyledCardContainer>
         </div>
         <StyledImage
@@ -100,9 +101,8 @@ export const Ranking = () => {
           </StyledBetweenContainer>
           <StyledCardContainer>
             {newReleases &&
-              newReleases.pages[0]
-                .slice(0, 3)
-                .map((product) => (
+              newReleases.pages[0].slice(0, 3).map((product) => (
+                <DetectClick key={product.productNo} product={product}>
                   <BigDrawerCard
                     key={product.productNo}
                     link={`/drawer/services/${product.productNo}`}
@@ -113,7 +113,8 @@ export const Ranking = () => {
                     bigImgSrc={product.introductionImage[0]}
                     smallImgSrc={product.mainImage}
                   />
-                ))}
+                </DetectClick>
+              ))}
           </StyledCardContainer>
         </div>
       </StyledRankingContainer>

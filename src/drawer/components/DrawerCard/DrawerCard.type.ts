@@ -8,4 +8,6 @@ export interface DrawerCardProps {
   body: string;
   bookmarkCount: number;
   isBookmarked: boolean;
+
+  onClick?: (event: React.MouseEvent) => void;
 }

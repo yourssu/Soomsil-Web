@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Fallback } from '@/components/Fallback/Fallback';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
+import { usePrivateRoute } from '@/hooks/usePrivateRoute';
 
 const Search = lazy(() =>
   import('./search/pages/Search/Search').then(({ Search }) => ({
@@ -81,6 +82,11 @@ const Withdraw = lazy(() =>
     default: Withdraw,
   }))
 );
+const ResetPassword = lazy(() =>
+  import('./home/pages/ResetPassword/ResetPassword').then(({ ResetPassword }) => ({
+    default: ResetPassword,
+  }))
+);
 
 const DrawerSearch = lazy(() =>
   import('./drawer/pages/DrawerSearch/DrawerSearch').then(({ DrawerSearch }) => ({
@@ -107,6 +113,8 @@ export const Router = () => {
     };
   }, []);
 
+  const { PrivateRoute } = usePrivateRoute();
+
   return (
     <ErrorBoundary fallbackRender={(fallbackProps) => <Fallback {...fallbackProps} />}>
       <Suspense
@@ -122,16 +130,21 @@ export const Router = () => {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/changePassword" element={<ChangePassword />} />
-          <Route path="/mypage" element={<Mypage />}></Route>
-          <Route path="/withdraw" element={<Withdraw />}></Route>
+          <Route path="/Signup" element={<Signup />}></Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/Mypage" element={<Mypage />}></Route>
+            <Route path="/changePassword" element={<ChangePassword />}></Route>
+            <Route path="/withdraw" element={<Withdraw />}></Route>
+            <Route path="/resetPassword" element={<ResetPassword />}></Route>
+          </Route>
           <Route path="/drawer" element={<DrawerLayout />}>
             <Route index element={<Navigate to="rankings" replace />}></Route>
             <Route path="services/:serviceId" element={<ServiceDetail />} />
             <Route path="rankings" element={<Ranking />} />
-            <Route path="register" element={<Register />} />
-            <Route path="myDrawers" element={<MyDrawer />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="register" element={<Register />} />
+              <Route path="myDrawers" element={<MyDrawer />} />
+            </Route>
             <Route path="/drawer/newRelease" element={<NewRelease />} />
             <Route path="/drawer/starRanking" element={<StarRanking />} />
             <Route path=":providerId" element={<Provider />} />

@@ -1,10 +1,8 @@
-
 import { useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
 import { IcSearchLine } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-
 import { useTheme } from 'styled-components';
 
 import soomsil from '@/assets/soomsil_logo.svg';
