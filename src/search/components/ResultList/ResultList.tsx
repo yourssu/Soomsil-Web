@@ -45,7 +45,6 @@ export const ResultList = () => {
                     userId,
                     version: 1,
                     event: {
-                      platform: 'web',
                       name: 'searchResultClicked',
                       screen: 'SearchResult',
                       params: {
