@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { LogInState } from '@/home/recoil/LogInState';
@@ -19,15 +19,16 @@ export const PrivateRoute = ({
   const isLoggedIn = useRecoilValue(LogInState);
   const accessToken = api.getAccessToken();
   const resetUserInfo = useResetUserInfo();
+  const location = useLocation();
 
   useEffect(() => {
     if (!isLoggedIn || !accessToken) {
       resetUserInfo();
       if (isModalOpen) {
-        setDialog({ open: true, type: 'login' });
+        setDialog({ open: true, type: 'login', goBack: location.state?.from == undefined });
       }
     }
-  }, [isLoggedIn, accessToken, resetUserInfo, setDialog, isModalOpen]);
+  }, [isLoggedIn, accessToken, resetUserInfo, setDialog, isModalOpen, location]);
 
   if (!isLoggedIn || !accessToken) {
     if (isModalOpen) return;
