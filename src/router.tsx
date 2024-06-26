@@ -135,7 +135,7 @@ export const Router = () => {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/Signup" element={<Signup />}></Route>
-          <Route element={<PrivateRoute toPath="/login" />}>
+          <Route element={<PrivateRoute />}>
             <Route path="/Mypage" element={<Mypage />}></Route>
             <Route path="/changePassword" element={<ChangePassword />}></Route>
             <Route path="/withdraw" element={<Withdraw />}></Route>
@@ -145,7 +145,7 @@ export const Router = () => {
             <Route index element={<Navigate to="rankings" replace />}></Route>
             <Route path="services/:serviceId" element={<ServiceDetail />} />
             <Route path="rankings" element={<Ranking />} />
-            <Route element={<PrivateRoute toPath="/login" />}>
+            <Route element={<PrivateRoute />}>
               <Route path="register" element={<Register />} />
               <Route path="myDrawers" element={<MyDrawer />} />
             </Route>
