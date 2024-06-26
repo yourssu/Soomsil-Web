@@ -5,7 +5,7 @@ import { LogInState } from '@/home/recoil/LogInState';
 import { useResetUserInfo } from '@/hooks/useResetUserInfo';
 import { api } from '@/service/TokenService';
 
-export const PrivateRoute = (): React.ReactNode => {
+export const PrivateRoute = ({ toPath }: { toPath: string }): React.ReactNode => {
   const isLoggedIn = useRecoilValue(LogInState);
   const accessToken = api.getAccessToken();
 
@@ -13,7 +13,7 @@ export const PrivateRoute = (): React.ReactNode => {
 
   if (!isLoggedIn || !accessToken) {
     resetUserInfo();
-    return <Navigate to="/login" />;
+    return <Navigate to={toPath} />;
   }
   return <Outlet />;
 };
