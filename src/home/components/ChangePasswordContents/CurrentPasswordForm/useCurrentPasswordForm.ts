@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -18,37 +19,40 @@ export const useCurrentPasswordForm = ({
   setSessionToken,
   setPreviousPassword,
 }: CurrentPasswordFormProps) => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [isError, setIsError] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState<string>('');
+  const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
   const isLoggedIn = useRecoilValue(LogInState);
   const navigate = useNavigate();
 
-  const checkCurrentPassword = async () => {
+  const passwordMatchMutation = useMutation({
+    mutationFn: getUserPasswordMatch,
+    onSuccess: (data) => {
+      setSessionToken(data);
+      setPreviousPassword(currentPassword);
+      onConfirm();
+    },
+    onError: () => {
+      setIsPasswordError(true);
+    },
+  });
+
+  const checkCurrentPassword = () => {
     if (!isLoggedIn) {
       navigate('/Login');
       return;
     }
 
-    const { error, data } = await getUserPasswordMatch({
-      password: currentPassword,
-    });
-
-    if (data) {
-      setIsError(false);
-      setSessionToken(data as SessionTokenType);
-      setPreviousPassword(currentPassword);
-      onConfirm();
-    } else if (error) setIsError(true);
+    passwordMatchMutation.mutate(currentPassword);
   };
 
   const handlePasswordChange = (password: string) => {
-    if (isError) setIsError(false);
+    if (isPasswordError) setIsPasswordError(false);
     setCurrentPassword(password);
   };
 
   return {
     currentPassword,
-    isError,
+    isPasswordError,
     handlePasswordChange,
     checkCurrentPassword,
   };

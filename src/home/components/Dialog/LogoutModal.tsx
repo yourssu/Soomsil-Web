@@ -20,8 +20,8 @@ interface LogoutModalProps {
 }
 
 export const LogoutModal = ({ open, onOpenChange }: LogoutModalProps) => {
-  const navigate = useNavigate();
   const resetUserInfo = useResetUserInfo();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     resetUserInfo();

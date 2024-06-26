@@ -5,6 +5,8 @@ import {
   StyledContainer,
   StyledLink,
   StyledLogo,
+  StyledHiddenLogo,
+  StyledHiddenDiv,
 } from './ChangePasswordFrame.style';
 
 interface ChangePasswordFrameProps {
@@ -18,6 +20,9 @@ export const ChangePasswordFrame = ({ children }: ChangePasswordFrameProps) => {
         <StyledLogo src={Logo} alt="soomsil" />
       </StyledLink>
       <StyledContainer>{children}</StyledContainer>
+      <StyledHiddenDiv>
+        <StyledHiddenLogo />
+      </StyledHiddenDiv>
     </StyledChangePasswordFrame>
   );
 };
