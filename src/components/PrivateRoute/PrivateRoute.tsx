@@ -14,7 +14,7 @@ export const PrivateRoute = ({
 }: {
   toPath?: string;
   isModalOpen?: boolean;
-}): React.ReactNode => {
+}) => {
   const setDialog = useSetRecoilState(DialogState);
   const isLoggedIn = useRecoilValue(LogInState);
   const accessToken = api.getAccessToken();

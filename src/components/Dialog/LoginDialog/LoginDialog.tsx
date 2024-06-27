@@ -1,7 +1,7 @@
 import { DialogClose } from '@radix-ui/react-dialog';
 import { BoxButton } from '@yourssu/design-system-react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import Ppussung from '@/assets/defaultProfile.png';
 import { ProfileSvg } from '@/components/ProfileSvg/ProfileSVG';
@@ -11,7 +11,7 @@ import { StyledContainer, StyledButtonContainer, StyledTitle } from './LoginDial
 
 export const LoginDialog = () => {
   const navigate = useNavigate();
-  const [dialog] = useRecoilState(DialogState);
+  const dialog = useRecoilValue(DialogState);
 
   return (
     <StyledContainer>
