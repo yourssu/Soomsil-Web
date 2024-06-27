@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
-import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Loading } from '@/components/Loading/Loading';
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
@@ -13,33 +14,46 @@ import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
 import { registerFormDefaultValue } from '@/drawer/constants/registerFormDefaultValue.constant';
-import { usePostProduct } from '@/drawer/hooks/usePostProduct';
+import { usePutUpdateProduct } from '@/drawer/hooks/usePutUpdateProduct';
 import { RegisterFormValues } from '@/drawer/types/form.type';
 
 import {
-  StyledContainer,
   StyledImportText,
   StyledInputContainer,
+  StyledContainer as StyledRegisterContainer,
   StyledRightContainer,
-} from './Register.style';
+} from '../Register/Register.style';
 
-export const Register = () => {
+import { useLoadServiceDetailEffect } from './useLoadServiceDetailEffect';
+
+export const ServiceEdit = () => {
+  const { serviceId } = useParams();
+  const navigate = useNavigate();
   const methods = useForm<RegisterFormValues>({ defaultValues: registerFormDefaultValue });
 
   const [linkExist, setLinkExist] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
+  const registerProductMutation = usePutUpdateProduct(Number(serviceId));
 
   const validateLink = (name: string, value: string) => {
     return !value.startsWith(REGISTER_URL[name as keyof typeof REGISTER_URL]);
   };
 
-  const registerProductMutation = usePostProduct();
-
   const handleSubmit: SubmitHandler<RegisterFormValues> = (data) => {
     if (isChecked) {
-      registerProductMutation.mutate(data);
+      registerProductMutation.mutate(data, {
+        onSuccess: () => {
+          alert('서비스가 수정되었습니다.');
+          navigate(`/drawer/services/${serviceId}`);
+        },
+      });
     }
   };
+
+  useLoadServiceDetailEffect({
+    serviceId: Number(serviceId),
+    setValue: methods.setValue,
+  });
 
   useEffect(() => {
     if (methods.formState.errors) {
@@ -53,7 +67,7 @@ export const Register = () => {
 
   return (
     <FormProvider {...methods}>
-      <StyledContainer>
+      <StyledRegisterContainer>
         {registerProductMutation.isPending && <Loading />}
         <form onSubmit={methods.handleSubmit(handleSubmit)} id={'registerForm'}>
           <StyledInputContainer>
@@ -122,17 +136,18 @@ export const Register = () => {
 
           <StyledRightContainer>
             <BoxButton
+              type="submit"
               size={'medium'}
               variant={'filled'}
               rounding={4}
               width="8.125rem"
               disabled={registerProductMutation.isPending}
             >
-              {registerProductMutation.isPending ? '등록 중...' : '서비스 등록'}
+              {registerProductMutation.isPending ? '수정 중...' : '서비스 수정'}
             </BoxButton>
           </StyledRightContainer>
         </form>
-      </StyledContainer>
+      </StyledRegisterContainer>
     </FormProvider>
   );
 };
