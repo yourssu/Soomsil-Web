@@ -3,5 +3,5 @@ import { DIALOG } from '@/constants/dialog.constant';
 export interface DialogData {
   open: boolean;
   type: keyof typeof DIALOG;
-  goBack?: boolean;
+  redirectPath?: string | null;
 }

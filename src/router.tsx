@@ -145,7 +145,7 @@ export const Router = () => {
             <Route index element={<Navigate to="rankings" replace />}></Route>
             <Route path="services/:serviceId" element={<ServiceDetail />} />
             <Route path="rankings" element={<Ranking />} />
-            <Route element={<PrivateRoute isModalOpen={true} />}>
+            <Route element={<PrivateRoute isModalOpen={true} modalPath="/drawer" />}>
               <Route path="register" element={<Register />} />
               <Route path="myDrawers" element={<MyDrawer />} />
             </Route>

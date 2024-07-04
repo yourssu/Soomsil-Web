@@ -8,13 +8,17 @@ import { useResetUserInfo } from '@/hooks/useResetUserInfo';
 import { DialogState } from '@/recoil/DialogState';
 import { api } from '@/service/TokenService';
 
+interface PrivateRouteProps {
+  toPath?: string;
+  isModalOpen?: boolean;
+  modalPath?: string;
+}
+
 export const PrivateRoute = ({
   toPath = '/login',
   isModalOpen = false,
-}: {
-  toPath?: string;
-  isModalOpen?: boolean;
-}) => {
+  modalPath = '/',
+}: PrivateRouteProps) => {
   const setDialog = useSetRecoilState(DialogState);
   const isLoggedIn = useRecoilValue(LogInState);
   const accessToken = api.getAccessToken();
@@ -25,10 +29,14 @@ export const PrivateRoute = ({
     if (!isLoggedIn || !accessToken) {
       resetUserInfo();
       if (isModalOpen) {
-        setDialog({ open: true, type: 'login', goBack: location.state?.from == undefined });
+        setDialog({
+          open: true,
+          type: 'login',
+          redirectPath: location.state?.from == undefined ? modalPath : null,
+        });
       }
     }
-  }, [isLoggedIn, accessToken, resetUserInfo, setDialog, isModalOpen, location]);
+  }, [isLoggedIn, accessToken, resetUserInfo, setDialog, isModalOpen, modalPath, location]);
 
   if (!isLoggedIn || !accessToken) {
     if (isModalOpen) return;

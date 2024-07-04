@@ -38,7 +38,7 @@ export const LoginDialog = () => {
             variant="line"
             width="10.75rem"
             onClick={() => {
-              if (dialog && dialog.goBack) navigate(-1);
+              if (dialog && dialog.redirectPath) navigate(dialog.redirectPath);
             }}
           >
             아니오
