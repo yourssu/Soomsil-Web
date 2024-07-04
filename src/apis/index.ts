@@ -20,7 +20,7 @@ export const authClient = axios.create({
 });
 
 soomsilClient.interceptors.request.use((config) => {
-  if (config.headers && api.getRefreshToken()) {
+  if (config.headers && api.getAccessToken()) {
     config.headers.Authorization = `Bearer ${api.getAccessToken()}`;
   }
   return config;
