@@ -4,9 +4,9 @@ interface StyledContainerProps {
   $width: number;
 }
 export const StyledContainer = styled.div<StyledContainerProps>`
-  width: ${(props) => `${props.$width}rem`};
+  max-width: ${(props) => `${props.$width}rem`};
+  flex-direction: column;
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
   text-decoration: none;
   cursor: pointer;
@@ -18,7 +18,7 @@ interface StyledThumbnailProps {
   $borderRadius: number;
 }
 export const StyledThumbnail = styled.img<StyledThumbnailProps>`
-  width: ${(props) => `${props.$width}rem`};
+  max-width: ${(props) => `${props.$width}rem`};
   height: ${(props) => `${props.$height}rem`};
   border-radius: ${(props) => `${props.$borderRadius}rem`};
   box-shadow:

@@ -20,7 +20,7 @@ export const StyledRankingContainer = styled.section<StyledRankingCategoryContai
 
 export const StyledCardContainer = styled.section`
   display: grid;
-  grid-template-columns: repeat(3, 25.5rem);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.75rem;
   margin-top: 2rem;
 `;

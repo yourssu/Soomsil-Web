@@ -15,13 +15,20 @@ export const BigDrawerCard = ({
   return (
     <Card link={link} onClick={onClick}>
       <Card.BigThumbnail imgSrc={bigImgSrc} />
-      <Card.SmallThumbnail imgSrc={smallImgSrc} />
-      <Card.Content
-        title={title}
-        body={body}
-        bookmarkCount={bookmarkCount}
-        isBookmarked={isBookmarked}
-      />
+      <div
+        style={{
+          display: 'flex',
+          gap: '1rem',
+        }}
+      >
+        <Card.SmallThumbnail imgSrc={smallImgSrc} />
+        <Card.Content
+          title={title}
+          body={body}
+          bookmarkCount={bookmarkCount}
+          isBookmarked={isBookmarked}
+        />
+      </div>
     </Card>
   );
 };
