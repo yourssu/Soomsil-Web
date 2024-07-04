@@ -14,25 +14,22 @@ import {
 } from './OverviewImage.style';
 
 export const OverviewImage = () => {
-  const { register, formState, setValue } = useFormContext();
+  const { register, formState, getValues, setValue, watch } = useFormContext();
+  const formFiles: File[] = watch('introductionImages');
 
-  const [files, setFiles] = useState<File[]>([]);
   const [isWarned, setIsWarned] = useState(false);
-
   const multiFileRef = useRef<HTMLInputElement | null>(null);
 
   const MAX_FILE_COUNT = 5;
 
   const handleFileChange = (file: File | undefined, index: number) => {
-    setFiles((prevFiles) => {
-      const newFiles = [...prevFiles];
-      if (file && ALLOWED_IMAGE_TYPE.includes(file.type)) {
-        newFiles[index] = file;
-      } else {
-        alert('이미지 포맷은 jpg, jpeg, png, gif 중 하나여야 합니다.');
-      }
-      return newFiles;
-    });
+    const newFiles = [...getValues('introductionImages')];
+    if (file && ALLOWED_IMAGE_TYPE.includes(file.type)) {
+      newFiles[index] = file;
+    } else {
+      alert('이미지 포맷은 jpg, jpeg, png, gif 중 하나여야 합니다.');
+    }
+    setValue('introductionImages', newFiles);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -43,24 +40,21 @@ export const OverviewImage = () => {
   };
 
   const handleDeleteFile = (index: number) => {
-    setFiles((prevFiles) => {
-      const newFiles = prevFiles.filter((_, i) => i !== index);
-      return newFiles;
-    });
+    const prevFiles = getValues('introductionImages');
+    const newFiles = [...prevFiles].filter((_, i) => i !== index);
+    setValue('introductionImages', newFiles);
   };
 
   useEffect(() => {
-    if (formState.isSubmitted && files.length === 0) setIsWarned(true);
-    if (files.length) setIsWarned(false);
-  }, [files, formState]);
+    if (formState.isSubmitted && formFiles.length === 0) setIsWarned(true);
+    if (formFiles.length) setIsWarned(false);
+  }, [formFiles, formState]);
 
   useEffect(() => {
     const dataTransfer = new DataTransfer();
-    files.forEach((file) => dataTransfer.items.add(file));
+    formFiles.forEach((file) => dataTransfer.items.add(file));
     multiFileRef.current!.files = dataTransfer.files;
-
-    setValue('introductionImages', files);
-  }, [files, setValue]);
+  }, [formFiles]);
 
   return (
     <StyledOverviewContainer>
@@ -77,7 +71,7 @@ export const OverviewImage = () => {
           hidden
         />
         {Array.from({ length: MAX_FILE_COUNT }).map((_, index) => {
-          const file = files[index];
+          const file = formFiles[index];
           const key = file ? `file-${file.name}-${file.lastModified}` : `file-empty-${index}`;
           return (
             <OverviewFileUpload

@@ -7,7 +7,7 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { EMAIL_DOMAIN } from '@/constants/email.constant';
+import { EMAIL_DOMAIN, MAIL_SEARCH_URL } from '@/constants/email.constant';
 import { StyledSignupContentTitle } from '@/home/components/SignupContents/SignupContents.style';
 import { SignupFrame } from '@/home/components/SignupFrame/SignupFrame';
 import { usePostLogin } from '@/home/hooks/usePostLogin';
@@ -29,8 +29,6 @@ interface LoginFormStates {
 
 export const Login = () => {
   const { register, handleSubmit } = useForm<LoginFormStates>();
-  const MAIL_SEARCH_URL = 'https://gw.ssu.ac.kr/o365Userlogin.aspx';
-
   const navigate = useNavigate();
   const parseFullEmail = useParseFullEmail();
   const loginMutation = usePostLogin();

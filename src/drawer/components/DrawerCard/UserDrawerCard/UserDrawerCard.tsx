@@ -48,6 +48,7 @@ export const UserDrawerCard = ({
           isBookmarked={isBookmarked}
         />
         <CardSettingDropdownMenu
+          productNo={productNo}
           open={isCardSettingClicked}
           onOpenChange={setIsCardSettingClicked}
           onClickRemoveButton={handleClickRemoveButton}

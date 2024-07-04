@@ -30,3 +30,11 @@ export const StyledEmailSuffix = styled.div`
 export const StyledEmailFieldWrapper = styled.div`
   ${({ theme }) => theme.typo.body1};
 `;
+
+export const StyledLink = styled.a`
+  ${({ theme }) => theme.typo.button3};
+  color: inherit;
+  &:visited {
+    color: inherit;
+  }
+`;

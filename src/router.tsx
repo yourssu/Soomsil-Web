@@ -43,6 +43,11 @@ const ServiceDetail = lazy(() =>
     default: ServiceDetail,
   }))
 );
+const ServiceEdit = lazy(() =>
+  import('./drawer/pages/ServiceEdit/ServiceEdit').then(({ ServiceEdit }) => ({
+    default: ServiceEdit,
+  }))
+);
 const StarRanking = lazy(() =>
   import('./drawer/pages/StarRanking/StarRanking').then(({ StarRanking }) => ({
     default: StarRanking,
@@ -143,6 +148,7 @@ export const Router = () => {
           </Route>
           <Route path="/drawer" element={<DrawerLayout />}>
             <Route index element={<Navigate to="rankings" replace />}></Route>
+            <Route path="services/:serviceId/edit" element={<ServiceEdit />} />
             <Route path="services/:serviceId" element={<ServiceDetail />} />
             <Route path="rankings" element={<Ranking />} />
             <Route element={<PrivateRoute isModalOpen={true} modalPath="/drawer" />}>
