@@ -29,6 +29,7 @@ declare global {
   interface Window {
     Android: {
       getAccessToken: () => void;
+      onRegisterSuccess: () => void;
     };
     webkit: {
       messageHandlers: {
@@ -58,6 +59,12 @@ export const Register = () => {
     if (isChecked) {
       registerProductMutation.mutate(data, {
         onSuccess: () => {
+          if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios) {
+            window.webkit.messageHandlers.ios.postMessage('onRegisterSuccess');
+          } else if (window.Android && window.Android.onRegisterSuccess) {
+            window.Android.onRegisterSuccess();
+          }
+
           navigate('/drawer/myDrawers');
         },
       });
