@@ -1,11 +1,12 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 
+import { useColorTheme } from '@yourssu/design-system-react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Fallback } from '@/components/Fallback/Fallback';
+import { PrivateRoute } from '@/components/PrivateRoute/PrivateRoute';
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar';
-import { usePrivateRoute } from '@/hooks/usePrivateRoute';
 
 const Search = lazy(() =>
   import('./search/pages/Search/Search').then(({ Search }) => ({
@@ -104,6 +105,11 @@ export const Router = () => {
     isAnimating: false,
     key: 0,
   });
+  const { setTheme } = useColorTheme();
+
+  useEffect(() => {
+    setTheme('light');
+  }, [setTheme]);
 
   useEffect(() => {
     setState((prevState) => ({
@@ -117,8 +123,6 @@ export const Router = () => {
       }));
     };
   }, []);
-
-  const { PrivateRoute } = usePrivateRoute();
 
   return (
     <ErrorBoundary fallbackRender={(fallbackProps) => <Fallback {...fallbackProps} />}>
@@ -136,18 +140,18 @@ export const Router = () => {
           <Route path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/Signup" element={<Signup />}></Route>
+          <Route path="/resetPassword" element={<ResetPassword />}></Route>
           <Route element={<PrivateRoute />}>
             <Route path="/Mypage" element={<Mypage />}></Route>
             <Route path="/changePassword" element={<ChangePassword />}></Route>
             <Route path="/withdraw" element={<Withdraw />}></Route>
-            <Route path="/resetPassword" element={<ResetPassword />}></Route>
           </Route>
           <Route path="/drawer" element={<DrawerLayout />}>
             <Route index element={<Navigate to="rankings" replace />}></Route>
             <Route path="services/:serviceId/edit" element={<ServiceEdit />} />
             <Route path="services/:serviceId" element={<ServiceDetail />} />
             <Route path="rankings" element={<Ranking />} />
-            <Route element={<PrivateRoute />}>
+            <Route element={<PrivateRoute isModalOpen={true} modalPath="/drawer" />}>
               <Route path="register" element={<Register />} />
               <Route path="myDrawers" element={<MyDrawer />} />
             </Route>

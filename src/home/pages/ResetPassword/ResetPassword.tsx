@@ -15,10 +15,10 @@ type ResetPasswordFunnelStepsType =
   | '비밀번호재설정완료';
 
 export const ResetPassword = () => {
-  useRedirectLoggedInEffect();
-
   const [Funnel, setStep] = useFunnel<ResetPasswordFunnelStepsType>('이메일입력');
   const [email, setEmail] = useState('');
+
+  useRedirectLoggedInEffect();
 
   return (
     <ResetPasswordFrame>
