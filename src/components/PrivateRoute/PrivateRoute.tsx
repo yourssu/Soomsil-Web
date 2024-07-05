@@ -32,7 +32,7 @@ export const PrivateRoute = ({
         setDialog({
           open: true,
           type: 'login',
-          redirectPath: location.state?.from == undefined ? modalPath : null,
+          redirectPath: location.state?.from || modalPath,
         });
       }
     }
