@@ -9,18 +9,14 @@ export const StyledServiceDetailContainer = styled.div`
   padding-bottom: 10rem;
 `;
 
-interface StyledBackgroundImageContainerProps {
-  $backgroundImage: string;
-}
-
-export const StyledBackgroundImageContainer = styled.div<StyledBackgroundImageContainerProps>`
+export const StyledBackgroundContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 55vh;
   justify-content: flex-end;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(${(props) => props.$backgroundImage});
+  background-color: #1d2023;
+
   padding-left: 17vw;
   padding-bottom: 5vh;
 
