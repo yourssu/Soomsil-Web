@@ -7,7 +7,7 @@ import { CategoryObj } from '@/drawer/constants/category.constant';
 import { useGetProductDetail } from '@/drawer/hooks/useGetProductDetail';
 
 import {
-  StyledBackgroundImageContainer,
+  StyledBackgroundContainer,
   StyledCategoryContainer,
   StyledCategoryHintText,
   StyledCategoryText,
@@ -25,7 +25,7 @@ export const ServiceDetail = () => {
 
   return (
     <StyledServiceDetailContainer>
-      <StyledBackgroundImageContainer $backgroundImage={product.thumbnail}>
+      <StyledBackgroundContainer>
         <StyledServiceTitleText>{product.productTitle}</StyledServiceTitleText>
         <StyledServiceDeveloperText>{product.providerName}</StyledServiceDeveloperText>
         <StyledServiceInfoContainer>
@@ -36,7 +36,7 @@ export const ServiceDetail = () => {
           </StyledCategoryContainer>
         </StyledServiceInfoContainer>
         <ServiceAction product={product} />
-      </StyledBackgroundImageContainer>
+      </StyledBackgroundContainer>
       <StyledLowerSection>
         <Description product={product} />
         <MoreProductSection providerId={product.providerId} />
