@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { BoxButton } from '@yourssu/design-system-react';
-import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { Loading } from '@/components/Loading/Loading';
 import { CategoryWithoutAll } from '@/drawer/components/CategoryWithoutAll/CategoryWithoutAll';
@@ -15,6 +16,7 @@ import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
 import { registerFormDefaultValue } from '@/drawer/constants/registerFormDefaultValue.constant';
 import { usePostProduct } from '@/drawer/hooks/usePostProduct';
 import { RegisterFormValues } from '@/drawer/types/form.type';
+import { api } from '@/service/TokenService';
 
 import {
   StyledContainer,
@@ -23,8 +25,26 @@ import {
   StyledRightContainer,
 } from './Register.style';
 
+declare global {
+  interface Window {
+    Android: {
+      getAccessToken: () => void;
+      onRegisterSuccess: () => void;
+    };
+    webkit: {
+      messageHandlers: {
+        ios: {
+          postMessage: (message: string) => void;
+        };
+      };
+    };
+    setAccessToken: (token: string) => void;
+  }
+}
+
 export const Register = () => {
   const methods = useForm<RegisterFormValues>({ defaultValues: registerFormDefaultValue });
+  const navigate = useNavigate();
 
   const [linkExist, setLinkExist] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
@@ -37,9 +57,35 @@ export const Register = () => {
 
   const handleSubmit: SubmitHandler<RegisterFormValues> = (data) => {
     if (isChecked) {
-      registerProductMutation.mutate(data);
+      registerProductMutation.mutate(data, {
+        onSuccess: () => {
+          if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios) {
+            window.webkit.messageHandlers.ios.postMessage('onRegisterSuccess');
+          } else if (window.Android && window.Android.onRegisterSuccess) {
+            window.Android.onRegisterSuccess();
+          }
+
+          navigate('/drawer/myDrawers');
+        },
+      });
     }
   };
+
+  useEffect(() => {
+    const getAccessTokenFromNative = () => {
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios) {
+        window.webkit.messageHandlers.ios.postMessage('getAccessToken');
+      } else if (window.Android && window.Android.getAccessToken) {
+        window.Android.getAccessToken();
+      }
+    };
+
+    window.setAccessToken = (accessToken: string) => {
+      api.setAccessToken(accessToken, Date.now() + 60 * 60 * 1000);
+    };
+
+    getAccessTokenFromNative();
+  }, []);
 
   useEffect(() => {
     if (methods.formState.errors) {
