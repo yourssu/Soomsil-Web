@@ -39,7 +39,7 @@ export const StyledBetweenContainer = styled.div`
 `;
 
 export const StyledImage = styled.img`
-  width: auto;
+  width: 100%;
   height: 22.125rem;
   border-radius: 0.5rem;
   object-fit: cover;
