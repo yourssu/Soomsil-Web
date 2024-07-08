@@ -23,20 +23,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build application
-        run: pnpm run build
-
       - name: Set Environment Variables
+        run: |
+          echo "VITE_API_SOOMSIL_URL=$VITE_API_SOOMSIL_URL" >> .env.production
+          echo "VITE_API_AUTH_URL=$VITE_API_AUTH_URL" >> .env.production
+          echo "VITE_API_SEARCH_URL=$VITE_API_SEARCH_URL" >> .env.production
+          echo "VITE_API_YLS_URL=$VITE_API_YLS_URL" >> .env.production
         env:
           VITE_API_SOOMSIL_URL: ${{ secrets.VITE_API_SOOMSIL_URL }}
           VITE_API_AUTH_URL: ${{ secrets.VITE_API_AUTH_URL }}
           VITE_API_SEARCH_URL: ${{ secrets.VITE_API_SEARCH_URL }}
           VITE_API_YLS_URL: ${{ secrets.VITE_API_YLS_URL }}
-        run: |
-          echo "VITE_API_SOOMSIL_URL=${VITE_API_SOOMSIL_URL}" >> .env.production
-          echo "VITE_API_AUTH_URL=${VITE_API_AUTH_URL}" >> .env.production
-          echo "VITE_API_SEARCH_URL=${VITE_API_SEARCH_URL}" >> .env.production
-          echo "VITE_API_YLS_URL=${VITE_API_YLS_URL}" >> .env.production
+
+      - name: Build application
+        run: pnpm run build
 
       - name: Deploy to s3
         env:
