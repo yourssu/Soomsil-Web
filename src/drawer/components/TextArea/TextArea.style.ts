@@ -66,6 +66,8 @@ export const StyledTextArea = styled.textarea<StyledTextAreaProps>`
   }
 
   ${({ theme }) => theme.typo.button4};
+
+  background-color: white;
   color: ${({ $isWarned, theme }) =>
     $isWarned ? theme.color.buttonWarned : theme.color.textSecondary};
 

@@ -64,6 +64,7 @@ export const StyledHeaderSearchContainer = styled.div`
 
 export const StyledHeaderSearchInput = styled.input`
   width: 100%;
+  color: ${({ theme }) => theme.color.textPrimary};
   height: 1.25rem;
   border: none;
   outline: none;
