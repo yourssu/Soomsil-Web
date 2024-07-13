@@ -4,6 +4,7 @@ import {
   StyledPasswordContainer,
   StyledSubTitleText,
   StyledTitleText,
+  StyledForm,
 } from './ResetPasswordInput.style';
 import { useResetPasswordInput } from './useResetPasswordInput';
 
@@ -24,7 +25,7 @@ export const ResetPasswordInput = ({ email, onConfirm }: ResetPasswordProps) => 
   } = useResetPasswordInput({ email, onConfirm });
 
   return (
-    <>
+    <StyledForm onSubmit={handleSubmit(handleOnSubmit)}>
       <StyledTitleText>비밀번호 재설정</StyledTitleText>
       <StyledSubTitleText>새로운 비밀번호를 입력해주세요.</StyledSubTitleText>
       <StyledPasswordContainer>
@@ -57,6 +58,6 @@ export const ResetPasswordInput = ({ email, onConfirm }: ResetPasswordProps) => 
       >
         비밀번호 재설정 완료
       </BoxButton>
-    </>
+    </StyledForm>
   );
 };
