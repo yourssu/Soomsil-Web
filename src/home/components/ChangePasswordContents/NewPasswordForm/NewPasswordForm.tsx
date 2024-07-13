@@ -13,13 +13,14 @@ import {
 } from './NewPasswordForm.style';
 
 export const NewPasswordForm = (props: NewPasswordFormProps) => {
-  const { isFirstRender, register, passwordValidate, errors, onSubmit } = useNewPasswordForm(props);
+  const { isFirstRender, register, passwordValidate, errors, onSubmit, handleSubmit } =
+    useNewPasswordForm(props);
 
   const isInvalidPassword = !isFirstRender && !!errors.newPassword;
   const isValidPassword = !isFirstRender && !errors.newPassword;
 
   return (
-    <StyledBoxContainer>
+    <StyledBoxContainer onSubmit={handleSubmit(onSubmit)}>
       <StyledTitle>비밀번호 변경</StyledTitle>
       <StyledInputContainer>
         <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>

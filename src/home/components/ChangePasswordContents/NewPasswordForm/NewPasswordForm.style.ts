@@ -1,20 +1,11 @@
-import { SimpleTextField } from '@yourssu/design-system-react';
 import styled from 'styled-components';
-
-export const StyledContainer = styled.article`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-`;
 
 export const StyledButtonContainer = styled.section`
   display: flex;
   flex-direction: column;
 `;
 
-export const StyledBoxContainer = styled.section`
+export const StyledBoxContainer = styled.form`
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
   justify-content: center;
@@ -61,20 +52,4 @@ export const StyledInputAnimation = styled.article`
     max-height: 150px;
     transition-delay: 0s;
   }
-`;
-
-export const StyledInput = styled(SimpleTextField)`
-  width: 100%;
-  height: 3rem;
-`;
-
-export const StyledErrorMessageContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  ${({ theme }) => theme.typo.caption1};
-  color: ${({ theme }) => theme.color.textWarned};
-`;
-
-export const StyledLogo = styled.img`
-  width: 180px;
 `;

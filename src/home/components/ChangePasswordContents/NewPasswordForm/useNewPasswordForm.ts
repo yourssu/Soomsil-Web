@@ -20,6 +20,7 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
     getValues,
     setValue,
     setError,
+    handleSubmit,
   } = useForm({
     mode: 'onChange',
   });
@@ -77,5 +78,6 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
     onSubmit,
     passwordValidate,
     errors,
+    handleSubmit,
   };
 };
