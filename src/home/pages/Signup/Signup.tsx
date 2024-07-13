@@ -7,6 +7,7 @@ import { SignupEnd } from '@/home/components/SignupContents/SignupEnd/SignupEnd'
 import { SignupForm } from '@/home/components/SignupContents/SignupForm/SignupForm';
 import { SignupFrame } from '@/home/components/SignupFrame/SignupFrame';
 import { useFunnel } from '@/hooks/useFunnel.tsx';
+import { useRedirectLoggedInEffect } from '@/hooks/useRedirectLoggedInEffect';
 
 type SignupFunnelStepsType =
   | '약관동의'
@@ -18,6 +19,8 @@ type SignupFunnelStepsType =
 export const Signup = () => {
   const [Funnel, setStep] = useFunnel<SignupFunnelStepsType>('약관동의');
   const [email, setEmail] = useState('');
+
+  useRedirectLoggedInEffect();
 
   return (
     <SignupFrame>

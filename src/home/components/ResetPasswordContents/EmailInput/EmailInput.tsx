@@ -3,7 +3,7 @@ import { BoxButton, SuffixTextField } from '@yourssu/design-system-react';
 import { EMAIL_DOMAIN } from '@/constants/email.constant';
 
 import { StyledEmailContainer, StyledSubTitleText, StyledTitleText } from './EmailInput.style';
-import { useEmailInput } from './useEmailInputForm';
+import { useEmailInputForm } from './useEmailInputForm';
 
 interface EmailInputProps {
   email: string;
@@ -11,7 +11,7 @@ interface EmailInputProps {
 }
 
 export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
-  const { register, handleSubmit, errors, isSubmitting, handleOnSubmit } = useEmailInput({
+  const { register, handleSubmit, errors, isSubmitting, handleOnSubmit } = useEmailInputForm({
     email,
     onConfirm,
   });

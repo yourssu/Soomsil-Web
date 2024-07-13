@@ -19,20 +19,14 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 export const TextArea = ({ title, description, name, ...props }: TextAreaProps) => {
-  const { register, formState, getValues } = useFormContext();
+  const { register, formState, watch } = useFormContext();
 
-  const [textAreaValue, setTextAreaValue] = useState('');
+  const textAreaValue = watch(name, '');
   const [isWarned, setIsWarned] = useState(false);
 
-  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setIsWarned(false);
-    setTextAreaValue(event.target.value);
-  };
-
   useEffect(() => {
-    const value = getValues(name);
-    if (formState.isSubmitted && !value) setIsWarned(true);
-  }, [formState, getValues, name]);
+    if (formState.isSubmitted && !textAreaValue) setIsWarned(true);
+  }, [formState, textAreaValue]);
 
   return (
     <StyledContainer>
@@ -44,10 +38,13 @@ export const TextArea = ({ title, description, name, ...props }: TextAreaProps) 
       </StyledLabelContainer>
       <StyledTextAreaContainer>
         <StyledTextArea
-          {...register(name, { required: props.required })}
+          {...register(name, {
+            required: props.required,
+            onChange: () => {
+              setIsWarned(false);
+            },
+          })}
           id={title}
-          value={textAreaValue}
-          onChange={handleTextAreaChange}
           rows={8}
           $isWarned={isWarned}
           $hasText={textAreaValue.length > 0}

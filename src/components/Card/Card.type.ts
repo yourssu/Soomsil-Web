@@ -2,6 +2,7 @@ export interface CardContainerProps {
   children: React.ReactNode;
   link: string;
   width?: number;
+  onClick?: (event: React.MouseEvent) => void;
 }
 
 export interface CardContentProps {

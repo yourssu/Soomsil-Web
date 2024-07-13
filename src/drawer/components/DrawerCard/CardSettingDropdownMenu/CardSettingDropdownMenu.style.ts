@@ -13,6 +13,7 @@ export const StyledSettingDropdownContent = styled(DropdownMenu.Content)`
   border: 1px solid ${({ theme }) => theme.color.borderThin};
   border-radius: 0.25rem;
   box-shadow: 0px 1px 3px 0px rgba(107, 114, 128, 0.4);
+  background-color: ${({ theme }) => theme.color.bgNormal};
 `;
 
 export const StyledSettingDropdownItem = styled(DropdownMenu.Item)`

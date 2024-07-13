@@ -1,4 +1,4 @@
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
+import { InfiniteData, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { getNewRelease } from '@/drawer/apis/getNewRelease';
 
@@ -9,7 +9,7 @@ import { ProductResponses, ProductResult } from '../types/product.type';
 type ProductRequestParamsWithoutPage = Omit<ProductRequestParams, 'page'>;
 
 export const useGetNewRelease = ({ responseType, category }: ProductRequestParamsWithoutPage) => {
-  return useInfiniteQuery<
+  return useSuspenseInfiniteQuery<
     ProductResponses[],
     Error,
     InfiniteData<ProductResult[], number>,

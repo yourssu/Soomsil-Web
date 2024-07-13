@@ -20,6 +20,8 @@ interface StyledInputProps {
 
 export const StyledInput = styled.input<StyledInputProps>`
   ${(props) => props.theme.typo.title2};
+  color: ${({ theme }) => theme.color.textPrimary};
+  background-color: ${({ theme }) => theme.color.bgNormal};
   width: ${(props) => (props.$inputSize == 'large' ? '41.188rem' : '33.063rem')};
   height: 1.938rem;
   border: none;

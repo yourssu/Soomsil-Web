@@ -10,6 +10,7 @@ export const StyledResultListItem = styled.section`
   border-radius: 0.75rem;
   padding: 1.5rem;
   border: 0.063rem ${(props) => props.theme.color.borderNormal} solid;
+  cursor: pointer;
 `;
 
 interface StyledContentProps {

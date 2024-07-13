@@ -28,10 +28,13 @@ import {
   CardThumbnailProps,
 } from './Card.type';
 
-const CardContainer = ({ children, link, width = 25.5 }: CardContainerProps) => {
+const CardContainer = ({ children, link, width = 25.5, onClick }: CardContainerProps) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
+    if (onClick) {
+      onClick(event);
+    }
     navigate(link);
   };
 

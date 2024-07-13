@@ -1,6 +1,6 @@
 import { BoxButton, PlainButton, SuffixTextField } from '@yourssu/design-system-react';
 
-import { EMAIL_DOMAIN } from '@/constants/email.constant';
+import { EMAIL_DOMAIN, MAIL_SEARCH_URL } from '@/constants/email.constant';
 import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
 import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm.ts';
 import { usePreventDuplicateClick } from '@/hooks/usePreventDuplicateClick.ts';
@@ -14,6 +14,7 @@ import {
 import {
   StyledButtonsContainer,
   StyledEmailFieldWrapper,
+  StyledLink,
   StyledPlainButtonWrapper,
   StyledTextFieldLabel,
 } from './EmailForm.style';
@@ -42,7 +43,11 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
       <StyledButtonsContainer>
         <StyledPlainButtonWrapper>
           <PlainButton type="button" size="medium" isPointed={false} isWarned={false}>
-            <StyledSignupButtonText>학교 메일 찾기</StyledSignupButtonText>
+            <StyledSignupButtonText>
+              <StyledLink href={MAIL_SEARCH_URL} target="_blank" rel="noopener noreferrer">
+                학교 메일 찾기
+              </StyledLink>
+            </StyledSignupButtonText>
           </PlainButton>
         </StyledPlainButtonWrapper>
         <BoxButton

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { IcPlusLine, IconContext } from '@yourssu/design-system-react';
 import { useFormContext } from 'react-hook-form';
@@ -20,10 +20,11 @@ interface StyledThumbnailProps {
 }
 
 export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
-  const { register, formState, getValues, setValue } = useFormContext();
-  const { onChange, ref } = register(name, { required: true });
+  const { register, formState, setValue, watch } = useFormContext();
 
-  const [postImg, setPostImg] = useState<File | null>();
+  const thumbnailFile: File[] = watch(name);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const [isPreview, setIsPreview] = useState<string | null>('');
   const [isWarned, setIsWarned] = useState<boolean>(false);
 
@@ -33,32 +34,39 @@ export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
     if (event.target.files !== null) {
       const file = event.target.files[0];
       if (file && ALLOWED_IMAGE_TYPE.includes(file.type)) {
-        setPostImg(file);
+        setValue(name, [file]);
       } else {
         alert('이미지 포맷은 jpg, jpeg, png, gif 중 하나여야 합니다.');
-        setValue(name, null);
-        setPostImg(null);
+        setValue(name, []);
       }
     }
   };
 
   useEffect(() => {
-    if (postImg) {
+    if (thumbnailFile[0]) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setIsPreview(reader.result as string);
       };
-      reader.readAsDataURL(postImg);
+      reader.readAsDataURL(thumbnailFile[0]);
       setIsWarned(false);
     } else {
       setIsPreview(null);
     }
-  }, [postImg]);
+  }, [thumbnailFile]);
 
   useEffect(() => {
-    const value = getValues(name);
-    if (formState.isSubmitted && !value.length) setIsWarned(true);
-  }, [formState, getValues, name]);
+    if (!inputRef.current) return;
+    if (!thumbnailFile.length) return;
+
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(thumbnailFile[0]);
+    inputRef.current.files = dataTransfer.files;
+  }, [thumbnailFile, inputRef]);
+
+  useEffect(() => {
+    if (formState.isSubmitted && !thumbnailFile.length) setIsWarned(true);
+  }, [formState, thumbnailFile]);
 
   return (
     <StyledThumbnailContainer>
@@ -67,15 +75,16 @@ export const ThumbnailInput = ({ name }: StyledThumbnailProps) => {
         <StyledThumbnailDescription>(권장 : 1024px X 1024px)</StyledThumbnailDescription>
       </StyledThumbnailTitleContainer>
       <input
+        {...register(name, {
+          required: true,
+          onChange: (e) => {
+            handleChangeImg(e);
+          },
+        })}
+        ref={inputRef}
         id="inputFile"
         type="file"
         accept=".jpg, .jpeg, .png, .gif"
-        onChange={(event) => {
-          handleChangeImg(event);
-          onChange(event);
-        }}
-        name={name}
-        ref={ref}
         style={{ display: 'none' }}
       />
       <StyledThumbnailNone htmlFor="inputFile">

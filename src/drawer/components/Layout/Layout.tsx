@@ -6,7 +6,6 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
-import { MobileRegisterHeader } from '../Header/MobileRegisterHeader';
 
 import { StyledLayout } from './Layout.style';
 
@@ -18,7 +17,7 @@ export const Layout = () => {
 
   return (
     <StyledLayout>
-      {isMobileRegisterRoute ? <MobileRegisterHeader /> : <Header />}
+      {isMobileRegisterRoute ? null : <Header />}
       <ErrorBoundary
         fallbackRender={(fallbackProps) => <Fallback {...fallbackProps} />}
         resetKeys={[location.pathname]}
