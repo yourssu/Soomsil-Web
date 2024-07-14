@@ -72,7 +72,7 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
     postChangePassword.mutate({
       email: currentUser.email,
       newPassword,
-      sessionToken,
+      sessionToken: sessionToken.sessionToken,
     });
   };
 
