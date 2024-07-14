@@ -16,8 +16,8 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
   const { isFirstRender, register, passwordValidate, errors, onSubmit, handleSubmit } =
     useNewPasswordForm(props);
 
-  const isInvalidPassword = !isFirstRender && !!errors.newPassword;
-  const isValidPassword = !isFirstRender && !errors.newPassword;
+  const isInvalidPassword = !isFirstRender && !!errors.password;
+  const isValidPassword = !isFirstRender && !errors.password;
 
   return (
     <StyledBoxContainer onSubmit={handleSubmit(onSubmit)}>
@@ -26,18 +26,18 @@ export const NewPasswordForm = (props: NewPasswordFormProps) => {
         <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>
         <PasswordTextField
           placeholder="숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요"
-          {...register('newPassword', {
+          {...register('password', {
             validate: passwordValidate,
           })}
           isNegative={isInvalidPassword}
-          helperLabel={isInvalidPassword ? (errors.newPassword?.message as string) : ''}
+          helperLabel={isInvalidPassword ? (errors.password?.message as string) : ''}
         />
         <StyledInputAnimation className={isValidPassword ? 'active' : ''}>
           <StyledInputTitle>비밀번호를 한번 더 입력해주세요.</StyledInputTitle>
           <PasswordTextField
-            {...register('newPasswordCheck')}
-            isNegative={!!errors.newPasswordCheck}
-            helperLabel={errors.newPasswordCheck?.message as string | undefined}
+            {...register('confirmPassword')}
+            isNegative={!!errors.confirmPassword}
+            helperLabel={errors.confirmPassword?.message as string | undefined}
           />
         </StyledInputAnimation>
       </StyledInputContainer>

@@ -8,7 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { useGetUserData } from '@/home/hooks/useGetUserData';
 import { usePostChangePassword } from '@/home/hooks/usePostChangePassword';
 import { LogInState } from '@/home/recoil/LogInState';
-import { NewPasswordFormProps } from '@/home/types/password.type';
+import { NewPasswordFormProps, FormData } from '@/home/types/password.type';
 
 export const useNewPasswordForm = (props: NewPasswordFormProps) => {
   const { sessionToken, previousPassword } = props;
@@ -21,16 +21,21 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
     setValue,
     setError,
     handleSubmit,
-  } = useForm({
+  } = useForm<FormData>({
     mode: 'onChange',
   });
 
   const isLoggedIn = useRecoilValue(LogInState);
   const { data: currentUser } = useGetUserData();
   const navigate = useNavigate();
-  const postChangePassword = usePostChangePassword();
+  const postChangePassword = usePostChangePassword({
+    onSuccessFunction: () => {
+      navigate('/MyPage');
+    },
+    setError,
+  });
 
-  const newPassword = watch('newPassword');
+  const newPassword = watch('password');
 
   useEffect(() => {
     setIsFirstRender(!newPassword || newPassword.length < 8);
@@ -38,21 +43,21 @@ export const useNewPasswordForm = (props: NewPasswordFormProps) => {
 
   const passwordValidate = (newPassword: string) => {
     if (newPassword === previousPassword) {
-      setValue('newPasswordCheck', '');
+      setValue('confirmPassword', '');
       return '현재 비밀번호와 다른 비밀번호를 입력해주세요.';
     }
 
     if (hasNumberAndEnglishWithSymbols(newPassword) && newPassword.length <= 100) return true;
 
-    setValue('newPasswordCheck', '');
+    setValue('confirmPassword', '');
     return '숫자, 영문자, 특수문자 조합으로 8자 이상 입력해주세요.';
   };
 
   const onSubmit = () => {
-    const newPasswordCheck = getValues('newPasswordCheck');
+    const confirmPassword = getValues('confirmPassword');
 
-    if (newPassword !== newPasswordCheck) {
-      setError('newPasswordCheck', {
+    if (newPassword !== confirmPassword) {
+      setError('confirmPassword', {
         type: 'manual',
         message: '비밀번호가 일치하지 않습니다.',
       });
