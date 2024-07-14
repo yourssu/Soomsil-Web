@@ -3,16 +3,12 @@ import { useForm } from 'react-hook-form';
 
 import { STORAGE_KEYS } from '@/constants/storage.constant';
 import { usePostChangePassword } from '@/home/hooks/usePostChangePassword';
+import { FormData } from '@/home/types/password.type';
 import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 interface UseResetPasswordInputProps {
   email: string;
   onConfirm: () => void;
-}
-
-interface FormData {
-  password: string;
-  confirmPassword: string;
 }
 
 export const useResetPasswordInput = ({ email, onConfirm }: UseResetPasswordInputProps) => {

@@ -15,5 +15,3 @@ export const StyledPasswordContainer = styled.div`
   flex-direction: column;
   margin-top: -5%;
 `;
-
-export const StyledForm = styled.form``;
