@@ -14,9 +14,9 @@ export const postChangePassword = async ({
   newPassword,
 }: changePasswordProps): Promise<PostAuthSignInData> => {
   const res = await authClient.post('/auth/change-password', {
-    email: email,
-    newPassword: newPassword,
-    sessionToken: sessionToken,
+    email,
+    newPassword,
+    sessionToken,
   });
   return res.data;
 };
