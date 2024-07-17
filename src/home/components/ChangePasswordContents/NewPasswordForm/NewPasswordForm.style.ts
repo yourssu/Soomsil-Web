@@ -34,22 +34,3 @@ export const StyledInputContainer = styled.article`
   display: flex;
   flex-direction: column;
 `;
-
-export const StyledInputAnimation = styled.article`
-  transition:
-    visibility 0s 0.5s,
-    opacity 0.5s ease,
-    max-height 0.5s ease;
-  visibility: hidden;
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-
-  &.active {
-    margin-top: 1rem;
-    visibility: visible;
-    opacity: 1;
-    max-height: 150px;
-    transition-delay: 0s;
-  }
-`;
