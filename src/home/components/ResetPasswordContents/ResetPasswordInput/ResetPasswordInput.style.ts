@@ -5,7 +5,7 @@ export const StyledButtonContainer = styled.section`
   flex-direction: column;
 `;
 
-export const StyledBoxContainer = styled.form`
+export const StyledBoxContainer = styled.div`
   border-radius: 1rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
   justify-content: center;

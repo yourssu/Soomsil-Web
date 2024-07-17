@@ -59,7 +59,7 @@ export const ResetPasswordInput = ({ email, onConfirm }: ResetPasswordProps) => 
 
   return (
     <>
-      <StyledBoxContainer onSubmit={handleSubmit(onSubmit)}>
+      <StyledBoxContainer>
         <StyledTitle>비밀번호 재설정</StyledTitle>
         <StyledInputContainer>
           <StyledInputTitle>새로운 비밀번호를 입력해주세요.</StyledInputTitle>
@@ -96,6 +96,7 @@ export const ResetPasswordInput = ({ email, onConfirm }: ResetPasswordProps) => 
             rounding={8}
             size="large"
             variant="filled"
+            onClick={handleSubmit(onSubmit)}
             disabled={changePasswordMutation.isPending}
           >
             변경하기
