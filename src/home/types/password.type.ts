@@ -16,3 +16,8 @@ export interface NewPasswordFormProps {
   sessionToken: SessionTokenType;
   previousPassword: string;
 }
+
+export interface FormData {
+  password: string;
+  confirmPassword: string;
+}
