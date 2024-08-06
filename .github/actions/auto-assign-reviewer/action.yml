@@ -1,0 +1,12 @@
+name: 'action.yml for auto-assign-reviewer.yml'
+author: '@nijuy'
+
+inputs:
+  github_token:
+    required: true
+  code_owners:
+    required: true
+
+runs:
+  using: 'node18'
+  main: 'main.js'
