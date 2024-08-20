@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 
 import { Spacing } from '@/components/Spacing/Spacing';
+import { RESULT_LIST_ITEM_THUMBNAIL_LENGTH } from '@/search/constant';
 import { ResultListItemResponse } from '@/search/types/ResultListItem.type';
 import { onErrorImg } from '@/search/utils/onErrorImg';
 
@@ -25,6 +26,9 @@ interface ResultListItemProps
 
 export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
   ({ title, content, date, thumbnail, favicon, source, onClick }, ref) => {
+    const isVerticalLayout = thumbnail.length >= RESULT_LIST_ITEM_THUMBNAIL_LENGTH;
+    const isHorizontalLayout = !isVerticalLayout && thumbnail.length > 0;
+
     return (
       <StyledResultListItem ref={ref} onClick={onClick}>
         <StyledContentWrap $length={thumbnail.length}>
@@ -43,7 +47,7 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
           <StyledTitle $length={thumbnail.length}>{title}</StyledTitle>
           <Spacing direction="vertical" size={8} />
           <StyledContent $length={thumbnail.length}>{content}</StyledContent>
-          {thumbnail.length >= 5 && (
+          {isVerticalLayout && (
             <>
               <Spacing direction="vertical" size={12} />
               <StyledThumbnail $length={thumbnail.length}>
@@ -61,7 +65,7 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
             </>
           )}
         </StyledContentWrap>
-        {thumbnail.length < 5 && (
+        {isHorizontalLayout && (
           <StyledThumbnail $length={thumbnail.length}>
             <StyledThumbnailImage
               $length={thumbnail.length}
