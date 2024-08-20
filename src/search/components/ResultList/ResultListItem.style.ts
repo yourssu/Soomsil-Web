@@ -18,7 +18,8 @@ interface StyledContentProps {
 }
 
 export const StyledContentWrap = styled.div<StyledContentProps>`
-  width: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? '37.563rem' : '100%')};
+  width: ${(props) =>
+    props.$length > 0 && props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? '37.563rem' : '100%'};
 `;
 
 export const StyledInformationWrap = styled.div`
