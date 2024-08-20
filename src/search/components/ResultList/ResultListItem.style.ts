@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { RESULT_LIST_ITEM_THUMNAIL_LENGTH } from '@/search/constant';
+import { RESULT_LIST_ITEM_THUMBNAIL_LENGTH } from '@/search/constant';
 
 export const StyledResultListItem = styled.section`
   display: flex;
@@ -18,7 +18,7 @@ interface StyledContentProps {
 }
 
 export const StyledContentWrap = styled.div<StyledContentProps>`
-  width: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMNAIL_LENGTH ? '37.563rem' : '100%')};
+  width: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? '37.563rem' : '100%')};
 `;
 
 export const StyledInformationWrap = styled.div`
@@ -66,7 +66,7 @@ export const StyledTitle = styled.a<StyledTitleProps>`
   word-wrap: break-word;
   display: -webkit-box;
   overflow: hidden;
-  -webkit-line-clamp: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMNAIL_LENGTH ? 1 : 2)};
+  -webkit-line-clamp: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? 1 : 2)};
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 
@@ -84,11 +84,11 @@ export const StyledContent = styled.div<StyledContentProps>`
   ${(props) => props.theme.typo.body1}
   color: ${(props) => props.theme.color.textTertiary};
   width: 100%;
-  height: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMNAIL_LENGTH ? 4.688 : 3.25)}rem;
+  height: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? 4.688 : 3.25)}rem;
   word-wrap: break-word;
   display: -webkit-box;
   overflow: hidden;
-  -webkit-line-clamp: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMNAIL_LENGTH ? 3 : 2)};
+  -webkit-line-clamp: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? 3 : 2)};
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 `;
@@ -98,7 +98,7 @@ interface StyledThumbnailProps {
 }
 
 export const StyledThumbnail = styled.div<StyledThumbnailProps>`
-  width: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMNAIL_LENGTH ? '8.125rem' : '100%')};
+  width: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? '8.125rem' : '100%')};
   height: 8.125rem;
   align-self: flex-end;
   position: relative;
@@ -109,7 +109,7 @@ export const StyledThumbnail = styled.div<StyledThumbnailProps>`
 `;
 
 export const StyledThumbnailImage = styled.img<StyledThumbnailProps>`
-  width: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMNAIL_LENGTH ? '100%' : '20%')};
+  width: ${(props) => (props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? '100%' : '20%')};
   height: 100%;
   align-self: flex-end;
   background: linear-gradient(
@@ -118,7 +118,7 @@ export const StyledThumbnailImage = styled.img<StyledThumbnailProps>`
     rgba(212.91, 212.91, 212.91, 0.2) 100%
   );
   aspect-ratio: ${(props) =>
-    props.$length < RESULT_LIST_ITEM_THUMNAIL_LENGTH ? 'auto 130/130' : 'auto 148.8/130'};
+    props.$length < RESULT_LIST_ITEM_THUMBNAIL_LENGTH ? 'auto 130/130' : 'auto 148.8/130'};
   overflow: clip;
   overflow-clip-margin: content-box;
   object-fit: cover;
