@@ -1,0 +1,22 @@
+name: Auto Assign Reviewers
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Run action (auto-assign-reviewer/action.yml)
+        uses: nijuy/auto-reviewer-assign@main
+        with:
+          github_token: ${{ secrets.REVIEWER_GITHUB_TOKEN }}
+          code_owners: ${{ vars.CODE_OWNERS }}
+          reviewer_count: 3
