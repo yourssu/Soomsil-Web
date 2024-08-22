@@ -23,15 +23,11 @@ export const StyledCarousel = styled.div`
 `;
 
 interface StyledCarouselButtonProps {
-  $backgroundImage: string;
   $left?: string;
   $right?: string;
 }
 
-export const StyledCarouselButton = styled.input<StyledCarouselButtonProps>`
-  background-image: url(${(props) => props.$backgroundImage});
-  background-color: transparent;
-
+export const StyledCarouselButton = styled.img<StyledCarouselButtonProps>`
   width: 3rem;
   height: 3rem;
 
