@@ -27,7 +27,7 @@ interface StyledCarouselButtonProps {
   $right?: string;
 }
 
-export const StyledCarouselButton = styled.img<StyledCarouselButtonProps>`
+export const StyledCarouselButton = styled.button<StyledCarouselButtonProps>`
   width: 3rem;
   height: 3rem;
 
@@ -36,7 +36,9 @@ export const StyledCarouselButton = styled.img<StyledCarouselButtonProps>`
   left: ${(props) => props.$left && props.$left};
   right: ${(props) => props.$right && props.$right};
 
-  border: none;
-  border-radius: 24px;
-  cursor: pointer;
+  border-radius: 1.5rem;
+
+  img {
+    pointer-events: none;
+  }
 `;

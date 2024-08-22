@@ -26,17 +26,21 @@ export const Carousel = ({ introductionImage }: Pick<ProductDetailResult, 'intro
       {introductionImage.length > 1 && (
         <>
           <StyledCarouselButton
-            src={carouselLeftButton}
             $left={'-24px'}
             data-direction="left"
             onClick={handleCarouselClick}
-          />
+            title={'carousel-left-button'}
+          >
+            <img src={carouselLeftButton} alt={'carousel-left-img'} />
+          </StyledCarouselButton>
           <StyledCarouselButton
-            src={carouselRightButton}
             $right={'-24px'}
             data-direction="right"
             onClick={handleCarouselClick}
-          />
+            title={'carousel-right-button'}
+          >
+            <img src={carouselRightButton} alt={'carousel-right-img'} />
+          </StyledCarouselButton>
         </>
       )}
       {introductionImage.map((imageSrc) => (
