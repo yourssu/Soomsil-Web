@@ -22,8 +22,7 @@ export const MoreProductSection = ({ providerId }: { providerId: string }) => {
       <StyledContainer>
         {providerName}의 서비스 더보기
         <StyledArrowButton
-          $backgroundImage={IcRightArrow}
-          type="button"
+          src={IcRightArrow}
           onClick={() => {
             navigate(`/drawer/${providerId}`);
           }}

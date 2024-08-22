@@ -12,14 +12,7 @@ export const StyledMoreProductSection = styled.div`
   color: ${({ theme }) => theme.color.textPrimary};
 `;
 
-interface StyledArrowButtonProps {
-  $backgroundImage: string;
-}
-
-export const StyledArrowButton = styled.input<StyledArrowButtonProps>`
-  background-image: url(${(props) => props.$backgroundImage});
-  background-color: transparent;
-
+export const StyledArrowButton = styled.img`
   width: 3rem;
   height: 3rem;
   margin-left: 0.625rem;
