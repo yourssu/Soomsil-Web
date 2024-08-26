@@ -8,8 +8,7 @@ interface StyledContainerProps {
 }
 
 export const StyledContainer = styled.div<StyledContainerProps>`
-  position: sticky;
-  top: 10rem;
+  position: relative;
   padding: ${({ $containerPadding }) => $containerPadding};
   width: ${({ $containerWidth }) => $containerWidth};
   height: ${({ $containerHeight }) => $containerHeight};
