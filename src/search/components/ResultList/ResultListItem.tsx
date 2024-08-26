@@ -31,7 +31,7 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
 
     return (
       <StyledResultListItem ref={ref} onClick={onClick}>
-        <StyledContentWrap $length={thumbnail.length}>
+        <StyledContentWrap $isHorizontalLayout={isHorizontalLayout}>
           <StyledInformationWrap>
             <StyledLinkImageWrap>
               <StyledLinkImage src={favicon || '/'} alt="favicon" onError={onErrorImg} />
@@ -44,17 +44,17 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
             <StyledDate>{date}</StyledDate>
           </StyledInformationWrap>
           <Spacing direction="vertical" size={12} />
-          <StyledTitle $length={thumbnail.length}>{title}</StyledTitle>
+          <StyledTitle $isVerticalLayout={isVerticalLayout}>{title}</StyledTitle>
           <Spacing direction="vertical" size={8} />
-          <StyledContent $length={thumbnail.length}>{content}</StyledContent>
+          <StyledContent $isVerticalLayout={isVerticalLayout}>{content}</StyledContent>
           {isVerticalLayout && (
             <>
               <Spacing direction="vertical" size={12} />
-              <StyledThumbnail $length={thumbnail.length}>
+              <StyledThumbnail $isVerticalLayout={isVerticalLayout}>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <StyledThumbnailImage
                     key={thumbnail[index]}
-                    $length={thumbnail.length}
+                    $isVerticalLayout={isVerticalLayout}
                     src={thumbnail[index] || '/'}
                     alt="썸네일"
                     onError={onErrorImg}
@@ -66,9 +66,9 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
           )}
         </StyledContentWrap>
         {isHorizontalLayout && (
-          <StyledThumbnail $length={thumbnail.length}>
+          <StyledThumbnail $isVerticalLayout={isVerticalLayout}>
             <StyledThumbnailImage
-              $length={thumbnail.length}
+              $isVerticalLayout={isVerticalLayout}
               src={thumbnail[0] || '/'}
               alt="썸네일"
               onError={onErrorImg}
