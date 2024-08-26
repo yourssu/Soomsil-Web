@@ -42,9 +42,9 @@ export const NoResult = () => {
 
   const handleClickAddSection = (type: 'request' | 'edit') => {
     if (type === 'request') {
-      window.open(ADD_SECTION_DATA[0].url, '_blank');
+      window.open(ADD_SECTION_DATA[0].url);
     } else {
-      window.open(ADD_SECTION_DATA[1].url(query), '_blank');
+      window.open(ADD_SECTION_DATA[1].url(query));
     }
   };
 
