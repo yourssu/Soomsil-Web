@@ -47,23 +47,6 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
           <StyledTitle $isVerticalLayout={isVerticalLayout}>{title}</StyledTitle>
           <Spacing direction="vertical" size={8} />
           <StyledContent $isVerticalLayout={isVerticalLayout}>{content}</StyledContent>
-          {isVerticalLayout && (
-            <>
-              <Spacing direction="vertical" size={12} />
-              <StyledThumbnail $isVerticalLayout={isVerticalLayout}>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <StyledThumbnailImage
-                    key={thumbnail[index]}
-                    $isVerticalLayout={isVerticalLayout}
-                    src={thumbnail[index] || '/'}
-                    alt="썸네일"
-                    onError={onErrorImg}
-                  ></StyledThumbnailImage>
-                ))}
-                <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
-              </StyledThumbnail>
-            </>
-          )}
         </StyledContentWrap>
         {isHorizontalLayout && (
           <StyledThumbnail $isVerticalLayout={isVerticalLayout}>
@@ -73,6 +56,20 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
               alt="썸네일"
               onError={onErrorImg}
             ></StyledThumbnailImage>
+            <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
+          </StyledThumbnail>
+        )}
+        {isVerticalLayout && (
+          <StyledThumbnail $isVerticalLayout={isVerticalLayout}>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <StyledThumbnailImage
+                key={thumbnail[index]}
+                $isVerticalLayout={isVerticalLayout}
+                src={thumbnail[index] || '/'}
+                alt="썸네일"
+                onError={onErrorImg}
+              ></StyledThumbnailImage>
+            ))}
             <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
           </StyledThumbnail>
         )}

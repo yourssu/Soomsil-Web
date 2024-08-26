@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const StyledResultListItem = styled.section`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   box-sizing: border-box;
   width: 50rem;
@@ -13,6 +14,7 @@ export const StyledResultListItem = styled.section`
 
 export const StyledContentWrap = styled.div<{ $isHorizontalLayout: boolean }>`
   width: ${({ $isHorizontalLayout }) => ($isHorizontalLayout ? '37.563rem' : '100%')};
+  flex-shrink: 0;
 `;
 
 export const StyledInformationWrap = styled.div`
@@ -88,6 +90,8 @@ export const StyledThumbnail = styled.div<{ $isVerticalLayout: boolean }>`
   overflow: hidden;
   display: flex;
   gap: 0.125rem;
+  flex-shrink: 0;
+  margin-top: ${({ $isVerticalLayout }) => ($isVerticalLayout ? '12px' : '0')};
 `;
 
 export const StyledThumbnailImage = styled.img<{ $isVerticalLayout: boolean }>`
