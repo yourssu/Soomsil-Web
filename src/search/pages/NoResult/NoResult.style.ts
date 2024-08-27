@@ -10,6 +10,8 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledNoResultKeyword = styled.span`
+  word-break: break-all;
+  overflow-wrap: break-word;
   color: ${({ theme }) => theme.color.textPointed};
 
   ${({ theme }) => theme.typo.title2}
