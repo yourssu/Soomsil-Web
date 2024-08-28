@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 
 import { Spacing } from '@/components/Spacing/Spacing';
+import { RESULT_LIST_ITEM_THUMBNAIL_LENGTH } from '@/search/constant';
 import { ResultListItemResponse } from '@/search/types/ResultListItem.type';
 import { onErrorImg } from '@/search/utils/onErrorImg';
 
@@ -28,6 +29,8 @@ interface ResultListItemProps
 
 export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
   ({ title, content, date, thumbnail, favicon, source, domain, onClick }, ref) => {
+    const isVerticalLayout = thumbnail.length >= RESULT_LIST_ITEM_THUMBNAIL_LENGTH;
+    const isHorizontalLayout = !isVerticalLayout && thumbnail.length > 0;
     const handleDomainClick = (e: React.MouseEvent) => {
       e.stopPropagation();
       if (domain) {
@@ -37,7 +40,7 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
 
     return (
       <StyledResultListItem ref={ref} onClick={onClick}>
-        <StyledContentWrap $length={thumbnail.length}>
+        <StyledContentWrap $isHorizontalLayout={isHorizontalLayout}>
           <StyledInformationWrap>
             <StyledDomain onClick={handleDomainClick}>
               <StyledLinkImageWrap>
@@ -52,35 +55,32 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
             <StyledDate>{date}</StyledDate>
           </StyledInformationWrap>
           <Spacing direction="vertical" size={12} />
-          <StyledTitle $length={thumbnail.length}>{title}</StyledTitle>
+          <StyledTitle $isVerticalLayout={isVerticalLayout}>{title}</StyledTitle>
           <Spacing direction="vertical" size={8} />
-          <StyledContent $length={thumbnail.length}>{content}</StyledContent>
-          {thumbnail.length >= 5 && (
-            <>
-              <Spacing direction="vertical" size={12} />
-              <StyledThumbnail $length={thumbnail.length}>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <StyledThumbnailImage
-                    key={thumbnail[index]}
-                    $length={thumbnail.length}
-                    src={thumbnail[index] || '/'}
-                    alt="썸네일"
-                    onError={onErrorImg}
-                  ></StyledThumbnailImage>
-                ))}
-                <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
-              </StyledThumbnail>
-            </>
-          )}
+          <StyledContent $isVerticalLayout={isVerticalLayout}>{content}</StyledContent>
         </StyledContentWrap>
-        {thumbnail.length < 5 && (
-          <StyledThumbnail $length={thumbnail.length}>
+        {isHorizontalLayout && (
+          <StyledThumbnail $isVerticalLayout={isVerticalLayout}>
             <StyledThumbnailImage
-              $length={thumbnail.length}
+              $isVerticalLayout={isVerticalLayout}
               src={thumbnail[0] || '/'}
               alt="썸네일"
               onError={onErrorImg}
             ></StyledThumbnailImage>
+            <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
+          </StyledThumbnail>
+        )}
+        {isVerticalLayout && (
+          <StyledThumbnail $isVerticalLayout={isVerticalLayout}>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <StyledThumbnailImage
+                key={thumbnail[index]}
+                $isVerticalLayout={isVerticalLayout}
+                src={thumbnail[index] || '/'}
+                alt="썸네일"
+                onError={onErrorImg}
+              ></StyledThumbnailImage>
+            ))}
             <StyledThumbnailCountBox>{thumbnail.length}</StyledThumbnailCountBox>
           </StyledThumbnail>
         )}
