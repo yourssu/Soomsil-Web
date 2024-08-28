@@ -68,8 +68,10 @@ export const NoResult = () => {
   return (
     <StyledContainer>
       <FlexContainer>
-        <StyledNoResultKeyword>'{noResultKeyword}'</StyledNoResultKeyword>
-        <StyledNoResultDescription>에 대한 검색결과가 없습니다.</StyledNoResultDescription>
+        <div>
+          <StyledNoResultKeyword>'{noResultKeyword}'</StyledNoResultKeyword>
+          <StyledNoResultDescription>에 대한 검색결과가 없습니다.</StyledNoResultDescription>
+        </div>
       </FlexContainer>
       <StyledModifySection>
         <StyledModifyDescription>
