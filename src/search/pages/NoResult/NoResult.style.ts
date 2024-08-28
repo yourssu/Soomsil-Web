@@ -10,20 +10,13 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledNoResultKeyword = styled.span`
-  color: ${({ theme }) => theme.color.textPointed};
-
   ${({ theme }) => theme.typo.title2}
+  color: ${({ theme }) => theme.color.textPointed};
 `;
 
 export const StyledNoResultDescription = styled.p`
+  ${({ theme }) => theme.typo.subtitle2}
   color: ${({ theme }) => theme.color.textPrimary};
-
-  /* PC & Android/subtitle24 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%; /* 1.95rem */
 `;
 
 export const StyledModifySection = styled.div`
@@ -33,14 +26,8 @@ export const StyledModifySection = styled.div`
 `;
 
 export const StyledModifyDescription = styled.p`
+  ${({ theme }) => theme.typo.body1}
   color: ${({ theme }) => theme.color.textTertiary};
-
-  /* PC & Android/body18 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
 `;
 
 export const StyledCard = styled.div`
@@ -55,6 +42,12 @@ export const StyledCard = styled.div`
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
   background: ${({ theme }) => theme.color.bgNormal};
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const StyledCardDescriptionSection = styled.div`
@@ -63,7 +56,7 @@ export const StyledCardDescriptionSection = styled.div`
 `;
 
 interface StyledCardIconFrameProp {
-  $index: number;
+  $type: 'request' | 'edit';
 }
 
 export const StyledCardIconFrame = styled.div<StyledCardIconFrameProp>`
@@ -74,7 +67,7 @@ export const StyledCardIconFrame = styled.div<StyledCardIconFrameProp>`
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
-  background: ${(prop) => (prop.$index === 0 ? 'rgba(255, 44, 190, 0.1)' : '#ebe6fb')};
+  background: ${({ $type }) => ($type === 'request' ? 'rgba(255, 44, 190, 0.1)' : '#ebe6fb')};
 `;
 
 export const StyledCardTextFrame = styled.div`
@@ -84,25 +77,12 @@ export const StyledCardTextFrame = styled.div`
   gap: 0.25rem;
 `;
 
-export const StyledCardLinkText = styled.a`
+export const StyledCardTitle = styled.span`
+  ${({ theme }) => theme.typo.subtitle3}
   color: ${({ theme }) => theme.color.textPrimary};
-
-  ${({ theme }) => theme.typo.subtitle1}
-
-  &:hover {
-    color: ${({ theme }) => theme.color.textPrimary};
-    text-decoration: underline;
-    cursor: pointer;
-  }
 `;
 
-export const StyledCardLinkTextDescription = styled.p`
+export const StyledCardDescription = styled.p`
+  ${({ theme }) => theme.typo.body2}
   color: ${({ theme }) => theme.color.textTertiary};
-
-  /* PC & Android/body16 */
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%; /* 1.3rem */
 `;
