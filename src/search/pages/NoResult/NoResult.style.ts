@@ -27,8 +27,7 @@ export const StyledNoResultDescription = styled.p`
   font-weight: 500;
   line-height: 130%; /* 1.95rem */
 
-  display: inline;
-  white-space: nowrap;
+  display: inline-block;
 `;
 
 export const StyledModifySection = styled.div`
