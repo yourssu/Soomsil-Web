@@ -17,23 +17,35 @@ import {
   StyledTitle,
   StyledContentWrap,
   StyledInformationWrap,
+  StyledDomain,
 } from './ResultListItem.style';
 
 interface ResultListItemProps
   extends Pick<React.ComponentProps<'div'>, 'onClick'>,
-    ResultListItemResponse {}
+    ResultListItemResponse {
+  domain?: string;
+}
 
 export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
-  ({ title, content, date, thumbnail, favicon, source, onClick }, ref) => {
+  ({ title, content, date, thumbnail, favicon, source, domain, onClick }, ref) => {
+    const handleDomainClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (domain) {
+        window.open(domain, '_blank');
+      }
+    };
+
     return (
       <StyledResultListItem ref={ref} onClick={onClick}>
         <StyledContentWrap $length={thumbnail.length}>
           <StyledInformationWrap>
-            <StyledLinkImageWrap>
-              <StyledLinkImage src={favicon || '/'} alt="favicon" onError={onErrorImg} />
-            </StyledLinkImageWrap>
-            <Spacing direction="horizontal" size={4} />
-            <StyledLinkTitle>{source}</StyledLinkTitle>
+            <StyledDomain onClick={handleDomainClick}>
+              <StyledLinkImageWrap>
+                <StyledLinkImage src={favicon || '/'} alt="favicon" onError={onErrorImg} />
+              </StyledLinkImageWrap>
+              <Spacing direction="horizontal" size={4} />
+              <StyledLinkTitle>{source}</StyledLinkTitle>
+            </StyledDomain>
             <Spacing direction="horizontal" size={4} />
             <StyledDate>·</StyledDate>
             <Spacing direction="horizontal" size={4} />

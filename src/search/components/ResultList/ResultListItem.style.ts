@@ -47,6 +47,17 @@ export const StyledLinkImage = styled.img`
 export const StyledLinkTitle = styled.span`
   ${(props) => props.theme.typo.body1}
   color: ${(props) => props.theme.color.textSecondary};
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const StyledDomain = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 `;
 
 export const StyledDate = styled.span`
