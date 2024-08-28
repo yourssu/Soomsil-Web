@@ -10,6 +10,7 @@ import { useScrollObserve } from '@/hooks/useScrollObserve';
 import { useGetSearch } from '@/search/hooks/useGetSearch';
 import { NoResult } from '@/search/pages/NoResult/NoResult';
 import { SearchResponse } from '@/search/types/ResultListItem.type';
+import { extractOrigin } from '@/search/utils/extractOrigin';
 
 import NoResultFallback from '../FallbackComponent/NoResultFallback';
 
@@ -32,22 +33,13 @@ export const ResultList = () => {
   const { data: currentUser } = useGetUserData();
   const userId = currentUser?.email || '';
 
-  const handleExtractDomain = (url: string) => {
-    try {
-      const { origin } = new URL(url);
-      return origin;
-    } catch (error) {
-      return url;
-    }
-  };
-
   return (
     <NoResultFallback results={data?.pages[0].resultList} fallback={<NoResult />}>
       <Suspense fallback={<Loading />}>
         {data?.pages.map((page) => {
           return page.resultList.map((item, itemIndex) => {
             const isLastItem = page.resultList.length === itemIndex + 1;
-            const domain = handleExtractDomain(item.link);
+            const domain = extractOrigin(item.link);
             return (
               <div key={item.id}>
                 <LogClick
