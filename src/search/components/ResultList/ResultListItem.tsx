@@ -7,18 +7,18 @@ import { onErrorImg } from '@/search/utils/onErrorImg';
 
 import {
   StyledContent,
+  StyledContentWrap,
   StyledDate,
-  StyledLinkImageWrap,
+  StyledDomain,
+  StyledInformationWrap,
   StyledLinkImage,
+  StyledLinkImageWrap,
   StyledLinkTitle,
   StyledResultListItem,
   StyledThumbnail,
   StyledThumbnailCountBox,
   StyledThumbnailImage,
   StyledTitle,
-  StyledContentWrap,
-  StyledInformationWrap,
-  StyledDomain,
 } from './ResultListItem.style';
 
 interface ResultListItemProps
@@ -34,7 +34,7 @@ export const ResultListItem = forwardRef<HTMLDivElement, ResultListItemProps>(
     const handleDomainClick = (e: React.MouseEvent) => {
       e.stopPropagation();
       if (domain) {
-        window.open(domain, '_blank');
+        window.open(domain);
       }
     };
 
