@@ -7,17 +7,17 @@ import IcSoomsilde from '@/assets/ic_wiki.svg';
 import { FlexContainer } from '@/components/FlexContainer/FlexContainer';
 
 import {
-  StyledModifySection,
-  StyledModifyDescription,
-  StyledNoResultKeyword,
-  StyledNoResultDescription,
-  StyledContainer,
   StyledCard,
-  StyledCardIconFrame,
   StyledCardDescriptionSection,
-  StyledCardTextFrame,
-  StyledCardLinkTextDescription,
+  StyledCardIconFrame,
   StyledCardLinkText,
+  StyledCardLinkTextDescription,
+  StyledCardTextFrame,
+  StyledContainer,
+  StyledModifyDescription,
+  StyledModifySection,
+  StyledNoResultDescription,
+  StyledNoResultKeyword,
 } from './NoResult.style';
 
 interface AddSectionData {
