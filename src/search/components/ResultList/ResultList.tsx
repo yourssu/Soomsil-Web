@@ -32,12 +32,22 @@ export const ResultList = () => {
   const { data: currentUser } = useGetUserData();
   const userId = currentUser?.email || '';
 
+  const handleExtractDomain = (url: string) => {
+    try {
+      const { origin } = new URL(url);
+      return origin;
+    } catch (error) {
+      return url;
+    }
+  };
+
   return (
     <NoResultFallback results={data?.pages[0].resultList} fallback={<NoResult />}>
       <Suspense fallback={<Loading />}>
         {data?.pages.map((page) => {
           return page.resultList.map((item, itemIndex) => {
             const isLastItem = page.resultList.length === itemIndex + 1;
+            const domain = handleExtractDomain(item.link);
             return (
               <div key={item.id}>
                 <LogClick
@@ -59,6 +69,7 @@ export const ResultList = () => {
                 >
                   <ResultListItem
                     {...item}
+                    domain={domain}
                     onClick={() => window.open(item.link)}
                     ref={isLastItem ? lastElementRef : null}
                   />
