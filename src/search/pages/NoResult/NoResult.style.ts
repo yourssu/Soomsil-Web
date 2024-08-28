@@ -45,7 +45,7 @@ export const StyledCard = styled.div`
 
   cursor: pointer;
 
-  &: hover {
+  &:hover {
     text-decoration: underline;
   }
 `;
