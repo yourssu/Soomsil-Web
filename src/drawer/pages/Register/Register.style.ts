@@ -1,58 +1,45 @@
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 
 export const StyledContainer = styled.div`
-  @media (max-width: 30rem) {
-    gap: 1.25rem;
-    padding: 1.5rem 0rem;
-  }
+  width: 100%;
+  padding: 3.5rem 20rem;
+`;
 
+export const StyledRequiredHint = styled.div`
+  ${({ theme }) => theme.typo.subtitle6}
+  text-align: right;
+`;
+
+export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 3.37rem 0rem;
+
+  margin-top: 1.25rem;
 `;
 
-export const StyledInputContainer = styled.div`
-  @media (max-width: 30rem) {
-    gap: 0.75rem;
-  }
-
+export const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 1.56rem;
+  gap: 1.25rem;
 `;
 
-export const StyledRightContainer = styled.div`
-  @media (max-width: 30rem) {
-    margin-right: 0rem;
-  }
-
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 1.2rem;
-`;
-
-interface StyledImportTextProps {
-  $isWarned: boolean;
+interface StyledInputProps {
+  $isWarned?: boolean;
 }
-export const StyledImportText = styled.p<StyledImportTextProps>`
-  @media (max-width: 30rem) {
-    /* Soomsil/Drawer/Web/body10 */
-    font-size: 'Spoqa Han Sans Neo';
-    font-size: 0.625rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.3;
-  }
 
-  ${({ theme }) => theme.typo.subtitle3};
-  color: ${({ theme, $isWarned }) =>
+export const StyledInput = styled.input<StyledInputProps>`
+  ${({ theme }) => theme.typo.subtitle3}
+
+  color: ${({ $isWarned = false, theme }) =>
     $isWarned ? theme.color.textWarned : theme.color.textPrimary};
 
-  text-align: right;
-  white-space: pre-wrap;
+  width: 100%;
+  padding: 0.375rem;
+  border-bottom: 2px solid
+    ${({ $isWarned = false, theme }) =>
+      $isWarned ? theme.color.textWarned : theme.color.buttonNormalPressed};
 
-  &:hover {
-    cursor: pointer;
-  }
+  background-color: transparent;
+  caret-color: ${({ theme }) => theme.color.textPointed};
 `;
