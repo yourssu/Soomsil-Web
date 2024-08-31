@@ -11,12 +11,23 @@ export const StyledContainer = styled.div`
 
 export const StyledNoResultKeyword = styled.span`
   ${({ theme }) => theme.typo.title2}
+  word-break: break-all;
+  overflow-wrap: break-word;
   color: ${({ theme }) => theme.color.textPointed};
 `;
 
 export const StyledNoResultDescription = styled.p`
   ${({ theme }) => theme.typo.subtitle2}
   color: ${({ theme }) => theme.color.textPrimary};
+
+  /* PC & Android/subtitle24 */
+  font-family: 'Spoqa Han Sans Neo';
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%; /* 1.95rem */
+
+  display: inline-block;
 `;
 
 export const StyledModifySection = styled.div`
