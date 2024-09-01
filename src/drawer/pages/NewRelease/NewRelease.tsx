@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { CategoryDropdownMenu } from '@/drawer/components/Category/CategoryDropdownMenu/CategoryDropdownMenu';
 import { RankingCategory } from '@/drawer/components/Category/RankingCategory';
 import { BigDrawerCard } from '@/drawer/components/DrawerCard/BigDrawerCard';
+import { EmptyScreen } from '@/drawer/components/EmptyScreen/EmptyScreen';
 import { SMALL_DESKTOP_MEDIA_QUERY } from '@/drawer/constants/mobileview.constant';
 import { useGetNewRelease } from '@/drawer/hooks/useGetNewRelease';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
@@ -83,6 +84,7 @@ export const NewRelease = () => {
                 );
               })}
           </StyledCardContainer>
+          {!newReleases.pages[0].length && <EmptyScreen type="PROVIDER" />}
         </div>
       </StyledRankingContainer>
     </StyledContainer>
