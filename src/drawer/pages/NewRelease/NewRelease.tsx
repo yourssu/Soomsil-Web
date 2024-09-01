@@ -84,7 +84,7 @@ export const NewRelease = () => {
                 );
               })}
           </StyledCardContainer>
-          {!newReleases.pages[0].length && <EmptyScreen type="CATEGORY" />}
+          {newReleases.pages[0].length === 0 && <EmptyScreen type="CATEGORY" />}
         </div>
       </StyledRankingContainer>
     </StyledContainer>
