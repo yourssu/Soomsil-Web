@@ -1,5 +1,5 @@
 export const NOT_FOUND_TEXT: Record<
-  'SEARCH' | 'STAR' | 'MYDRAWER' | 'PROVIDER' | 'CATEGORY',
+  'SEARCH' | 'STAR' | 'MYDRAWER' | 'CATEGORY',
   { boldText: string; subText: string }
 > = {
   SEARCH: {
@@ -13,10 +13,6 @@ export const NOT_FOUND_TEXT: Record<
   MYDRAWER: {
     boldText: '내가 등록한 서비스가 없습니다.',
     subText: '새로운 서비스를 등록해보세요.',
-  },
-  PROVIDER: {
-    boldText: '아직 해당 카테고리에 업로드한 서비스가 없습니다.',
-    subText: '',
   },
   CATEGORY: {
     boldText: '현재 해당 카테고리에 등록된 서비스가 없습니다.',
