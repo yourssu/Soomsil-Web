@@ -15,7 +15,7 @@ export const Description = ({ product }: { product: ProductDetailResult }) => {
     <StyledDescriptionSection>
       <Carousel introductionImage={product.introductionImage} />
       <StyledDescriptionPart>
-        <StyledSubtitle>{`추천`}</StyledSubtitle>
+        <StyledSubtitle>{`즐겨찾기 수`}</StyledSubtitle>
         <StyledDescription>
           {product.count}+
           <IcStarFilled size={'15px'} color={'#FDD655'} />

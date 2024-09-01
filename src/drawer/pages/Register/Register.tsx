@@ -65,7 +65,7 @@ export const Register = () => {
             window.Android.onRegisterSuccess();
           }
 
-          navigate('/drawer/myDrawers');
+          navigate('/drawer/myDrawers?tab=MYDRAWER');
         },
       });
     }
