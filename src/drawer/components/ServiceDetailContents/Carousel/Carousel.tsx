@@ -15,7 +15,7 @@ export const Carousel = ({ introductionImage }: Pick<ProductDetailResult, 'intro
 
     if (scrollRef.current) {
       const x = scrollRef.current!.scrollLeft;
-      const scrollDirection = target.name === 'left' ? -scrollAmount : scrollAmount;
+      const scrollDirection = target.dataset.direction === 'left' ? -scrollAmount : scrollAmount;
 
       scrollRef.current.scrollTo(x + scrollDirection, 0);
     }
@@ -26,19 +26,21 @@ export const Carousel = ({ introductionImage }: Pick<ProductDetailResult, 'intro
       {introductionImage.length > 1 && (
         <>
           <StyledCarouselButton
-            $backgroundImage={carouselLeftButton}
             $left={'-24px'}
-            type="button"
-            name="left"
+            data-direction="left"
             onClick={handleCarouselClick}
-          />
+            title={'carousel-left-button'}
+          >
+            <img src={carouselLeftButton} alt={'carousel-left-img'} />
+          </StyledCarouselButton>
           <StyledCarouselButton
-            $backgroundImage={carouselRightButton}
             $right={'-24px'}
-            type="button"
-            name="right"
+            data-direction="right"
             onClick={handleCarouselClick}
-          />
+            title={'carousel-right-button'}
+          >
+            <img src={carouselRightButton} alt={'carousel-right-img'} />
+          </StyledCarouselButton>
         </>
       )}
       {introductionImage.map((imageSrc) => (

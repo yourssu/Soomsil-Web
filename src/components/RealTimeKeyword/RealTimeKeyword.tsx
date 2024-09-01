@@ -10,15 +10,15 @@ import {
 } from '@/components/RealTimeKeyword/RealTimeKeyword.constant.ts';
 import {
   StyledContainer,
-  StyledTitleContainer,
   StyledImage,
-  StyledTitle,
-  StyledUpdateDate,
   StyledList,
-  StyledListItemRanking,
-  StyledListItemKeyword,
   StyledListItem,
+  StyledListItemKeyword,
+  StyledListItemRanking,
   StyledListItemText,
+  StyledTitle,
+  StyledTitleContainer,
+  StyledUpdateDate,
 } from '@/components/RealTimeKeyword/RealTimeKeyword.style.ts';
 import { useGetRealTimeKeyword } from '@/search/hooks/useGetRealTimeKeyword.ts';
 import { formatDateTime } from '@/utils/formatDateTime.ts';
