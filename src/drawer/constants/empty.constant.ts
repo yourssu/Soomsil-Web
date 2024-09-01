@@ -1,7 +1,6 @@
-export const NOT_FOUND_TEXT: Record<
-  'SEARCH' | 'STAR' | 'MYDRAWER' | 'CATEGORY',
-  { boldText: string; subText: string }
-> = {
+import { EmptyStateType } from '../types/emptyState.type';
+
+export const NOT_FOUND_TEXT: Record<EmptyStateType, { boldText: string; subText: string }> = {
   SEARCH: {
     boldText: '해당 검색어에 대한 검색결과가 없습니다.',
     subText: '더 간단한 단어로 검색하거나 직접 서비스를 등록해보세요.',

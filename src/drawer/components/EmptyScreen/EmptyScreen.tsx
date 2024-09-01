@@ -4,6 +4,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import NotIllust from '@/drawer/assets/noResultDrawer.png';
 import { NOT_FOUND_TEXT } from '@/drawer/constants/empty.constant';
+import { EmptyStateType } from '@/drawer/types/emptyState.type';
 import { LogInState } from '@/home/recoil/LogInState';
 import { DialogState } from '@/recoil/DialogState';
 
@@ -14,11 +15,7 @@ import {
   StyledNotTextContainer,
 } from './EmptyScreen.style';
 
-interface EmptyScreenProps {
-  type: 'SEARCH' | 'STAR' | 'MYDRAWER' | 'CATEGORY';
-}
-
-export const EmptyScreen = ({ type }: EmptyScreenProps) => {
+export const EmptyScreen = ({ type }: { type: EmptyStateType }) => {
   const { boldText, subText } = NOT_FOUND_TEXT[type];
 
   const setDialog = useSetRecoilState(DialogState);
