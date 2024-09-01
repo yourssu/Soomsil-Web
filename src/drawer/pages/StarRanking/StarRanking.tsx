@@ -85,7 +85,7 @@ export const StarRanking = () => {
                 );
               })}
           </StyledCardContainer>
-          {!rankings.pages[0].length && <EmptyScreen type="PROVIDER" />}
+          {!rankings.pages[0].length && <EmptyScreen type="CATEGORY" />}
         </div>
       </StyledRankingContainer>
     </StyledContainer>

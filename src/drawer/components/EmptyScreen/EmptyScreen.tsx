@@ -15,7 +15,7 @@ import {
 } from './EmptyScreen.style';
 
 interface EmptyScreenProps {
-  type: 'SEARCH' | 'STAR' | 'MYDRAWER' | 'PROVIDER';
+  type: 'SEARCH' | 'STAR' | 'MYDRAWER' | 'PROVIDER' | 'CATEGORY';
 }
 
 export const EmptyScreen = ({ type }: EmptyScreenProps) => {
