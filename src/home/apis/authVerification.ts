@@ -1,3 +1,4 @@
+import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import { authClient } from '@/apis';
@@ -5,8 +6,8 @@ import { STORAGE_KEYS } from '@/constants/storage.constant.ts';
 
 import {
   AuthErrorData,
-  GetAuthVerificationCheckResponse,
-  PostAuthVerificationEmailResponse,
+  GetAuthVerificationCheckData,
+  PostAuthVerificationEmailData,
 } from '../types/Auth.type';
 
 interface EmailVerificationParams {
@@ -20,31 +21,45 @@ interface VerificationCheckParams {
 
 export const postAuthVerificationEmail = async (
   emailVerificationParams: EmailVerificationParams
-): Promise<PostAuthVerificationEmailResponse> => {
-  try {
-    const res = await authClient.post(`/auth/verification/email`, emailVerificationParams);
-    if (res.data) {
-      sessionStorage.setItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN, res.data.sessionToken);
+): Promise<PostAuthVerificationEmailData> => {
+  const res = await authClient.post(`/auth/verification/email`, emailVerificationParams);
+  return res.data;
+};
+
+export const usePostAuthVerificationEmail = () => {
+  return useMutation({
+    mutationFn: postAuthVerificationEmail,
+    onSuccess: (data) => {
+      sessionStorage.setItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN, data.sessionToken);
       sessionStorage.setItem(
         STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN_EXPIRED_IN,
-        res.data.sessionTokenExpiredIn.toString()
+        data.sessionTokenExpiredIn.toString()
       );
-    }
-    return { data: res.data };
-  } catch (error: unknown) {
-    return { error: error as AxiosError<AuthErrorData> };
-  }
+    },
+    throwOnError: (error: AxiosError<AuthErrorData>) => {
+      //이전과 같은 이메일일 경우 errorBoundary로 가지 않고 에러 처리
+      if (error.response?.status === 400) return false;
+      // 나머지는 errorBoundary로 처리
+      return true;
+    },
+  });
 };
 
 export const getAuthVerificationCheck = async (
   verificationCheckParams: VerificationCheckParams
-): Promise<GetAuthVerificationCheckResponse> => {
-  try {
-    const res = await authClient.get('/auth/verification/check', {
-      params: verificationCheckParams,
-    });
-    return { data: res.data };
-  } catch (error: unknown) {
-    return { error: error as AxiosError<AuthErrorData> };
-  }
+): Promise<GetAuthVerificationCheckData> => {
+  const res = await authClient.get('/auth/verification/check', {
+    params: verificationCheckParams,
+  });
+  return res.data;
+};
+
+export const useGetAuthVerificationCheck = () => {
+  return useMutation({
+    mutationFn: getAuthVerificationCheck,
+    throwOnError: (error: AxiosError<AuthErrorData>) => {
+      if (error.response?.status === 401) return false;
+      return true;
+    },
+  });
 };
