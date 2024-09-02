@@ -22,20 +22,19 @@ export const useEmailAuth = ({ onConfirm, email }: EmailAuthProps) => {
 
   const sendAuthenticationMail = async () => {
     setEmailSending(true);
-    await postAuthVerificationEmailMutation.mutate(
+    await postAuthVerificationEmailMutation.mutateAsync(
       { email: email, verificationType: 'SIGN_UP' },
       {
         onSuccess: () => {
-          setEmailSending(false);
           setAuthed(true);
         },
         onError: () => {
-          setEmailSending(false);
           setAuthed(false);
           setError('인증 메일 재전송에 실패했습니다.');
         },
       }
     );
+    setEmailSending(false);
     resetTimer();
   };
 
@@ -43,7 +42,7 @@ export const useEmailAuth = ({ onConfirm, email }: EmailAuthProps) => {
     const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
     if (!session) return;
 
-    getAuthVerificationCheckMutation.mutate(
+    await getAuthVerificationCheckMutation.mutateAsync(
       { session: session },
       {
         onSuccess: (data) => {

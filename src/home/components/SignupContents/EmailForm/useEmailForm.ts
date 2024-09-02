@@ -20,7 +20,8 @@ export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
 
   const onEmailSubmit = async () => {
     const fullEmail = parseFullEmail(email);
-    postAuthVerificationEmailMutation.mutate(
+
+    await postAuthVerificationEmailMutation.mutateAsync(
       { email: fullEmail, verificationType: 'SIGN_UP' },
       {
         onSuccess: () => {
