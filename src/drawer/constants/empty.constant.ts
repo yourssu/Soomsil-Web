@@ -1,4 +1,4 @@
-import { EmptyStateType } from '../types/emptyState.type';
+import { EmptyStateType } from '@/drawer/types/emptyState.type';
 
 export const NOT_FOUND_TEXT: Record<EmptyStateType, { boldText: string; subText: string }> = {
   SEARCH: {
