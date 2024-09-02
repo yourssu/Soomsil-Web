@@ -43,7 +43,7 @@ export const Provider = () => {
           <StyledDescription>개발자의 서비스를 확인해보세요.</StyledDescription>
         </div>
         {isEmpty ? (
-          <EmptyScreen type={'PROVIDER'} />
+          <EmptyScreen type={'CATEGORY'} />
         ) : (
           <>
             <CardLayout data={data.pages.flatMap((page) => page.products)} type={'PROVIDER'} />
