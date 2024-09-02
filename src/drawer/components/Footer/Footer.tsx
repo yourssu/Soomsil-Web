@@ -4,7 +4,7 @@ export const Footer = () => {
   return (
     <StyledFooter>
       <StyledFooterLogo>SOOMSIL DRAWERS</StyledFooterLogo>
-      <StyledFooterText>Version n.n.n</StyledFooterText>
+      <StyledFooterText>Version 1.0.0</StyledFooterText>
     </StyledFooter>
   );
 };
