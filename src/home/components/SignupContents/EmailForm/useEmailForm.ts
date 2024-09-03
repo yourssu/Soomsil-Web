@@ -8,7 +8,7 @@ import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
   const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState<string | undefined>(undefined);
+  const [emailError, setEmailError] = useState<string | null>(null);
   const parseFullEmail = useParseFullEmail();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,7 @@ export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
       return;
     }
 
-    setEmailError(undefined);
+    setEmailError(null);
 
     const res = await postAuthVerificationEmail({ email: fullEmail, verificationType: 'SIGN_UP' });
     if (res.data) {
