@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
 import { isEmail } from '@yourssu/utils';
 
@@ -8,10 +8,10 @@ import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
   const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string>('');
   const parseFullEmail = useParseFullEmail();
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
@@ -23,7 +23,7 @@ export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
       return;
     }
 
-    setEmailError(null);
+    setEmailError('');
 
     const res = await postAuthVerificationEmail({ email: fullEmail, verificationType: 'SIGN_UP' });
     if (res.data) {
