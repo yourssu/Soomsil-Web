@@ -51,12 +51,15 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           </PlainButton>
         </StyledPlainButtonWrapper>
         <BoxButton
-          type="button"
+          type="submit"
           size="large"
           variant="filled"
           rounding={8}
           disabled={email === '' || disabled}
-          onClick={() => handleClick(onEmailSubmit)}
+          onClick={async (e) => {
+            e.preventDefault();
+            await handleClick(onEmailSubmit);
+          }}
         >
           <StyledSignupButtonText>
             {disabled ? '잠시만 기다려주세요...' : '인증 메일 받기'}
