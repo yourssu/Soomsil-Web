@@ -23,6 +23,8 @@ export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
       return;
     }
 
+    setEmailError(undefined);
+
     const res = await postAuthVerificationEmail({ email: fullEmail, verificationType: 'SIGN_UP' });
     if (res.data) {
       onConfirm(fullEmail);
