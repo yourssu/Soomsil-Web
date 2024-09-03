@@ -1,124 +1,82 @@
-import { useEffect, useState } from 'react';
-
-import { IcArrowRightLine, IcPenLine, IconContext } from '@yourssu/design-system-react';
+import { IcArrowRightLine, IcPenLine } from '@yourssu/design-system-react';
+import { useSearchParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import IcSoomsilde from '@/assets/ic_wiki.svg';
 import { FlexContainer } from '@/components/FlexContainer/FlexContainer';
 
 import {
-  StyledModifySection,
-  StyledModifyDescription,
-  StyledNoResultKeyword,
-  StyledNoResultDescription,
-  StyledContainer,
   StyledCard,
-  StyledCardIconFrame,
+  StyledCardDescription,
   StyledCardDescriptionSection,
+  StyledCardIconFrame,
   StyledCardTextFrame,
-  StyledCardLinkTextDescription,
-  StyledCardLinkText,
+  StyledCardTitle,
+  StyledContainer,
+  StyledModifyDescription,
+  StyledModifySection,
+  StyledNoResultDescription,
+  StyledNoResultKeyword,
 } from './NoResult.style';
 
-interface AddSectionData {
-  linkText: string;
-  linkTextDescription: string;
-  href: string;
-}
-
-const ADD_SECTION_DATA: AddSectionData[] = [
+const ADD_SECTION_DATA = [
   {
-    linkText: '숨쉴위키에 내용 추가 요청하기',
-    linkTextDescription: '해당 검색어에 대해 궁금하다면 추가를 요청해보세요',
-    href: `https://forms.gle/YruucE1ZkTBtc6YE8`,
+    type: 'request',
+    title: '숨쉴위키에 내용 추가 요청하기',
+    description: '해당 검색어에 대해 궁금하다면 추가를 요청해보세요',
+    url: `https://forms.gle/YruucE1ZkTBtc6YE8`,
   },
   {
-    linkText: '숨쉴위키에서 편집하기',
-    linkTextDescription: '이미 알고 있는 내용이라면 숨쉴위키에 내용을 추가해주세요',
-    href: `https://wiki.soomsil.de/wiki/index.php?title={query}&action=edit`,
+    type: 'edit',
+    title: '숨쉴위키에서 편집하기',
+    description: '이미 알고 있는 내용이라면 숨쉴위키에 내용을 추가해주세요',
+    url: (query: string) => `https://wiki.soomsil.de/wiki/index.php?title=${query}&action=edit`,
   },
-];
+] as const;
 
 export const NoResult = () => {
   const theme = useTheme();
+  const [searchParams] = useSearchParams();
 
-  const [noResultKeyword, setNoResultKeyword] = useState<string>();
-  const [addSectionData, setAddSectionData] = useState<AddSectionData[]>();
+  const query = searchParams.get('query') ?? '';
 
-  useEffect(() => {
-    const currentURL = window.location.href;
-    const queryParams = new URLSearchParams(new URL(currentURL).search);
-    const queryValue = queryParams.get('query');
-    if (queryValue) {
-      setNoResultKeyword(queryValue);
+  const handleClickAddSection = (type: 'request' | 'edit') => {
+    if (type === 'request') {
+      window.open(ADD_SECTION_DATA[0].url);
+    } else {
+      window.open(ADD_SECTION_DATA[1].url(query));
     }
-  }, []);
-
-  useEffect(() => {
-    if (noResultKeyword) {
-      setAddSectionData(
-        ADD_SECTION_DATA.map((data) => ({
-          ...data,
-          href: data.href.replace('{query}', encodeURIComponent(noResultKeyword)),
-        }))
-      );
-    }
-  }, [noResultKeyword]);
+  };
 
   return (
     <StyledContainer>
       <FlexContainer>
-        <StyledNoResultKeyword>'{noResultKeyword}'</StyledNoResultKeyword>
-        <StyledNoResultDescription>에 대한 검색결과가 없습니다.</StyledNoResultDescription>
+        <div>
+          <StyledNoResultKeyword>'{query}'</StyledNoResultKeyword>
+          <StyledNoResultDescription>에 대한 검색결과가 없습니다.</StyledNoResultDescription>
+        </div>
       </FlexContainer>
       <StyledModifySection>
         <StyledModifyDescription>
           찾으시는 검색결과가 없다면 아래 기능을 사용해보세요
         </StyledModifyDescription>
-        {addSectionData?.map((value, index) => {
+        {ADD_SECTION_DATA.map((section) => {
           return (
-            <StyledCard key={value.linkText}>
+            <StyledCard key={section.type} onClick={() => handleClickAddSection(section.type)}>
               <StyledCardDescriptionSection>
-                <StyledCardIconFrame $index={index}>
-                  {index === 0 ? (
+                <StyledCardIconFrame $type={section.type}>
+                  {section.type === 'request' ? (
                     <img src={IcSoomsilde} alt="soomsil" />
                   ) : (
-                    <IconContext.Provider
-                      value={{
-                        size: '1.8rem',
-                        color: theme.color.buttonPoint,
-                      }}
-                    >
-                      <IcPenLine />
-                    </IconContext.Provider>
+                    <IcPenLine size="1.8rem" color={theme.color.buttonPoint} />
                   )}
                 </StyledCardIconFrame>
                 <StyledCardTextFrame>
-                  <StyledCardLinkText
-                    onClick={() => {
-                      window.open(value.href);
-                    }}
-                  >
-                    {value.linkText}
-                  </StyledCardLinkText>
-                  <StyledCardLinkTextDescription>
-                    {value.linkTextDescription}
-                  </StyledCardLinkTextDescription>
+                  <StyledCardTitle>{section.title}</StyledCardTitle>
+                  <StyledCardDescription>{section.description}</StyledCardDescription>
                 </StyledCardTextFrame>
               </StyledCardDescriptionSection>
-              <IconContext.Provider
-                value={{
-                  size: '1.2rem',
-                  color: theme.color.buttonNormal,
-                  cursor: 'pointer',
-                }}
-              >
-                <IcArrowRightLine
-                  onClick={() => {
-                    window.open(value.href);
-                  }}
-                />
-              </IconContext.Provider>
+              <IcArrowRightLine size="1.2rem" color={theme.color.buttonNormal} />
             </StyledCard>
           );
         })}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledMoreProductSection = styled.div`
@@ -12,20 +13,10 @@ export const StyledMoreProductSection = styled.div`
   color: ${({ theme }) => theme.color.textPrimary};
 `;
 
-interface StyledArrowButtonProps {
-  $backgroundImage: string;
-}
-
-export const StyledArrowButton = styled.input<StyledArrowButtonProps>`
-  background-image: url(${(props) => props.$backgroundImage});
-  background-color: transparent;
-
+export const StyledLink = styled(Link)`
   width: 3rem;
   height: 3rem;
   margin-left: 0.625rem;
-
-  border: none;
-  cursor: pointer;
 `;
 
 export const StyledContainer = styled.div`

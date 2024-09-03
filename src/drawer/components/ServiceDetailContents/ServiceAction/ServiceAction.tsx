@@ -111,7 +111,7 @@ export const ServiceAction = ({ product }: { product: ProductDetailResult }) => 
               {product.isBookmarked ? <IcStarFilled /> : <IcStarLine />}
             </IconContext.Provider>
           </button>
-          <StyledIconLabelText $color={theme.color.pointYellow}>Recommend</StyledIconLabelText>
+          <StyledIconLabelText $color={theme.color.pointYellow}>Bookmark</StyledIconLabelText>
         </StyledIconButtonContainer>
       </StyledServiceActionContainer>
       {isShowToast && <Toast {...toastProps} />}
