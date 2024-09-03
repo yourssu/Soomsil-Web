@@ -29,11 +29,11 @@ export const StyledLabelHint = styled.span<IsWarnedProps>`
     $isWarned ? theme.color.textWarned : theme.color.textPrimary};
 `;
 
-export const StyledControlContainer = styled.div`
+export const StyledTextControlContainer = styled.div`
   flex-grow: 1;
 `;
 
-export const StyledControlMessage = styled.div<IsWarnedProps>`
+export const StyledTextControlMessage = styled.div<IsWarnedProps>`
   ${({ theme }) => theme.typo.caption2}
   color: ${({ theme, $isWarned }) =>
     $isWarned ? theme.color.textWarned : theme.color.textPrimary};

@@ -3,12 +3,12 @@ import React, { createContext, ReactElement, ReactNode, useContext } from 'react
 import { RegisterOptions, useFormContext, ValidationValueMessage } from 'react-hook-form';
 
 import {
-  StyledControlContainer,
-  StyledControlMessage,
   StyledFieldContainer,
   StyledLabel,
   StyledLabelContainer,
   StyledLabelHint,
+  StyledTextControlContainer,
+  StyledTextControlMessage,
 } from './FormField.style';
 
 interface FormFieldProps {
@@ -22,7 +22,7 @@ interface FieldLabelProps {
   hint: string;
 }
 
-interface FieldControlProps {
+interface FieldTextControl {
   children: ReactElement;
 }
 
@@ -56,7 +56,7 @@ const FieldLabel = ({ children, hint }: FieldLabelProps) => {
   );
 };
 
-const FieldControl = ({ children }: FieldControlProps) => {
+const FieldTextControl = ({ children }: FieldTextControl) => {
   const {
     register,
     formState: { errors },
@@ -81,17 +81,19 @@ const FieldControl = ({ children }: FieldControlProps) => {
   };
 
   return (
-    <StyledControlContainer>
+    <StyledTextControlContainer>
       {React.cloneElement(children, {
         $isWarned: !!errors[name],
         $hasText: watchField.length > 0,
         id: name,
         ...register(name, registerOption),
       })}
-      <StyledControlMessage $isWarned={!!errors[name]}>{getControlMessage()}</StyledControlMessage>
-    </StyledControlContainer>
+      <StyledTextControlMessage $isWarned={!!errors[name]}>
+        {getControlMessage()}
+      </StyledTextControlMessage>
+    </StyledTextControlContainer>
   );
 };
 
 FormField.Label = FieldLabel;
-FormField.Control = FieldControl;
+FormField.TextControl = FieldTextControl;

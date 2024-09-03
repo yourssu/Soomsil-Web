@@ -1,5 +1,7 @@
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
+import { RegisterCategory } from '@/drawer/pages/Register/RegisterCategory';
+
 import { FormField } from './FormField';
 import {
   StyledContainer,
@@ -44,9 +46,9 @@ export const Register = () => {
               }}
             >
               <FormField.Label hint="최대 20자">서비스 이름</FormField.Label>
-              <FormField.Control>
+              <FormField.TextControl>
                 <StyledInput />
-              </FormField.Control>
+              </FormField.TextControl>
             </FormField>
             <FormField
               name="subtitle"
@@ -59,9 +61,9 @@ export const Register = () => {
               }}
             >
               <FormField.Label hint="최대 20자">간단한 설명</FormField.Label>
-              <FormField.Control>
+              <FormField.TextControl>
                 <StyledInput />
-              </FormField.Control>
+              </FormField.TextControl>
             </FormField>
             <FormField
               name="content"
@@ -74,9 +76,18 @@ export const Register = () => {
               }}
             >
               <FormField.Label hint="최대 5000자">내용</FormField.Label>
-              <FormField.Control>
+              <FormField.TextControl>
                 <StyledTextarea />
-              </FormField.Control>
+              </FormField.TextControl>
+            </FormField>
+            <FormField
+              name="category"
+              registerOption={{
+                required: true,
+              }}
+            >
+              <FormField.Label hint="중복 선택 불가">카테고리</FormField.Label>
+              <RegisterCategory />
             </FormField>
           </StyledSection>
           <button
