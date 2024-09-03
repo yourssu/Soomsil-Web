@@ -11,6 +11,7 @@ export const StyledFieldContainer = styled.div`
 
 export const StyledLabelContainer = styled.div`
   display: flex;
+  width: 7.5rem;
   white-space: nowrap;
   flex-direction: column;
   gap: 0.625rem;

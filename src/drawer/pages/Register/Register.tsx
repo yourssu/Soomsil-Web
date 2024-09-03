@@ -7,6 +7,7 @@ import {
   StyledInput,
   StyledRequiredHint,
   StyledSection,
+  StyledTextarea,
 } from './Register.style';
 
 interface RegisterFormInput {
@@ -62,8 +63,32 @@ export const Register = () => {
                 <StyledInput />
               </FormField.Control>
             </FormField>
+            <FormField
+              name="content"
+              registerOption={{
+                required: '내용은 필수값입니다.',
+                maxLength: {
+                  value: 5000,
+                  message: '최대 5000자까지 입력 가능합니다.',
+                },
+              }}
+            >
+              <FormField.Label hint="최대 5000자">내용</FormField.Label>
+              <FormField.Control>
+                <StyledTextarea />
+              </FormField.Control>
+            </FormField>
           </StyledSection>
-          <button type="submit">서비스 등록</button>
+          <button
+            type="submit"
+            style={{
+              width: '100%',
+              height: '3rem',
+              color: 'black',
+            }}
+          >
+            서비스 등록
+          </button>
         </StyledForm>
       </FormProvider>
     </StyledContainer>

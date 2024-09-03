@@ -64,7 +64,7 @@ const FieldControl = ({ children }: FieldControlProps) => {
   } = useFormContext();
   const { name, registerOption } = useContext(FormFieldContext);
 
-  const watchField = watch(name);
+  const watchField = watch(name, '');
 
   const getControlMessage = () => {
     const errorMessage = errors[name]?.message;
@@ -84,6 +84,7 @@ const FieldControl = ({ children }: FieldControlProps) => {
     <StyledControlContainer>
       {React.cloneElement(children, {
         $isWarned: !!errors[name],
+        $hasText: watchField.length > 0,
         id: name,
         ...register(name, registerOption),
       })}

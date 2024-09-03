@@ -7,6 +7,7 @@ export const StyledContainer = styled.div`
 
 export const StyledRequiredHint = styled.div`
   ${({ theme }) => theme.typo.subtitle6}
+  color: ${({ theme }) => theme.color.textPrimary};
   text-align: right;
 `;
 
@@ -26,6 +27,7 @@ export const StyledSection = styled.section`
 
 interface StyledInputProps {
   $isWarned?: boolean;
+  $hasText?: boolean;
 }
 
 export const StyledInput = styled.input<StyledInputProps>`
@@ -37,9 +39,34 @@ export const StyledInput = styled.input<StyledInputProps>`
   width: 100%;
   padding: 0.375rem;
   border-bottom: 2px solid
-    ${({ $isWarned = false, theme }) =>
-      $isWarned ? theme.color.textWarned : theme.color.buttonNormalPressed};
+    ${({ $isWarned = false, $hasText = false, theme }) =>
+      $isWarned
+        ? theme.color.buttonWarned
+        : $hasText
+          ? theme.color.buttonNormalPressed
+          : theme.color.buttonDisabled};
 
   background-color: transparent;
   caret-color: ${({ theme }) => theme.color.textPointed};
+`;
+
+export const StyledTextarea = styled.textarea<StyledInputProps>`
+  ${({ theme }) => theme.typo.button4}
+
+  color: ${({ $isWarned = false, theme }) =>
+    $isWarned ? theme.color.textWarned : theme.color.textPrimary};
+
+  width: 100%;
+  resize: none;
+
+  background-color: transparent;
+
+  border: none;
+  border-bottom: 2px solid
+    ${({ $isWarned = false, $hasText = false, theme }) =>
+      $isWarned
+        ? theme.color.buttonWarned
+        : $hasText
+          ? theme.color.buttonNormalPressed
+          : theme.color.buttonDisabled};
 `;
