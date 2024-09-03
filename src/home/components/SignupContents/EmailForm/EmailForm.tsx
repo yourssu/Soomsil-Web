@@ -33,7 +33,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
             value={email}
             onChange={onChange}
             isNegative={!!emailError}
-            helperLabel={emailError}
+            helperLabel={emailError ? emailError : undefined}
             placeholder="ppushoong"
             suffix={EMAIL_DOMAIN}
             autoFocus
