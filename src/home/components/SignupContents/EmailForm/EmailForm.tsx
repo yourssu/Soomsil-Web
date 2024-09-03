@@ -1,9 +1,9 @@
 import { BoxButton, PlainButton, SuffixTextField } from '@yourssu/design-system-react';
 
 import { EMAIL_DOMAIN, MAIL_SEARCH_URL } from '@/constants/email.constant';
-import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
-import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm.ts';
-import { usePreventDuplicateClick } from '@/hooks/usePreventDuplicateClick.ts';
+import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type';
+import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm';
+import { usePreventDuplicateClick } from '@/hooks/usePreventDuplicateClick';
 
 import {
   StyledSignupButtonText,
@@ -51,7 +51,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           </PlainButton>
         </StyledPlainButtonWrapper>
         <BoxButton
-          type="submit"
+          type="button"
           size="large"
           variant="filled"
           rounding={8}
