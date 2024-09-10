@@ -22,7 +22,7 @@ export const StyledForm = styled.form`
 export const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.625rem;
 `;
 
 interface StyledInputProps {
@@ -69,4 +69,11 @@ export const StyledTextarea = styled.textarea<StyledInputProps>`
         : $hasText
           ? theme.color.buttonNormalPressed
           : theme.color.buttonDisabled};
+`;
+
+export const StyledRequiredLinkHint = styled.div`
+  ${({ theme }) => theme.typo.subtitle6}
+  color: ${({ theme }) => theme.color.textPrimary};
+  text-align: right;
+  margin-bottom: 1.25rem;
 `;
