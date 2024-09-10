@@ -1,9 +1,16 @@
 import React, { createContext, ReactElement, ReactNode, useContext, useState } from 'react';
 
+import { IcXLine } from '@yourssu/design-system-react';
 import { RegisterOptions, useFormContext } from 'react-hook-form';
+import { useTheme } from 'styled-components';
 
 import {
   StyledFieldContainer,
+  StyledImageDeleteButton,
+  StyledImageFileName,
+  StyledImageUploadButton,
+  StyledImageUploadControlContainer,
+  StyledImageUploadItemContainer,
   StyledLabel,
   StyledLabelContainer,
   StyledLabelHint,
@@ -18,13 +25,14 @@ import {
 interface FormFieldProps {
   children: ReactNode;
   name: string;
-  registerOption: RegisterOptions;
+  registerOption?: RegisterOptions;
 }
 
 interface FieldLabelProps {
   children: ReactNode;
   hint: string;
   justify?: 'flex-start' | 'center';
+  required?: boolean;
 }
 
 interface FieldTextControlProps {
@@ -34,6 +42,11 @@ interface FieldTextControlProps {
 interface FieldThumbnailControlProps {
   children: ReactElement;
   fallback: ReactNode;
+}
+
+interface FieldImageUploadControlProps {
+  children: ReactElement;
+  maxFiles: number;
 }
 
 const FormFieldContext = createContext<Omit<FormFieldProps, 'children'>>({
@@ -49,7 +62,12 @@ export const FormField = ({ children, name, registerOption }: FormFieldProps) =>
   );
 };
 
-const FieldLabel = ({ children, hint, justify = 'flex-start' }: FieldLabelProps) => {
+const FieldLabel = ({
+  children,
+  hint,
+  justify = 'flex-start',
+  required = false,
+}: FieldLabelProps) => {
   const {
     formState: { errors },
   } = useFormContext();
@@ -59,7 +77,7 @@ const FieldLabel = ({ children, hint, justify = 'flex-start' }: FieldLabelProps)
     <StyledLabelContainer $justify={justify}>
       <StyledLabel htmlFor={name} $isWarned={!!errors[name]}>
         {children}
-        {registerOption.required && ' *'}
+        {(required || registerOption?.required) && ' *'}
       </StyledLabel>
       <StyledLabelHint $isWarned={!!errors[name]}>({hint})</StyledLabelHint>
     </StyledLabelContainer>
@@ -82,7 +100,11 @@ const FieldTextControl = ({ children }: FieldTextControlProps) => {
       return String(errorMessage);
     }
 
-    if (typeof registerOption.maxLength === 'object') {
+    if (
+      registerOption &&
+      typeof registerOption.maxLength === 'object' &&
+      registerOption.maxLength.value
+    ) {
       return `${watchField.length}/${registerOption.maxLength.value}`;
     }
 
@@ -145,6 +167,61 @@ const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProp
   );
 };
 
+const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControlProps) => {
+  const { register, getValues, setValue } = useFormContext();
+  const { name } = useContext(FormFieldContext);
+  const [fileNames, setFileNames] = useState<string[]>(Array.from({ length: maxFiles }, () => ''));
+  const theme = useTheme();
+
+  const handleChangeFile = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const newFileNames = [...fileNames];
+      newFileNames[index] = file.name;
+      setFileNames(newFileNames);
+    }
+  };
+
+  const handleClickDeleteButton = (index: number) => () => {
+    const newFileNames = [...fileNames];
+    newFileNames[index] = '';
+    setFileNames(newFileNames);
+
+    setValue(`${name}.${index}`, null);
+  };
+
+  return (
+    <StyledImageUploadControlContainer>
+      {Array.from({ length: maxFiles }).map((_, index) => (
+        <StyledImageUploadItemContainer key={`container-${index}`}>
+          {React.cloneElement(children, {
+            id: `${name}-${index}`,
+            ...register(`${name}.${index}`, {
+              onChange: handleChangeFile(index),
+            }),
+          })}
+          <StyledImageUploadButton
+            type="button"
+            onClick={() => {
+              document.getElementById(`${name}-${index}`)?.click();
+            }}
+          >
+            파일 첨부
+          </StyledImageUploadButton>
+          <StyledImageFileName>{fileNames[index]}</StyledImageFileName>
+          {getValues(`${name}.${index}`)?.length > 0 && (
+            <StyledImageDeleteButton type="button" onClick={handleClickDeleteButton(index)}>
+              <IcXLine size={'1.25rem'} color={theme.color.buttonNormal} />
+            </StyledImageDeleteButton>
+          )}
+        </StyledImageUploadItemContainer>
+      ))}
+    </StyledImageUploadControlContainer>
+  );
+};
+
 FormField.Label = FieldLabel;
 FormField.TextControl = FieldTextControl;
 FormField.ThumbnailControl = FieldThumbnailControl;
+FormField.ImageUploadControl = FieldImageUploadControl;
