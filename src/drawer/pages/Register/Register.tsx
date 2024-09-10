@@ -1,9 +1,14 @@
-import { IcPlusLine } from '@yourssu/design-system-react';
+import { useState } from 'react';
+
+import { BoxButton, IcPlusLine } from '@yourssu/design-system-react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
 import { useTheme } from 'styled-components';
 
 import { Category } from '@/drawer/components/Category/Category.type';
+import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
+import { CategoryState } from '@/drawer/recoil/CategoryState';
 
 import { FormField } from './FormField';
 import {
@@ -27,6 +32,7 @@ interface RegisterFormInput {
   appStoreUrl: string;
   githubUrl: string;
   thumbnailImage: File[];
+  introductionImages: File[];
 }
 
 // const registerFormDefaultValues: RegisterFormInput = {
@@ -38,6 +44,9 @@ interface RegisterFormInput {
 
 export const Register = () => {
   const theme = useTheme();
+  const category = useRecoilValue(CategoryState);
+  const [isChecked, setIsChecked] = useState(false);
+
   const methods = useForm<RegisterFormInput>({
     mode: 'onChange',
 
@@ -45,12 +54,13 @@ export const Register = () => {
       title: '',
       subtitle: '',
       content: '',
-      category: '',
+      category: category as Category,
       webpageUrl: '',
       googlePlayUrl: '',
       appStoreUrl: '',
       githubUrl: '',
       thumbnailImage: [],
+      introductionImages: [],
     },
   });
 
@@ -110,13 +120,10 @@ export const Register = () => {
               <StyledTextarea />
             </FormField.TextControl>
           </FormField>
-          <FormField
-            name="category"
-            registerOption={{
-              required: true,
-            }}
-          >
-            <FormField.Label hint="중복 선택 불가">카테고리</FormField.Label>
+          <FormField name="category">
+            <FormField.Label hint="중복 선택 불가" required={true}>
+              카테고리
+            </FormField.Label>
             <RegisterCategory />
           </FormField>
           <StyledSection>
@@ -151,14 +158,11 @@ export const Register = () => {
             name="thumbnailImage"
             registerOption={{
               validate: {
-                required: (value) => {
-                  if (value.length === 0) return '썸네일 이미지는 필수값입니다.';
-                  return true;
-                },
+                required: (files: File[]) => files.length > 0 || '썸네일 이미지는 필수값입니다.',
               },
             }}
           >
-            <FormField.Label hint="권장 : 1024px X 1024px" justify="center">
+            <FormField.Label hint="권장 : 1024px X 1024px" justify="center" required={true}>
               썸네일 이미지
             </FormField.Label>
             <FormField.ThumbnailControl
@@ -167,16 +171,31 @@ export const Register = () => {
               <input type="file" accept=".jpg, .jpeg, .png, .gif" style={{ display: 'none' }} />
             </FormField.ThumbnailControl>
           </FormField>
-          <button
-            type="submit"
+          <FormField name="introductionImages">
+            <FormField.Label hint="권장 : 1920px X 1080px, 최대 5장" required={true}>
+              소개 이미지
+            </FormField.Label>
+            <FormField.ImageUploadControl maxFiles={5}>
+              <input type="file" accept=".jpg, .jpeg, .png, .gif" style={{ display: 'none' }} />
+            </FormField.ImageUploadControl>
+          </FormField>
+          <WarningBox
+            isSelected={isChecked}
+            handleSelected={() => {
+              setIsChecked((prev) => !prev);
+            }}
+          />
+          <BoxButton
+            size={'medium'}
+            variant={'filled'}
+            rounding={4}
+            width="8.125rem"
             style={{
-              width: '100%',
-              height: '3rem',
-              color: 'black',
+              alignSelf: 'flex-end',
             }}
           >
             서비스 등록
-          </button>
+          </BoxButton>
         </StyledForm>
       </FormProvider>
     </StyledContainer>
