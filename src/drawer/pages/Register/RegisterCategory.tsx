@@ -27,13 +27,13 @@ export const RegisterCategory = () => {
     <StyledRegisterCategoryContainer id={name}>
       {CategoryList.slice(1).map(({ category, title, subcategories }) => (
         <CheckBox
-          name={name}
-          ref={ref}
           key={category}
           value={category}
-          isSelected={selectedCategory === category}
-          type={'radio'}
+          type="radio"
           size="medium"
+          isSelected={selectedCategory === category}
+          name={name}
+          ref={ref}
           onChange={(event) => {
             setSelectedCategory(category);
             onChange(event);
