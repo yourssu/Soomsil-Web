@@ -13,7 +13,6 @@ import {
 export const RegisterCategory = () => {
   const {
     register,
-    setValue,
     formState: { errors },
   } = useFormContext();
   const { onChange, onBlur, name, ref } = register('category', {
@@ -21,7 +20,6 @@ export const RegisterCategory = () => {
   });
 
   const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
-  setValue('category', selectedCategory);
 
   return (
     <StyledRegisterCategoryContainer id={name}>
