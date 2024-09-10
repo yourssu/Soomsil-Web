@@ -1,6 +1,6 @@
-import React, { createContext, ReactElement, ReactNode, useContext } from 'react';
+import React, { createContext, ReactElement, ReactNode, useContext, useState } from 'react';
 
-import { RegisterOptions, useFormContext, ValidationValueMessage } from 'react-hook-form';
+import { RegisterOptions, useFormContext } from 'react-hook-form';
 
 import {
   StyledFieldContainer,
@@ -9,6 +9,10 @@ import {
   StyledLabelHint,
   StyledTextControlContainer,
   StyledTextControlMessage,
+  StyledThumbnailControlContainer,
+  StyledThumbnailErrorMessage,
+  StyledThumbnailPreview,
+  StyledThumbnailPreviewContainer,
 } from './FormField.style';
 
 interface FormFieldProps {
@@ -20,10 +24,16 @@ interface FormFieldProps {
 interface FieldLabelProps {
   children: ReactNode;
   hint: string;
+  justify?: 'flex-start' | 'center';
 }
 
-interface FieldTextControl {
+interface FieldTextControlProps {
   children: ReactElement;
+}
+
+interface FieldThumbnailControlProps {
+  children: ReactElement;
+  fallback: ReactNode;
 }
 
 const FormFieldContext = createContext<Omit<FormFieldProps, 'children'>>({
@@ -39,14 +49,14 @@ export const FormField = ({ children, name, registerOption }: FormFieldProps) =>
   );
 };
 
-const FieldLabel = ({ children, hint }: FieldLabelProps) => {
+const FieldLabel = ({ children, hint, justify = 'flex-start' }: FieldLabelProps) => {
   const {
     formState: { errors },
   } = useFormContext();
   const { name, registerOption } = useContext(FormFieldContext);
 
   return (
-    <StyledLabelContainer>
+    <StyledLabelContainer $justify={justify}>
       <StyledLabel htmlFor={name} $isWarned={!!errors[name]}>
         {children}
         {registerOption.required && ' *'}
@@ -56,7 +66,7 @@ const FieldLabel = ({ children, hint }: FieldLabelProps) => {
   );
 };
 
-const FieldTextControl = ({ children }: FieldTextControl) => {
+const FieldTextControl = ({ children }: FieldTextControlProps) => {
   const {
     register,
     formState: { errors },
@@ -72,9 +82,8 @@ const FieldTextControl = ({ children }: FieldTextControl) => {
       return String(errorMessage);
     }
 
-    if (registerOption.maxLength) {
-      const maxLength = registerOption.maxLength as ValidationValueMessage<number>;
-      return `${watchField.length}/${maxLength.value}`;
+    if (typeof registerOption.maxLength === 'object') {
+      return `${watchField.length}/${registerOption.maxLength.value}`;
     }
 
     return '';
@@ -95,5 +104,47 @@ const FieldTextControl = ({ children }: FieldTextControl) => {
   );
 };
 
+const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProps) => {
+  const {
+    register,
+    formState: { errors },
+    setValue,
+  } = useFormContext();
+  const { name, registerOption } = useContext(FormFieldContext);
+  const [previewUrl, setPreviewUrl] = useState('');
+
+  const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result as string);
+        setValue(name, [file]);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  return (
+    <StyledThumbnailControlContainer>
+      {React.cloneElement(children, {
+        id: name,
+        ...register(name, {
+          onChange: handleChangeImage,
+          ...registerOption,
+        }),
+      })}
+      <StyledThumbnailPreviewContainer htmlFor={name}>
+        {previewUrl ? <StyledThumbnailPreview src={previewUrl} alt="preview" /> : fallback}
+      </StyledThumbnailPreviewContainer>
+      {errors[name] && (
+        <StyledThumbnailErrorMessage>{String(errors[name].message)}</StyledThumbnailErrorMessage>
+      )}
+    </StyledThumbnailControlContainer>
+  );
+};
+
 FormField.Label = FieldLabel;
 FormField.TextControl = FieldTextControl;
+FormField.ThumbnailControl = FieldThumbnailControl;
