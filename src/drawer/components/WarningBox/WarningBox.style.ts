@@ -9,8 +9,6 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   align-items: end;
   gap: 1.06rem;
-  margin: 2rem 0;
-  padding-right: 1.2rem;
 `;
 
 interface StyledWarningBoxProps {
@@ -18,7 +16,7 @@ interface StyledWarningBoxProps {
 }
 
 export const StyledWarningBoxContainer = styled.div<StyledWarningBoxProps>`
-  width: 62.5rem;
+  width: 100%;
   height: 4.8125rem;
   border-radius: 0.75rem;
   background: ${({ theme }) => theme.color.buttonDisabledBG};
