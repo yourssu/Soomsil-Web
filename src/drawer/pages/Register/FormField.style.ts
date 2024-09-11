@@ -4,16 +4,30 @@ interface IsWarnedProps {
   $isWarned: boolean;
 }
 
+interface StyledFieldContainerProps {
+  $direction?: 'row' | 'column';
+}
 interface StyledLabelContainerProps {
   $justify?: 'flex-start' | 'center';
 }
 
-export const StyledFieldContainer = styled.div`
+export const StyledFieldContainer = styled.div<StyledFieldContainerProps>`
+  @media (max-width: 30rem) {
+    gap: 0.75rem;
+    justify-content: space-between;
+  }
+
   display: flex;
+  flex-direction: ${({ $direction }) => $direction};
   gap: 12.75rem;
 `;
 
 export const StyledLabelContainer = styled.div<StyledLabelContainerProps>`
+  @media (max-width: 30rem) {
+    width: 5rem;
+    gap: 0.25rem;
+  }
+
   display: flex;
   justify-content: ${({ $justify }) => $justify};
   width: 7.5rem;
@@ -23,12 +37,26 @@ export const StyledLabelContainer = styled.div<StyledLabelContainerProps>`
 `;
 
 export const StyledLabel = styled.label<IsWarnedProps>`
+  @media (max-width: 30rem) {
+    ${({ theme }) => theme.typo.caption0}
+  }
+
   ${({ theme }) => theme.typo.subtitle6}
   color: ${({ theme, $isWarned }) =>
     $isWarned ? theme.color.textWarned : theme.color.textPrimary};
 `;
 
 export const StyledLabelHint = styled.span<IsWarnedProps>`
+  @media (max-width: 30rem) {
+    /* Soomsil/Drawer/Web/body10 */
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 13px */
+    letter-spacing: 0.25px;
+  }
+
   ${({ theme }) => theme.typo.caption2}
   color: ${({ theme, $isWarned }) =>
     $isWarned ? theme.color.textWarned : theme.color.textPrimary};
@@ -39,6 +67,16 @@ export const StyledTextControlContainer = styled.div`
 `;
 
 export const StyledTextControlMessage = styled.div<IsWarnedProps>`
+  @media (max-width: 30rem) {
+    /* Soomsil/Drawer/Web/body10 */
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 13px */
+    letter-spacing: 0.25px;
+  }
+
   ${({ theme }) => theme.typo.caption2}
   color: ${({ theme, $isWarned }) =>
     $isWarned ? theme.color.textWarned : theme.color.textPrimary};
@@ -46,12 +84,22 @@ export const StyledTextControlMessage = styled.div<IsWarnedProps>`
 `;
 
 export const StyledThumbnailControlContainer = styled.div`
+  @media (max-width: 30rem) {
+    align-self: flex-end;
+  }
+
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
 `;
 
 export const StyledThumbnailPreviewContainer = styled.label`
+  @media (max-width: 30rem) {
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 1.25rem;
+  }
+
   display: flex;
   width: 11.25rem;
   height: 11.25rem;
@@ -73,6 +121,16 @@ export const StyledThumbnailPreview = styled.img`
 `;
 
 export const StyledErrorMessage = styled.div`
+  @media (max-width: 30rem) {
+    /* Soomsil/Drawer/Web/body10 */
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 13px */
+    letter-spacing: 0.25px;
+  }
+
   ${({ theme }) => theme.typo.caption2}
   color: ${({ theme }) => theme.color.textWarned};
 `;
@@ -85,6 +143,10 @@ export const StyledImageUploadControlContainer = styled.div`
 `;
 
 export const StyledImageUploadItemContainer = styled.div`
+  @media (max-width: 30rem) {
+    border-radius: 0.25rem;
+  }
+
   display: flex;
   align-items: center;
   gap: 0.875rem;
@@ -94,6 +156,20 @@ export const StyledImageUploadItemContainer = styled.div`
 `;
 
 export const StyledImageUploadButton = styled.button`
+  @media (max-width: 30rem) {
+    /* Soomsil/Drawer/iOS/subtitle10 */
+    font-family: 'Apple SD Gothic Neo';
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 13px */
+
+    border-radius: 0.25rem;
+
+    width: 70px;
+    height: 21px;
+  }
+
   ${({ theme }) => theme.typo.button4}
 
   width: 6rem;
@@ -106,6 +182,16 @@ export const StyledImageUploadButton = styled.button`
 `;
 
 export const StyledImageFileName = styled.span`
+  @media (max-width: 30rem) {
+    /* Soomsil/Drawer/Web/body10 */
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 13px */
+    letter-spacing: 0.25px;
+  }
+
   ${({ theme }) => theme.typo.button4}
   color: ${({ theme }) => theme.color.textSecondary};
   flex-grow: 1;

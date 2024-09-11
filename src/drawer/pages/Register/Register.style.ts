@@ -1,21 +1,38 @@
 import { styled } from 'styled-components';
 
 export const StyledContainer = styled.div`
+  @media (max-width: 30rem) {
+    padding: 1.5rem 1.25rem;
+  }
+
   width: 100%;
   padding: 3.5rem 20rem;
 `;
 
 export const StyledRequiredHint = styled.div`
+  @media (max-width: 30rem) {
+    /* Soomsil/Drawer/Web/body10 */
+    font-size: 'Spoqa Han Sans Neo';
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
   ${({ theme }) => theme.typo.subtitle6}
   color: ${({ theme }) => theme.color.textPrimary};
   text-align: right;
 `;
 
 export const StyledForm = styled.form`
+  @media (max-width: 30rem) {
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+  }
+
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
   margin-top: 1.25rem;
 `;
 
@@ -31,8 +48,11 @@ interface StyledInputProps {
 }
 
 export const StyledInput = styled.input<StyledInputProps>`
-  ${({ theme }) => theme.typo.subtitle3}
+  @media (max-width: 30rem) {
+    ${({ theme }) => theme.typo.caption2}
+  }
 
+  ${({ theme }) => theme.typo.subtitle3}
   color: ${({ $isWarned = false, theme }) =>
     $isWarned ? theme.color.textWarned : theme.color.textSecondary};
 
@@ -73,8 +93,19 @@ export const StyledTextarea = styled.textarea<StyledInputProps>`
 `;
 
 export const StyledRequiredLinkHint = styled.div`
+  @media (max-width: 30rem) {
+    /* Soomsil/Drawer/Web/body10 */
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 13px */
+    letter-spacing: 0.25px;
+  }
+
   ${({ theme }) => theme.typo.subtitle6}
   color: ${({ theme }) => theme.color.textPrimary};
   text-align: right;
+  white-space: pre-wrap;
   margin-bottom: 1.25rem;
 `;

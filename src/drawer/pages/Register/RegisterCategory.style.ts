@@ -12,3 +12,8 @@ export const StyledRegisterCategoryErrorMessage = styled.div`
   color: ${({ theme }) => theme.color.textWarned};
   text-align: right;
 `;
+
+export const StyledTitle = styled.span`
+  display: inline-block;
+  white-space: nowrap;
+`;

@@ -4,6 +4,8 @@ import { IcXLine } from '@yourssu/design-system-react';
 import { RegisterOptions, useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+
 import {
   StyledErrorMessage,
   StyledFieldContainer,
@@ -26,6 +28,7 @@ interface FormFieldProps {
   children: ReactNode;
   name: string;
   registerOption?: RegisterOptions;
+  direction?: 'row' | 'column';
 }
 
 interface FieldLabelProps {
@@ -54,10 +57,15 @@ const FormFieldContext = createContext<Omit<FormFieldProps, 'children'>>({
   registerOption: {},
 });
 
-export const FormField = ({ children, name, registerOption }: FormFieldProps) => {
+export const FormField = ({
+  children,
+  name,
+  registerOption,
+  direction = 'row',
+}: FormFieldProps) => {
   return (
     <FormFieldContext.Provider value={{ name, registerOption }}>
-      <StyledFieldContainer>{children}</StyledFieldContainer>
+      <StyledFieldContainer $direction={direction}>{children}</StyledFieldContainer>
     </FormFieldContext.Provider>
   );
 };
@@ -166,6 +174,9 @@ const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProp
 };
 
 const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControlProps) => {
+  const theme = useTheme();
+  const isMobileView = useMediaQuery('(max-width: 30rem)');
+
   const {
     register,
     formState: { errors },
@@ -175,7 +186,6 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
   } = useFormContext();
   const { name, registerOption } = useContext(FormFieldContext);
   const [fileNames, setFileNames] = useState<string[]>(Array.from({ length: maxFiles }, () => ''));
-  const theme = useTheme();
 
   const handleChangeFile = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -225,7 +235,10 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
           <StyledImageFileName>{fileNames[index]}</StyledImageFileName>
           {getValues(`${name}.${index}`) && (
             <StyledImageDeleteButton type="button" onClick={handleClickDeleteButton(index)}>
-              <IcXLine size={'1.25rem'} color={theme.color.buttonNormal} />
+              <IcXLine
+                size={isMobileView ? '0.8rem' : '1.25rem'}
+                color={theme.color.buttonNormal}
+              />
             </StyledImageDeleteButton>
           )}
         </StyledImageUploadItemContainer>

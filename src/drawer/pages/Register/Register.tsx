@@ -10,6 +10,7 @@ import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, LINK_NAMES, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { usePostProduct } from '@/drawer/hooks/usePostProduct';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { FormField } from './FormField';
 import {
@@ -38,6 +39,7 @@ interface RegisterFormInput {
 
 export const Register = () => {
   const theme = useTheme();
+  const isMobileView = useMediaQuery('(max-width: 30rem)');
   const category = useRecoilValue(CategoryState);
   const [isChecked, setIsChecked] = useState(false);
   const registerProductMutation = usePostProduct();
@@ -134,7 +136,9 @@ export const Register = () => {
           </FormField>
           <StyledSection>
             <StyledRequiredLinkHint>
-              웹 페이지, Google Play, App Store, GitHub 링크 중 하나는 필수 기재 *
+              {isMobileView
+                ? `웹 페이지, Google Play, App Store, GitHub\n링크 중 하나는 필수 기재 *`
+                : '웹 페이지, Google Play, App Store, GitHub 링크 중 하나는 필수 기재 *'}
             </StyledRequiredLinkHint>
             {LINK.map((link) => (
               <FormField
@@ -173,8 +177,13 @@ export const Register = () => {
                 required: (files: File[]) => files.length > 0 || '썸네일 이미지는 필수값입니다.',
               },
             }}
+            direction={isMobileView ? 'column' : 'row'}
           >
-            <FormField.Label hint="권장 : 1024px X 1024px" justify="center" required={true}>
+            <FormField.Label
+              hint="권장 : 1024px X 1024px"
+              justify={isMobileView ? 'flex-start' : 'center'}
+              required={true}
+            >
               썸네일 이미지
             </FormField.Label>
             <FormField.ThumbnailControl
@@ -196,6 +205,7 @@ export const Register = () => {
                 },
               },
             }}
+            direction={isMobileView ? 'column' : 'row'}
           >
             <FormField.Label hint="권장 : 1920px X 1080px, 최대 5장" required={true}>
               소개 이미지
@@ -211,7 +221,7 @@ export const Register = () => {
             }}
           />
           <BoxButton
-            size={'medium'}
+            size={isMobileView ? 'small' : 'medium'}
             variant={'filled'}
             rounding={4}
             width="8.125rem"

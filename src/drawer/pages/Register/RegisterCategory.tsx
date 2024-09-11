@@ -4,10 +4,12 @@ import { useRecoilState } from 'recoil';
 
 import { CategoryList } from '@/drawer/constants/category.constant';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import {
   StyledRegisterCategoryContainer,
   StyledRegisterCategoryErrorMessage,
+  StyledTitle,
 } from './RegisterCategory.style';
 
 export const RegisterCategory = () => {
@@ -20,6 +22,7 @@ export const RegisterCategory = () => {
   });
 
   const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
+  const isMobileView = useMediaQuery('(max-width: 30rem)');
 
   return (
     <StyledRegisterCategoryContainer id={name}>
@@ -28,7 +31,7 @@ export const RegisterCategory = () => {
           key={category}
           value={category}
           type="radio"
-          size="medium"
+          size={isMobileView ? 'small' : 'medium'}
           isSelected={selectedCategory === category}
           name={name}
           ref={ref}
@@ -38,7 +41,7 @@ export const RegisterCategory = () => {
           }}
           onBlur={onBlur}
         >
-          {`${title} ${subcategories ?? ''}`}
+          <StyledTitle>{`${title} ${subcategories ?? ''}`}</StyledTitle>
         </CheckBox>
       ))}
       {errors[name] && (
