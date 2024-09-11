@@ -16,18 +16,20 @@ interface StyledWarningBoxProps {
 }
 
 export const StyledWarningBoxContainer = styled.div<StyledWarningBoxProps>`
+  display: flex;
+  align-items: center;
+  gap: 1.27rem;
+
   width: 100%;
   height: 4.8125rem;
-  border-radius: 0.75rem;
+  padding-left: 1.35rem;
+
   background: ${({ theme }) => theme.color.buttonDisabledBG};
+
+  border-radius: 0.75rem;
   border: 1px solid
     ${({ $isWarned, theme }) =>
       $isWarned ? theme.color.buttonWarned : theme.color.buttonDisabledBG};
-  padding-left: 1.35rem;
-  display: flex;
-  flex-direction: row;
-  gap: 1.27rem;
-  align-items: center;
 `;
 
 export const StyledWarningBoxText = styled.div`
