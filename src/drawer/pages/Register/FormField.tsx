@@ -186,6 +186,8 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
       setFileNames(newFileNames);
     }
 
+    setValue(`${name}.${index}`, file);
+
     // 입력이 발생할 때마다 다른 파일 입력 폼도 함께 validation 수행
     trigger(name);
   };
@@ -221,7 +223,7 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
             파일 첨부
           </StyledImageUploadButton>
           <StyledImageFileName>{fileNames[index]}</StyledImageFileName>
-          {getValues(`${name}.${index}`)?.length > 0 && (
+          {getValues(`${name}.${index}`) && (
             <StyledImageDeleteButton type="button" onClick={handleClickDeleteButton(index)}>
               <IcXLine size={'1.25rem'} color={theme.color.buttonNormal} />
             </StyledImageDeleteButton>

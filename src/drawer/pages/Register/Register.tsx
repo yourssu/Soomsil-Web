@@ -8,6 +8,7 @@ import { useTheme } from 'styled-components';
 import { Category } from '@/drawer/components/Category/Category.type';
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, LINK_NAMES, REGISTER_URL } from '@/drawer/constants/link.constant';
+import { usePostProduct } from '@/drawer/hooks/usePostProduct';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 
 import { FormField } from './FormField';
@@ -32,14 +33,14 @@ interface RegisterFormInput {
   appStoreUrl: string;
   githubUrl: string;
   thumbnailImage: File[];
-  introductionImages: File[];
+  introductionImages: (File | null)[];
 }
 
 export const Register = () => {
   const theme = useTheme();
   const category = useRecoilValue(CategoryState);
   const [isChecked, setIsChecked] = useState(false);
-
+  const registerProductMutation = usePostProduct();
   const methods = useForm<RegisterFormInput>({
     mode: 'onChange',
 
@@ -53,12 +54,24 @@ export const Register = () => {
       appStoreUrl: '',
       githubUrl: '',
       thumbnailImage: [],
-      introductionImages: [],
+      introductionImages: Array(5).fill(null),
     },
   });
 
   const onSubmit: SubmitHandler<RegisterFormInput> = (data) => {
-    console.log(data);
+    if (isChecked) {
+      const fileList = data.introductionImages.filter((file) => file !== null);
+      const productData = {
+        ...data,
+        introductionImages: fileList,
+      };
+
+      registerProductMutation.mutate(productData, {
+        onSuccess: () => {
+          console.log('onSuccess');
+        },
+      });
+    }
   };
 
   return (
@@ -121,7 +134,7 @@ export const Register = () => {
           </FormField>
           <StyledSection>
             <StyledRequiredLinkHint>
-              웹 페이지, Google play, App store, GitHub 링크 중 하나는 필수 기재 *
+              웹 페이지, Google Play, App Store, GitHub 링크 중 하나는 필수 기재 *
             </StyledRequiredLinkHint>
             {LINK.map((link) => (
               <FormField
@@ -175,13 +188,11 @@ export const Register = () => {
             registerOption={{
               validate: {
                 atLeastOne: (_, formValues) => {
-                  const fileList: FileList[] = formValues['introductionImages'].filter(
-                    (file: FileList | null) => file !== null
+                  const fileList: File[] = formValues['introductionImages'].filter(
+                    (file: File | null) => file !== null
                   );
 
-                  const isFileExist = fileList.some((file) => file.length > 0);
-                  console.log('isFileExist', isFileExist);
-                  return isFileExist || '소개 이미지를 하나 이상 첨부해주세요.';
+                  return fileList.length > 0 || '소개 이미지를 하나 이상 첨부해주세요.';
                 },
               },
             }}
