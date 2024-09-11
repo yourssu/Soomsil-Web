@@ -23,3 +23,5 @@ export const LINK = [
     title: 'GitHub 링크',
   },
 ] as const;
+
+export const LINK_NAMES = LINK.map((link) => link.name);
