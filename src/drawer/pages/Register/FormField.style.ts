@@ -72,7 +72,7 @@ export const StyledThumbnailPreview = styled.img`
   object-fit: cover;
 `;
 
-export const StyledThumbnailErrorMessage = styled.div`
+export const StyledErrorMessage = styled.div`
   ${({ theme }) => theme.typo.caption2}
   color: ${({ theme }) => theme.color.textWarned};
 `;

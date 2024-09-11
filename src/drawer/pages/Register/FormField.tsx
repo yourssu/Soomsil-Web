@@ -5,6 +5,7 @@ import { RegisterOptions, useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 
 import {
+  StyledErrorMessage,
   StyledFieldContainer,
   StyledImageDeleteButton,
   StyledImageFileName,
@@ -17,7 +18,6 @@ import {
   StyledTextControlContainer,
   StyledTextControlMessage,
   StyledThumbnailControlContainer,
-  StyledThumbnailErrorMessage,
   StyledThumbnailPreview,
   StyledThumbnailPreviewContainer,
 } from './FormField.style';
@@ -160,16 +160,20 @@ const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProp
       <StyledThumbnailPreviewContainer htmlFor={name}>
         {previewUrl ? <StyledThumbnailPreview src={previewUrl} alt="preview" /> : fallback}
       </StyledThumbnailPreviewContainer>
-      {errors[name] && (
-        <StyledThumbnailErrorMessage>{String(errors[name].message)}</StyledThumbnailErrorMessage>
-      )}
+      {errors[name] && <StyledErrorMessage>{String(errors[name].message)}</StyledErrorMessage>}
     </StyledThumbnailControlContainer>
   );
 };
 
 const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControlProps) => {
-  const { register, getValues, setValue } = useFormContext();
-  const { name } = useContext(FormFieldContext);
+  const {
+    register,
+    formState: { errors },
+    getValues,
+    setValue,
+    trigger,
+  } = useFormContext();
+  const { name, registerOption } = useContext(FormFieldContext);
   const [fileNames, setFileNames] = useState<string[]>(Array.from({ length: maxFiles }, () => ''));
   const theme = useTheme();
 
@@ -181,6 +185,9 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
       newFileNames[index] = file.name;
       setFileNames(newFileNames);
     }
+
+    // 입력이 발생할 때마다 다른 파일 입력 폼도 함께 validation 수행
+    trigger(name);
   };
 
   const handleClickDeleteButton = (index: number) => () => {
@@ -189,6 +196,9 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
     setFileNames(newFileNames);
 
     setValue(`${name}.${index}`, null);
+
+    // 입력이 발생할 때마다 다른 파일 입력 폼도 함께 validation 수행
+    trigger(name);
   };
 
   return (
@@ -199,6 +209,7 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
             id: `${name}-${index}`,
             ...register(`${name}.${index}`, {
               onChange: handleChangeFile(index),
+              ...registerOption,
             }),
           })}
           <StyledImageUploadButton
@@ -217,6 +228,9 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
           )}
         </StyledImageUploadItemContainer>
       ))}
+      {Array.isArray(errors[name]) && errors[name][0] && (
+        <StyledErrorMessage>{errors[name][0].message}</StyledErrorMessage>
+      )}
     </StyledImageUploadControlContainer>
   );
 };
