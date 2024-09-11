@@ -34,7 +34,7 @@ export const StyledInput = styled.input<StyledInputProps>`
   ${({ theme }) => theme.typo.subtitle3}
 
   color: ${({ $isWarned = false, theme }) =>
-    $isWarned ? theme.color.textWarned : theme.color.textPrimary};
+    $isWarned ? theme.color.textWarned : theme.color.textSecondary};
 
   width: 100%;
   padding: 0.375rem;
@@ -54,7 +54,8 @@ export const StyledTextarea = styled.textarea<StyledInputProps>`
   ${({ theme }) => theme.typo.button4}
 
   color: ${({ $isWarned = false, theme }) =>
-    $isWarned ? theme.color.textWarned : theme.color.textPrimary};
+    $isWarned ? theme.color.textWarned : theme.color.textSecondary};
+  caret-color: ${({ theme }) => theme.color.textPointed};
 
   width: 100%;
   resize: none;
