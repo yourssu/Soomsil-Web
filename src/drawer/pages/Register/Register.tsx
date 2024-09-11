@@ -7,7 +7,7 @@ import { useTheme } from 'styled-components';
 
 import { Category } from '@/drawer/components/Category/Category.type';
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
-import { LINK, REGISTER_URL } from '@/drawer/constants/link.constant';
+import { LINK, LINK_NAMES, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
 
 import { FormField } from './FormField';
@@ -34,13 +34,6 @@ interface RegisterFormInput {
   thumbnailImage: File[];
   introductionImages: File[];
 }
-
-// const registerFormDefaultValues: RegisterFormInput = {
-//   title: '',
-//   subtitle: '',
-//   content: '',
-//   category: '',
-// };
 
 export const Register = () => {
   const theme = useTheme();
@@ -135,6 +128,8 @@ export const Register = () => {
                 key={link.name}
                 name={link.name}
                 registerOption={{
+                  // 입력이 발생할 때마다 다른 링크 입력 폼도 함께 validation 수행
+                  onChange: () => methods.trigger(LINK_NAMES),
                   maxLength: {
                     value: 100,
                     message: '최대 100자까지 입력 가능합니다.',
@@ -143,6 +138,10 @@ export const Register = () => {
                     startsWith: (v) => {
                       if (v.length === 0) return true;
                       return v.startsWith(REGISTER_URL[link.name]) || '유효하지 않은 링크입니다.';
+                    },
+                    atLeastOne: (_, formValues) => {
+                      const isLinkExist = LINK_NAMES.some((name) => formValues[name].length > 0);
+                      return isLinkExist || '링크를 하나 이상 입력해주세요.';
                     },
                   },
                 }}
@@ -171,7 +170,22 @@ export const Register = () => {
               <input type="file" accept=".jpg, .jpeg, .png, .gif" style={{ display: 'none' }} />
             </FormField.ThumbnailControl>
           </FormField>
-          <FormField name="introductionImages">
+          <FormField
+            name="introductionImages"
+            registerOption={{
+              validate: {
+                atLeastOne: (_, formValues) => {
+                  const fileList: FileList[] = formValues['introductionImages'].filter(
+                    (file: FileList | null) => file !== null
+                  );
+
+                  const isFileExist = fileList.some((file) => file.length > 0);
+                  console.log('isFileExist', isFileExist);
+                  return isFileExist || '소개 이미지를 하나 이상 첨부해주세요.';
+                },
+              },
+            }}
+          >
             <FormField.Label hint="권장 : 1920px X 1080px, 최대 5장" required={true}>
               소개 이미지
             </FormField.Label>
