@@ -10,6 +10,7 @@ import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, LINK_NAMES, REGISTER_URL } from '@/drawer/constants/link.constant';
 import { usePostProduct } from '@/drawer/hooks/usePostProduct';
 import { CategoryState } from '@/drawer/recoil/CategoryState';
+import { ServiceFormValues } from '@/drawer/types/form.type';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { FormField } from './FormField';
@@ -24,26 +25,13 @@ import {
 } from './Register.style';
 import { RegisterCategory } from './RegisterCategory';
 
-interface RegisterFormInput {
-  title: string;
-  subtitle: string;
-  content: string;
-  category: Category;
-  webpageUrl: string;
-  googlePlayUrl: string;
-  appStoreUrl: string;
-  githubUrl: string;
-  thumbnailImage: File[];
-  introductionImages: (File | null)[];
-}
-
 export const Register = () => {
   const theme = useTheme();
   const isMobileView = useMediaQuery('(max-width: 30rem)');
   const category = useRecoilValue(CategoryState);
   const [isChecked, setIsChecked] = useState(false);
   const registerProductMutation = usePostProduct();
-  const methods = useForm<RegisterFormInput>({
+  const methods = useForm<ServiceFormValues>({
     mode: 'onChange',
 
     defaultValues: {
@@ -60,7 +48,7 @@ export const Register = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<RegisterFormInput> = (data) => {
+  const onSubmit: SubmitHandler<ServiceFormValues> = (data) => {
     if (isChecked) {
       const fileList = data.introductionImages.filter((file) => file !== null);
       const productData = {

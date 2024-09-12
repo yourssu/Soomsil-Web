@@ -1,12 +1,14 @@
-export interface RegisterFormValues {
+import { Category } from '../components/Category/Category.type';
+
+export interface ServiceFormValues {
   title: string;
   subtitle: string;
   content: string;
-  category: string;
+  category: Category;
+  webpageUrl: string;
+  googlePlayUrl: string;
   appStoreUrl: string;
   githubUrl: string;
-  googlePlayUrl: string;
-  webpageUrl: string;
   thumbnailImage: File[];
-  introductionImages: File[];
+  introductionImages: (File | null)[];
 }
