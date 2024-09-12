@@ -71,16 +71,19 @@ export const StyledInput = styled.input<StyledInputProps>`
 `;
 
 export const StyledTextarea = styled.textarea<StyledInputProps>`
-  ${({ theme }) => theme.typo.button4}
+  @media (max-width: 30rem) {
+    ${({ theme }) => theme.typo.caption2}
+  }
 
+  ${({ theme }) => theme.typo.button4}
   color: ${({ $isWarned = false, theme }) =>
     $isWarned ? theme.color.textWarned : theme.color.textSecondary};
   caret-color: ${({ theme }) => theme.color.textPointed};
+  background-color: transparent;
 
   width: 100%;
   resize: none;
-
-  background-color: transparent;
+  padding: 0.375rem;
 
   border: none;
   border-bottom: 2px solid
