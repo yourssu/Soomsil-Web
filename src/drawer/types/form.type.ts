@@ -9,6 +9,6 @@ export interface ServiceFormValues {
   googlePlayUrl: string;
   appStoreUrl: string;
   githubUrl: string;
-  thumbnailImage: File[];
+  thumbnailImage: File | null;
   introductionImages: (File | null)[];
 }

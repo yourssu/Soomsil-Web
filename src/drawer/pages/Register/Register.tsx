@@ -43,7 +43,7 @@ export const Register = () => {
       googlePlayUrl: '',
       appStoreUrl: '',
       githubUrl: '',
-      thumbnailImage: [],
+      thumbnailImage: null,
       introductionImages: Array(5).fill(null),
     },
   });
@@ -162,7 +162,7 @@ export const Register = () => {
             name="thumbnailImage"
             registerOption={{
               validate: {
-                required: (files: File[]) => files.length > 0 || '썸네일 이미지는 필수값입니다.',
+                required: (file: File | null) => file !== null || '썸네일 이미지는 필수값입니다.',
               },
             }}
             direction={isMobileView ? 'column' : 'row'}
