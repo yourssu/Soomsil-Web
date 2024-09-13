@@ -20,7 +20,7 @@ export const StyledWarningBoxContainer = styled.div<StyledWarningBoxProps>`
   align-items: center;
   gap: 1.27rem;
 
-  width: 100%;
+  width: calc(100% - 20.25rem);
   height: 4.8125rem;
   padding-left: 1.35rem;
 
