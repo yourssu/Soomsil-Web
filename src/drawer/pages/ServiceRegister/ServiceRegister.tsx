@@ -1,4 +1,6 @@
 import { BoxButton } from '@yourssu/design-system-react';
+import { isAxiosError } from 'axios';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -31,18 +33,21 @@ export const ServiceRegister = () => {
   const category = useRecoilValue(CategoryState);
   const navigate = useNavigate();
 
-  const defaultValues: ServiceFormValues = {
-    title: '',
-    subtitle: '',
-    content: '',
-    category: category as Category,
-    webpageUrl: '',
-    googlePlayUrl: '',
-    appStoreUrl: '',
-    githubUrl: '',
-    thumbnailImage: null,
-    introductionImages: Array(5).fill(null),
-  };
+  const methods = useForm<ServiceFormValues>({
+    mode: 'onChange',
+    defaultValues: {
+      title: '',
+      subtitle: '',
+      content: '',
+      category: category as Category,
+      webpageUrl: '',
+      googlePlayUrl: '',
+      appStoreUrl: '',
+      githubUrl: '',
+      thumbnailImage: null,
+      introductionImages: Array(5).fill(null),
+    },
+  });
 
   const registerProductMutation = usePostProduct();
 
@@ -57,25 +62,42 @@ export const ServiceRegister = () => {
 
         navigate('/drawer/myDrawers?tab=MYDRAWER');
       },
+      onError: (error) => {
+        if (isAxiosError(error)) {
+          // 서비스명 중복 에러
+          if (error.response?.data?.error === 'Drawer-008') {
+            methods.setError(
+              'title',
+              {
+                type: 'custom',
+                message: '이미 등록된 서비스 이름입니다.',
+              },
+              { shouldFocus: true }
+            );
+          }
+        }
+      },
     });
   };
 
   return (
-    <ServiceForm defaultValues={defaultValues} onSubmit={onSubmit}>
-      <ServiceForm.Submit>
-        <BoxButton
-          size={isMobileView ? 'small' : 'medium'}
-          variant={'filled'}
-          rounding={4}
-          width="8.125rem"
-          style={{
-            alignSelf: 'flex-end',
-          }}
-          disabled={registerProductMutation.isPending}
-        >
-          서비스 등록
-        </BoxButton>
-      </ServiceForm.Submit>
-    </ServiceForm>
+    <FormProvider {...methods}>
+      <ServiceForm onSubmit={onSubmit}>
+        <ServiceForm.Submit>
+          <BoxButton
+            size={isMobileView ? 'small' : 'medium'}
+            variant={'filled'}
+            rounding={4}
+            width="8.125rem"
+            style={{
+              alignSelf: 'flex-end',
+            }}
+            disabled={registerProductMutation.isPending}
+          >
+            서비스 등록
+          </BoxButton>
+        </ServiceForm.Submit>
+      </ServiceForm>
+    </FormProvider>
   );
 };
