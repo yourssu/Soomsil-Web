@@ -1,19 +1,16 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
-import { BoxButton, IcPlusLine } from '@yourssu/design-system-react';
+import { IcPlusLine } from '@yourssu/design-system-react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
 import { useTheme } from 'styled-components';
 
-import { Category } from '@/drawer/components/Category/Category.type';
 import { WarningBox } from '@/drawer/components/WarningBox/WarningBox';
 import { LINK, LINK_NAMES, REGISTER_URL } from '@/drawer/constants/link.constant';
-import { usePostProduct } from '@/drawer/hooks/usePostProduct';
-import { CategoryState } from '@/drawer/recoil/CategoryState';
 import { ServiceFormValues } from '@/drawer/types/form.type';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
-import { FormField } from './FormField';
+import { FormField } from './FormField/FormField';
+import { RegisterCategory } from './RegisterCategory/RegisterCategory';
 import {
   StyledContainer,
   StyledForm,
@@ -22,30 +19,22 @@ import {
   StyledRequiredLinkHint,
   StyledSection,
   StyledTextarea,
-} from './Register.style';
-import { RegisterCategory } from './RegisterCategory';
+} from './ServiceForm.style';
 
-export const Register = () => {
+interface ServiceFormProps {
+  children: ReactNode;
+  defaultValues: ServiceFormValues;
+  onSubmit: (data: ServiceFormValues) => void;
+}
+
+export const ServiceForm = (props: ServiceFormProps) => {
   const theme = useTheme();
   const isMobileView = useMediaQuery('(max-width: 30rem)');
-  const category = useRecoilValue(CategoryState);
+
   const [isChecked, setIsChecked] = useState(false);
-  const registerProductMutation = usePostProduct();
   const methods = useForm<ServiceFormValues>({
     mode: 'onChange',
-
-    defaultValues: {
-      title: '',
-      subtitle: '',
-      content: '',
-      category: category as Category,
-      webpageUrl: '',
-      googlePlayUrl: '',
-      appStoreUrl: '',
-      githubUrl: '',
-      thumbnailImage: null,
-      introductionImages: Array(5).fill(null),
-    },
+    defaultValues: props.defaultValues,
   });
 
   const onSubmit: SubmitHandler<ServiceFormValues> = (data) => {
@@ -56,11 +45,7 @@ export const Register = () => {
         introductionImages: fileList,
       };
 
-      registerProductMutation.mutate(productData, {
-        onSuccess: () => {
-          console.log('onSuccess');
-        },
-      });
+      props.onSubmit(productData);
     }
   };
 
@@ -208,19 +193,15 @@ export const Register = () => {
               setIsChecked((prev) => !prev);
             }}
           />
-          <BoxButton
-            size={isMobileView ? 'small' : 'medium'}
-            variant={'filled'}
-            rounding={4}
-            width="8.125rem"
-            style={{
-              alignSelf: 'flex-end',
-            }}
-          >
-            서비스 등록
-          </BoxButton>
+          {props.children}
         </StyledForm>
       </FormProvider>
     </StyledContainer>
   );
 };
+
+const ServiceFormSubmit = ({ children }: { children: ReactNode }) => {
+  return children;
+};
+
+ServiceForm.Submit = ServiceFormSubmit;

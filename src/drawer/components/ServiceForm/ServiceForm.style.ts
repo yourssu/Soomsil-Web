@@ -6,7 +6,7 @@ export const StyledContainer = styled.div`
   }
 
   width: 100%;
-  padding: 3.5rem 20rem;
+  padding: 3.5rem;
 `;
 
 export const StyledRequiredHint = styled.div`

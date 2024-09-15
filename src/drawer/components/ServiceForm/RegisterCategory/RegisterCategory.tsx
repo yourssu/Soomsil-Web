@@ -32,7 +32,7 @@ export const RegisterCategory = () => {
           value={category}
           type="radio"
           size={isMobileView ? 'small' : 'medium'}
-          isSelected={selectedCategory === category}
+          isSelected={category === selectedCategory}
           name={name}
           ref={ref}
           onChange={(event) => {

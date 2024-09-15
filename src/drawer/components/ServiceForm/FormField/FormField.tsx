@@ -150,7 +150,7 @@ const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProp
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewUrl(reader.result as string);
-        setValue(name, [file]);
+        setValue(name, file);
       };
       reader.readAsDataURL(file);
     }
