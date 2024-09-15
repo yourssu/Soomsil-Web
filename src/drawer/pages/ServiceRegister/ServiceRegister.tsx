@@ -1,4 +1,5 @@
 import { BoxButton } from '@yourssu/design-system-react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { Category } from '@/drawer/components/Category/Category.type';
@@ -8,9 +9,27 @@ import { CategoryState } from '@/drawer/recoil/CategoryState';
 import { ServiceFormValues } from '@/drawer/types/form.type';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
+declare global {
+  interface Window {
+    Android: {
+      getAccessToken: () => void;
+      onRegisterSuccess: () => void;
+    };
+    webkit: {
+      messageHandlers: {
+        ios: {
+          postMessage: (message: string) => void;
+        };
+      };
+    };
+    setAccessToken: (token: string) => void;
+  }
+}
+
 export const ServiceRegister = () => {
   const isMobileView = useMediaQuery('(max-width: 30rem)');
   const category = useRecoilValue(CategoryState);
+  const navigate = useNavigate();
 
   const defaultValues: ServiceFormValues = {
     title: '',
@@ -30,7 +49,13 @@ export const ServiceRegister = () => {
   const onSubmit = (data: ServiceFormValues) => {
     registerProductMutation.mutate(data, {
       onSuccess: () => {
-        console.log('success');
+        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios) {
+          window.webkit.messageHandlers.ios.postMessage('onRegisterSuccess');
+        } else if (window.Android && window.Android.onRegisterSuccess) {
+          window.Android.onRegisterSuccess();
+        }
+
+        navigate('/drawer/myDrawers?tab=MYDRAWER');
       },
     });
   };
