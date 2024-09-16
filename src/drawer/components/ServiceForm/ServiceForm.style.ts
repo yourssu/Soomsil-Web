@@ -95,7 +95,11 @@ export const StyledTextarea = styled.textarea<StyledInputProps>`
           : theme.color.buttonDisabled};
 `;
 
-export const StyledRequiredLinkHint = styled.div`
+interface StyledRequiredLinkHintProps {
+  $isWarned: boolean;
+}
+
+export const StyledRequiredLinkHint = styled.div<StyledRequiredLinkHintProps>`
   @media (max-width: 30rem) {
     /* Soomsil/Drawer/Web/body10 */
     font-family: 'Spoqa Han Sans Neo';
@@ -107,7 +111,8 @@ export const StyledRequiredLinkHint = styled.div`
   }
 
   ${({ theme }) => theme.typo.subtitle6}
-  color: ${({ theme }) => theme.color.textPrimary};
+  color: ${({ theme, $isWarned }) =>
+    $isWarned ? theme.color.textWarned : theme.color.textPrimary};
   text-align: right;
   white-space: pre-wrap;
   margin-bottom: 1.25rem;

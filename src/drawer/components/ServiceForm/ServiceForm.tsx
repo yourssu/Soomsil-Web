@@ -30,7 +30,11 @@ export const ServiceForm = (props: ServiceFormProps) => {
   const theme = useTheme();
   const isMobileView = useMediaQuery('(max-width: 30rem)');
 
-  const { handleSubmit, trigger } = useFormContext<ServiceFormValues>();
+  const {
+    handleSubmit,
+    trigger,
+    formState: { errors },
+  } = useFormContext<ServiceFormValues>();
   const [isChecked, setIsChecked] = useState(false);
 
   const onSubmit: SubmitHandler<ServiceFormValues> = (data) => {
@@ -104,7 +108,7 @@ export const ServiceForm = (props: ServiceFormProps) => {
           <RegisterCategory />
         </FormField>
         <StyledSection>
-          <StyledRequiredLinkHint>
+          <StyledRequiredLinkHint $isWarned={LINK_NAMES.some((name) => !!errors[name])}>
             {isMobileView
               ? `웹 페이지, Google Play, App Store, GitHub\n링크 중 하나는 필수 기재 *`
               : '웹 페이지, Google Play, App Store, GitHub 링크 중 하나는 필수 기재 *'}
