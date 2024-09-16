@@ -4,6 +4,7 @@ import { IcXLine } from '@yourssu/design-system-react';
 import { RegisterOptions, useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 
+import { ALLOWED_IMAGE_TYPE } from '@/drawer/constants/image.constant';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import {
@@ -146,13 +147,16 @@ const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProp
   const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file) {
+    if (file && ALLOWED_IMAGE_TYPE.includes(file.type)) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewUrl(reader.result as string);
         setValue(name, file);
       };
       reader.readAsDataURL(file);
+    } else {
+      alert('이미지 포맷은 jpg, jpeg, png, gif 중 하나여야 합니다.');
+      setValue(name, null);
     }
   };
 
@@ -190,13 +194,15 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
   const handleChangeFile = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file) {
+    if (file && ALLOWED_IMAGE_TYPE.includes(file.type)) {
       const newFileNames = [...fileNames];
       newFileNames[index] = file.name;
       setFileNames(newFileNames);
+      setValue(`${name}.${index}`, file);
+    } else {
+      alert('이미지 포맷은 jpg, jpeg, png, gif 중 하나여야 합니다.');
+      setValue(`${name}.${index}`, null);
     }
-
-    setValue(`${name}.${index}`, file);
 
     // 입력이 발생할 때마다 다른 파일 입력 폼도 함께 validation 수행
     trigger(name);
