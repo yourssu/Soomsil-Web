@@ -46,8 +46,8 @@ export const ServiceEdit = () => {
       },
       onError: (error) => {
         if (isAxiosError(error)) {
-          // TODO: 서비스 수정 API에서는 서비스 명 중복 시 'Drawer-008'로 처리되지 않음
-          if (error.response?.data?.error === 'Drawer-008') {
+          // TODO: 서비스 수정 API에서는 서비스 이름 중복 시 'Drawer-008'가 아닌 `System-004' 에러가 응답으로 옴
+          if (error.response?.data?.error === 'System-004') {
             methods.setError(
               'title',
               {
