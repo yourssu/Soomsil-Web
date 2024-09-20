@@ -51,14 +51,14 @@ export const ServiceForm = (props: ServiceFormProps) => {
 
   return (
     <StyledContainer>
-      <StyledRequiredHint>별표 표시 * 는 필수 입력란</StyledRequiredHint>
+      <StyledRequiredHint>별표 표시 * 는 필수 입력</StyledRequiredHint>
 
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <StyledSection>
           <FormField
             name="title"
             registerOption={{
-              required: '서비스 이름은 필수값입니다.',
+              required: '서비스 이름은 필수 입력입니다.',
               maxLength: {
                 value: 20,
                 message: '최대 20자까지 입력 가능합니다.',
@@ -73,7 +73,7 @@ export const ServiceForm = (props: ServiceFormProps) => {
           <FormField
             name="subtitle"
             registerOption={{
-              required: '간단한 설명은 필수값입니다.',
+              required: '간단한 설명은 필수 입력입니다.',
               maxLength: {
                 value: 20,
                 message: '최대 20자까지 입력 가능합니다.',
@@ -89,7 +89,7 @@ export const ServiceForm = (props: ServiceFormProps) => {
         <FormField
           name="content"
           registerOption={{
-            required: '내용은 필수값입니다.',
+            required: '내용은 필수 입력입니다.',
             maxLength: {
               value: 5000,
               message: '최대 5000자까지 입력 가능합니다.',
@@ -110,8 +110,8 @@ export const ServiceForm = (props: ServiceFormProps) => {
         <StyledSection>
           <StyledRequiredLinkHint $isWarned={LINK_NAMES.some((name) => !!errors[name])}>
             {isMobileView
-              ? `웹 페이지, Google Play, App Store, GitHub\n링크 중 하나는 필수 기재 *`
-              : '웹 페이지, Google Play, App Store, GitHub 링크 중 하나는 필수 기재 *'}
+              ? `웹 페이지, Google Play, App Store, GitHub\n링크 중 하나는 필수 입력 *`
+              : '웹 페이지, Google Play, App Store, GitHub 링크 중 하나는 필수 입력 *'}
           </StyledRequiredLinkHint>
           {LINK.map((link) => (
             <FormField
@@ -147,7 +147,7 @@ export const ServiceForm = (props: ServiceFormProps) => {
           name="thumbnailImage"
           registerOption={{
             validate: {
-              required: (file: File | null) => file !== null || '썸네일 이미지는 필수값입니다.',
+              required: (file: File | null) => file !== null || '썸네일 이미지는 필수 입력입니다.',
             },
           }}
           direction={isMobileView ? 'column' : 'row'}

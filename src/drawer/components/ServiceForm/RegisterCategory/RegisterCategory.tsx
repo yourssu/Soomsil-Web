@@ -18,7 +18,7 @@ export const RegisterCategory = () => {
     formState: { errors },
   } = useFormContext();
   const { onChange, onBlur, name, ref } = register('category', {
-    required: '카테고리는 필수값입니다.',
+    required: '카테고리는 필수 입력입니다.',
   });
 
   const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
