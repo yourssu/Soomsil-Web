@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 export const StyledContainer = styled.div`
   @media (max-width: 30rem) {
@@ -47,6 +47,15 @@ interface StyledInputProps {
   $hasText?: boolean;
 }
 
+const sharedBorderColor = css<StyledInputProps>`
+  ${({ $isWarned = false, $hasText = false, theme }) =>
+    $isWarned
+      ? theme.color.buttonWarned
+      : $hasText
+        ? theme.color.buttonNormalPressed
+        : theme.color.buttonDisabled};
+`;
+
 export const StyledInput = styled.input<StyledInputProps>`
   @media (max-width: 30rem) {
     ${({ theme }) => theme.typo.caption2}
@@ -58,13 +67,7 @@ export const StyledInput = styled.input<StyledInputProps>`
 
   width: 100%;
   padding: 0.375rem;
-  border-bottom: 2px solid
-    ${({ $isWarned = false, $hasText = false, theme }) =>
-      $isWarned
-        ? theme.color.buttonWarned
-        : $hasText
-          ? theme.color.buttonNormalPressed
-          : theme.color.buttonDisabled};
+  border-bottom: 2px solid ${sharedBorderColor};
 
   background-color: transparent;
   caret-color: ${({ theme }) => theme.color.textPointed};
@@ -86,13 +89,7 @@ export const StyledTextarea = styled.textarea<StyledInputProps>`
   padding: 0.375rem;
 
   border: none;
-  border-bottom: 2px solid
-    ${({ $isWarned = false, $hasText = false, theme }) =>
-      $isWarned
-        ? theme.color.buttonWarned
-        : $hasText
-          ? theme.color.buttonNormalPressed
-          : theme.color.buttonDisabled};
+  border-bottom: 2px solid ${sharedBorderColor};
 `;
 
 interface StyledRequiredLinkHintProps {
