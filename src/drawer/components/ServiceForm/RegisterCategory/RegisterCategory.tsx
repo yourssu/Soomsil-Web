@@ -24,6 +24,13 @@ export const RegisterCategory = () => {
   const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
   const isMobileView = useMediaQuery('(max-width: 30rem)');
 
+  const getErrorMessage = () => {
+    const error = errors[name];
+    if (error) {
+      return String(error?.message ?? '');
+    }
+  };
+
   return (
     <StyledRegisterCategoryContainer id={name}>
       {CategoryList.slice(1).map(({ category, title, subcategories }) => (
@@ -44,11 +51,7 @@ export const RegisterCategory = () => {
           <StyledTitle>{`${title} ${subcategories ?? ''}`}</StyledTitle>
         </CheckBox>
       ))}
-      {errors[name] && (
-        <StyledRegisterCategoryErrorMessage>
-          {String(errors[name].message)}
-        </StyledRegisterCategoryErrorMessage>
-      )}
+      <StyledRegisterCategoryErrorMessage>{getErrorMessage()}</StyledRegisterCategoryErrorMessage>
     </StyledRegisterCategoryContainer>
   );
 };

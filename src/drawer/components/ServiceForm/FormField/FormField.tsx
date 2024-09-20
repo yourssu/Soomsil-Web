@@ -160,6 +160,13 @@ const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProp
     }
   };
 
+  const getErrorMessage = () => {
+    const error = errors[name];
+    if (error) {
+      return String(error?.message ?? '');
+    }
+  };
+
   return (
     <StyledThumbnailControlContainer>
       {React.cloneElement(children, {
@@ -172,7 +179,7 @@ const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProp
       <StyledThumbnailPreviewContainer htmlFor={name}>
         {previewUrl ? <StyledThumbnailPreview src={previewUrl} alt="preview" /> : fallback}
       </StyledThumbnailPreviewContainer>
-      {errors[name] && <StyledErrorMessage>{String(errors[name].message)}</StyledErrorMessage>}
+      {getErrorMessage()}
     </StyledThumbnailControlContainer>
   );
 };
@@ -219,6 +226,13 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
     trigger(name);
   };
 
+  const getErrorMessage = () => {
+    const error = errors[name];
+    if (Array.isArray(error)) {
+      return String(error[0]?.message ?? '');
+    }
+  };
+
   return (
     <StyledImageUploadControlContainer>
       {Array.from({ length: maxFiles }).map((_, index) => (
@@ -249,9 +263,7 @@ const FieldImageUploadControl = ({ children, maxFiles }: FieldImageUploadControl
           )}
         </StyledImageUploadItemContainer>
       ))}
-      {Array.isArray(errors[name]) && errors[name][0] && (
-        <StyledErrorMessage>{errors[name][0].message}</StyledErrorMessage>
-      )}
+      <StyledErrorMessage>{getErrorMessage()}</StyledErrorMessage>
     </StyledImageUploadControlContainer>
   );
 };
