@@ -11,12 +11,7 @@ export const StyledContainer = styled.div`
 
 export const StyledRequiredHint = styled.div`
   @media (max-width: 30rem) {
-    /* Soomsil/Drawer/Web/body10 */
-    font-size: 'Spoqa Han Sans Neo';
-    font-size: 0.625rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.3;
+    ${({ theme }) => theme.typo.caption2}
   }
 
   ${({ theme }) => theme.typo.subtitle6}
@@ -98,13 +93,7 @@ interface StyledRequiredLinkHintProps {
 
 export const StyledRequiredLinkHint = styled.div<StyledRequiredLinkHintProps>`
   @media (max-width: 30rem) {
-    /* Soomsil/Drawer/Web/body10 */
-    font-family: 'Spoqa Han Sans Neo';
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 130%; /* 13px */
-    letter-spacing: 0.25px;
+    ${({ theme }) => theme.typo.caption2}
   }
 
   ${({ theme }) => theme.typo.subtitle6}
