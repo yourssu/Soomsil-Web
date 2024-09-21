@@ -9,8 +9,6 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   align-items: end;
   gap: 1.06rem;
-  margin: 2rem 0;
-  padding-right: 1.2rem;
 `;
 
 interface StyledWarningBoxProps {
@@ -18,18 +16,20 @@ interface StyledWarningBoxProps {
 }
 
 export const StyledWarningBoxContainer = styled.div<StyledWarningBoxProps>`
-  width: 62.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.27rem;
+
+  width: calc(100% - 20.25rem);
   height: 4.8125rem;
-  border-radius: 0.75rem;
+  padding-left: 1.35rem;
+
   background: ${({ theme }) => theme.color.buttonDisabledBG};
+
+  border-radius: 0.75rem;
   border: 1px solid
     ${({ $isWarned, theme }) =>
       $isWarned ? theme.color.buttonWarned : theme.color.buttonDisabledBG};
-  padding-left: 1.35rem;
-  display: flex;
-  flex-direction: row;
-  gap: 1.27rem;
-  align-items: center;
 `;
 
 export const StyledWarningBoxText = styled.div`
