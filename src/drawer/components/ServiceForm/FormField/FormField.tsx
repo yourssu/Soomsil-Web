@@ -179,7 +179,7 @@ const FieldThumbnailControl = ({ children, fallback }: FieldThumbnailControlProp
       <StyledThumbnailPreviewContainer htmlFor={name}>
         {previewUrl ? <StyledThumbnailPreview src={previewUrl} alt="preview" /> : fallback}
       </StyledThumbnailPreviewContainer>
-      {getErrorMessage()}
+      <StyledErrorMessage>{getErrorMessage()}</StyledErrorMessage>
     </StyledThumbnailControlContainer>
   );
 };
