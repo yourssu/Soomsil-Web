@@ -7,11 +7,6 @@ export interface PostAuthSignInData {
   refreshTokenExpiredIn: number;
 }
 
-export interface PostAuthResponse {
-  data?: PostAuthSignInData;
-  error?: AxiosError;
-}
-
 export interface PostAuthVerificationEmailData {
   sessionToken: string;
   sessionTokenExpiredIn: number;

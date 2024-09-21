@@ -20,7 +20,7 @@ export const useEmailAuth = ({ onConfirm, email }: EmailAuthProps) => {
 
   const sendAuthenticationMail = async () => {
     setEmailSending(true);
-    await postAuthVerificationEmailMutation.mutate(
+    postAuthVerificationEmailMutation.mutate(
       { email: email, verificationType: 'SIGN_UP' },
       {
         onSuccess: () => {
@@ -42,7 +42,7 @@ export const useEmailAuth = ({ onConfirm, email }: EmailAuthProps) => {
     const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
     if (!session) return;
 
-    await getAuthVerificationCheckMutation.mutate(
+    getAuthVerificationCheckMutation.mutate(
       { session: session },
       {
         onSuccess: (data) => {

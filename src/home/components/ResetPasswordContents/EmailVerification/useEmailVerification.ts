@@ -30,7 +30,7 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
   }, []);
 
   const verifyEmailSession = async (session: string, isInitialCheck: boolean = false) => {
-    await getAuthVerificationCheckMutation.mutate(
+    getAuthVerificationCheckMutation.mutate(
       { session },
       {
         onSuccess: (data) => {
@@ -71,7 +71,7 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
     setIsResending(true);
     resetTimer();
 
-    await postAuthVerificationEmailMutation.mutate(
+    postAuthVerificationEmailMutation.mutate(
       { email: fullEmail, verificationType: 'PASSWORD' },
       {
         onSuccess: () => {

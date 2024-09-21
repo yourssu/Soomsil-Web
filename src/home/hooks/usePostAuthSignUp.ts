@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
-import { getAuthVerificationCheck } from '@/home/apis/getAuthVerificationCheck';
-import { AuthErrorData } from '@/home/types/Auth.type';
+import { postAuthSignUp } from '../apis/postAuthSignUp';
+import { AuthErrorData } from '../types/Auth.type';
 
-export const useGetAuthVerificationCheck = () => {
+export const usePostAuthSignUp = () => {
   return useMutation({
-    mutationFn: getAuthVerificationCheck,
+    mutationFn: postAuthSignUp,
     throwOnError: (error: AxiosError<AuthErrorData>) => {
       return error.response?.status !== 401;
     },
