@@ -1,9 +1,8 @@
 import { CheckBox } from '@yourssu/design-system-react';
 import { useFormContext } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
 
 import { CategoryList } from '@/drawer/constants/category.constant';
-import { CategoryState } from '@/drawer/recoil/CategoryState';
+import { ServiceFormValues } from '@/drawer/types/form.type';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import {
@@ -16,37 +15,31 @@ export const RegisterCategory = () => {
   const {
     register,
     formState: { errors },
-  } = useFormContext();
-  const { onChange, onBlur, name, ref } = register('category', {
-    required: '카테고리는 필수 입력입니다.',
-  });
+    watch,
+  } = useFormContext<ServiceFormValues>();
 
-  const [selectedCategory, setSelectedCategory] = useRecoilState(CategoryState);
+  const watchCategory = watch('category');
   const isMobileView = useMediaQuery('(max-width: 30rem)');
 
   const getErrorMessage = () => {
-    const error = errors[name];
+    const error = errors['category'];
     if (error) {
       return String(error?.message ?? '');
     }
   };
 
   return (
-    <StyledRegisterCategoryContainer id={name}>
+    <StyledRegisterCategoryContainer id={'category'}>
       {CategoryList.slice(1).map(({ category, title, subcategories }) => (
         <CheckBox
           key={category}
           value={category}
           type="radio"
           size={isMobileView ? 'small' : 'medium'}
-          isSelected={category === selectedCategory}
-          name={name}
-          ref={ref}
-          onChange={(event) => {
-            setSelectedCategory(category);
-            onChange(event);
-          }}
-          onBlur={onBlur}
+          isSelected={category === watchCategory}
+          {...register('category', {
+            required: '카테고리는 필수 입력입니다.',
+          })}
         >
           <StyledTitle>{`${title} ${subcategories ?? ''}`}</StyledTitle>
         </CheckBox>

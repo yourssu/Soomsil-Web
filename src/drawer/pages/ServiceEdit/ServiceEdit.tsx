@@ -1,15 +1,11 @@
-import { useEffect } from 'react';
-
 import { BoxButton } from '@yourssu/design-system-react';
 import { isAxiosError } from 'axios';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
 
 import { ServiceForm } from '@/drawer/components/ServiceForm/ServiceForm';
 import { useGetProductDetail } from '@/drawer/hooks/useGetProductDetail';
 import { usePutUpdateProduct } from '@/drawer/hooks/usePutUpdateProduct';
-import { CategoryState } from '@/drawer/recoil/CategoryState';
 import { ServiceFormValues } from '@/drawer/types/form.type';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
@@ -18,7 +14,6 @@ export const ServiceEdit = () => {
   const { data: product } = useGetProductDetail(Number(serviceId));
 
   const isMobileView = useMediaQuery('(max-width: 30rem)');
-  const setCategory = useSetRecoilState(CategoryState);
   const navigate = useNavigate();
 
   const methods = useForm<ServiceFormValues>({
@@ -61,13 +56,6 @@ export const ServiceEdit = () => {
       },
     });
   };
-
-  // 카테고리 선택 폼이 category atom과 연결되어 있기 때문에 동기화 effect 발생
-  useEffect(() => {
-    if (product) {
-      setCategory(product.category);
-    }
-  }, [product, setCategory]);
 
   return (
     <FormProvider {...methods}>

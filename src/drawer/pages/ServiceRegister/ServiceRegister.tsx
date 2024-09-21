@@ -2,12 +2,9 @@ import { BoxButton } from '@yourssu/design-system-react';
 import { isAxiosError } from 'axios';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
-import { Category } from '@/drawer/components/Category/Category.type';
 import { ServiceForm } from '@/drawer/components/ServiceForm/ServiceForm';
 import { usePostProduct } from '@/drawer/hooks/usePostProduct';
-import { CategoryState } from '@/drawer/recoil/CategoryState';
 import { ServiceFormValues } from '@/drawer/types/form.type';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
@@ -30,7 +27,6 @@ declare global {
 
 export const ServiceRegister = () => {
   const isMobileView = useMediaQuery('(max-width: 30rem)');
-  const category = useRecoilValue(CategoryState);
   const navigate = useNavigate();
 
   const methods = useForm<ServiceFormValues>({
@@ -39,7 +35,7 @@ export const ServiceRegister = () => {
       title: '',
       subtitle: '',
       content: '',
-      category: category as Category,
+      category: '',
       webpageUrl: '',
       googlePlayUrl: '',
       appStoreUrl: '',
