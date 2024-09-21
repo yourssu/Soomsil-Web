@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { postAuthVerificationEmail } from '@/home/apis/authVerification';
+import { postAuthVerificationEmail } from '@/home/apis/postAuthVerificationEmail';
 import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 interface EmailInputProps {

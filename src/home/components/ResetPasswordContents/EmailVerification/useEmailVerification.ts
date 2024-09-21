@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
 import { STORAGE_KEYS } from '@/constants/storage.constant';
-import { getAuthVerificationCheck, postAuthVerificationEmail } from '@/home/apis/authVerification';
+import { getAuthVerificationCheck } from '@/home/apis/getAuthVerificationCheck';
+import { postAuthVerificationEmail } from '@/home/apis/postAuthVerificationEmail';
 import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 

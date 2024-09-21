@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { AxiosError } from 'axios';
 
-import { usePostAuthVerificationEmail } from '@/home/apis/authVerification.ts';
-import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
+import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type';
+import { usePostAuthVerificationEmail } from '@/home/hooks/usePostAuthVerificationEmail';
 import { AuthErrorData } from '@/home/types/Auth.type';
 import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 

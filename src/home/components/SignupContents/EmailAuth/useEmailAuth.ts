@@ -3,11 +3,9 @@ import { useState } from 'react';
 import { AxiosError } from 'axios';
 
 import { STORAGE_KEYS } from '@/constants/storage.constant.ts';
-import {
-  useGetAuthVerificationCheck,
-  usePostAuthVerificationEmail,
-} from '@/home/apis/authVerification.ts';
-import { EmailAuthProps } from '@/home/components/SignupContents/EmailAuth/EmailAuth.type.ts';
+import { EmailAuthProps } from '@/home/components/SignupContents/EmailAuth/EmailAuth.type';
+import { useGetAuthVerificationCheck } from '@/home/hooks/useGetAuthVerificationCheck';
+import { usePostAuthVerificationEmail } from '@/home/hooks/usePostAuthVerificationEmail';
 import { AuthErrorData } from '@/home/types/Auth.type';
 import { useSecondTimer } from '@/hooks/useSecondTimer.ts';
 
