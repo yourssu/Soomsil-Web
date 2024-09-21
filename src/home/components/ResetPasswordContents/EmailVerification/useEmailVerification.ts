@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
 import { STORAGE_KEYS } from '@/constants/storage.constant';
-import { getAuthVerificationCheck } from '@/home/apis/getAuthVerificationCheck';
-import { postAuthVerificationEmail } from '@/home/apis/postAuthVerificationEmail';
+import { useGetAuthVerificationCheck } from '@/home/hooks/useGetAuthVerificationCheck';
+import { usePostAuthVerificationEmail } from '@/home/hooks/usePostAuthVerificationEmail';
 import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 import { useSecondTimer } from '@/hooks/useSecondTimer';
 
@@ -19,6 +19,9 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
   const [error, setError] = useState<string | null>(null);
   const [isResending, setIsResending] = useState(false);
 
+  const getAuthVerificationCheckMutation = useGetAuthVerificationCheck();
+  const postAuthVerificationEmailMutation = usePostAuthVerificationEmail();
+
   useEffect(() => {
     const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
     if (session) {
@@ -27,13 +30,22 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
   }, []);
 
   const verifyEmailSession = async (session: string, isInitialCheck: boolean = false) => {
-    const { data, error } = await getAuthVerificationCheck({ session });
-    if (data?.isVerified) {
-      setError(null);
-      onConfirm();
-    } else if (!isInitialCheck || error) {
-      setError('이메일 인증을 완료해주세요.');
-    }
+    await getAuthVerificationCheckMutation.mutate(
+      { session },
+      {
+        onSuccess: (data) => {
+          if (data.isVerified) {
+            setError(null);
+            onConfirm();
+          } else if (!isInitialCheck) {
+            setError('이메일 인증을 완료해주세요.');
+          }
+        },
+        onError: () => {
+          setError('이메일 인증을 완료해주세요.');
+        },
+      }
+    );
   };
 
   const handleVerification = async () => {
@@ -59,15 +71,20 @@ export const useEmailVerification = ({ email, onConfirm }: UseEmailVerificationP
     setIsResending(true);
     resetTimer();
 
-    const response = await postAuthVerificationEmail({
-      email: fullEmail,
-      verificationType: 'PASSWORD',
-    });
-
-    if (response.error) {
-      setError('이메일 인증을 완료해주세요.');
-    }
-    setIsResending(false);
+    await postAuthVerificationEmailMutation.mutate(
+      { email: fullEmail, verificationType: 'PASSWORD' },
+      {
+        onSuccess: () => {
+          setError(null);
+        },
+        onError: () => {
+          setError('인증 메일 재전송에 실패했습니다.');
+        },
+        onSettled: () => {
+          setIsResending(false);
+        },
+      }
+    );
   };
 
   return {

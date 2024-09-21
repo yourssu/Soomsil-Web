@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { postAuthVerificationEmail } from '@/home/apis/postAuthVerificationEmail';
+import { usePostAuthVerificationEmail } from '@/home/hooks/usePostAuthVerificationEmail';
 import { useParseFullEmail } from '@/hooks/useParseFullEmail';
 
 interface EmailInputProps {
@@ -26,18 +26,23 @@ export const useEmailInputForm = ({ email, onConfirm }: EmailInputProps) => {
   const localEmail = watch('email');
   const parseFullEmail = useParseFullEmail();
   const fullEmail = parseFullEmail(localEmail);
+  const postAuthVerificationEmailMutation = usePostAuthVerificationEmail();
 
   const handleOnSubmit = async (data: FormData) => {
-    const response = await postAuthVerificationEmail({
-      email: fullEmail,
-      verificationType: 'PASSWORD',
-    });
-
-    if (response.error) {
-      setError('email', { type: 'manual', message: '존재하지 않는 이메일입니다.' });
-    } else {
-      onConfirm(data.email);
-    }
+    await postAuthVerificationEmailMutation.mutateAsync(
+      { email: fullEmail, verificationType: 'PASSWORD' },
+      {
+        onSuccess: () => {
+          onConfirm(data.email);
+        },
+        onError: () => {
+          setError('email', {
+            type: 'manual',
+            message: '존재하지 않는 이메일입니다.',
+          });
+        },
+      }
+    );
   };
 
   return {

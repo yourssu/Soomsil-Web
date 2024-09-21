@@ -11,7 +11,7 @@ import { useSecondTimer } from '@/hooks/useSecondTimer.ts';
 
 export const useEmailAuth = ({ onConfirm, email }: EmailAuthProps) => {
   const [authed, setAuthed] = useState(true);
-  const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(8 * 60);
+  const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(10);
   const [error, setError] = useState<string>('');
   const [emailSending, setEmailSending] = useState(false);
 
@@ -20,7 +20,7 @@ export const useEmailAuth = ({ onConfirm, email }: EmailAuthProps) => {
 
   const sendAuthenticationMail = async () => {
     setEmailSending(true);
-    await postAuthVerificationEmailMutation.mutateAsync(
+    await postAuthVerificationEmailMutation.mutate(
       { email: email, verificationType: 'SIGN_UP' },
       {
         onSuccess: () => {
@@ -30,17 +30,19 @@ export const useEmailAuth = ({ onConfirm, email }: EmailAuthProps) => {
           setAuthed(false);
           setError('인증 메일 재전송에 실패했습니다.');
         },
+        onSettled: () => {
+          setEmailSending(false);
+          resetTimer();
+        },
       }
     );
-    setEmailSending(false);
-    resetTimer();
   };
 
   const onClickNext = async () => {
     const session = sessionStorage.getItem(STORAGE_KEYS.EMAIL_AUTH_SESSION_TOKEN);
     if (!session) return;
 
-    await getAuthVerificationCheckMutation.mutateAsync(
+    await getAuthVerificationCheckMutation.mutate(
       { session: session },
       {
         onSuccess: (data) => {

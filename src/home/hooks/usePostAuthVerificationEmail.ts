@@ -16,10 +16,7 @@ export const usePostAuthVerificationEmail = () => {
       );
     },
     throwOnError: (error: AxiosError<AuthErrorData>) => {
-      //이전과 같은 이메일일 경우 errorBoundary로 가지 않고 에러 처리
-      if (error.response?.status === 400) return false;
-      // 나머지는 errorBoundary로 처리
-      return true;
+      return error.response?.status !== 400;
     },
   });
 };
