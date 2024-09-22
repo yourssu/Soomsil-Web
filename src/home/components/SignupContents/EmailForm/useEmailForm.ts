@@ -29,7 +29,7 @@ export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
 
     setEmailError('');
 
-    await postAuthVerificationEmailMutation.mutateAsync(
+    postAuthVerificationEmailMutation.mutate(
       { email: fullEmail, verificationType: 'SIGN_UP' },
       {
         onSuccess: () => {
@@ -42,5 +42,7 @@ export const useEmailForm = ({ onConfirm }: EmailFormProps) => {
     );
   };
 
-  return { email, emailError, onChange, onEmailSubmit };
+  const isPending = postAuthVerificationEmailMutation.isPending;
+
+  return { email, emailError, onChange, onEmailSubmit, isPending };
 };

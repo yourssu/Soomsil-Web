@@ -20,7 +20,7 @@ import {
 } from './EmailForm.style';
 
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
-  const { email, emailError, onEmailSubmit, onChange } = useEmailForm({ onConfirm });
+  const { email, emailError, onEmailSubmit, onChange, isPending } = useEmailForm({ onConfirm });
   const {
     handleSubmit,
     formState: { isSubmitting },
@@ -58,7 +58,7 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           size="large"
           variant="filled"
           rounding={8}
-          disabled={email === '' || isSubmitting}
+          disabled={email === '' || isPending}
         >
           <StyledSignupButtonText>
             {isSubmitting ? '잠시만 기다려주세요...' : '인증 메일 받기'}

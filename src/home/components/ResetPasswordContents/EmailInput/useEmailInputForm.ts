@@ -17,7 +17,7 @@ export const useEmailInputForm = ({ email, onConfirm }: EmailInputProps) => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setError,
   } = useForm<FormData>({
     defaultValues: { email },
@@ -29,7 +29,7 @@ export const useEmailInputForm = ({ email, onConfirm }: EmailInputProps) => {
   const postAuthVerificationEmailMutation = usePostAuthVerificationEmail();
 
   const handleOnSubmit = async (data: FormData) => {
-    await postAuthVerificationEmailMutation.mutateAsync(
+    postAuthVerificationEmailMutation.mutate(
       { email: fullEmail, verificationType: 'PASSWORD' },
       {
         onSuccess: () => {
@@ -45,11 +45,13 @@ export const useEmailInputForm = ({ email, onConfirm }: EmailInputProps) => {
     );
   };
 
+  const isPending = postAuthVerificationEmailMutation.isPending;
+
   return {
     register,
     handleSubmit,
     errors,
-    isSubmitting,
     handleOnSubmit,
+    isPending,
   };
 };
