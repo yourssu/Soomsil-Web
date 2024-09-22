@@ -11,7 +11,7 @@ interface EmailInputProps {
 }
 
 export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
-  const { register, handleSubmit, errors, isSubmitting, handleOnSubmit } = useEmailInputForm({
+  const { register, handleSubmit, errors, handleOnSubmit, isPending } = useEmailInputForm({
     email,
     onConfirm,
   });
@@ -41,9 +41,9 @@ export const EmailInput = ({ email, onConfirm }: EmailInputProps) => {
         variant="filled"
         rounding={8}
         onClick={handleSubmit(handleOnSubmit)}
-        disabled={isSubmitting}
+        disabled={isPending}
       >
-        {isSubmitting ? '잠시만 기다려주세요...' : '재설정 메일 보내기'}
+        {isPending ? '잠시만 기다려주세요...' : '재설정 메일 보내기'}
       </BoxButton>
     </>
   );

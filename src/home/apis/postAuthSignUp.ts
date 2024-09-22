@@ -1,8 +1,5 @@
-import { AxiosError } from 'axios';
-
 import { authClient } from '@/apis';
-
-import { AuthErrorData, PostAuthResponse } from '../types/Auth.type';
+import { PostAuthSignInData } from '@/home/types/Auth.type';
 
 interface SignUpParams {
   email: string;
@@ -11,11 +8,7 @@ interface SignUpParams {
   sessionToken: string;
 }
 
-export const postAuthSignUp = async (signUpParams: SignUpParams): Promise<PostAuthResponse> => {
-  try {
-    const res = await authClient.post(`/auth/sign-up`, signUpParams);
-    return { data: res.data };
-  } catch (error: unknown) {
-    return { error: error as AxiosError<AuthErrorData> };
-  }
+export const postAuthSignUp = async (signUpParams: SignUpParams): Promise<PostAuthSignInData> => {
+  const res = await authClient.post(`/auth/sign-up`, signUpParams);
+  return res.data;
 };

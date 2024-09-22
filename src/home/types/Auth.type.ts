@@ -7,19 +7,9 @@ export interface PostAuthSignInData {
   refreshTokenExpiredIn: number;
 }
 
-export interface PostAuthResponse {
-  data?: PostAuthSignInData;
-  error?: AxiosError;
-}
-
 export interface PostAuthVerificationEmailData {
   sessionToken: string;
   sessionTokenExpiredIn: number;
-}
-
-export interface PostAuthVerificationEmailResponse {
-  data?: PostAuthVerificationEmailData;
-  error?: AxiosError<AuthErrorData>;
 }
 
 export interface PostWithdrawResponse {
@@ -29,11 +19,6 @@ export interface PostWithdrawResponse {
 
 export interface GetAuthVerificationCheckData {
   isVerified: boolean;
-}
-
-export interface GetAuthVerificationCheckResponse {
-  data?: GetAuthVerificationCheckData;
-  error?: AxiosError<AuthErrorData>;
 }
 
 export interface AuthErrorData {

@@ -1,9 +1,9 @@
 import { BoxButton, PlainButton, SuffixTextField } from '@yourssu/design-system-react';
+import { useForm } from 'react-hook-form';
 
 import { EMAIL_DOMAIN, MAIL_SEARCH_URL } from '@/constants/email.constant';
-import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type';
-import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm';
-import { usePreventDuplicateClick } from '@/hooks/usePreventDuplicateClick';
+import { EmailFormProps } from '@/home/components/SignupContents/EmailForm/EmailForm.type.ts';
+import { useEmailForm } from '@/home/components/SignupContents/EmailForm/useEmailForm.ts';
 
 import {
   StyledSignupButtonText,
@@ -20,16 +20,14 @@ import {
 } from './EmailForm.style';
 
 export const EmailForm = ({ onConfirm }: EmailFormProps) => {
-  const { email, emailError, onEmailSubmit, onChange } = useEmailForm({ onConfirm });
-  const { disabled, handleClick } = usePreventDuplicateClick();
+  const { email, emailError, onEmailSubmit, onChange, isPending } = useEmailForm({ onConfirm });
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm();
 
   return (
-    <StyledSignupContentContainer
-      onSubmit={async (e) => {
-        e.preventDefault();
-        await handleClick(onEmailSubmit);
-      }}
-    >
+    <StyledSignupContentContainer onSubmit={handleSubmit(onEmailSubmit)}>
       <StyledSignupContentTitle>회원가입</StyledSignupContentTitle>
       <div>
         <StyledTextFieldLabel>숭실대학교 메일을 입력해주세요.</StyledTextFieldLabel>
@@ -60,10 +58,10 @@ export const EmailForm = ({ onConfirm }: EmailFormProps) => {
           size="large"
           variant="filled"
           rounding={8}
-          disabled={email === '' || disabled}
+          disabled={email === '' || isPending}
         >
           <StyledSignupButtonText>
-            {disabled ? '잠시만 기다려주세요...' : '인증 메일 받기'}
+            {isSubmitting ? '잠시만 기다려주세요...' : '인증 메일 받기'}
           </StyledSignupButtonText>
         </BoxButton>
       </StyledButtonsContainer>

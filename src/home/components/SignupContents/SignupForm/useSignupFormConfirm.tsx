@@ -2,12 +2,14 @@ import { AxiosError } from 'axios';
 import { SubmitHandler } from 'react-hook-form';
 
 import { STORAGE_KEYS } from '@/constants/storage.constant';
-import { postAuthSignUp } from '@/home/apis/postAuthSignUp';
+import { usePostAuthSignUp } from '@/home/hooks/usePostAuthSignUp';
 import { AuthErrorData } from '@/home/types/Auth.type';
 
 import { SignupFormProps, SignupFormStates } from './SignUpForm.type';
 
 export const useSignupFormConfirm = ({ email, onConfirm }: SignupFormProps) => {
+  const postAuthSignUpMutation = usePostAuthSignUp();
+
   const onSignupError = (error: AxiosError) => {
     alert(
       (error as AxiosError<AuthErrorData>).response?.data.message || '회원가입에 실패했습니다.'
@@ -35,10 +37,10 @@ export const useSignupFormConfirm = ({ email, onConfirm }: SignupFormProps) => {
       email: email,
     };
 
-    const { data, error } = await postAuthSignUp(signUpParams);
-
-    if (data) onSignupSuccess();
-    else if (error) onSignupError(error);
+    postAuthSignUpMutation.mutate(signUpParams, {
+      onSuccess: onSignupSuccess,
+      onError: onSignupError,
+    });
   };
 
   return onFormConfirm;
