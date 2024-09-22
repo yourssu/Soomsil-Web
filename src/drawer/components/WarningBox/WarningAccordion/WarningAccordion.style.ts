@@ -5,29 +5,31 @@ interface StyledAccordionBoxProps {
 }
 
 export const StyledAccordionContainer = styled.div<StyledAccordionBoxProps>`
-  width: 21.875rem;
+  width: 100%;
   height: fit-content;
-  border-radius: 0.75rem;
-  background: ${({ theme }) => theme.color.buttonDisabledBG};
-  border: 1px solid
-    ${({ $isWarned, theme }) =>
-      $isWarned ? theme.color.buttonWarned : theme.color.buttonDisabledBG};
-  padding-left: 1.12rem;
-  padding-top: 0.69rem;
-  padding-right: 1.25rem;
-  padding-bottom: 0.8rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.31rem;
+
+  background: ${({ theme }) => theme.color.buttonDisabledBG};
+  border: 1px solid
+    ${({ $isWarned, theme }) =>
+      $isWarned ? theme.color.buttonWarned : theme.color.buttonDisabledBG};
+  border-radius: 0.75rem;
+
+  padding-left: 1.12rem;
+  padding-top: 0.69rem;
+  padding-right: 1.25rem;
+  padding-bottom: 0.8rem;
 `;
 
 export const StyledAccordionHeaderContainer = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  gap: 5.45rem;
 `;
 
 export const StyledAccordionHeader = styled.div`
@@ -36,13 +38,10 @@ export const StyledAccordionHeader = styled.div`
 `;
 
 export const StyledAccordionContent = styled.div<{ $isOpen: boolean }>`
-  width: 17.5rem;
+  width: 100%;
+  ${({ theme }) => theme.typo.caption2};
   color: ${({ theme }) => theme.color.textPrimary};
-  font-family: 'Spoqa Han Sans Neo';
-  font-size: 0.65rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.3;
+
   margin-left: 0.5rem;
   word-break: keep-all;
 

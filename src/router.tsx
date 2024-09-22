@@ -33,9 +33,9 @@ const Ranking = lazy(() =>
     default: Ranking,
   }))
 );
-const Register = lazy(() =>
-  import('./drawer/pages/Register/Register').then(({ Register }) => ({
-    default: Register,
+const ServiceRegister = lazy(() =>
+  import('./drawer/pages/ServiceRegister/ServiceRegister').then(({ ServiceRegister }) => ({
+    default: ServiceRegister,
   }))
 );
 const ServiceDetail = lazy(() =>
@@ -151,7 +151,7 @@ export const Router = () => {
             <Route path="services/:serviceId/edit" element={<ServiceEdit />} />
             <Route path="services/:serviceId" element={<ServiceDetail />} />
             <Route path="rankings" element={<Ranking />} />
-            <Route path="register" element={<Register />} />
+            <Route path="register" element={<ServiceRegister />} />
             <Route element={<PrivateRoute isModalOpen={true} modalPath="/drawer" />}>
               <Route path="myDrawers" element={<MyDrawer />} />
             </Route>

@@ -4,7 +4,7 @@ import { CheckBox, IcNoticeFilled, IconContext } from '@yourssu/design-system-re
 import { useFormContext } from 'react-hook-form';
 import { useTheme } from 'styled-components';
 
-import { MOBILE_VIEW_WIDTH } from '@/drawer/constants/mobileview.constant';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { WarningAccordion } from './WarningAccordion/WarningAccordion';
 import {
@@ -20,24 +20,10 @@ interface WarningBoxProps {
 
 export const WarningBox = ({ isSelected, handleSelected }: WarningBoxProps) => {
   const { formState } = useFormContext();
-
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= MOBILE_VIEW_WIDTH);
   const [isWarned, setIsWarned] = useState(false);
 
+  const isMobileView = useMediaQuery('(max-width: 30rem)');
   const theme = useTheme();
-
-  useEffect(() => {
-    const handleResize = () => {
-      const newIsMobileView = window.innerWidth <= MOBILE_VIEW_WIDTH;
-      setIsMobileView(newIsMobileView);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     if (formState.isSubmitted) {

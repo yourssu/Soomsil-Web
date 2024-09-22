@@ -1,6 +1,6 @@
 import { soomsilClient } from '@/apis';
 
-import { RegisterFormValues } from '../types/form.type';
+import { ServiceFormValues } from '../types/form.type';
 import { ImageResult } from '../types/image.type';
 
 const renameImageKeys = (image: ImageResult) => {
@@ -12,7 +12,7 @@ const renameImageKeys = (image: ImageResult) => {
 
 export const putUpdateProduct = async (
   productNo: number,
-  product: RegisterFormValues,
+  product: ServiceFormValues,
   images: ImageResult[]
 ) => {
   const [thumbnailImage, ...introductionImages] = images;

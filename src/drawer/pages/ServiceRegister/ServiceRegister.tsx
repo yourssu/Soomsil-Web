@@ -1,48 +1,67 @@
 import { BoxButton } from '@yourssu/design-system-react';
 import { isAxiosError } from 'axios';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ServiceForm } from '@/drawer/components/ServiceForm/ServiceForm';
-import { useGetProductDetail } from '@/drawer/hooks/useGetProductDetail';
-import { usePutUpdateProduct } from '@/drawer/hooks/usePutUpdateProduct';
+import { usePostProduct } from '@/drawer/hooks/usePostProduct';
 import { ServiceFormValues } from '@/drawer/types/form.type';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
-export const ServiceEdit = () => {
-  const { serviceId } = useParams();
-  const { data: product } = useGetProductDetail(Number(serviceId));
+declare global {
+  interface Window {
+    Android: {
+      getAccessToken: () => void;
+      onRegisterSuccess: () => void;
+    };
+    webkit: {
+      messageHandlers: {
+        ios: {
+          postMessage: (message: string) => void;
+        };
+      };
+    };
+    setAccessToken: (token: string) => void;
+  }
+}
 
+export const ServiceRegister = () => {
   const isMobileView = useMediaQuery('(max-width: 30rem)');
   const navigate = useNavigate();
 
   const methods = useForm<ServiceFormValues>({
     mode: 'onChange',
     defaultValues: {
-      title: product.productTitle,
-      subtitle: product.productSubTitle,
-      content: product.productContent,
-      category: product.category,
-      webpageUrl: product.webpageUrl ?? '',
-      googlePlayUrl: product.googlePlayUrl ?? '',
-      appStoreUrl: product.appStoreUrl ?? '',
-      githubUrl: product.githubUrl ?? '',
+      title: '',
+      subtitle: '',
+      content: '',
+      category: '',
+      webpageUrl: '',
+      googlePlayUrl: '',
+      appStoreUrl: '',
+      githubUrl: '',
       thumbnailImage: null,
       introductionImages: Array(5).fill(null),
     },
   });
 
-  const updateProductMutation = usePutUpdateProduct(Number(serviceId));
+  const registerProductMutation = usePostProduct();
 
   const onSubmit = (data: ServiceFormValues) => {
-    updateProductMutation.mutate(data, {
+    registerProductMutation.mutate(data, {
       onSuccess: () => {
+        if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.ios) {
+          window.webkit.messageHandlers.ios.postMessage('onRegisterSuccess');
+        } else if (window.Android && window.Android.onRegisterSuccess) {
+          window.Android.onRegisterSuccess();
+        }
+
         navigate('/drawer/myDrawers?tab=MYDRAWER');
       },
       onError: (error) => {
         if (isAxiosError(error)) {
-          // TODO: 서비스 수정 API에서는 서비스 이름 중복 시 'Drawer-008'가 아닌 `System-004' 에러가 응답으로 옴
-          if (error.response?.data?.error === 'System-004') {
+          // 서비스명 중복 에러
+          if (error.response?.data?.error === 'Drawer-008') {
             methods.setError(
               'title',
               {
@@ -69,9 +88,9 @@ export const ServiceEdit = () => {
             style={{
               alignSelf: 'flex-end',
             }}
-            disabled={updateProductMutation.isPending}
+            disabled={registerProductMutation.isPending}
           >
-            서비스 수정
+            서비스 등록
           </BoxButton>
         </ServiceForm.Submit>
       </ServiceForm>

@@ -12,16 +12,6 @@ export const StyledRankingCategoryContainer = styled.div`
   ${({ theme }) => theme.typo.subtitle2};
 `;
 
-export const StyledRegisterCategoryContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.69rem;
-  align-items: flex-start;
-  margin-top: 0.62rem;
-  margin-bottom: 0.62rem;
-  margin-left: 1rem;
-`;
-
 export const StyledCategoryTitle = styled.p`
   ${({ theme }) => theme.typo.title5};
 `;
