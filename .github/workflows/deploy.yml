@@ -1,0 +1,49 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Set Environment Variables
+        run: |
+          echo "VITE_API_SOOMSIL_URL=$VITE_API_SOOMSIL_URL" >> .env.production
+          echo "VITE_API_AUTH_URL=$VITE_API_AUTH_URL" >> .env.production
+          echo "VITE_API_SEARCH_URL=$VITE_API_SEARCH_URL" >> .env.production
+          echo "VITE_API_YLS_URL=$VITE_API_YLS_URL" >> .env.production
+        env:
+          VITE_API_SOOMSIL_URL: ${{ secrets.VITE_API_SOOMSIL_URL }}
+          VITE_API_AUTH_URL: ${{ secrets.VITE_API_AUTH_URL }}
+          VITE_API_SEARCH_URL: ${{ secrets.VITE_API_SEARCH_URL }}
+          VITE_API_YLS_URL: ${{ secrets.VITE_API_YLS_URL }}
+
+      - name: Build application
+        run: pnpm run build
+
+      - name: Deploy to s3
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            dist s3://soomsil.de
