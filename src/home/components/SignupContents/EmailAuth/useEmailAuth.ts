@@ -11,7 +11,7 @@ import { useSecondTimer } from '@/hooks/useSecondTimer.ts';
 
 export const useEmailAuth = ({ onConfirm, email }: EmailAuthProps) => {
   const [authed, setAuthed] = useState(true);
-  const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(10);
+  const { leftTime, isTimerEnd, resetTimer } = useSecondTimer(8 * 60); // 8분
   const [error, setError] = useState<string>('');
   const [emailSending, setEmailSending] = useState(false);
 
