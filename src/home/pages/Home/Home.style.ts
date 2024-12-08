@@ -13,7 +13,9 @@ export const StyledComponentContainer = styled.div`
 `;
 
 export const StyledComponentInnerContainer = styled.div`
-  display: flex;
-  gap: 1.1875rem;
+  width: 60.775rem;
   margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.19rem;
 `;

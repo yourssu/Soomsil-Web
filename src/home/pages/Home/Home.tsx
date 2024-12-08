@@ -4,6 +4,7 @@ import { Header } from '@/home/components/Header/Header';
 import { Nav } from '@/home/components/Nav/Nav';
 import { Notification } from '@/home/components/Notification/Notification';
 import { SocialNetworkService } from '@/home/components/SocialNetworkService/SocialNetworkService';
+import { SsuNews } from '@/home/components/SsuNews/SsuNews';
 
 import {
   StyledComponentContainer,
@@ -19,9 +20,12 @@ export const Home = () => {
       <StyledComponentContainer>
         <Notification />
         <StyledComponentInnerContainer>
+          <SsuNews />
+          <SocialNetworkService />
+        </StyledComponentInnerContainer>
+        <StyledComponentInnerContainer>
           <DrawerRanking />
           <RealTimeKeyword variant="home" />
-          <SocialNetworkService />
         </StyledComponentInnerContainer>
       </StyledComponentContainer>
     </StyledContainer>
