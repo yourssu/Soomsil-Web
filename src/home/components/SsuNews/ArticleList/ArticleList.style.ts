@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledArticleItem = styled.div`
+export const StyledArticleItem = styled.a`
   width: 29.4rem;
   padding: 0.62rem 0;
 
@@ -8,6 +8,8 @@ export const StyledArticleItem = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 0.62rem;
+
+  color: inherit;
 `;
 
 export const StyledArticleTitle = styled.p`

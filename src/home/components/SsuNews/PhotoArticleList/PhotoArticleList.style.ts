@@ -6,11 +6,13 @@ export const StyledArticleBox = styled.div`
   gap: 1.5rem;
 `;
 
-export const StyledArticleItem = styled.div`
+export const StyledArticleItem = styled.a`
   width: 25rem;
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  color: inherit;
 `;
 
 export const StyledImg = styled.img`

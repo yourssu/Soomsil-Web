@@ -1,3 +1,5 @@
+import { useGetNews } from '@/home/hooks/useGetNews';
+
 import { ArticleList } from './ArticleList/ArticleList';
 import { PhotoArticleList } from './PhotoArticleList/PhotoArticleList';
 import {
@@ -11,6 +13,8 @@ import {
 const SSU_NEWS_LINK = 'https://www.ssunews.net/';
 
 export const SsuNews = () => {
+  const { data: news } = useGetNews();
+
   return (
     <StyledContainer>
       <StyledTitleSection>
@@ -22,8 +26,8 @@ export const SsuNews = () => {
         </StyledAnchor>
       </StyledTitleSection>
       <StyledArticleSection>
-        <PhotoArticleList />
-        <ArticleList />
+        <PhotoArticleList imgNews={news.imgNews} />
+        <ArticleList textNews={news.textNews} />
       </StyledArticleSection>
     </StyledContainer>
   );

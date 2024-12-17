@@ -1,39 +1,14 @@
+import { TextNews } from '@/home/types/news.type';
+
 import { StyledArticleItem, StyledArticleTitle, StyledDateSpan } from './ArticleList.style';
 
-const ListDummy = [
-  {
-    title: '제 16대 총장 선임, 본교 구성원에게 묻다',
-    date: '2024.12.08',
-  },
-  {
-    title: '제 16대 총장 선임, 본교 구성원에게 묻다 제 16대 총장 선임, 본교 구성원에게 묻다',
-    date: '2024.12.08',
-  },
-  {
-    title: '제 16대 총장 선임, 본교 구성원에게 묻다',
-    date: '2024.12.08',
-  },
-  {
-    title: '제 16대 총장 선임, 본교 구성원에게 묻다',
-    date: '2024.12.08',
-  },
-  {
-    title: '제 16대 총장 선임, 본교 구성원에게 묻다',
-    date: '2024.12.08',
-  },
-  {
-    title: '제 16대 총장 선임, 본교 구성원에게 묻다',
-    date: '2024.12.08',
-  },
-];
-
-export const ArticleList = () => {
+export const ArticleList = ({ textNews }: { textNews: TextNews[] }) => {
   return (
     <div>
-      {ListDummy.map(({ title, date }) => (
-        <StyledArticleItem>
+      {textNews.map(({ title, date, pageUrl }) => (
+        <StyledArticleItem key={title} href={pageUrl} target="_blank" rel="noopener noreferrer">
           <StyledArticleTitle>{title}</StyledArticleTitle>
-          <StyledDateSpan>{date}</StyledDateSpan>
+          <StyledDateSpan>{date.replaceAll('-', '.')}</StyledDateSpan>
         </StyledArticleItem>
       ))}
     </div>

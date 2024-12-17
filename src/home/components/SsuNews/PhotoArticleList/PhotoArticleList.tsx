@@ -1,3 +1,5 @@
+import { ImgNews } from '@/home/types/news.type';
+
 import {
   StyledDateSpan,
   StyledImg,
@@ -5,28 +7,16 @@ import {
   StyledArticleItem,
   StyledArticleTitle,
 } from './PhotoArticleList.style';
-const PhotoDummy = [
-  {
-    img: '/',
-    title: '제 16대 총장 선임, 본교 구성원에게 묻다',
-    date: '2024.12.08',
-  },
-  {
-    img: '/',
-    title: '제 16대 총장 선임, 본교 구성원에게 묻다',
-    date: '2024.12.08',
-  },
-];
 
-export const PhotoArticleList = () => {
+export const PhotoArticleList = ({ imgNews }: { imgNews: ImgNews[] }) => {
   return (
     <StyledArticleBox>
-      {PhotoDummy.map(({ img, title, date }) => (
-        <StyledArticleItem>
-          <StyledImg src={img} />
+      {imgNews.map(({ thumbnail, title, date, pageUrl }) => (
+        <StyledArticleItem key={title} href={pageUrl} target="_blank" rel="noopener noreferrer">
+          <StyledImg src={thumbnail} />
           <div>
             <StyledArticleTitle>{title}</StyledArticleTitle>
-            <StyledDateSpan>입력 | {date}</StyledDateSpan>
+            <StyledDateSpan>입력 | {date.replaceAll('-', '.')}</StyledDateSpan>
           </div>
         </StyledArticleItem>
       ))}

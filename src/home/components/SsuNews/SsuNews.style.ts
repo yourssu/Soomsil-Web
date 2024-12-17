@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.section`
+  min-width: 100%;
   padding: 1.5rem;
   border-radius: 0.75rem;
   border: 1px solid ${({ theme }) => theme.color.borderNormal};
