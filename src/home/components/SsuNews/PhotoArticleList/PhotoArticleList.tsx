@@ -13,7 +13,7 @@ export const PhotoArticleList = ({ imgNews }: { imgNews: ImgNews[] }) => {
     <StyledArticleBox>
       {imgNews.map(({ thumbnail, title, date, pageUrl }) => (
         <StyledArticleItem key={title} href={pageUrl} target="_blank" rel="noopener noreferrer">
-          <StyledImg src={thumbnail} />
+          <StyledImg src={thumbnail} alt={'ssu_news_img'} />
           <div>
             <StyledArticleTitle>{title}</StyledArticleTitle>
             <StyledDateSpan>입력 | {date.replaceAll('-', '.')}</StyledDateSpan>
