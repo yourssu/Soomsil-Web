@@ -8,7 +8,7 @@ export const ArticleList = ({ textNews }: { textNews: TextNews[] }) => {
       {textNews.map(({ title, date, pageUrl }) => (
         <StyledArticleItem key={title} href={pageUrl} target="_blank" rel="noopener noreferrer">
           <StyledArticleTitle>{title}</StyledArticleTitle>
-          <StyledDateSpan>{date.replaceAll('-', '.')}</StyledDateSpan>
+          <StyledDateSpan>{date}</StyledDateSpan>
         </StyledArticleItem>
       ))}
     </div>

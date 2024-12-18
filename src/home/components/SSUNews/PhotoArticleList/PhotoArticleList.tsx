@@ -16,7 +16,7 @@ export const PhotoArticleList = ({ imgNews }: { imgNews: ImgNews[] }) => {
           <StyledImg src={thumbnail} alt={'ssu_news_img'} />
           <div>
             <StyledArticleTitle>{title}</StyledArticleTitle>
-            <StyledDateSpan>입력 | {date.replaceAll('-', '.')}</StyledDateSpan>
+            <StyledDateSpan>입력 | {date}</StyledDateSpan>
           </div>
         </StyledArticleItem>
       ))}
