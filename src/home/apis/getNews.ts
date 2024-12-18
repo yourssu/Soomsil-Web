@@ -1,7 +1,7 @@
 import { searchClient } from '@/apis';
-import { SsuNews } from '@/home/types/news.type';
+import { SSUNews } from '@/home/types/news.type';
 
-export const getNews = async (): Promise<SsuNews> => {
+export const getNews = async (): Promise<SSUNews> => {
   const { data } = await searchClient.get('/search/news', {
     params: {
       platform: 'WEB',

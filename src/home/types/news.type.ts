@@ -1,4 +1,4 @@
-export interface SsuNews {
+export interface SSUNews {
   imgNews: ImgNews[];
   textNews: TextNews[];
 }
