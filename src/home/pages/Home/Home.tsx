@@ -3,6 +3,7 @@ import { DrawerRanking } from '@/home/components/DrawerRanking/DrawerRanking';
 import { Header } from '@/home/components/Header/Header';
 import { Nav } from '@/home/components/Nav/Nav';
 import { Notification } from '@/home/components/Notification/Notification';
+import { SSUNews } from '@/home/components/SSUNews/SSUNews';
 import { SocialNetworkService } from '@/home/components/SocialNetworkService/SocialNetworkService';
 
 import {
@@ -19,6 +20,7 @@ export const Home = () => {
       <StyledComponentContainer>
         <Notification />
         <StyledComponentInnerContainer>
+          <SSUNews />
           <SocialNetworkService />
         </StyledComponentInnerContainer>
         <StyledComponentInnerContainer>
