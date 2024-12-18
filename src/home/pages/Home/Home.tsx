@@ -1,5 +1,4 @@
 import { RealTimeKeyword } from '@/components/RealTimeKeyword/RealTimeKeyword.tsx';
-import { Spacing } from '@/components/Spacing/Spacing';
 import { DrawerRanking } from '@/home/components/DrawerRanking/DrawerRanking';
 import { Header } from '@/home/components/Header/Header';
 import { Nav } from '@/home/components/Nav/Nav';
@@ -29,7 +28,6 @@ export const Home = () => {
           <RealTimeKeyword variant="home" />
         </StyledComponentInnerContainer>
       </StyledComponentContainer>
-      <Spacing direction={'vertical'} size={62} />
     </StyledContainer>
   );
 };
