@@ -19,7 +19,7 @@ export const SSUNews = () => {
     <StyledContainer>
       <StyledTitleSection>
         <StyledTitle>
-          숭대시보로 알아보는 <span>교내 소식</span>
+          숭대시보로 알아보는 <span>교내소식</span>
         </StyledTitle>
         <StyledAnchor href={SSU_NEWS_LINK} target="_blank" rel="noopener noreferrer">
           전체보기
