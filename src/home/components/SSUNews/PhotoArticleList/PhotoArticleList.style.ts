@@ -24,6 +24,14 @@ export const StyledImg = styled.img`
 
 export const StyledArticleTitle = styled.p`
   ${({ theme }) => theme.typo.subtitle4};
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+
+  max-height: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const StyledDateSpan = styled.span`
